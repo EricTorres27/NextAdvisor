@@ -4,6 +4,7 @@ import './App.css';
 
 
 import RegistrarAsesoria from './Components/RegistrarAsesoria';
+import MetodoPago from './Components/MetodoPago';
 import navbarNA from './Components/navbarNA';
 import { NavbarBrand } from 'reactstrap';
 
@@ -12,8 +13,8 @@ import { NavbarBrand } from 'reactstrap';
 function App() {
   return (
     <div className="App">
-    <navbarNA/>
-    <RegistrarAsesoria/>
+   
+  <MetodoPago/>
     </div>
   );
 }
