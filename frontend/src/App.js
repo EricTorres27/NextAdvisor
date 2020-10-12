@@ -4,6 +4,7 @@ import './App.css';
 
 
 import RegistrarAsesoria from './Components/RegistrarAsesoria';
+import RegistrarMateria from './Components/RegistrarMateria';
 import EditarRegistroAsesoria from './Components/EditarRegistroAsesoria';
 import MetodoPago from './Components/MetodoPago';
 import navbarNA from './Components/navbarNA';
@@ -15,7 +16,7 @@ function App() {
   return (
     <div className="App">
    
-  <RegistrarAsesoria/>
+  <RegistrarMateria/>
     </div>
   );
 }
