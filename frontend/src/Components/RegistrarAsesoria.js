@@ -1,12 +1,21 @@
 import React, { Component, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-
+import swal from 'sweetalert';
 
 
 
 export default class RegistrarAsesoria extends Component {
     render() {
+        const save=()=>{
+            swal({
+                title:"Asesoría registrada exitosamente",
+                
+                icon: "success",
+                button: "Aceptar"
+            });
+           
+        }
         
         return (
         
@@ -49,7 +58,7 @@ export default class RegistrarAsesoria extends Component {
                 </div>   
           </label>  
             <br></br>
-                <button type="button" class="btn btn-primary">Registrar</button>
+                <button onClick={()=>save()} type="button" class="btn btn-primary">Registrar</button>
           </form>
             
             

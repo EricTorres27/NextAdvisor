@@ -12,7 +12,9 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
-    "reactstrap": "^8.6.0"
+    "reactstrap": "^8.6.0",
+    "swe": "^2.0.5",
+    "sweetalert": "^2.1.2"
   },
   "scripts": {
     "start": "react-scripts start",

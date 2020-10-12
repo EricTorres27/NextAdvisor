@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import swal from 'sweetalert';
 
 
 
@@ -8,6 +9,30 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 export default class EditarRegistroAsesoria extends Component {
     render() {
         
+        const showAlert=()=>{
+            swal({
+                title:"¿Seguro que desea eliminar el registro de asesoría?",
+                icon: "warning",
+                buttons: ["No", "Si"]
+
+            }).then(respuesta=>{
+                if(respuesta){
+                    swal({
+                        text: "El registro se ha eliminado con éxito",
+                        icon: "success"})
+
+                }
+            })
+        }
+        const save=()=>{
+            swal({
+                title:"Cambios guardados exitosamente",
+                
+                icon: "success",
+                button: "Aceptar"
+            });
+           
+        }
         return (
         
          
@@ -49,9 +74,11 @@ export default class EditarRegistroAsesoria extends Component {
                 </div>   
           </label>  
           <br></br>  
-             <button type="button" class="btn btn-primary">Guardar</button>
+             <button onClick={()=>save()} type="button" class="btn btn-primary">Guardar</button>
              <br></br>  <br></br> 
             <button type="button" class="btn btn-primary">Cancelar</button>
+            <br></br>   <br></br>  
+             <button onClick={()=>showAlert()} type="button" class="btn btn-primary">Eliminar registro</button>
           </form>
             
             
