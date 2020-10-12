@@ -1,0 +1,37 @@
+
+
+lroot{
+    --primary: #111854;
+    --light: #ffffff;
+    --grey: #efefef;
+
+}
+.bg-primary {
+    background-color: var(--primary) !important; 
+}
+
+.bg-light{background-color: var(--light) !important;}
+body{
+    overflow: hidden;
+    font-weight: 300;
+    color: var[--primary];
+}
+
+a:hover{
+    text-decoration: none ;
+}
+
+
+
+#sidebar-container{
+    min-height: 100vh;
+}
+
+#sidebar-container .logo{
+    padding: 0.875rem 1.25rem;
+}
+
+#sidebar-container .menu{
+    width: 18rem;
+}
+
