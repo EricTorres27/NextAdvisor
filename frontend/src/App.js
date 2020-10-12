@@ -1,23 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-
-
-import RegistrarAsesoria from './Components/RegistrarAsesoria';
-import RegistrarMateria from './Components/RegistrarMateria';
-import EditarRegistroAsesoria from './Components/EditarRegistroAsesoria';
-import MetodoPago from './Components/MetodoPago';
-import navbarNA from './Components/navbarNA';
-import { NavbarBrand } from 'reactstrap';
-
+import {ThemeProvider} from '@material-ui/core/styles'
+import theme from './ThemeConfig'
+import PrincipalContainer from './Components/PrincipalContainer';
 
 
 function App() {
   return (
-    <div className="App">
-   
-  <RegistrarMateria/>
-    </div>
+    <ThemeProvider theme={theme}>
+      <PrincipalContainer
+        texto="Hola mundo"
+      />
+    </ThemeProvider>
   );
 }
 
