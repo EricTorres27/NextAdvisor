@@ -1,14 +1,14 @@
-import { Typography } from '@material-ui/core'
 import React from 'react'
+import { Typography } from '@material-ui/core'
 
-const CreateUser = () => {
+const ConsultUser = () => {
     return (
         <div>
             <Typography variant="h3">
-                Crear un usuario
+                Consultar usuario
             </Typography>    
         </div>
     )
 }
 
-export default CreateUser
+export default ConsultUser

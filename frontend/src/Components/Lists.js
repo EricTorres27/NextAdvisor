@@ -2,20 +2,14 @@ import React from 'react'
 import Icon from '@material-ui/core/Icon';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import { Link } from 'react-router-dom'
-
-
-
+import { Link } from 'react-router-dom';
 import {
     List,
     ListItem,
     ListItemIcon,
     ListItemText,
-    Divider,
-    Menu,
-    MenuList,
-    MenuItem
-}from '@material-ui/core'
+    Divider
+} from '@material-ui/core'
 
 const Lists = () => {
     return (
@@ -24,16 +18,20 @@ const Lists = () => {
             <List component='nav'>
                 <ListItem button>
                     <ListItemIcon>
-                        <AddCircleOutlineIcon/>
+                        <AddCircleOutlineIcon />
                     </ListItemIcon>
-                    <ListItemText primary='Materias'/>
+                    <Link to="/ConsultarUsuario">
+                        <ListItemText primary='contenido dinamico' />
+                    </Link>
                 </ListItem>
-                <Divider/>
+                <Divider />
                 <ListItem button>
                     <ListItemIcon>
-                        <AddCircleIcon/>
+                        <AddCircleIcon />
                     </ListItemIcon>
-                    <ListItemText primary='Mis asesorias'/>
+                    <Link to="/CrearUsuario">
+                        <ListItemText primary='Crear usuario' />
+                    </Link>
                 </ListItem>
             </List>
         </div>
