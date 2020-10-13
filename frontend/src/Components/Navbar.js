@@ -38,7 +38,7 @@ const Navbar = (props) => {
                         NextAdvisor
                     </Typography>
                     <Typography variant='h6'>
-                        UserName
+                        User
                     </Typography>
                 </Toolbar>
             </AppBar>

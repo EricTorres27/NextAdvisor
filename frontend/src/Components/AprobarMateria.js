@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import swal from 'sweetalert';
+import {Box} from '@material-ui/core'
 
 
 
@@ -17,7 +18,8 @@ export default class passSubject extends Component {
            
         }
         return (
-        
+        <div>
+        <Box mx={40} mt={10}>
          
         <form>
             <h1  class="display-4" >Aprobar materias</h1> 
@@ -36,6 +38,8 @@ export default class passSubject extends Component {
                 </div>   
           </label>
           </form>
+        </Box>
+        </div>
             
             
         )
