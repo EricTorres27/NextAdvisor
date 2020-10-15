@@ -21,7 +21,7 @@ const Lists = () => {
                         <AddCircleOutlineIcon />
                     </ListItemIcon>
                     <Link to="/ConsultarUsuario">
-                        <ListItemText primary='contenido dinamico' />
+                        <ListItemText primary='Usuarios'/>
                     </Link>
                 </ListItem>
                 <Divider />
@@ -31,6 +31,23 @@ const Lists = () => {
                     </ListItemIcon>
                     <Link to="/CrearUsuario">
                         <ListItemText primary='Crear usuario' />
+                    </Link>
+                </ListItem>
+                <Divider />
+                <ListItem button>
+                    <ListItemIcon>
+                        <AddCircleIcon />
+                    </ListItemIcon>
+                    <Link to="RegistrarAsesoria">
+                        <ListItemText primary='Registrar asesoria' />
+                    </Link>
+                </ListItem>
+                <ListItem button>
+                    <ListItemIcon>
+                        <AddCircleIcon />
+                    </ListItemIcon>
+                    <Link to="Materias">
+                        <ListItemText primary='Materias' />
                     </Link>
                 </ListItem>
             </List>
