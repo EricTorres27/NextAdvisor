@@ -2,7 +2,9 @@ import React, { Component, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import swal from 'sweetalert';
-
+import {Box} from '@material-ui/core'
+import { Typography } from '@material-ui/core'
+import Button from '@material-ui/core/Button';
 
 
 export default class RegistrarMateria extends Component {
@@ -18,7 +20,9 @@ export default class RegistrarMateria extends Component {
         }
         
         return (
-        
+        <div>
+       <Typography variant="h3">
+        <Box mx={30} mt={5}>
          
         <form>
             <h1  class="display-4" > Registrar materia</h1> 
@@ -50,11 +54,13 @@ export default class RegistrarMateria extends Component {
           </label>     
            
             <br></br>
-                <button onClick={()=>save()} type="button" class="btn btn-primary">Registrar</button>
-            <br></br> <br></br>
-                <button type="button" class="btn btn-primary">Cancelar</button>
+                <Button onClick={()=>save()} variant = "contained" color="primary">Registrar</Button>
+            <br></br>
+                <Button variant = "contained" color="primary">Cancelar</Button>
           </form>
-            
+          </Box>  
+          </Typography>
+          </div>
             
         )
     }

@@ -39,7 +39,7 @@ const Navbar = (props) => {
                         NextAdvisor
                     </Typography>
                     <Typography variant='h6'>
-                        Asesor
+                       Administrador
                     </Typography>
                 </Toolbar>
             </AppBar>
