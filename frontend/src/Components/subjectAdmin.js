@@ -33,6 +33,12 @@ export default class passSubject extends Component {
               <Link to="RegistrarMateria">
                     <button type="button" class="btn btn-primary">Registrar materias</button>
             </Link>
+            <br></br>
+            <Link to="AprobarMateria">
+                    <button type="button" class="btn btn-primary">Aprobar materias</button>
+            </Link>
+            
+
                 </div>   
           </label>
           </form>

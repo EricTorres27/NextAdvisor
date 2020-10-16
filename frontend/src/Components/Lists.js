@@ -11,48 +11,168 @@ import {
     Divider
 } from '@material-ui/core'
 
+
+        const isAdv=true;
+        const isAdmin=false;
+        const isStudent=false;
+
 const Lists = () => {
+
+    if(isStudent){
     return (
         <div>
         
             <List component='nav'>
-                <ListItem button>
-                    <ListItemIcon>
-                        <AddCircleOutlineIcon />
-                    </ListItemIcon>
-                    <Link to="/ConsultarUsuario">
-                        <ListItemText primary='Usuarios'/>
-                    </Link>
-                </ListItem>
                 <Divider />
                 <ListItem button>
                     <ListItemIcon>
                         <AddCircleIcon />
                     </ListItemIcon>
-                    <Link to="/CrearUsuario">
-                        <ListItemText primary='Crear usuario' />
-                    </Link>
-                </ListItem>
-                <Divider />
-                <ListItem button>
-                    <ListItemIcon>
-                        <AddCircleIcon />
-                    </ListItemIcon>
-                    <Link to="RegistrarAsesoria">
-                        <ListItemText primary='Registrar asesoria' />
+                    <Link to="">
+                        <ListItemText primary='Mi perfil' />
                     </Link>
                 </ListItem>
                 <ListItem button>
                     <ListItemIcon>
                         <AddCircleIcon />
                     </ListItemIcon>
-                    <Link to="Materias">
-                        <ListItemText primary='Materias' />
+                    <Link to="">
+                        <ListItemText primary='Mis asesorías' />
                     </Link>
                 </ListItem>
             </List>
         </div>
     )
+    }
+
+    if(isAdmin){
+        return (
+            <div>
+            
+                <List component='nav'>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AddCircleOutlineIcon />
+                        </ListItemIcon>
+                        <Link to="">
+                            <ListItemText primary='Mi perfil'/>
+                        </Link>
+                    </ListItem>
+                    <Divider />
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AddCircleIcon />
+                        </ListItemIcon>
+                        <Link to="">
+                            <ListItemText primary='Preguntas frecuentes' />
+                        </Link>
+                    </ListItem>
+                    <Divider />
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AddCircleIcon />
+                        </ListItemIcon>
+                        <Link to="">
+                            <ListItemText primary='Usuarios' />
+                        </Link>
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AddCircleIcon />
+                        </ListItemIcon>
+                        <Link to="">
+                            <ListItemText primary='Asesorías' />
+                        </Link>
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AddCircleIcon />
+                        </ListItemIcon>
+                        <Link to="">
+                            <ListItemText primary='Asesores' />
+                        </Link>
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AddCircleIcon />
+                        </ListItemIcon>
+                        <Link to="MateriasAdmin">
+                            <ListItemText primary='Materias' />
+                        </Link>
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AddCircleIcon />
+                        </ListItemIcon>
+                        <Link to="">
+                            <ListItemText primary='Reportes' />
+                        </Link>
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AddCircleIcon />
+                        </ListItemIcon>
+                        <Link to="">
+                            <ListItemText primary='Calendario' />
+                        </Link>
+                    </ListItem>
+                </List>
+            </div>
+        )
+    }
+
+    if(isAdv){
+        return (
+            <div>
+            
+                <List component='nav'>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AddCircleOutlineIcon />
+                        </ListItemIcon>
+                        <Link to="">
+                            <ListItemText primary='Mi perfil'/>
+                        </Link>
+                    </ListItem>
+                    <Divider />
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AddCircleIcon />
+                        </ListItemIcon>
+                        <Link to="">
+                            <ListItemText primary='Mi Evaluación' />
+                        </Link>
+                    </ListItem>
+                    <Divider />
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AddCircleIcon />
+                        </ListItemIcon>
+                        <Link to="MisAsesorias">
+                            <ListItemText primary='Mis asesorías' />
+                        </Link>
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AddCircleIcon />
+                        </ListItemIcon>
+                        <Link to="MetodoPago">
+                            <ListItemText primary='Mi método de pago' />
+                        </Link>
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AddCircleIcon />
+                        </ListItemIcon>
+                        <Link to="Materias">
+                            <ListItemText primary='Materias' />
+                        </Link>
+                    </ListItem>
+                </List>
+            </div>
+        )
+        }
+
 }
 
 export default Lists

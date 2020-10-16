@@ -14,10 +14,10 @@ export default class passSubject extends Component {
         
         return (
         <div>
-        <Box mx={35} mt={5}>
+        <Box mx={40} mt={10}>
          
         <form>
-            <h1  class="display-4" >Listado de materias</h1> 
+            <h1  class="display-4" >Mis asesorías</h1> 
              <br></br>
             <label>
               <div class="input-group input-group-sm mb-3" >
@@ -30,10 +30,18 @@ export default class passSubject extends Component {
           <br></br>
           <label>
               <div class="input-group input-group-sm mb-3" >
-              <Link to="RegistrarMateria">
-                    <button type="button" class="btn btn-primary">Registrar materias</button>
+              <Link to="RegistrarAsesoria">
+                    <button type="button" class="btn btn-primary">Registrar Asesoría</button>
             </Link>
+            
                 </div>   
+          </label>
+          <br></br>
+          <label>
+          <Link to="EditarAsesoria">
+                    <button type="button" class="btn btn-primary">Editar Asesoría</button>
+            </Link>
+            
           </label>
           </form>
         </Box>

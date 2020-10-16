@@ -6,6 +6,12 @@ import {
 } from '@material-ui/core'
 import Navbar from './Navbar'
 import NavBarAdmin from './NavBarAdmin'
+import NavBarStudent from './NavBarStudent'
+import advisoryAdv from './advisoryAdv'
+import AprobarMateria from './AprobarMateria'
+import subjectAdmin from './subjectAdmin'
+import EditarRegistroAsesoria from './EditarRegistroAsesoria'
+import MetodoPago from './MetodoPago'
 import DrawerBox from './DrawerBox'
 import Button from '@material-ui/core/Button'
 import CreateUser from './CreateUser'
@@ -39,6 +45,8 @@ const PrincipalContainer = () => {
 
    
         const isAdv=true;
+        const isAdmin=false ;
+        const isStudent=false;
         if(isAdv){
             return (
                 <Router>
@@ -59,9 +67,17 @@ const PrincipalContainer = () => {
                         </Hidden>
                         <div className={classes.content}>
                             <div className={classes.toolbar}></div>
+                            <Route exact path="/ConsultarUsuario" component={ConsultUser}/>
+                            <Route exact path="/CrearUsuario" component={CreateUser}/>
                             <Route exact path="/RegistrarAsesoria" component={RegistrarAsesoria}/>
                             <Route exact path="/Materias" component={subjects}/>
                             <Route exact path="/RegistrarMateria" component={RegistrarMateria}/>
+                            <Route exact path="/MisAsesorias" component={advisoryAdv}/>
+                            <Route exact path="/AprobarMateria" component={AprobarMateria}/>
+                            <Route exact path="/MateriaAdmin" component={subjectAdmin}/>
+                            <Route exact path="/EditarAsesoria" component={EditarRegistroAsesoria}/>
+                            <Route exact path="/MetodoPago" component={MetodoPago}/>
+
                         </div>
                     </div>
                 </Router>
@@ -69,6 +85,7 @@ const PrincipalContainer = () => {
             ) 
         }
 
+        if(isAdmin){
         return (
             <Router>
                 <div className={classes.root}>
@@ -98,6 +115,37 @@ const PrincipalContainer = () => {
             </Router>
     
         )
+        }
+        if(isStudent){
+        return (
+            <Router>
+                <div className={classes.root}>
+                    <NavBarStudent openAction={openAction} />
+                    <Hidden xsDown>
+                        <DrawerBox
+                            variant="permanent"
+                            open={true}
+                        />
+                    </Hidden>
+                    <Hidden smUp>
+                        <DrawerBox
+                            variant="temporary"
+                            open={stateOpen}
+                            onClose={openAction}
+                        />
+                    </Hidden>
+                    <div className={classes.content}>
+                        <div className={classes.toolbar}></div>
+                        <Route exact path="/ConsultarUsuario" component={ConsultUser}/>
+                        <Route exact path="/CrearUsuario" component={CreateUser}/>
+                        <Route exact path="/RegistrarAsesoria" component={RegistrarAsesoria}/>
+                        <Route exact path="/Materias" component={subjects}/>
+                        <Route exact path="/RegistrarMateria" component={RegistrarMateria}/>
+                    </div>
+                </div>
+            </Router>
+    
+        )}
     }
     
 
