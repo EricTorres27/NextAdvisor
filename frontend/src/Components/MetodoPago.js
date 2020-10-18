@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import swal from 'sweetalert';
 import {Box} from '@material-ui/core'
+import Button from '@material-ui/core/Button';
 
 
 
@@ -81,9 +82,9 @@ export default class MetodoPago extends Component {
                 </div>   
           </label>
           <br></br>  
-             <button onClick={()=>save()} type="button" class="btn btn-primary">Establecer</button>
+             <Button onClick={()=>save()}  variant = "contained" color="primary" >Establecer</Button>
              <br></br>  <br></br> 
-            <button onClick={()=>showAlert()} type="button" class="btn btn-primary">Eliminar tarifa</button>
+            <Button onClick={()=>showAlert()}  variant = "contained" color="primary">Eliminar tarifa</Button>
           </form>
           </Box> 
         </div> 

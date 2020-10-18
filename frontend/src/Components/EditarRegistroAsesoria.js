@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import swal from 'sweetalert';
 import {Box} from '@material-ui/core'
+import Button from '@material-ui/core/Button';
+import { positions } from '@material-ui/system';
 
 
 
@@ -76,15 +78,15 @@ export default class EditarRegistroAsesoria extends Component {
                 </div>   
           </label>  
           <br></br>  
-             <button onClick={()=>save()} type="button" class="btn btn-primary">Guardar</button>
+             <Button onClick={()=>save()}  variant = "contained" color="primary">Guardar</Button>
              <br></br>  <br></br> 
-            <button type="button" class="btn btn-primary">Cancelar</button>
+            <Button variant = "contained" color="primary">Cancelar</Button>
             <br></br>   <br></br>  
-             <button onClick={()=>showAlert()} type="button" class="btn btn-primary">Eliminar registro</button>
+             <Button onClick={()=>showAlert()} variant = "contained" color="primary">Eliminar registro</Button>
           </form>
         </Box>
         </div>
-            
+           
             
         )
     }

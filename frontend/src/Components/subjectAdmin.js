@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import swal from 'sweetalert';
 import {Box} from '@material-ui/core'
 import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 
 
@@ -35,7 +36,7 @@ export default class passSubject extends Component {
             </Link>
             <br></br>
             <Link to="AprobarMateria">
-                    <button type="button" class="btn btn-primary">Aprobar materias</button>
+                    <Button variant = "contained" color="primary" disableElevation>Aprobar materias</Button>
             </Link>
             
 
