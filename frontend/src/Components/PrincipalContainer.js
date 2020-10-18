@@ -24,6 +24,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
 
+
 const styles = makeStyles(theme => ({
     root: {
         display: 'flex'
@@ -41,9 +42,6 @@ const PrincipalContainer = () => {
     const openAction = () => {
         setStateOpen(!stateOpen)
     }
-    
-
-   
         const isAdv=true;
         const isAdmin=false ;
         const isStudent=false;
@@ -103,7 +101,7 @@ const PrincipalContainer = () => {
                             onClose={openAction}
                         />
                     </Hidden>
-                    <div className={classes.content}>
+                    <div className={classes.content} style={{backgroundColor: '#133C55'}}>
                         <div className={classes.toolbar}></div>
                         <Route exact path="/ConsultarUsuario" component={ConsultUser}/>
                         <Route exact path="/CrearUsuario" component={CreateUser}/>

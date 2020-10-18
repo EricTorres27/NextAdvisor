@@ -4,7 +4,7 @@ import {
     Drawer,
     Divider
 } from '@material-ui/core'
-import Lists from './Lists'
+import UserLists from './UserLists'
 
 const drawerWidth=240
 const styles= makeStyles(theme =>({
@@ -33,7 +33,7 @@ const DrawerBox = (props) => {
         >
             <div className={classes.toolbar}></div>
             <Divider/>
-            <Lists/>
+            <UserLists/>
         </Drawer>
     )
 }
