@@ -18,6 +18,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
 
+
 const styles = makeStyles(theme => ({
     root: {
         display: 'flex'
@@ -38,7 +39,7 @@ const PrincipalContainer = () => {
     
 
    
-        const isAdv=true;
+        const isAdv=false;
         if(isAdv){
             return (
                 <Router>
@@ -86,7 +87,7 @@ const PrincipalContainer = () => {
                             onClose={openAction}
                         />
                     </Hidden>
-                    <div className={classes.content}>
+                    <div className={classes.content} style={{backgroundColor: '#133C55'}}>
                         <div className={classes.toolbar}></div>
                         <Route exact path="/ConsultarUsuario" component={ConsultUser}/>
                         <Route exact path="/CrearUsuario" component={CreateUser}/>

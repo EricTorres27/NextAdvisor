@@ -11,10 +11,9 @@ import {
     Divider
 } from '@material-ui/core'
 
-const Lists = () => {
+const AdminLists = () => {
     return (
         <div>
-        
             <List component='nav'>
                 <ListItem button>
                     <ListItemIcon>
@@ -33,26 +32,18 @@ const Lists = () => {
                         <ListItemText primary='Crear usuario' />
                     </Link>
                 </ListItem>
+                <ListItem button>
+                    <ListItemIcon>
+                        <AddCircleIcon />
+                    </ListItemIcon>
+                    <Link to="/PrecuntasFrecuentes">
+                        <ListItemText primary='Preguntas frecuentes' />
+                    </Link>
+                </ListItem>
                 <Divider />
-                <ListItem button>
-                    <ListItemIcon>
-                        <AddCircleIcon />
-                    </ListItemIcon>
-                    <Link to="RegistrarAsesoria">
-                        <ListItemText primary='Registrar asesoria' />
-                    </Link>
-                </ListItem>
-                <ListItem button>
-                    <ListItemIcon>
-                        <AddCircleIcon />
-                    </ListItemIcon>
-                    <Link to="Materias">
-                        <ListItemText primary='Materias' />
-                    </Link>
-                </ListItem>
             </List>
         </div>
     )
 }
 
-export default Lists
+export default AdminLists
