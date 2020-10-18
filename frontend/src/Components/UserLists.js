@@ -16,7 +16,7 @@ import {
         const isAdmin=false;
         const isStudent=false;
 
-const Lists = () => {
+const UserLists = () => {
 
     if(isStudent){
     return (
@@ -175,4 +175,4 @@ const Lists = () => {
 
 }
 
-export default Lists
+export default UserLists
