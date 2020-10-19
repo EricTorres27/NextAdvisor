@@ -1,22 +1,16 @@
-import React, { Component, useState } from 'react'
+
+import { Box, Button, Divider, Grid, Typography, Paper, Container, Select, MenuItem } from '@material-ui/core';
+import React, {Component,  Fragment, useState } from 'react';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import InputBase from '@material-ui/core/InputBase';
+import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import swal from 'sweetalert';
-import {Box} from '@material-ui/core'
-import { Typography } from '@material-ui/core'
-import Button from '@material-ui/core/Button';
 
 
-
-  
-
-export default class RegistrarAsesoria extends Component {
-    
-    
-
-   
+export default class passSubject extends Component {
     render() {
-        
+
         const save=()=>{
             swal({
                 title:"Asesoría registrada exitosamente",
@@ -24,104 +18,136 @@ export default class RegistrarAsesoria extends Component {
                 icon: "success",
                 button: "Aceptar"
             });
-
-
            
-     
         }
 
-       
-        
-        return (
-       <div>
-        <Typography variant="h3" >
-           
-        <Box   style={{
-        textAlign:'center'
-    }} >
-        <form>
-            <h1  class="display-4" >Registrar asesoría</h1> 
-             <br></br>
-            <label  >
-             
-            <div class="input-group mb-3" >
-                <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Materia</label>
-                </div>
-                <select class="custom-select" id="inputGroupSelect01">
-                    <option selected>Seleccione una opción</option>
-                    <option value="1" class="dropdown-item" >Ingeniería de software</option>
-                    <option value="2"class="dropdown-item" >Finanzas personales</option>
-                    <option value="3" class="dropdown-item" >Administración de proyectos</option>
-                </select>
-            </div>
-                
+            const passSubject = () => {
 
-            </label >
-            <br></br>
-            <label>
-          <div class="input-group mb-3" >
-                <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01" >Método de pago</label>
-                </div>
-                <select class="custom-select" id="inputGroupSelect01">
-                    <option selected>Seleccione una opción</option>
-                    <option value="1" class="dropdown-item" >Efectivo</option>
-                    <option value="2"class="dropdown-item" >Transferencia</option>
-                </select>
-            </div>
-            </label>
-            <br></br>
-          <label>
-              <div class="input-group mb-3" >
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-">Tema</span>
-                </div>
-                    <input type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing"></input>
-                </div>   
-          </label>     
-            <br></br>
-            <label  >
-              <div class="input-group input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing">Horario</span>
-                </div>
-                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing"></input>
-                </div>   
-          </label> 
-          <br></br>
-          <label  >
-              <div class="input-group input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing">Día</span>
-                </div>
-                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing"></input>
-                </div>   
-          </label> 
-          <br></br>
-            <label  >
-              <div class="input-group input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroupSelect01" label="Size" size="Normal">Monto</span>
-                </div>
-                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing"></input>
-                </div>   
-          </label> 
+                const BootstrapInput = withStyles((theme) => ({
+                    root: {
+                        'label + &': {
+                            marginTop: theme.spacing(3),
+                        },
+                    },
+                    input: {
+                        borderRadius: 4,
+                        position: 'relative',
+                        backgroundColor: theme.palette.background.paper,
+                        border: '1px solid #ced4da',
+                        fontSize: 16,
+                        padding: '9px 26px 10px 12px',
+                        width: '245px',
+                        transition: theme.transitions.create(['border-color', 'box-shadow']),
+                        // Use the system font instead of the default Roboto font.
+                        fontFamily: [
+                            '-apple-system',
+                            'BlinkMacSystemFont',
+                            '"Segoe UI"',
+                            'Roboto',
+                            '"Helvetica Neue"',
+                            'Arial',
+                            'sans-serif',
+                            '"Apple Color Emoji"',
+                            '"Segoe UI Emoji"',
+                            '"Segoe UI Symbol"',
+                        ].join(','),
+                        '&:focus': {
+                            borderRadius: 4,
+                            borderColor: '#80bdff',
+                            boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+                        },
+                    },
+                }))(InputBase);
                
-            <br></br>
-                <Button  onClick={()=>save()} variant = "contained" color="primary" disableElevation >Registrar</Button>
-          </form>
-         <div>
-            
-         </div>
-    
-          </Box>
-          
-          </Typography>
-          
-        </div>      
-            
-        )
-    }
-}
+           
+        }
+        const styles = {
+            Paper: { height: 500, padding: 20, marginLeft: 200, marginRight: 200, overflowY: 'auto' }
+        };
 
+
+        return (
+        
+            <Fragment>
+            <Box color="primary.contrastText" mb={3}>
+                <Typography color="white" align="center" variant="h3">Registrar asesoría</Typography>
+            </Box>
+            <Paper elevation={3} style={styles.Paper}>
+                <Box mt={5} ml={5}>
+                    <Container maxWidth="sm">
+                        <form className="row" >
+                            <Grid container spacing={1}>
+                                <Grid item xs={12} sm={12}>
+                                <Box mb={2}>
+                                        <Typography variant="subtitle1">Materia</Typography>
+                                        <Select
+                                            
+                                            labelId="demo-customized-select-label"
+                                            id="demo-customized-select"
+                                           
+                                        >
+                                            <MenuItem value="">
+                                                <em>None</em>
+                                            </MenuItem>
+                                            <MenuItem >Calculo  </MenuItem>
+                                            <MenuItem >FIS</MenuItem>
+                                            <MenuItem >Finanzas personales</MenuItem>
+                                            <MenuItem >Álgebra lineal</MenuItem>
+                                            <MenuItem >Estadística</MenuItem>
+                                        </Select>
+                                    </Box>
+                                    <Box mb={2}>
+                                        <Typography variant="subtitle1">Método de pago</Typography>
+                                        <Select
+                                            
+                                            labelId="demo-customized-select-label"
+                                            id="demo-customized-select"
+                                           
+                                        >
+                                            <MenuItem value="">
+                                                <em>None</em>
+                                            </MenuItem>
+                                            <MenuItem >Efectivo</MenuItem>
+                                            <MenuItem >Transferencia</MenuItem>
+                                            
+                                        </Select>
+                                    </Box>
+                                    <Box mb={2}>
+                                        <Typography variant="subtitle1">Tema</Typography>
+                                        <input type="text"  className="form-control" ></input>
+                                    </Box>
+                                    <Box mb={2}>
+                                        <Typography variant="subtitle1">Hora</Typography>
+                                        <input type="text"  className="form-control" ></input>
+                                    </Box>
+                                    <Box mb={2}>
+                                        <Typography variant="subtitle1">Día</Typography>
+                                        <input type="text"  className="form-control" ></input>
+                                    </Box>
+                                    <Box mb={2}>
+                                        <Typography variant="subtitle1">Monto por hora</Typography>
+                                        <input type="text"  className="form-control" ></input>
+                                    </Box>
+                                </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <Box  ml={10} mt={10}>
+                                        <Button color="primary" variant="contained" onClick={()=>save()}>Registrar</Button>        
+                                    </Box >
+                                    <Box ml={40} mt={-4.4}>
+                                        <Button color="primary" variant="contained">Cancelar</Button>
+                                            
+                                    </Box>    
+
+                                        
+                                   
+                                </Grid>
+                               
+                            </Grid>
+                        </form>
+                    </Container>
+                </Box>
+            </Paper>
+        </Fragment>
+        );
+    }
+    }

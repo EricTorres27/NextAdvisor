@@ -5,25 +5,25 @@ import InputBase from '@material-ui/core/InputBase';
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import swal from 'sweetalert';
-import { Link } from 'react-router-dom';
-import { spacing } from '@material-ui/system';
-
 
 export default class passSubject extends Component {
     render() {
+        
+        const save=()=>{
+            swal({
+                title:"Materia aprobada exitosamente",
+                icon: "success",
+                button: "Aceptar"
+            });
+           
+        }
 
             const passSubject = () => {
 
-
-               
-                
-                
-
                 const BootstrapInput = withStyles((theme) => ({
                     root: {
-                        '& > *': {
-                            marginTop: theme.spacing(10),
-                            margin: theme.spacing(10),
+                        'label + &': {
+                            marginTop: theme.spacing(3),
                         },
                     },
                     input: {
@@ -49,7 +49,7 @@ export default class passSubject extends Component {
                             '"Segoe UI Symbol"',
                         ].join(','),
                         '&:focus': {
-                            borderRadius: 10,
+                            borderRadius: 4,
                             borderColor: '#80bdff',
                             boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
                         },
@@ -64,10 +64,10 @@ export default class passSubject extends Component {
 
 
         return (
-       
+        
             <Fragment>
             <Box color="primary.contrastText" mb={3}>
-                <Typography color="white" align="center" variant="h3">Listado de materias</Typography>
+                <Typography color="white" align="center" variant="h3">Aprobar materia</Typography>
             </Box>
             <Paper elevation={3} style={styles.Paper}>
                 <Box mt={5} ml={5}>
@@ -76,28 +76,19 @@ export default class passSubject extends Component {
                             <Grid container spacing={1}>
                                 <Grid item xs={12} sm={12}>
                                     <Typography variant="subtitle1">Cálculo diferencial</Typography>
-                                    <Typography variant="subtitle1">Fundamentos de ingeniería de software</Typography>
-                                    <Typography variant="subtitle1">Sistemas inteligentes</Typography>
-                                    <Typography variant="subtitle1">Finanzas personales</Typography>
-                                    <Typography variant="subtitle1">Administración de proyectos</Typography>
-                                    <Typography variant="subtitle1">Microcontroladores</Typography>
-                                    <Typography variant="subtitle1">Interconexión de redes</Typography>
-                                    <Typography variant="subtitle1">Diseño gráfico</Typography>
-                                    <Typography variant="subtitle1">FIS</Typography>
+                                    <Button onClick={()=>save()}  color="primary" variant="contained">Aprobar</Button>
                                 </Grid>
                                 <Grid item xs={12} sm={12}>
-                                    <Box  ml={20} mt={10}>
-                                        
-                                            <Link to="RegistrarMateria">
-                                                    <Button color="primary" variant="contained" >Registrar materias</Button>
-                                            </Link>
-                                            
-                                            
-                                    </Box >
-                                      
-
-                                        
-                                   
+                                    <Typography variant="subtitle1">Cálculo integral</Typography>
+                                    <Button onClick={()=>save()}  color="primary" variant="contained">Aprobar</Button>
+                                </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <Typography variant="subtitle1">Álgebra lineal</Typography>
+                                    <Button onClick={()=>save()}   color="primary" variant="contained">Aprobar</Button>
+                                </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <Typography variant="subtitle1">Fundamentos de redes</Typography>
+                                    <Button onClick={()=>save()} color="primary" variant="contained">Aprobar</Button>
                                 </Grid>
                             </Grid>
                         </form>

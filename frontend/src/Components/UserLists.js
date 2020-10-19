@@ -63,7 +63,7 @@ const UserLists = () => {
                         <ListItemIcon>
                             <AddCircleIcon />
                         </ListItemIcon>
-                        <Link to="">
+                        <Link to="/PrecuntasFrecuentes">
                             <ListItemText primary='Preguntas frecuentes' />
                         </Link>
                     </ListItem>
@@ -72,7 +72,7 @@ const UserLists = () => {
                         <ListItemIcon>
                             <AddCircleIcon />
                         </ListItemIcon>
-                        <Link to="">
+                        <Link to="/CrearUsuario">
                             <ListItemText primary='Usuarios' />
                         </Link>
                     </ListItem>
@@ -96,7 +96,7 @@ const UserLists = () => {
                         <ListItemIcon>
                             <AddCircleIcon />
                         </ListItemIcon>
-                        <Link to="MateriasAdmin">
+                        <Link to="MateriaAdmin">
                             <ListItemText primary='Materias' />
                         </Link>
                     </ListItem>
