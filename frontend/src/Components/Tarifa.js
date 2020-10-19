@@ -4,9 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
 
-
-
-
 export default class passSubject extends Component {
     render() {
 
@@ -17,7 +14,7 @@ export default class passSubject extends Component {
         <form>
             <h1  class="display-4" >Tarifa actual</h1>
              <br></br>
-            <label>
+          <label>
               <div class="input-group input-group-sm mb-3" >
                     <h5 >100 pesos por hora</h5>
               </div>
