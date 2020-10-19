@@ -22,7 +22,7 @@ export default class passSubject extends Component {
                     <h4 >Diana Estefanía Ortiz Ledesma</h4>
               </div>
               <div class="input-group input-group-sm mb-3" >
-                    <h5 >Estudiante</h>
+                    <h5 >Estudiante</h5>
               </div>
           </label>
           <br></br>
