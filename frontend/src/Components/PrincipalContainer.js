@@ -26,6 +26,7 @@ import ConsultAdvisory from './ConsultAdvisory'
 import ConsultTopic from './ConsultTopic'
 import Reports from './Reports'
 import AdminProfile from './AdminProfile'
+import FrecuentQS from './FrecuentQS'
 
 
 
@@ -48,10 +49,9 @@ const PrincipalContainer = () => {
     const openAction = () => {
         setStateOpen(!stateOpen)
     }
-        const isAdv=true;
-        const isAdmin=false;
-        const isStudent=false;
-        if(isAdv){
+
+        const role="advisor"
+        if(role=="advisor"){
             return (
                 <Router>
                     <div className={classes.root}>
@@ -90,7 +90,7 @@ const PrincipalContainer = () => {
             ) 
         }
 
-        if(isAdmin){
+        if(role=="admin"){
         return (
             <Router>
                 <div className={classes.root}>
@@ -116,6 +116,7 @@ const PrincipalContainer = () => {
                         <Route exact path="/Reports" component={Reports}/>
                         <Route exact path="/ConsultTopic" component={ConsultTopic}/>
                         <Route exact path="/CrearUsuario" component={CreateUser}/>
+                        <Route exact path="/PreguntasFrecuentes" component={FrecuentQS}/>
                         <Route exact path="/Materias" component={subjects}/>
                         <Route exact path="/RegistrarMateria" component={RegistrarMateria}/>
                         <Route exact path="/passSubject" component={passSubject}/>
@@ -126,7 +127,7 @@ const PrincipalContainer = () => {
     
         )
         }
-        if(isStudent){
+        if(role=="student"){
         return (
             <Router>
                 <div className={classes.root}>
