@@ -21,7 +21,7 @@ const UserLists = () => {
     if(isStudent){
     return (
         <div>
-        
+
             <List component='nav'>
                 <Divider />
                 <ListItem button>
@@ -48,7 +48,7 @@ const UserLists = () => {
     if(isAdmin){
         return (
             <div>
-            
+
                 <List component='nav'>
                     <ListItem button>
                         <ListItemIcon>
@@ -124,14 +124,14 @@ const UserLists = () => {
     if(isAdv){
         return (
             <div>
-            
+
                 <List component='nav'>
                     <ListItem button>
                         <ListItemIcon>
                             <AddCircleOutlineIcon />
                         </ListItemIcon>
-                        <Link to="">
-                            <ListItemText primary='Mi perfil'/>
+                        <Link to="Perfil">
+                            <ListItemText primary='Perfil'/>
                         </Link>
                     </ListItem>
                     <Divider />
@@ -139,8 +139,8 @@ const UserLists = () => {
                         <ListItemIcon>
                             <AddCircleIcon />
                         </ListItemIcon>
-                        <Link to="">
-                            <ListItemText primary='Mi Evaluación' />
+                        <Link to="Materias">
+                            <ListItemText primary='Materias' />
                         </Link>
                     </ListItem>
                     <Divider />
@@ -149,23 +149,34 @@ const UserLists = () => {
                             <AddCircleIcon />
                         </ListItemIcon>
                         <Link to="MisAsesorias">
-                            <ListItemText primary='Mis asesorías' />
+                            <ListItemText primary='Asesorías' />
                         </Link>
                     </ListItem>
+                    <Divider />
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AddCircleIcon />
+                        </ListItemIcon>
+                        <Link to="Tarifa">
+                            <ListItemText primary='Tarifa' />
+                        </Link>
+                    </ListItem>
+                    <Divider />
                     <ListItem button>
                         <ListItemIcon>
                             <AddCircleIcon />
                         </ListItemIcon>
                         <Link to="MetodoPago">
-                            <ListItemText primary='Mi método de pago' />
+                            <ListItemText primary='Método de pago' />
                         </Link>
                     </ListItem>
+                    <Divider />
                     <ListItem button>
                         <ListItemIcon>
                             <AddCircleIcon />
                         </ListItemIcon>
-                        <Link to="Materias">
-                            <ListItemText primary='Materias' />
+                        <Link to="">
+                            <ListItemText primary='Evaluación' />
                         </Link>
                     </ListItem>
                 </List>
