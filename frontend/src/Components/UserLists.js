@@ -18,13 +18,10 @@ import {
 } from '@material-ui/core'
 
 
-const isAdv = false;
-const isAdmin = true;
-const isStudent = false;
-
+const role="advisor"
 const UserLists = () => {
 
-    if (isStudent) {
+    if (role=="student") {
         return (
             <div>
 
@@ -51,7 +48,7 @@ const UserLists = () => {
         )
     }
 
-    if (isAdmin) {
+    if (role=="admin") {
         return (
             <div>
 
@@ -101,7 +98,7 @@ const UserLists = () => {
                         </ListItem>
                     </Link>
                     <Divider />
-                    <Link to="/CrearUsuario" style={{ textDecoration: 'none' }}>
+                    <Link to="/PreguntasFrecuentes" style={{ textDecoration: 'none' }}>
                         <ListItem button>
                             <ListItemIcon>
                                 <HelpIcon color="primary" fontSize="large" />
@@ -115,7 +112,7 @@ const UserLists = () => {
         )
     }
 
-    if (isAdv) {
+    if (role=="advisor") {
         return (
             <div>
 
