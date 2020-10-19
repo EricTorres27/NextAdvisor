@@ -36,7 +36,6 @@ const Navbar = (props) => {
                         <MenuIcon/>
                     </IconButton>
                     <Typography variant='h6' className={classes.user}>
-                        NextAdvisor
                     </Typography>
                     <Typography variant='h6'>
                        Administrador

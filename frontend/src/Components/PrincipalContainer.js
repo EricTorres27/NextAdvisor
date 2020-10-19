@@ -20,6 +20,10 @@ import RegistrarAsesoria from './RegistrarAsesoria'
 import RegistrarMateria from './RegistrarMateria'
 import subjects from './subjects'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import ConsultAdvisory from './ConsultAdvisory'
+import ConsultTopic from './ConsultTopic'
+import Reports from './Reports'
+import AdminProfile from './AdminProfile'
 
 
 
@@ -42,8 +46,8 @@ const PrincipalContainer = () => {
     const openAction = () => {
         setStateOpen(!stateOpen)
     }
-        const isAdv=true;
-        const isAdmin=false ;
+        const isAdv=false;
+        const isAdmin=true ;
         const isStudent=false;
         if(isAdv){
             return (
@@ -65,7 +69,7 @@ const PrincipalContainer = () => {
                         </Hidden>
                         <div className={classes.content}>
                             <div className={classes.toolbar}></div>
-                            <Route exact path="/ConsultarUsuario" component={ConsultUser}/>
+                            <Route exact path="/ConsultUser" component={ConsultUser}/>
                             <Route exact path="/CrearUsuario" component={CreateUser}/>
                             <Route exact path="/RegistrarAsesoria" component={RegistrarAsesoria}/>
                             <Route exact path="/Materias" component={subjects}/>
@@ -103,11 +107,13 @@ const PrincipalContainer = () => {
                     </Hidden>
                     <div className={classes.content} style={{backgroundColor: '#133C55'}}>
                         <div className={classes.toolbar}></div>
-                        <Route exact path="/ConsultarUsuario" component={ConsultUser}/>
+                        <Route exact path="/AdminProfile" component={AdminProfile}/>
+                        <Route exact path="/ConsultUser" component={ConsultUser}/>
+                        <Route exact path="/ConsultAdvisory" component={ConsultAdvisory}/>
+                        <Route exact path="/Reports" component={Reports}/>
+                        <Route exact path="/ConsultTopic" component={ConsultTopic}/>
                         <Route exact path="/CrearUsuario" component={CreateUser}/>
-                        <Route exact path="/RegistrarAsesoria" component={RegistrarAsesoria}/>
                         <Route exact path="/Materias" component={subjects}/>
-                        <Route exact path="/RegistrarMateria" component={RegistrarMateria}/>
                     </div>
                 </div>
             </Router>

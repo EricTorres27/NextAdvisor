@@ -1,7 +1,13 @@
 import React from 'react'
 import Icon from '@material-ui/core/Icon';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import EventIcon from '@material-ui/icons/Event';
+import PeopleIcon from '@material-ui/icons/People';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import AssessmentIcon from '@material-ui/icons/Assessment';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import HelpIcon from '@material-ui/icons/Help';
 import { Link } from 'react-router-dom';
 import {
     List,
@@ -12,68 +18,24 @@ import {
 } from '@material-ui/core'
 
 
-        const isAdv=true;
-        const isAdmin=false;
-        const isStudent=false;
+const isAdv = false;
+const isAdmin = true;
+const isStudent = false;
 
 const UserLists = () => {
 
-    if(isStudent){
-    return (
-        <div>
-        
-            <List component='nav'>
-                <Divider />
-                <ListItem button>
-                    <ListItemIcon>
-                        <AddCircleIcon />
-                    </ListItemIcon>
-                    <Link to="">
-                        <ListItemText primary='Mi perfil' />
-                    </Link>
-                </ListItem>
-                <ListItem button>
-                    <ListItemIcon>
-                        <AddCircleIcon />
-                    </ListItemIcon>
-                    <Link to="">
-                        <ListItemText primary='Mis asesorías' />
-                    </Link>
-                </ListItem>
-            </List>
-        </div>
-    )
-    }
-
-    if(isAdmin){
+    if (isStudent) {
         return (
             <div>
-            
+
                 <List component='nav'>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <AddCircleOutlineIcon />
-                        </ListItemIcon>
-                        <Link to="">
-                            <ListItemText primary='Mi perfil'/>
-                        </Link>
-                    </ListItem>
                     <Divider />
                     <ListItem button>
                         <ListItemIcon>
-                            <AddCircleIcon />
+                            <AccountCircleIcon />
                         </ListItemIcon>
                         <Link to="">
-                            <ListItemText primary='Preguntas frecuentes' />
-                        </Link>
-                    </ListItem>
-                    <Divider />
-                    <ListItem button>
-                        <ListItemIcon>
-                            <AddCircleIcon />
-                        </ListItemIcon>
-                        <Link to="">
-                            <ListItemText primary='Usuarios' />
+                            <ListItemText primary='Mi perfil' />
                         </Link>
                     </ListItem>
                     <ListItem button>
@@ -81,39 +43,7 @@ const UserLists = () => {
                             <AddCircleIcon />
                         </ListItemIcon>
                         <Link to="">
-                            <ListItemText primary='Asesorías' />
-                        </Link>
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <AddCircleIcon />
-                        </ListItemIcon>
-                        <Link to="">
-                            <ListItemText primary='Asesores' />
-                        </Link>
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <AddCircleIcon />
-                        </ListItemIcon>
-                        <Link to="MateriasAdmin">
-                            <ListItemText primary='Materias' />
-                        </Link>
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <AddCircleIcon />
-                        </ListItemIcon>
-                        <Link to="">
-                            <ListItemText primary='Reportes' />
-                        </Link>
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <AddCircleIcon />
-                        </ListItemIcon>
-                        <Link to="">
-                            <ListItemText primary='Calendario' />
+                            <ListItemText primary='Mis asesorías' />
                         </Link>
                     </ListItem>
                 </List>
@@ -121,17 +51,81 @@ const UserLists = () => {
         )
     }
 
-    if(isAdv){
+    if (isAdmin) {
         return (
             <div>
-            
+
+                <List component='nav'>
+                    <Link to="/AdminProfile" style={{ textDecoration: 'none' }} >
+                        <ListItem button>
+                            <ListItemIcon >
+                                <AccountCircleIcon color="primary" fontSize="large" />
+                            </ListItemIcon>
+                            <ListItemText primary='Mi perfil' />
+                        </ListItem>
+                    </Link>
+                    <Divider />
+                    <Link to="/ConsultUser" style={{ textDecoration: 'none' }}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <PeopleIcon color="primary" fontSize="large" />
+                            </ListItemIcon>
+                            <ListItemText primary='Usuarios' />
+                        </ListItem>
+                    </Link>
+                    <Divider />
+                    <Link to="/ConsultAdvisory" style={{ textDecoration: 'none' }}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <EventIcon color="primary" fontSize="large" />
+                            </ListItemIcon>
+                            <ListItemText primary='Asesorías' />
+                        </ListItem>
+                    </Link>
+                    <Divider />
+                    <Link to="/ConsultTopic" style={{ textDecoration: 'none' }}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <AssignmentIcon color="primary" fontSize="large" />
+                            </ListItemIcon>
+                            <ListItemText primary='Materias' />
+                        </ListItem>
+                    </Link>
+                    <Divider />
+                    <Link to="/Reports" style={{ textDecoration: 'none' }}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <AssessmentIcon color="primary" fontSize="large" />
+                            </ListItemIcon>
+                            <ListItemText primary='Reportes' />
+                        </ListItem>
+                    </Link>
+                    <Divider />
+                    <Link to="/CrearUsuario" style={{ textDecoration: 'none' }}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <HelpIcon color="primary" fontSize="large" />
+                            </ListItemIcon>
+                            <ListItemText primary='Preguntas frecuentes' />
+                        </ListItem>
+                    </Link>
+                    <Divider />
+                </List>
+            </div >
+        )
+    }
+
+    if (isAdv) {
+        return (
+            <div>
+
                 <List component='nav'>
                     <ListItem button>
                         <ListItemIcon>
                             <AddCircleOutlineIcon />
                         </ListItemIcon>
                         <Link to="">
-                            <ListItemText primary='Mi perfil'/>
+                            <ListItemText primary='Mi perfil' />
                         </Link>
                     </ListItem>
                     <Divider />
@@ -171,7 +165,7 @@ const UserLists = () => {
                 </List>
             </div>
         )
-        }
+    }
 
 }
 
