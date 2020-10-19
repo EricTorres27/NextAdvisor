@@ -31,6 +31,7 @@ import ConsultTopic from './ConsultTopic'
 import Reports from './Reports'
 import AdminProfile from './AdminProfile'
 import FrecuentQS from './FrecuentQS'
+import CreateFrecuentQS from './CreateFrecuentQS'
 
 
 const styles = makeStyles(theme => ({
@@ -51,7 +52,7 @@ const PrincipalContainer = () => {
         setStateOpen(!stateOpen)
     }
 
-        const role="advisor"
+        const role="admin"
         if(role=="advisor"){
             return (
                 <Router>
@@ -79,7 +80,6 @@ const PrincipalContainer = () => {
                             <Route exact path="/RegistrarMateria" component={RegistrarMateria}/>
                             <Route exact path="/MisAsesorias" component={advisoryAdv}/>
                             <Route exact path="/AprobarMateria" component={AprobarMateria}/>
-
                             <Route exact path="/EditarAsesoria" component={EditarRegistroAsesoria}/>
                             <Route exact path="/MetodoPago" component={MetodoPago}/>
                             <Route exact path="/Perfil" component={Perfil}/>
@@ -121,6 +121,7 @@ const PrincipalContainer = () => {
                         <Route exact path="/ConsultTopic" component={ConsultTopic}/>
                         <Route exact path="/CrearUsuario" component={CreateUser}/>
                         <Route exact path="/PreguntasFrecuentes" component={FrecuentQS}/>
+                        <Route exact path="/CrearPregunta" component={CreateFrecuentQS}/>
                         <Route exact path="/Materias" component={subjects}/>
                         <Route exact path="/RegistrarMateria" component={RegistrarMateria}/>
                         <Route exact path="/passSubject" component={passSubject}/>

@@ -20,7 +20,7 @@ const FrecuentQS = () => {
     }
     const StyledTableCell = withStyles((theme) => ({
         head: {
-            backgroundColor: "#386FA4",
+            backgroundColor: "#59A5D8",
             color: theme.palette.common.white,
         },
         body: {
@@ -41,9 +41,8 @@ const FrecuentQS = () => {
     }
 
     const rows = [
-        createData(1, 'Eric', 'Torres', 'Rodríguez'),
-        createData(2, 'Eric', 'Torres', 'Rodríguez'),
-        createData(3, 'Eric', 'Torres', 'Rodríguez'),
+        createData(1, '¿Como doy una asesoria?', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'),
+        createData(2, '¿Como me inscribo a una sesoria?', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'),
     ];
 
     const useStyles = makeStyles({
@@ -63,47 +62,47 @@ const FrecuentQS = () => {
                 <Paper elevation={3} style={styles.Paper}>
                     <Box>
                         <Grid container spacing={3}>
-                        <Grid item xs={12} sm={1}>
-                            <SearchIcon />
+                            <Grid item xs={12} sm={1}>
+                                    <SearchIcon />
+                            </Grid>
+                            <Grid item xs={12} sm={10}>
+                                <input type="text" placeholder="Buscar" className="form-control" name="busqueda"></input>
+                            </Grid>
+                            <Grid item xs={12} sm={1}>
+                                <Link to="/CrearPregunta">
+                                    <AddCircleIcon button fontSize="large" />
+                                </Link>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={12} sm={10}>
-                            <input type="text" placeholder="Buscar" className="form-control" name="busqueda"></input>
-                        </Grid>
-                        <Grid item xs={12} sm={1}>
-                            <Link to="/CrearUsuario">
-                                <AddCircleIcon button fontSize="large" />
-                            </Link>
-                        </Grid>
-                    </Grid>
                     </Box>
-                <Box mt={5}>
-                    <TableContainer component={Paper}>
-                        <Table className={classes.table} aria-label="customized table">
-                            <TableHead>
-                                <TableRow>
-                                    <StyledTableCell>Id Pregunta</StyledTableCell>
-                                    <StyledTableCell>Pregunta</StyledTableCell>
-                                    <StyledTableCell >Respuesra</StyledTableCell>
-                                    <StyledTableCell ></StyledTableCell>
-                                    <StyledTableCell ></StyledTableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {rows.map((row) => (
-                                    <StyledTableRow key={row.idPregunta}>
-                                        <StyledTableCell component="th" scope="row">
-                                            {row.idPregunta}
-                                        </StyledTableCell>
-                                        <StyledTableCell >{row.pregunta}</StyledTableCell>
-                                        <StyledTableCell >{row.respuesta}</StyledTableCell>
-                                        <StyledTableCell ><EditIcon fontSize="large" color="primary" /></StyledTableCell>
-                                        <StyledTableCell ><DeleteForeverIcon fontSize="large" color="primary" /></StyledTableCell>
-                                    </StyledTableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </Box>
+                    <Box mt={5}>
+                        <TableContainer component={Paper}>
+                            <Table className={classes.table} aria-label="customized table">
+                                <TableHead>
+                                    <TableRow>
+                                        <StyledTableCell>Id Pregunta</StyledTableCell>
+                                        <StyledTableCell>Pregunta</StyledTableCell>
+                                        <StyledTableCell >Respuesta</StyledTableCell>
+                                        <StyledTableCell ></StyledTableCell>
+                                        <StyledTableCell ></StyledTableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {rows.map((row) => (
+                                        <StyledTableRow key={row.idPregunta}>
+                                            <StyledTableCell component="th" scope="row">
+                                                {row.idPregunta}
+                                            </StyledTableCell>
+                                            <StyledTableCell >{row.pregunta}</StyledTableCell>
+                                            <StyledTableCell >{row.respuesta}</StyledTableCell>
+                                            <StyledTableCell ><EditIcon fontSize="large" color="primary" /></StyledTableCell>
+                                            <StyledTableCell ><DeleteForeverIcon fontSize="large" color="primary" /></StyledTableCell>
+                                        </StyledTableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </Box>
                 </Paper>
             </div>
         </Fragment >

@@ -18,7 +18,7 @@ const ConsultUser = () => {
     }
     const StyledTableCell = withStyles((theme) => ({
         head: {
-            backgroundColor: "#386FA4",
+            backgroundColor: "#59A5D8",
             color: theme.palette.common.white,
         },
         body: {

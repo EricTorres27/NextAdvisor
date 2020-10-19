@@ -80,6 +80,14 @@ const CreateUser = () => {
             [event.target.name]: event.target.value
         })
     };
+    const [role, setRole] = React.useState('');
+    const handleChangeRole = (event) => {
+        setRole(event.target.value);
+        setDatos({
+            ...datos,
+            [event.target.name]: event.target.value
+        })
+    };
 
     return (
         <Fragment>
@@ -144,34 +152,33 @@ const CreateUser = () => {
                                     <Grid item xs={12} sm={6}>
                                         <Box mb={2}>
                                             <Typography variant="subtitle1"> Nombre de usuario</Typography>
-                                            <input type="text" placeholder="Gustavo" className="form-control" onChange={handleInputChange} name="nombre"></input>
+                                            <input type="text" placeholder="TrainerGus" className="form-control" onChange={handleInputChange} name="nombreUsuario"></input>
                                         </Box>
                                         <Box mb={2}>
                                             <Typography variant="subtitle1">Carrera</Typography>
-                                            <input type="text" placeholder="Rivera" className="form-control" onChange={handleInputChange} name="apellidoPaterno"></input>
+                                            <input type="text" placeholder="ISC" className="form-control" onChange={handleInputChange} name="carrera"></input>
                                         </Box>
                                         <Box mb={2}>
                                             <Typography variant="subtitle1">Semestre</Typography>
-                                            <input type="text" placeholder="Martínez" className="form-control" onChange={handleInputChange} name="apellidoMaterno"></input>
+                                            <input type="text" placeholder="1" className="form-control" onChange={handleInputChange} name="semestre"></input>
                                         </Box>
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
                                         <Box mb={2}>
                                             <Typography variant="subtitle1">Rol</Typography>
                                             <Select
-                                                name="genero"
+                                                name="role"
                                                 labelId="demo-customized-select-label"
                                                 id="demo-customized-select"
-                                                value={genero}
-                                                onChange={handleChange}
+                                                value={role}
+                                                onChange={handleChangeRole}
                                                 input={<BootstrapInput />}
                                             >
                                                 <MenuItem value="">
                                                     <em>None</em>
                                                 </MenuItem>
-                                                <MenuItem value="Hombre">Hombre</MenuItem>
-                                                <MenuItem value="Mujer">Mujer</MenuItem>
-                                                <MenuItem value="Otro">Otro</MenuItem>
+                                                <MenuItem value="Estudiante">Estudiante</MenuItem>
+                                                <MenuItem value="Asesor">Asesor</MenuItem>
                                             </Select>
                                         </Box>
 
