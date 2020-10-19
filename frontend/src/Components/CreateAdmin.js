@@ -2,9 +2,8 @@ import { Box, Button, Divider, Grid, Typography, Paper, Container, Select, MenuI
 import React, { Fragment, useState } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
-import axios from 'axios'
 
-const CreateUser = () => {
+const CreateAdmin = () => {
 
     const BootstrapInput = withStyles((theme) => ({
         root: {
@@ -61,8 +60,8 @@ const CreateUser = () => {
     }
 
     const enviarDatos = (event) => {
-        event.preventDefault();
-        console.log('enviando datos...' + datos)
+        event.preventDefault()
+        console.log('enviando datos...' + datos.nombre + ' ' + datos.genero)
     }
     const styles = {
         Paper: { height: 500, padding: 20, marginLeft: 200, marginRight: 200, overflowY: 'auto' }
@@ -123,11 +122,11 @@ const CreateUser = () => {
                                     </Box>
                                     <Box mb={2}>
                                         <Typography variant="subtitle1">Correo</Typography>
-                                        <input type="text" placeholder="Nombre" className="form-control" onChange={handleInputChange} name="correo"></input>
+                                        <input type="text" placeholder="Nombre" className="form-control" onChange={handleInputChange} name="nombre"></input>
                                     </Box>
                                     <Box mb={2}>
                                         <Typography variant="subtitle1">Telefono</Typography>
-                                        <input type="text" placeholder="Nombre" className="form-control" onChange={handleInputChange} name="telefono"></input>
+                                        <input type="text" placeholder="Nombre" className="form-control" onChange={handleInputChange} name="nombre"></input>
                                     </Box>
                                 </Grid>
                                 <Divider />
@@ -188,4 +187,4 @@ const CreateUser = () => {
     );
 }
 
-export default CreateUser;
+export default CreateAdmin;
