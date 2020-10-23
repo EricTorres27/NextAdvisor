@@ -87,6 +87,7 @@ const PrincipalContainer = () => {
                             <Route exact path="/Tarifa" component={Tarifa}/>
                             <Route exact path="/EditarTarifa" component={EditarTarifa}/>
                             <Route exact path="passSubject" component={passSubject}/>
+                            
                         </div>
                     </div>
                 </Router>
@@ -126,6 +127,7 @@ const PrincipalContainer = () => {
                         <Route exact path="/RegistrarMateria" component={RegistrarMateria}/>
                         <Route exact path="/passSubject" component={passSubject}/>
                         <Route exact path="/MateriaAdmin" component={subjectAdmin}/>
+                        <Route exact path="/subjectAdmin" component={subjectAdmin}/>
                     </div>
                 </div>
             </Router>

@@ -80,7 +80,7 @@ const UserLists = () => {
                         </ListItem>
                     </Link>
                     <Divider />
-                    <Link to="/ConsultTopic" style={{ textDecoration: 'none' }}>
+                    <Link to="/subjectAdmin" style={{ textDecoration: 'none' }}>
                         <ListItem button>
                             <ListItemIcon>
                                 <AssignmentIcon color="primary" fontSize="large" />
