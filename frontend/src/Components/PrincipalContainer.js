@@ -1,5 +1,4 @@
 import React from 'react'
-
 import {
     Hidden,
     makeStyles
@@ -16,7 +15,6 @@ import DrawerBox from './DrawerBox'
 import Button from '@material-ui/core/Button'
 import CreateUser from './CreateUser'
 import passSubject from './passSubject'
-
 import ConsultUser from './ConsultUser'
 import RegistrarAsesoria from './RegistrarAsesoria'
 import RegistrarMateria from './RegistrarMateria'
@@ -32,6 +30,8 @@ import Reports from './Reports'
 import AdminProfile from './AdminProfile'
 import FrecuentQS from './FrecuentQS'
 import CreateFrecuentQS from './CreateFrecuentQS'
+import ConsultarUsuario from '../Views/ConsultarUsuario'
+import { CrearUsuario } from '../Views/CrearUsuario'
 
 
 const styles = makeStyles(theme => ({
@@ -52,7 +52,7 @@ const PrincipalContainer = () => {
         setStateOpen(!stateOpen)
     }
 
-        const role="advisor"
+        const role="admin"
         if(role=="advisor"){
             return (
                 <Router>
@@ -116,11 +116,11 @@ const PrincipalContainer = () => {
                     <div className={classes.content} style={{backgroundColor: '#133C55'}}>
                         <div className={classes.toolbar}></div>
                         <Route exact path="/AdminProfile" component={AdminProfile}/>
-                        <Route exact path="/ConsultUser" component={ConsultUser}/>
+                        <Route exact path="/ConsultUser" component={ConsultarUsuario}/>
                         <Route exact path="/ConsultAdvisory" component={ConsultAdvisory}/>
                         <Route exact path="/Reports" component={Reports}/>
                         <Route exact path="/ConsultTopic" component={ConsultTopic}/>
-                        <Route exact path="/CrearUsuario" component={CreateUser}/>
+                        <Route exact path="/CrearUsuario" component={CrearUsuario}/>
                         <Route exact path="/PreguntasFrecuentes" component={FrecuentQS}/>
                         <Route exact path="/CrearPregunta" component={CreateFrecuentQS}/>
                         <Route exact path="/Materias" component={subjects}/>

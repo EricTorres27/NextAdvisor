@@ -1,5 +1,5 @@
 import { Box, Button, Divider, Grid, Typography, Paper, Container, Select, MenuItem, List } from '@material-ui/core';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -12,7 +12,22 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import EditIcon from '@material-ui/icons/Edit';
+import axios from 'axios'
+
+
 const ConsultUser = () => {
+    const baseURL='http://localhost:8000/api/cuenta';
+    const [data, setData]=useState([]);
+    const peticionGet=async()=>{
+        await axios.get(baseURL)
+        .then(response=>{
+            setData(response.data);
+        })
+    }
+    useEffect(()=>{
+        peticionGet();
+    },[])
+
     const styles = {
         Paper: { height: 500, padding: 20, marginLeft: 50, marginRight: 50, overflowY: 'auto' }
     }

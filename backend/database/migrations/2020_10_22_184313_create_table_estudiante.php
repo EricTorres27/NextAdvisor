@@ -14,8 +14,8 @@ class CreateTableEstudiante extends Migration
     public function up()
     {
         Schema::create('estudiante', function (Blueprint $table) {
-            $table->unsignedInteger('estudiante_id')->primary();
-            $table->foreign('estudiante_id')->references('cuenta_id')->on('cuenta')->onDelete('cascade');
+            $table->increments('estudiante_id');
+            $table->integer('cuenta_id_estudiante');
             $table->integer('estudiante_calificacion');
             $table->integer('asesor_calificacion');
             $table->string('estudiante_carrera');
