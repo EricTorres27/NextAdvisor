@@ -22,6 +22,7 @@ class CreateTableCuenta extends Migration
             $table->string('cuenta_nombre');
             $table->string('cuenta_apellido_paterno');
             $table->string('cuenta_apellido_materno');
+            $table->string('cuenta_genero');
             $table->timestamps();
 
         });

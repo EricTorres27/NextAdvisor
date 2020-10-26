@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Grid, Typography, Paper, Container, Select, MenuItem} from '@material-ui/core';
+import { Box, Button, Divider, Grid, Typography, Paper, Container, Select, MenuItem } from '@material-ui/core';
 import React, { Fragment, useState } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
@@ -44,19 +44,30 @@ const CreateUser = () => {
             },
         },
     }))(InputBase);
+    const styles = {
+        Paper: { height: 500, padding: 20, marginLeft: 200, marginRight: 200, overflowY: 'auto' }
+    }
 
+    /* 
+        Atributos
+    */
     const [datos, setDatos] = useState({
-        nombre: '',
-        apellidoPaterno: '',
-        apellidoMaterno: '',
-        genero: '',
-        correo: '',
-        telefono: ''
+        cuenta_nombre: '',
+        cuenta_apellido_paterno: '',
+        cuenta_apellido_materno: '',
+        //cuenta_genero: '',
+        cuenta_correo: '',
+        cuenta_nombre_usuario: '',
+        contraseña: '',
+        cuenta_telefono: '',
+        //estudiante_semestre: '',
+        //estudiante_carrera: '',
+        rol_id: ''
     })
-
+    /* 
+        
+    */
     const handleInputChange = (event) => {
-        // console.log(event.target.name)
-        // console.log(event.target.value)
         setDatos({
             ...datos,
             [event.target.name]: event.target.value
@@ -65,13 +76,26 @@ const CreateUser = () => {
 
     const enviarDatos = (event) => {
         event.preventDefault();
-        console.log('enviando datos...' + datos)
+        let data = JSON.stringify(datos)
+        console.log('enviando datos...' + data)
     }
-    const styles = {
-        Paper: { height: 500, padding: 20, marginLeft: 200, marginRight: 200, overflowY: 'auto' }
+    const peticionPost = async () => {
+        await axios.post('http://127.0.0.1:8000/api/cuenta',
+        {"cuenta_nombre_usuario": datos.cuenta_nombre,
+        "cuenta_correo": datos.cuenta_correo,
+        "contraseña": datos.contraseña,
+        "cuenta_telefono": datos.cuenta_telefono,
+        "cuenta_nombre": datos.cuenta_nombre,
+        "cuenta_apellido_paterno": datos.cuenta_apellido_paterno,
+        "cuenta_apellido_materno": datos.cuenta_apellido_materno,
+        "rol_id": datos.rol_id
+        }
+        )
     }
 
-
+    /*
+        Select para genero y Rol
+    */
     const [genero, setGenero] = React.useState('');
     const handleChange = (event) => {
         setGenero(event.target.value);
@@ -80,9 +104,10 @@ const CreateUser = () => {
             [event.target.name]: event.target.value
         })
     };
-    const [role, setRole] = React.useState('');
-    const handleChangeRole = (event) => {
-        setRole(event.target.value);
+
+    const [rol, setRol] = React.useState('');
+    const handleChangeRol = (event) => {
+        setRol(event.target.value);
         setDatos({
             ...datos,
             [event.target.name]: event.target.value
@@ -91,13 +116,13 @@ const CreateUser = () => {
 
     return (
         <Fragment>
-            <div style={{height:"650px"}}>
+            <div style={{ height: "650px" }}>
                 <Box color="primary.contrastText" mb={3}>
                     <Typography color="white" align="center" variant="h3">Crear nuevo usuario</Typography>
                 </Box>
                 <Paper elevation={3} style={styles.Paper}>
                     <Link to="/ConsultUser">
-                    <ArrowBackIcon button fontSize="large"/>
+                        <ArrowBackIcon button fontSize="large" />
                     </Link>
                     <Box mt={5} ml={5}>
                         <Container maxWidth="sm">
@@ -106,22 +131,22 @@ const CreateUser = () => {
                                     <Grid item xs={12} sm={6}>
                                         <Box mb={2}>
                                             <Typography variant="subtitle1"> Nombre</Typography>
-                                            <input type="text" placeholder="Gustavo" className="form-control" onChange={handleInputChange} name="nombre"></input>
+                                            <input type="text" placeholder="Gustavo" className="form-control" onChange={handleInputChange} name="cuenta_nombre"></input>
                                         </Box>
                                         <Box mb={2}>
                                             <Typography variant="subtitle1">Apellido Paterno</Typography>
-                                            <input type="text" placeholder="Rivera" className="form-control" onChange={handleInputChange} name="apellidoPaterno"></input>
+                                            <input type="text" placeholder="Rivera" className="form-control" onChange={handleInputChange} name="cuenta_apellido_paterno"></input>
                                         </Box>
                                         <Box mb={2}>
                                             <Typography variant="subtitle1">Apellido Materno</Typography>
-                                            <input type="text" placeholder="Martínez" className="form-control" onChange={handleInputChange} name="apellidoMaterno"></input>
+                                            <input type="text" placeholder="Martínez" className="form-control" onChange={handleInputChange} name="cuenta_apellido_materno"></input>
                                         </Box>
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
                                         <Box mb={2}>
                                             <Typography variant="subtitle1">Genero</Typography>
                                             <Select
-                                                name="genero"
+                                                name="cuenta_genero"
                                                 labelId="demo-customized-select-label"
                                                 id="demo-customized-select"
                                                 value={genero}
@@ -138,11 +163,17 @@ const CreateUser = () => {
                                         </Box>
                                         <Box mb={2}>
                                             <Typography variant="subtitle1">Correo</Typography>
-                                            <input type="text" placeholder="Nombre" className="form-control" onChange={handleInputChange} name="correo"></input>
+                                            <input type="text" placeholder="ejemplo@gmail.com" className="form-control" onChange={handleInputChange} name="cuenta_correo"></input>
                                         </Box>
                                         <Box mb={2}>
                                             <Typography variant="subtitle1">Telefono</Typography>
-                                            <input type="text" placeholder="Nombre" className="form-control" onChange={handleInputChange} name="telefono"></input>
+                                            <input type="text" placeholder="4421456789" className="form-control" onChange={handleInputChange} name="cuenta_telefono"></input>
+                                        </Box>
+                                    </Grid>
+                                    <Grid item xs={12} sm={12}>
+                                        <Box mb={2}>
+                                            <Typography variant="subtitle1">Contraseña</Typography>
+                                            <input type="password" placeholder="*******" className="form-control" onChange={handleInputChange} name="contraseña"></input>
                                         </Box>
                                     </Grid>
                                     <Divider />
@@ -152,43 +183,43 @@ const CreateUser = () => {
                                     <Grid item xs={12} sm={6}>
                                         <Box mb={2}>
                                             <Typography variant="subtitle1"> Nombre de usuario</Typography>
-                                            <input type="text" placeholder="TrainerGus" className="form-control" onChange={handleInputChange} name="nombreUsuario"></input>
+                                            <input type="text" placeholder="TrainerGus" className="form-control" onChange={handleInputChange} name="cuenta_nombre_usuario"></input>
                                         </Box>
                                         <Box mb={2}>
+
                                             <Typography variant="subtitle1">Carrera</Typography>
-                                            <input type="text" placeholder="ISC" className="form-control" onChange={handleInputChange} name="carrera"></input>
+                                            <input type="text" placeholder="ISC" className="form-control" onChange={handleInputChange} name="estudiante_carrera"></input>
                                         </Box>
                                         <Box mb={2}>
                                             <Typography variant="subtitle1">Semestre</Typography>
-                                            <input type="text" placeholder="1" className="form-control" onChange={handleInputChange} name="semestre"></input>
+                                            <input type="text" placeholder="1" className="form-control" onChange={handleInputChange} name="estudiante_semestre"></input>
                                         </Box>
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
                                         <Box mb={2}>
                                             <Typography variant="subtitle1">Rol</Typography>
                                             <Select
-                                                name="role"
+                                                name="rol_id"
                                                 labelId="demo-customized-select-label"
                                                 id="demo-customized-select"
-                                                value={role}
-                                                onChange={handleChangeRole}
+                                                value={rol}
+                                                onChange={handleChangeRol}
                                                 input={<BootstrapInput />}
                                             >
                                                 <MenuItem value="">
                                                     <em>None</em>
                                                 </MenuItem>
-                                                <MenuItem value="Estudiante">Estudiante</MenuItem>
-                                                <MenuItem value="Asesor">Asesor</MenuItem>
+                                                <MenuItem value="2">Estudiante</MenuItem>
+                                                <MenuItem value="3">Asesor</MenuItem>
                                             </Select>
                                         </Box>
-
                                     </Grid>
                                     <Grid item xs={12} sm={4}>
 
                                     </Grid>
                                     <Grid item xs={12} sm={4}>
                                         <Box mt={5} align="center">
-                                            <Button type="submit" color="primary" variant="contained">Enviar</Button>
+                                            <Button type="submit" onClick={()=>peticionPost()} color="primary" variant="contained">Enviar</Button>
                                         </Box>
                                     </Grid>
                                     <Grid item xs={12} sm={4}>

@@ -18,7 +18,7 @@ import {
 } from '@material-ui/core'
 
 
-const role="advisor"
+const role="admin"
 const UserLists = () => {
 
     if (role=="student") {
