@@ -14,7 +14,9 @@ class OfertaAsesoriaAsesorController extends Controller
      */
     public function index()
     {
-        //
+        $asesor =  OfertaAsesoriaAsesor::all();
+        return $asesor;
+
     }
 
     /**
@@ -25,7 +27,8 @@ class OfertaAsesoriaAsesorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $oferta = OfertaAsesoriaAsesor::create($request->all());
+        return $oferta;
     }
 
     /**
