@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CuentaController;
 use App\Http\Controllers\EstudianteController;
+use App\Http\Controllers\MateriaController;
 use Carbon\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource("ofertas","OfertaAsesoriaController");
+Route::resources('materia',MateriaController::class);
 Route::resource('cuenta',CuentaController::class);
 Route::resource('estudiante',EstudianteController::class);

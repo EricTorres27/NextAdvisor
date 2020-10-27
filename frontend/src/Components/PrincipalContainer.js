@@ -16,7 +16,7 @@ import Button from '@material-ui/core/Button'
 import passSubject from './passSubject'
 import ConsultUser from './ConsultUser'
 import RegistrarAsesoria from './RegistrarAsesoria'
-import RegistrarMateria from './RegistrarMateria'
+
 import subjects from './subjects'
 import Perfil from './Perfil'
 import EditarPerfil from './EditarPerfil'
@@ -31,6 +31,7 @@ import FrecuentQS from './FrecuentQS'
 import CreateFrecuentQS from './CreateFrecuentQS'
 import ConsultarUsuario from '../Views/ConsultarUsuario'
 import { CrearUsuario } from '../Views/CrearUsuario'
+import { RegistrarMateria } from './RegistrarMateria'
 
 
 const styles = makeStyles(theme => ({

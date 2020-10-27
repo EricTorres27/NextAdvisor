@@ -13,6 +13,6 @@ Content-Type: : application/json
     "rol_id": "1",
     "estudiante_semestre":"1",
     "estudiante_carrera":"ISC",
-    "estudiante_calificacion":null,
+    "estudiante_calificacion":0,
     "asesor_calificacion":0
 }
