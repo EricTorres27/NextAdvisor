@@ -13,7 +13,6 @@ import EditarRegistroAsesoria from './EditarRegistroAsesoria'
 import MetodoPago from './MetodoPago'
 import DrawerBox from './DrawerBox'
 import Button from '@material-ui/core/Button'
-import CreateUser from './CreateUser'
 import passSubject from './passSubject'
 import ConsultUser from './ConsultUser'
 import RegistrarAsesoria from './RegistrarAsesoria'
@@ -74,7 +73,6 @@ const PrincipalContainer = () => {
                         <div className={classes.content} style={{backgroundColor: '#133C55'}}>
                             <div className={classes.toolbar}></div>
                             <Route exact path="/ConsultUser" component={ConsultUser}/>
-                            <Route exact path="/CrearUsuario" component={CreateUser}/>
                             <Route exact path="/RegistrarAsesoria" component={RegistrarAsesoria}/>
                             <Route exact path="/Materias" component={subjects}/>
                             <Route exact path="/RegistrarMateria" component={RegistrarMateria}/>
@@ -155,7 +153,6 @@ const PrincipalContainer = () => {
                     <div className={classes.content} style={{backgroundColor: '#133C55'}}>
                         <div className={classes.toolbar}></div>
                         <Route exact path="/ConsultarUsuario" component={ConsultUser}/>
-                        <Route exact path="/CrearUsuario" component={CreateUser}/>
                         <Route exact path="/RegistrarAsesoria" component={RegistrarAsesoria}/>
                         <Route exact path="/Materias" component={subjects}/>
                         <Route exact path="/RegistrarMateria" component={RegistrarMateria}/>
