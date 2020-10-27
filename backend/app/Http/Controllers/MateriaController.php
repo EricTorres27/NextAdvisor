@@ -88,7 +88,7 @@ class MateriaController extends Controller
      */
     public function show($materia)
     {
-        echo "materia_id: $materia";
+       
     }
 
     /**
