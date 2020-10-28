@@ -30,7 +30,7 @@ class MateriaController extends Controller
      */
     public function store(Request $request)
     {
-        
+       
 
         if ($this->validarMateria($request) == 1) {
             return response()->json([
@@ -40,9 +40,9 @@ class MateriaController extends Controller
         }  else {
 
             Materia::create([
-                "materia_nombre"=>$request->$materia_nombre,
-                "area_id"=>$request->$area_id,
-                "administrador_id"=>"1",
+                "materia_nombre"=>$request->materia_nombre,
+                "area_id"=>$request->area_id,
+                "administrador_id"=>$request->administrador_id
             ]);
             
             return response()->json([

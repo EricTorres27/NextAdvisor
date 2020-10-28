@@ -16,12 +16,9 @@ export default function SelectArea(props) {
                     value={value}
                     onChange={onChange}>
                     <MenuItem value="">Seleccione una opción</MenuItem>
-                    <MenuItem key="1" value="1">Ambiente construido</MenuItem>
-                    <MenuItem key="2" value="2">Negocios</MenuItem>
-                    <MenuItem key="3" value="3">Ciencias sociales</MenuItem>
-                    <MenuItem key="4" value="4">Estudios creativos</MenuItem>
-                    <MenuItem key="5" value="5">Salud</MenuItem>
-                    <MenuItem key="6" value="6">Ingnieria</MenuItem>
+                    <MenuItem key="1" value="1">Admin 1</MenuItem>
+                    
+         
                 </MuiSelect>
                 {error && <FormHelperText>{error}</FormHelperText>}
             </FormControl>

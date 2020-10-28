@@ -1,0 +1,10 @@
+POST http://localhost:8000/api/materia HTTP/1.1
+Accept: application/application/json
+Content-Type: : application/json
+
+{
+    "materia_nombre":"Algebra lineal",
+    "area_id":"2",
+    "administrador_id":"1"
+   
+}

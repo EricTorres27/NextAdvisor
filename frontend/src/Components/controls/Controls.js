@@ -3,6 +3,7 @@ import Select from "./Select"
 import SelectRol from "./SelectRol"
 import ButtonSubmit from "./ButtonSubmit"
 import SelectArea from "./SelectArea"
+import selectAdmin from "./selectAdmin"
 
 
 const Controls ={
@@ -11,6 +12,7 @@ const Controls ={
     SelectRol,
     ButtonSubmit,
     SelectArea,
+    selectAdmin,
  
 }
 

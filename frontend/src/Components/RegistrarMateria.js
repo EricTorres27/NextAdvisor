@@ -11,7 +11,7 @@ import { Redirect } from 'react-router-dom';
 const initialValues = {
     materia_nombre: '',
     area_id: '',
-    administrador_id: '',
+    administrador_id: ''
 }
 
 const styles = {
@@ -51,11 +51,11 @@ export const RegistrarMateria = () => {
             confirmacion();
     }
 
-    const baseURL = "http://192.168.8.6:8000/api/materia";
+    const baseURL = "http://localhost:8000/api/materia";
 
     const peticionPost = async () => {
         try {
-            const response = await axios.post('http://192.168.8.6:8000/api/materia',
+            const response = await axios.post('http://localhost:8000/api/materia',
                 {
                    
                     "materia_nombre":values.materia_nombre,
@@ -63,7 +63,7 @@ export const RegistrarMateria = () => {
                     "administrador_id":values.administrador_id
                 }
             )
-            if (response.data.flag == 1) {
+            if (response.data.flag == 0) {
                 swal({
                     title: "La materia se ha registrado con éxito",
                     icon: "success"
@@ -98,7 +98,7 @@ export const RegistrarMateria = () => {
                  */
                 swal({
                     title: "Error",
-                    text: "request",
+                    text: "No hubo respuesta intentelo mas tarde",
                     icon: "error",
                 })
             } else {
@@ -164,6 +164,17 @@ export const RegistrarMateria = () => {
                                     value={values.area_id}
                                     onChange={handleInputChange}
                                     error={errors.area_id}
+                                />
+                            </Grid>
+                        </Grid>
+                        <Grid container spacing={1}>
+                            <Grid item xs={12} sm={6}>
+                                <Controls.selectAdmin
+                                    name="administrador_id"
+                                    label="Administrador"
+                                    value={values.administrador_id}
+                                    onChange={handleInputChange}
+                                    error={errors.administrador_id}
                                 />
                             </Grid>
                         </Grid>
