@@ -22,6 +22,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resources('materia',MateriaController::class);
+Route::resource('materia',MateriaController::class);
 Route::resource('cuenta',CuentaController::class);
 Route::resource('estudiante',EstudianteController::class);

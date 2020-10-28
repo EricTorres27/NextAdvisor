@@ -12,6 +12,7 @@ class Materia extends Model
 {
 
     protected $table = 'materia';
+
     use HasFactory;
 
     /**
@@ -21,8 +22,10 @@ class Materia extends Model
      */
     protected $fillable = [
         'materia_nombre',
-        'area_id'
+        'area_id',
+        'administrador_id'
     ];
+   
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -32,7 +35,7 @@ class Materia extends Model
    
     public function area()
     {
-        return $this->belongsTo(Area::class,'materia_id','area_id');
+        return $this->hasOne(Area::class,'materia_id','area_id');
     
     }
         public function administrador()

@@ -51,11 +51,11 @@ export const RegistrarMateria = () => {
             confirmacion();
     }
 
-    const baseURL = "http://localhost:8000/api/materia";
+    const baseURL = "http://192.168.8.6:8000/api/materia";
 
     const peticionPost = async () => {
         try {
-            const response = await axios.post('http://localhost:8000/api/materia',
+            const response = await axios.post('http://192.168.8.6:8000/api/materia',
                 {
                    
                     "materia_nombre":values.materia_nombre,
@@ -68,7 +68,7 @@ export const RegistrarMateria = () => {
                     title: "La materia se ha registrado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    return <Link to="/" />;
+                    return <Link to="/RegistrarMateria" />;
                 })
             } else {
                 swal({
