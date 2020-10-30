@@ -16,7 +16,7 @@ class CreateTableOfertaAsesoria extends Migration
         Schema::create('oferta_asesoria', function (Blueprint $table) {
             $table->increments('oferta_id');
             $table->date('oferta_fecha');
-            $table->integer('oferta_tarifa');
+            $table->unsignedInteger('oferta_tarifa');
             $table->unsignedInteger('estudiante_id');
             $table->foreign('estudiante_id')->references('estudiante_id')->on('estudiante')->onDelete('cascade');
             $table->unsignedInteger('materia_id');

@@ -11,6 +11,7 @@ import { Redirect } from 'react-router-dom';
 const initialValues = {
     materia_nombre: '',
     area_id: '',
+    estudiante_id:'',
     administrador_id: ''
 }
 

@@ -1,0 +1,14 @@
+POST http://localhost:8000/api/asesoria HTTP/1.1
+Accept: application/application/json
+Content-Type: : application/json
+
+{
+    
+    "oferta_fecha":"2020-10-10",
+    "oferta_tarifa": "60",
+    "materia_id":"1"
+
+   
+    
+   
+}

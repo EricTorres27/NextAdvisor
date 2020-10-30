@@ -15,8 +15,6 @@ import DrawerBox from './DrawerBox'
 import Button from '@material-ui/core/Button'
 import passSubject from './passSubject'
 import ConsultUser from './ConsultUser'
-import RegistrarAsesoria from './RegistrarAsesoria'
-
 import subjects from './subjects'
 import Perfil from './Perfil'
 import EditarPerfil from './EditarPerfil'
@@ -32,6 +30,7 @@ import CreateFrecuentQS from './CreateFrecuentQS'
 import ConsultarUsuario from '../Views/ConsultarUsuario'
 import { CrearUsuario } from '../Views/CrearUsuario'
 import { RegistrarMateria } from './RegistrarMateria'
+import { RegistrarAsesoria } from './RegistrarAsesoria'
 
 
 const styles = makeStyles(theme => ({
@@ -52,7 +51,7 @@ const PrincipalContainer = () => {
         setStateOpen(!stateOpen)
     }
 
-        const role="admin"
+        const role="advisor"
         if(role=="advisor"){
             return (
                 <Router>
@@ -86,6 +85,7 @@ const PrincipalContainer = () => {
                             <Route exact path="/Tarifa" component={Tarifa}/>
                             <Route exact path="/EditarTarifa" component={EditarTarifa}/>
                             <Route exact path="passSubject" component={passSubject}/>
+                           
                             
                         </div>
                     </div>

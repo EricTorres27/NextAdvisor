@@ -1,21 +1,36 @@
-import React from 'react'
-import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
-import { FormControl, FormHelperText, InputLabel, MenuItem, Select as MuiSelect } from '@material-ui/core';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
-//export default function DatePicker(props){
+const useStyles = makeStyles((theme) => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+  },
+}));
 
-   // const { name, labe, value, onChange}=props
-
-   // return(
-
-      //  <MuiPickersUtilsProvider  utils={DateFnsUtils}>
-        //    <KeyboardDatePicker disableToolbar variant="inline" inputVariant="outlined" label={label} formate="MM/DD/YYYY" name={name} value={value} onChange={OnChange}>
-
-          //  </KeyboardDatePicker>
-
-        //</MuiPickersUtilsProvider>
-
-
-   // )
-//}
+export default function DatePickers() {
+  const classes = useStyles();
+ 
+  return (
+  
+   
+    <form className={classes.container} noValidate>
+      <TextField
+        id="date"
+        label="Fecha de la asesoría"
+        type="datetime"
+        defaultValue="2020-10-10"
+        className={classes.textField}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+    </form>
+  );
+}

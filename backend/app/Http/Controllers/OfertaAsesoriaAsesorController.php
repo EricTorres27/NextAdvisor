@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\OfertaAsesoriaAsesor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\QueryException;
+
+
+use Illuminate\Support\Facades\DB;
 
 class OfertaAsesoriaAsesorController extends Controller
 {
@@ -12,11 +17,11 @@ class OfertaAsesoriaAsesorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $asesor =  OfertaAsesoriaAsesor::all();
-        return $asesor;
-
+        $ofertaAsesoriaAsesor = OfertaAsesoriaAsesor::all();
+        return $ofertaAsesoriaAsesor;
     }
 
     /**
@@ -27,9 +32,24 @@ class OfertaAsesoriaAsesorController extends Controller
      */
     public function store(Request $request)
     {
-        $oferta = OfertaAsesoriaAsesor::create($request->all());
-        return $oferta;
-    }
+
+
+            OfertaAsesoriaAsesor::create([
+                "oferta_fecha"=>$request->oferta_fecha,
+                "oferta_tarifa"=>$request->oferta_tarifa,
+                "estudiante_id"=>"1",
+                "materia_id"=>$request->materia_id
+            ]);
+
+            return response()->json([
+                'message' => 'Exitoso',
+                'flag' => 0,
+            ], 200);
+             
+            
+        //}
+        }
+    
 
     /**
      * Display the specified resource.
@@ -64,4 +84,9 @@ class OfertaAsesoriaAsesorController extends Controller
     {
         //
     }
+
+   // public function validarAsesoria(Request $request)
+    //{
+    //    return OfertaAsesoriaAsesor::where('oferta_id', $oferta_id)->exists();
+   // }
 }

@@ -16,7 +16,7 @@ export default function SelectArea(props) {
                     value={value}
                     onChange={onChange}>
                     <MenuItem value="">Seleccione una opción</MenuItem>
-                    <MenuItem key="1" value="1">Admin 1</MenuItem>
+                    <MenuItem key="1" value="1">Marcela Arcos Caballero</MenuItem>
                     
          
                 </MuiSelect>

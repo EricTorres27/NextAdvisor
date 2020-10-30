@@ -49,35 +49,7 @@ class MateriaController extends Controller
                 'message' => 'Exitoso',
                 'flag' => 0,
             ], 200);
-            
-                //DB::beginTransaction();
-               // try {
-
-                    /**
-                     * Crear una materia en el sistema
-                     */
-                   
-
-                   // $materia = new materia();
-                    //$materia->materia_nombre=$request->materia_nombre;
-                        
-
-                    //if ($materia->materia()->save($materia)) {
-                      //  DB::commit();
-                        //return response()->json([
-                          //  'message' => 'Registrado con exito',
-                            //'flag' => 1,
-                            //'materia' => $materia
-                        //], 201);
-                    ///}
-                    
-               // } catch (QueryException $err) {
-                 //   DB::rollBack();
-                   // return response()->json([
-                     //   'message' => 'Error al registrar usuario',
-                       // 'flag' => 0,
-                    //], 202);
-                //}  
+             
             }
         }
     

@@ -3,8 +3,8 @@ Accept: application/application/json
 Content-Type: : application/json
 
 {
-    "materia_nombre":"Algebra lineal",
+    "materia_nombre":"Algebra",
     "area_id":"2",
-    "administrador_id":"1"
+    "administrador_id":"2"
    
 }
