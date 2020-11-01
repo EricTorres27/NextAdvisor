@@ -21,7 +21,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'cuenta'
+], function ($router){
+    Route::post('crearEstudiante', [CuentaController::class, 'crearEstudiante']);
+    Route::post('crearAdministrador', [CuentaController::class, 'crearAdministrador']);
+    Route::get('listarCuentas', [CuentaController::class, 'index']);
+});
 Route::resource('materia',MateriaController::class);
 Route::resource('cuenta',CuentaController::class);
 Route::resource('estudiante',EstudianteController::class);

@@ -32,6 +32,7 @@ import CreateFrecuentQS from './CreateFrecuentQS'
 import ConsultarUsuario from '../Views/ConsultarUsuario'
 import { CrearUsuario } from '../Views/CrearUsuario'
 import { RegistrarMateria } from './RegistrarMateria'
+import { CrearAdministrador } from '../Views/CrearAdministrador'
 
 
 const styles = makeStyles(theme => ({
@@ -120,6 +121,7 @@ const PrincipalContainer = () => {
                         <Route exact path="/Reports" component={Reports}/>
                         <Route exact path="/ConsultTopic" component={ConsultTopic}/>
                         <Route exact path="/CrearUsuario" component={CrearUsuario}/>
+                        <Route exact path="/CrearAdministrador" component={CrearAdministrador}/>
                         <Route exact path="/PreguntasFrecuentes" component={FrecuentQS}/>
                         <Route exact path="/CrearPregunta" component={CreateFrecuentQS}/>
                         <Route exact path="/Materias" component={subjects}/>

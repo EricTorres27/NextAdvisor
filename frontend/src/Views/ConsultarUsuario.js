@@ -1,5 +1,5 @@
 import React, { forwardRef, useState, useEffect } from 'react';
-import { Box, Button, Divider, Grid, Typography, Paper, Container, Select, MenuItem, List } from '@material-ui/core';
+import { Box, Button, Grid, Typography, Paper, Container, Select, MenuItem, List, makeStyles, Modal } from '@material-ui/core';
 import axios from 'axios';
 import MaterialTable from 'material-table'
 import AddBox from '@material-ui/icons/AddBox';
@@ -19,12 +19,57 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { Link } from 'react-router-dom';
 
+const styles = {
+
+}
+const useStyles = makeStyles((theme) => ({
+    modal: {
+        position: "absolute",
+        width: 500,
+        height: 300,
+        backgroundColor: "white",
+        border: "2px solid #000",
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%,-50%)',
+    },
+    Paper: { height: 650, padding: 20, marginLeft: 50, marginRight: 50, overflowY: 'auto' },
+    Button: {
+        textTransform: 'none',
+        margin: theme.spacing(3)
+    }
+}))
+
 const ConsultarUsuario = () => {
 
-    const styles = {
-        Paper: { height: 650, padding: 20, marginLeft: 50, marginRight: 50, overflowY: 'auto' }
+    const [modalCrearUsuario, setModalCrearusuario] = useState(false);
+
+    const abirCerrarModalCrear = () => {
+        setModalCrearusuario(!modalCrearUsuario);
     }
 
+    const styles = useStyles();
+    const bodyCrear = (
+        <Box className={styles.modal} align="right">
+            <Button onClick={() => abirCerrarModalCrear()} variant="contained" color="secondary">X</Button>
+            <Container>
+                <Box align="center" mt={5} mb={10}>
+                    <Typography variant="h5">¿Que desea crear?</Typography>
+                </Box>
+                <Box ml={3} mt={1} align="center">
+                    <Link to="/CrearUsuario" style={{ textDecoration: 'none' }}>
+                        <Button onClick={() => abirCerrarModalCrear()} className={styles.Button} variant="contained" color="primary">Estudiante</Button>
+
+                    </Link>
+                    <Link to="/CrearAdministrador" style={{ textDecoration: 'none' }}>
+                        <Button onClick={() => abirCerrarModalCrear()} className={styles.Button} variant="contained" color="primary">Administrador</Button>
+                    </Link>
+                </Box>
+            </Container>
+        </Box>
+    )
     const columnas = [
         {
             title: 'Id',
@@ -44,8 +89,16 @@ const ConsultarUsuario = () => {
             field: 'cuenta_nombre'
         },
         {
-            title: 'Apellido',
+            title: 'Apellido Paterno',
             field: 'cuenta_apellido_paterno'
+        },
+        {
+            title: 'Apellido Materno',
+            field: 'cuenta_apellido_materno'
+        },
+        {
+            title: 'Rol',
+            field: 'rol_nombre'
         },
     ];
     const tableIcons = {
@@ -70,7 +123,7 @@ const ConsultarUsuario = () => {
 
     const [data, setData] = useState([]);
 
-    const baseURL = "http://localhost:8000/api/cuenta";
+    const baseURL = "http://localhost:8000/api/cuenta/listarCuentas";
     const peticionGet = async () => {
         await axios.get(baseURL)
             .then(response => {
@@ -80,15 +133,13 @@ const ConsultarUsuario = () => {
     useEffect(() => {
         peticionGet();
     }, [])
+
     return (
         <div>
-            <Paper elevation={3} style={styles.Paper}>
-                <Link to="/CrearUsuario" style={{ textDecoration: 'none' }}>
-                    <Box align="right" mb={2}>
-
-                        <Button variant="contained" color="primary">Crear usuario</Button>
-                    </Box>
-                </Link>
+            <Paper elevation={3} className={styles.Paper}>
+                <Box align="right" mb={2}>
+                    <Button onClick={() => abirCerrarModalCrear()} variant="contained" color="primary">Crear usuario</Button>
+                </Box>
                 <MaterialTable
                     title="Usuarios"
                     columns={columnas}
@@ -114,6 +165,12 @@ const ConsultarUsuario = () => {
                     }}
                 />
             </Paper>
+            <Modal
+                open={modalCrearUsuario}
+                onClose={abirCerrarModalCrear}
+            >
+                {bodyCrear}
+            </Modal>
         </div>
     )
 }

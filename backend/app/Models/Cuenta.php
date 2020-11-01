@@ -43,6 +43,10 @@ class Cuenta extends Model
     {
         return $this->hasOne(Estudiante::class,'cuenta_id_estudiante','cuenta_id');
     }
+    public function administrador()
+    {
+        return $this->hasOne(Estudiante::class,'cuenta_id_administrador','cuenta_id');
+    }
     
 
 }

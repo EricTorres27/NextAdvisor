@@ -16,8 +16,8 @@ export default function SelectRol(props) {
                     value={value}
                     onChange={onChange}>
                     <MenuItem value="">None</MenuItem>
-                    <MenuItem key="1" value="2">Estudiante</MenuItem>
-                    <MenuItem key="2" value="3">Asesor</MenuItem>
+                    <MenuItem key="1" value="1">Estudiante</MenuItem>
+                    <MenuItem key="2" value="2">Asesor</MenuItem>
                 </MuiSelect>
                 {error && <FormHelperText>{error}</FormHelperText>}
             </FormControl>
