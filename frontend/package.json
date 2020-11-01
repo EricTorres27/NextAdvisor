@@ -27,7 +27,7 @@
     "react-native-datepicker": "^1.7.2",
     "react-native-material-design": "^0.3.7",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3",
+    "react-scripts": "^4.0.0",
     "reactstrap": "^8.6.0",
     "start": "^5.1.0",
     "swe": "^2.0.5",
