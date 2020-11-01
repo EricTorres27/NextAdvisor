@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react';
 import { Box, Grid, Typography, Paper, Container, TextField, Button } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
-import axios from 'axios';
 import swal from 'sweetalert';
-import { Redirect } from 'react-router-dom';
+import axios from 'axios';
+
 
 const initialValues = {
     cuenta_nombre: '',
@@ -18,18 +18,16 @@ const initialValues = {
     contraseña: '',
     contraseñaConfirmar: '',
     cuenta_telefono: '',
-    estudiante_semestre: '',
-    estudiante_carrera: '',
-    estudiante_calificacion: '',
-    asesor_calificacion: '',
-    rol_id: ''
+    administrador_ocupacion: '',
 }
 
 const styles = {
     Paper: { height: 500, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
 }
 
-export const CrearUsuario = () => {
+
+
+export const CrearAdministrador = () => {
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -49,14 +47,10 @@ export const CrearUsuario = () => {
             temp.contraseña = fieldValues.contraseña.length > 6 ? "" : "La contraseña debe ser mayor 6 caracteres"
         if ('contraseñaConfirmar' in fieldValues)
             temp.contraseñaConfirmar = fieldValues.contraseñaConfirmar.length > 0 && values.contraseña === fieldValues.contraseñaConfirmar ? "" : "La contraseña debe ser la misma"
-        if ('rol_id' in fieldValues)
-            temp.rol_id = fieldValues.rol_id.length != 0 ? "" : "Esta campo es requerido"
         if ('cuenta_nombre_usuario' in fieldValues)
             temp.cuenta_nombre_usuario = fieldValues.cuenta_nombre_usuario ? "" : "Esta campo es requerido"
-        if ('estudiante_carrera' in fieldValues)
-            temp.estudiante_carrera = fieldValues.estudiante_carrera.length < 5 && fieldValues.estudiante_carrera.length > 0 ? "" : "Esta campo debe ser menor a 5 caracteres"
-        if ('estudiante_semestre' in fieldValues)
-            temp.estudiante_semestre = fieldValues.estudiante_semestre < 11 && fieldValues.estudiante_semestre > 1 ? "" : "El semestre debe ser mayor a 1 o menor a 10"
+        if ('administrador_ocupacion' in fieldValues)
+            temp.administrador_ocupacion = fieldValues.administrador_ocupacion ? "" : "Esta campo es requerido"
         setErrors({
             ...temp
         })
@@ -65,6 +59,12 @@ export const CrearUsuario = () => {
 
     }
 
+    const handleSubmitAdmin = e => {
+        e.preventDefault()
+        if (validate())
+            confirmacion();
+
+    }
     const {
         values,
         setValues,
@@ -74,17 +74,9 @@ export const CrearUsuario = () => {
         resetForm
     } = useForm(initialValues, true, validate);
 
-    const handleSubmit = e => {
-        e.preventDefault()
-        if (validate())
-            confirmacion();
-    }
-
-    const baseURL = "http://localhost:8000/api/cuenta";
-
     const peticionPost = async () => {
         try {
-            const response = await axios.post('http://localhost:8000/api/cuenta/crearEstudiante',
+            const response = await axios.post('http://localhost:8000/api/cuenta/crearAdministrador',
                 {
                     "cuenta_nombre_usuario": values.cuenta_nombre_usuario,
                     "cuenta_correo": values.cuenta_correo,
@@ -94,11 +86,7 @@ export const CrearUsuario = () => {
                     "cuenta_apellido_paterno": values.cuenta_apellido_paterno,
                     "cuenta_apellido_materno": values.cuenta_apellido_materno,
                     "cuenta_genero":values.cuenta_genero,
-                    "estudiante_semestre": values.estudiante_semestre,
-                    "estudiante_carrera": values.estudiante_carrera,
-                    "estudiante_calificacion": 0,
-                    "asesor_calificacion": 0,
-                    "rol_id": values.rol_id
+                    "administrador_ocupacion": values.administrador_ocupacion,
                 }
             )
             if (response.data.flag == 1) {
@@ -163,17 +151,18 @@ export const CrearUsuario = () => {
             }
         })
     }
+
     return (
         <div style={{ height: "650px" }}>
             <Box color="primary.contrastText" mb={1}>
-                <Typography color="white" align="center" variant="h3">Crear nuevo usuario</Typography>
+                <Typography color="white" align="center" variant="h3">Crear nuevo administrador</Typography>
             </Box>
             <Paper elevation={3} style={styles.Paper}>
                 <Link to="/ConsultUser">
                     <ArrowBackIcon button fontSize="large" />
                 </Link>
                 <Box mt={5} ml={5}>
-                    <Form onSubmit={handleSubmit}>
+                    <Form onSubmit={handleSubmitAdmin}>
                         <Box ml={3} mb={2}>
                             <Typography variant="h5">Datos generales</Typography>
                         </Box>
@@ -267,44 +256,22 @@ export const CrearUsuario = () => {
                                         error={errors.contraseñaConfirmar}
                                     />
                                 </Box>
-
                             </Grid>
-
                         </Grid>
                         <Box ml={3} mb={2}>
-                            <Typography variant="h5">Datos academicos</Typography>
+                            <Typography variant="h5">Datos administrativos</Typography>
                         </Box>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={6}>
                                 <Box mb={2} mr={2} ml={2}>
                                     <Controls.Input
-                                        name="estudiante_carrera"
-                                        label="Carrera"
-                                        value={values.estudiante_carrera}
+                                        name="administrador_ocupacion"
+                                        label="Ocupación"
+                                        value={values.administrador_ocupacion}
                                         onChange={handleInputChange}
-                                        error={errors.estudiante_carrera}
+                                        error={errors.administrador_ocupacion}
                                     />
                                 </Box>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <Controls.Input
-                                        name="estudiante_semestre"
-                                        label="Semestre"
-                                        value={values.estudiante_semestre}
-                                        type="number"
-                                        pattern="[0-9]*"
-                                        onChange={handleInputChange}
-                                        error={errors.estudiante_semestre}
-                                    />
-                                </Box>
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <Controls.SelectRol
-                                    name="rol_id"
-                                    label="Rol"
-                                    value={values.rol_id}
-                                    onChange={handleInputChange}
-                                    error={errors.rol_id}
-                                />
                             </Grid>
                         </Grid>
                         <Grid container spacing={1}>

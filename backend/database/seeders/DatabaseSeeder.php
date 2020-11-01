@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Cuenta;
+use App\Models\CuentaRol;
 use App\Models\Privilegio;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -24,12 +26,16 @@ class DatabaseSeeder extends Seeder
             'rol_descripcion' => Str::random(20),
         ]);
         DB::table('rol')->insert([
-            'rol_nombre' => "Estudiante",
+            'rol_nombre' => "Asesor",
             'rol_descripcion' => Str::random(20),
         ]);
         DB::table('rol')->insert([
-            'rol_nombre' => "Estudiante",
+            'rol_nombre' => "Administrador",
             'rol_descripcion' => Str::random(20),
+        ]);
+        Cuenta::factory()->count(20)->create();
+        $this->call([
+            CuentaRolSeeder::class,
         ]);
     }
 }

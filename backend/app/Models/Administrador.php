@@ -11,9 +11,11 @@ class Administrador extends Model
     use HasFactory;
 
     protected $fillable = [
-        'cuenta_id_administrador',
         'administrador_ocupacion',
     ];
 
-   
+    public function cuenta()
+    {
+        return $this->belongsTo(Cuenta::class,'cuenta_id','cuenta_id_administrador');
+    }
 }

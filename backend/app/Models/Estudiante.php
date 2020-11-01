@@ -22,6 +22,6 @@ class Estudiante extends Model
     ];
     public function cuenta()
     {
-        return $this->belongsTo(Cuenta::class,'cuenta_id','estudiante_cuenta_id');
+        return $this->belongsTo(Cuenta::class,'cuenta_id','cuenta_id_estudiante');
     }
 }

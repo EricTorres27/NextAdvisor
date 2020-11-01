@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class CuentaRol extends Model
 {
+    protected $table = 'cuenta_rol';
     use HasFactory;
 }
