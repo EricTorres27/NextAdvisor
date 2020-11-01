@@ -16,12 +16,13 @@ import Button from '@material-ui/core/Button'
 import passSubject from './passSubject'
 import ConsultUser from './ConsultUser'
 import RegistrarAsesoria from './RegistrarAsesoria'
-
+import Registro from './Registro'
 import subjects from './subjects'
 import Perfil from './Perfil'
 import EditarPerfil from './EditarPerfil'
 import Tarifa from './Tarifa'
 import EditarTarifa from './EditarTarifa'
+import EstablecerTarifa from './EstablecerTarifa'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ConsultAdvisory from './ConsultAdvisory'
 import ConsultTopic from './ConsultTopic'
@@ -45,14 +46,16 @@ const styles = makeStyles(theme => ({
         padding: theme.spacing(3),
     },
 }))
+
 const PrincipalContainer = () => {
+
     const classes = styles()
     const [stateOpen, setStateOpen] = React.useState(false)
     const openAction = () => {
         setStateOpen(!stateOpen)
     }
 
-        const role="admin"
+        const role="advisor"
         if(role=="advisor"){
             return (
                 <Router>
@@ -73,6 +76,7 @@ const PrincipalContainer = () => {
                         </Hidden>
                         <div className={classes.content} style={{backgroundColor: '#133C55'}}>
                             <div className={classes.toolbar}></div>
+                            <Route exact path="/Registro" component={Registro}/>
                             <Route exact path="/ConsultUser" component={ConsultUser}/>
                             <Route exact path="/RegistrarAsesoria" component={RegistrarAsesoria}/>
                             <Route exact path="/Materias" component={subjects}/>
@@ -84,9 +88,9 @@ const PrincipalContainer = () => {
                             <Route exact path="/Perfil" component={Perfil}/>
                             <Route exact path="/EditarPerfil" component={EditarPerfil}/>
                             <Route exact path="/Tarifa" component={Tarifa}/>
-                            <Route exact path="/EditarTarifa" component={EditarTarifa}/>
+                            <Route exact path="/EstablecerTarifa" component={EstablecerTarifa}/>
                             <Route exact path="passSubject" component={passSubject}/>
-                            
+
                         </div>
                     </div>
                 </Router>
@@ -114,6 +118,7 @@ const PrincipalContainer = () => {
                     </Hidden>
                     <div className={classes.content} style={{backgroundColor: '#133C55'}}>
                         <div className={classes.toolbar}></div>
+                        <Route exact path="/Registro" component={Registro}/>
                         <Route exact path="/AdminProfile" component={AdminProfile}/>
                         <Route exact path="/ConsultUser" component={ConsultarUsuario}/>
                         <Route exact path="/ConsultAdvisory" component={ConsultAdvisory}/>
@@ -153,6 +158,7 @@ const PrincipalContainer = () => {
                     </Hidden>
                     <div className={classes.content} style={{backgroundColor: '#133C55'}}>
                         <div className={classes.toolbar}></div>
+                        <Route exact path="/Registro" component={Registro}/>
                         <Route exact path="/ConsultarUsuario" component={ConsultUser}/>
                         <Route exact path="/RegistrarAsesoria" component={RegistrarAsesoria}/>
                         <Route exact path="/Materias" component={subjects}/>

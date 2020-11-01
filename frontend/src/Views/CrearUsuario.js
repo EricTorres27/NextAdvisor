@@ -103,7 +103,7 @@ export const CrearUsuario = () => {
             )
             if (response.data.flag == 1) {
                 swal({
-                    title: "El usuario se ah creado con éxito",
+                    title: "El usuario se ha creado con éxito",
                     icon: "success"
                 }).then(respuesta => {
                     return <Link to="/ConsultUser" />;
