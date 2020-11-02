@@ -7,7 +7,7 @@ import selectAdmin from "./selectAdmin"
 import SelecTarifa from "./SelecTarifa"
 import datePicker from "./datePicker"
 import SelectMateria from "./SelectMateria"
-
+import CheckBox from "./CheckBox"
 const Controls ={
     Input,
     Select,
@@ -17,8 +17,8 @@ const Controls ={
     selectAdmin,
     SelecTarifa,
     datePicker,
-    SelectMateria
- 
+    SelectMateria,
+    CheckBox
 }
 
 export default Controls;

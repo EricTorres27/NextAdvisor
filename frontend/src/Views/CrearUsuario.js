@@ -22,7 +22,9 @@ const initialValues = {
     estudiante_carrera: '',
     estudiante_calificacion: '',
     asesor_calificacion: '',
-    rol_id: ''
+    rol_id: '',
+    esAsesor: false,
+    esEstudiante:false
 }
 
 const styles = {
@@ -296,6 +298,12 @@ export const CrearUsuario = () => {
                                 </Box>
                             </Grid>
                             <Grid item xs={12} sm={6}>
+                                <Controls.CheckBox
+                                    name="esAsesor"
+                                    label="Asesor"
+                                    value={values.esAsesor}
+                                    onChange={handleInputChange}
+                                />
                                 <Controls.SelectRol
                                     name="rol_id"
                                     label="Rol"
