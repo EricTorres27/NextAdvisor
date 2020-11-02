@@ -31,7 +31,16 @@ const useStyles = makeStyles((theme) => ({
 const ConsultarPreguntas = () => {
     const styles = useStyles();
     const [data, setData] = useState([]);
+    const [preguntaSeleccionada, setPreguntaSeleccionada] = useState({
+        pregunta_pregunta: "",
+        pregunta_respuesta: "",
+        pregunta_id: "",
 
+    })
+    const selecionarPregunta=(pregunta,caso)=>{
+        setPreguntaSeleccionada(pregunta);
+        (caso==="Eliminar")&&confirmacionEliminar(pregunta)
+    }
     const columnas = [
 
         {
@@ -82,9 +91,76 @@ const ConsultarPreguntas = () => {
                 setData(response.data);
             })
     }
+
+    const peticionDelete = async (preguntaId) => {
+        try {
+            const response = await axios.delete('http://localhost:8000/api/pregunta/'+preguntaId,)
+            if (response.data.flag == 1) {
+                swal({
+                    title: "La pregunta se ha eliminado con éxito",
+                    icon: "success"
+                }).then(respuesta => {
+                    window.location.reload();
+                })
+            } else {
+                swal({
+                    title: response.data.message,
+                    text: "Error interno, intentelo más tarde",
+                    icon: "info"
+                })
+            }
+
+        } catch (error) {
+            // Error 😨
+            if (error.response) {
+                /*
+                 * The request was made and the server responded with a
+                 * status code that falls out of the range of 2xx
+                 */
+                swal({
+                    title: "Error: " + error.response.status,
+                    text: "Verifique la información y vuelvalo a intentar",
+                    icon: "error"
+                })
+            } else if (error.request) {
+                /*
+                 * The request was made but no response was received, `error.request`
+                 * is an instance of XMLHttpRequest in the browser and an instance
+                 * of http.ClientRequest in Node.js
+                 */
+                swal({
+                    title: "Error",
+                    text: "No hubo respuesta intentelo mas tarde",
+                    icon: "error"
+                })
+            } else {
+                // Something happened in setting up the request and triggered an Error
+                swal({
+                    title: "Error",
+                    text: "No hubo respuesta intentelo mas tarde",
+                    icon: "error"
+                })
+            }
+        }
+    }
+
     useEffect(() => {
         peticionGet();
     }, [])
+    
+    const confirmacionEliminar = (preguntaSeleccionada) => {
+        swal({
+            title: "¿Seguro que desea eliminar la pregunta "+preguntaSeleccionada.pregunta_pregunta+" del sistema?",
+            text: "La información quedara guardada en la base de datos",
+            buttons: ["No", "Si"]
+        }).then(respuesta => {
+            if (respuesta) {
+                peticionDelete(preguntaSeleccionada.pregunta_id);
+            }
+        })
+    }    
+    
+
     return (
         <div>
             <Paper elevation={3} className={styles.Paper}>
@@ -106,6 +182,7 @@ const ConsultarPreguntas = () => {
                         {
                             icon: DeleteOutline,
                             tooltip: 'Eliminar',
+                            onClick: (event, rowData)=>selecionarPregunta(rowData,"Eliminar")
                         },
                     ]}
                     options={{

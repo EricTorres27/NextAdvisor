@@ -83,8 +83,22 @@ class PreguntaController extends Controller
      * @param  \App\Models\Pregunta  $pregunta
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pregunta $pregunta)
+    public function destroy(int $idPregunta)
     {
-        //
+        DB::beginTransaction();
+        try {
+            Pregunta::where('pregunta_id',$idPregunta)->delete();
+            DB::commit();
+            return response()->json([
+                'message' => 'Pregunta eliminada con exito',
+                'flag' => 1
+            ], 201);
+        } catch (QueryException $err) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Error al eliminar pregunta',
+                'flag' => 0,
+            ], 202);
+        }
     }
 }
