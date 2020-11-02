@@ -15,16 +15,12 @@ import DrawerBox from './DrawerBox'
 import Button from '@material-ui/core/Button'
 import passSubject from './passSubject'
 import ConsultUser from './ConsultUser'
-<<<<<<< HEAD
-=======
 import RegistrarAsesoria from './RegistrarAsesoria'
 import Registro from './Registro'
->>>>>>> Fany/tarifa
 import subjects from './subjects'
 import Perfil from './Perfil'
 import EditarPerfil from './EditarPerfil'
 import Tarifa from './Tarifa'
-import EditarTarifa from './EditarTarifa'
 import EstablecerTarifa from './EstablecerTarifa'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ConsultAdvisory from './ConsultAdvisory'
@@ -36,7 +32,6 @@ import CreateFrecuentQS from './CreateFrecuentQS'
 import ConsultarUsuario from '../Views/ConsultarUsuario'
 import { CrearUsuario } from '../Views/CrearUsuario'
 import { RegistrarMateria } from './RegistrarMateria'
-import { RegistrarAsesoria } from './RegistrarAsesoria'
 import { CrearAdministrador } from '../Views/CrearAdministrador'
 
 

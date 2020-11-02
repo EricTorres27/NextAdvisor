@@ -3,8 +3,11 @@ import Icon from '@material-ui/core/Icon';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import EventIcon from '@material-ui/icons/Event';
 import PeopleIcon from '@material-ui/icons/People';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import CreditCardIcon from '@material-ui/icons/CreditCard';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import GradeIcon from '@material-ui/icons/Grade';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import HelpIcon from '@material-ui/icons/Help';
@@ -29,7 +32,7 @@ const UserLists = () => {
                     <Divider />
                     <ListItem button>
                         <ListItemIcon>
-                            <AccountCircleIcon />
+                            <AccountCircleIcon color="primary" fontSize="large" />
                         </ListItemIcon>
                         <Link to="">
                             <ListItemText primary='Mi perfil' />
@@ -37,7 +40,7 @@ const UserLists = () => {
                     </ListItem>
                     <ListItem button>
                         <ListItemIcon>
-                            <AddCircleIcon />
+                            <EventIcon color="primary" fontSize="large" />
                         </ListItemIcon>
                         <Link to="">
                             <ListItemText primary='Mis asesorías' />
@@ -119,7 +122,7 @@ const UserLists = () => {
                 <List component='nav'>
                     <ListItem button>
                         <ListItemIcon>
-                            <AddCircleOutlineIcon />
+                            <AccountCircleIcon color="primary" fontSize="large" />
                         </ListItemIcon>
                         <Link to="">
                             <ListItemText primary='Mi perfil' />
@@ -128,7 +131,7 @@ const UserLists = () => {
                     <Divider />
                     <ListItem button>
                         <ListItemIcon>
-                            <AddCircleIcon />
+                            <AssignmentIcon color="primary" fontSize="large" />
                         </ListItemIcon>
                         <Link to="Materias">
                             <ListItemText primary='Materias' />
@@ -137,7 +140,7 @@ const UserLists = () => {
                     <Divider />
                     <ListItem button>
                         <ListItemIcon>
-                            <AddCircleIcon />
+                            <EventIcon color="primary" fontSize="large" />
                         </ListItemIcon>
                         <Link to="MisAsesorias">
                             <ListItemText primary='Asesorías' />
@@ -146,7 +149,7 @@ const UserLists = () => {
                     <Divider />
                     <ListItem button>
                         <ListItemIcon>
-                            <AddCircleIcon />
+                            <AttachMoneyIcon color="primary" fontSize="large" />
                         </ListItemIcon>
                         <Link to="Tarifa">
                             <ListItemText primary='Tarifa' />
@@ -155,7 +158,7 @@ const UserLists = () => {
                     <Divider />
                     <ListItem button>
                         <ListItemIcon>
-                            <AddCircleIcon />
+                            <CreditCardIcon color="primary" fontSize="large" />
                         </ListItemIcon>
                         <Link to="MetodoPago">
                             <ListItemText primary='Método de pago' />
@@ -164,7 +167,7 @@ const UserLists = () => {
                     <Divider />
                     <ListItem button>
                         <ListItemIcon>
-                            <AddCircleIcon />
+                            <GradeIcon color="primary" fontSize="large" />
                         </ListItemIcon>
                         <Link to="">
                             <ListItemText primary='Evaluación' />
