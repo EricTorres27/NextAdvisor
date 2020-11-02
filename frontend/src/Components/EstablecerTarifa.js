@@ -6,7 +6,6 @@ import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
 import axios from 'axios';
 import swal from 'sweetalert';
-import { Redirect } from 'react-router-dom';
 
 const initialValues = {
     oferta_tarifa: '',

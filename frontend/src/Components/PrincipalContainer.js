@@ -3,41 +3,34 @@ import {
     Hidden,
     makeStyles
 } from '@material-ui/core'
-import Navbar from './Navbar'
-import NavBarAdmin from './NavBarAdmin'
-import NavBarStudent from './NavBarStudent'
-import advisoryAdv from './advisoryAdv'
-import AprobarMateria from './AprobarMateria'
-import subjectAdmin from './subjectAdmin'
-import EditarRegistroAsesoria from './EditarRegistroAsesoria'
-import MetodoPago from './MetodoPago'
-import DrawerBox from './DrawerBox'
-import Button from '@material-ui/core/Button'
-import passSubject from './passSubject'
-import ConsultUser from './ConsultUser'
-<<<<<<< HEAD
-=======
-import RegistrarAsesoria from './RegistrarAsesoria'
-import Registro from './Registro'
->>>>>>> Fany/tarifa
-import subjects from './subjects'
-import Perfil from './Perfil'
-import EditarPerfil from './EditarPerfil'
-import Tarifa from './Tarifa'
-import EditarTarifa from './EditarTarifa'
-import EstablecerTarifa from './EstablecerTarifa'
+import Navbar from './Navbar';
+import NavBarAdmin from './NavBarAdmin';
+import NavBarStudent from './NavBarStudent';
+import advisoryAdv from './advisoryAdv';
+import AprobarMateria from './AprobarMateria';
+import subjectAdmin from './subjectAdmin';
+import EditarRegistroAsesoria from './EditarRegistroAsesoria';
+import MetodoPago from './MetodoPago';
+import DrawerBox from './DrawerBox';
+import passSubject from './passSubject';
+import ConsultUser from './ConsultUser';
+import RegistrarAsesoria from './RegistrarAsesoria';
+import Registro from './Registro';
+import subjects from './subjects';
+import Perfil from './Perfil';
+import EditarPerfil from './EditarPerfil';
+import Tarifa from './Tarifa';
+import EditarTarifa from './EditarTarifa';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import ConsultAdvisory from './ConsultAdvisory'
-import ConsultTopic from './ConsultTopic'
-import Reports from './Reports'
-import AdminProfile from './AdminProfile'
-import FrecuentQS from './FrecuentQS'
-import CreateFrecuentQS from './CreateFrecuentQS'
-import ConsultarUsuario from '../Views/ConsultarUsuario'
-import { CrearUsuario } from '../Views/CrearUsuario'
-import { RegistrarMateria } from './RegistrarMateria'
-import { RegistrarAsesoria } from './RegistrarAsesoria'
-import { CrearAdministrador } from '../Views/CrearAdministrador'
+import ConsultAdvisory from './ConsultAdvisory';
+import ConsultTopic from './ConsultTopic';
+import Reports from './Reports';
+import AdminProfile from './AdminProfile';
+import ConsultarUsuario from '../Views/ConsultarUsuario';
+import { CrearUsuario } from '../Views/CrearUsuario';
+import { RegistrarMateria } from './RegistrarMateria';
+import { CrearAdministrador } from '../Views/CrearAdministrador';
+import EstablecerTarifa from './EstablecerTarifa';
 
 
 const styles = makeStyles(theme => ({
@@ -60,7 +53,7 @@ const PrincipalContainer = () => {
         setStateOpen(!stateOpen)
     }
 
-        const role="advisor"
+        const role="admin"
         if(role=="advisor"){
             return (
                 <Router>
@@ -131,8 +124,7 @@ const PrincipalContainer = () => {
                         <Route exact path="/ConsultTopic" component={ConsultTopic}/>
                         <Route exact path="/CrearUsuario" component={CrearUsuario}/>
                         <Route exact path="/CrearAdministrador" component={CrearAdministrador}/>
-                        <Route exact path="/PreguntasFrecuentes" component={FrecuentQS}/>
-                        <Route exact path="/CrearPregunta" component={CreateFrecuentQS}/>
+
                         <Route exact path="/Materias" component={subjects}/>
                         <Route exact path="/RegistrarMateria" component={RegistrarMateria}/>
                         <Route exact path="/passSubject" component={passSubject}/>

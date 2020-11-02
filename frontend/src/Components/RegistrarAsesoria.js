@@ -209,3 +209,4 @@ export const RegistrarAsesoria = () => {
         </div>
     )
 }
+export default RegistrarAsesoria;
