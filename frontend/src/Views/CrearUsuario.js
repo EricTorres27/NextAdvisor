@@ -106,7 +106,7 @@ export const CrearUsuario = () => {
                     title: "El usuario se ah creado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    return <Link to="/ConsultUser" />;
+                    window.location.href = "http://localhost:3000/ConsultarUsuario";
                 })
             } else {
                 swal({

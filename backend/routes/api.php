@@ -4,6 +4,7 @@ use App\Http\Controllers\CuentaController;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\OfertaAsesoriaAsesorController;
+use App\Http\Controllers\PreguntaController;
 use Carbon\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,4 +36,6 @@ Route::group([
 Route::resource('materia',MateriaController::class);
 Route::resource('cuenta',CuentaController::class);
 Route::resource('estudiante',EstudianteController::class);
+Route::resource('pregunta',PreguntaController::class);
+
 

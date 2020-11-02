@@ -25,14 +25,13 @@ import ConsultAdvisory from './ConsultAdvisory'
 import ConsultTopic from './ConsultTopic'
 import Reports from './Reports'
 import AdminProfile from './AdminProfile'
-import FrecuentQS from './FrecuentQS'
-import CreateFrecuentQS from './CreateFrecuentQS'
 import ConsultarUsuario from '../Views/ConsultarUsuario'
 import { CrearUsuario } from '../Views/CrearUsuario'
 import { RegistrarMateria } from './RegistrarMateria'
 import { RegistrarAsesoria } from './RegistrarAsesoria'
 import { CrearAdministrador } from '../Views/CrearAdministrador'
-
+import ConsultarPreguntas from '../Views/ConsultarPreguntas'
+import CrearPreguntasFrecuentes from '../Views/CrearPreguntasFrecuentes'
 
 const styles = makeStyles(theme => ({
     root: {
@@ -86,8 +85,6 @@ const PrincipalContainer = () => {
                             <Route exact path="/Tarifa" component={Tarifa}/>
                             <Route exact path="/EditarTarifa" component={EditarTarifa}/>
                             <Route exact path="passSubject" component={passSubject}/>
-                           
-                            
                         </div>
                     </div>
                 </Router>
@@ -116,14 +113,14 @@ const PrincipalContainer = () => {
                     <div className={classes.content} style={{backgroundColor: '#133C55'}}>
                         <div className={classes.toolbar}></div>
                         <Route exact path="/AdminProfile" component={AdminProfile}/>
-                        <Route exact path="/ConsultUser" component={ConsultarUsuario}/>
+                        <Route exact path="/ConsultarUsuario" component={ConsultarUsuario}/>
                         <Route exact path="/ConsultAdvisory" component={ConsultAdvisory}/>
                         <Route exact path="/Reports" component={Reports}/>
                         <Route exact path="/ConsultTopic" component={ConsultTopic}/>
                         <Route exact path="/CrearUsuario" component={CrearUsuario}/>
                         <Route exact path="/CrearAdministrador" component={CrearAdministrador}/>
-                        <Route exact path="/PreguntasFrecuentes" component={FrecuentQS}/>
-                        <Route exact path="/CrearPregunta" component={CreateFrecuentQS}/>
+                        <Route exact path="/PreguntasFrecuentes" component={ConsultarPreguntas}/>
+                        <Route exact path="/CrearPregunta" component={CrearPreguntasFrecuentes}/>
                         <Route exact path="/Materias" component={subjects}/>
                         <Route exact path="/RegistrarMateria" component={RegistrarMateria}/>
                         <Route exact path="/passSubject" component={passSubject}/>

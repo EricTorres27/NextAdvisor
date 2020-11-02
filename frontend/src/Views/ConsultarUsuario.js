@@ -20,9 +20,7 @@ import ViewColumn from '@material-ui/icons/ViewColumn';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 
-const styles = {
 
-}
 const useStyles = makeStyles((theme) => ({
     modal: {
         position: "absolute",

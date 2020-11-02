@@ -1,11 +1,9 @@
-POST http://localhost:8000/api/estudiante HTTP/1.1
-Accept: application/application/json
+POST http://localhost:8000/api/pregunta HTTP/1.1
+Accept: application/json
 Content-Type: : application/json
 
 {
-    "cuenta_correo": "estudiante1@gmail.com",
-    "estudiante_semestre":"1",
-    "estudiante_carrera":"ISC",
-    "estudiante_calificacion":0,
-    "asesor_calificacion":0
+    "administrador_id": 1,
+    "pregunta_pregunta": "salv",
+    "pregunta_respuesta": "salv",
 }
