@@ -56,7 +56,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Iniciar Sesión
         </Typography>
-        <form className={classes.form} noValidate>
+        <div className={classes.form}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -79,15 +79,19 @@ export default function SignIn() {
             id="password"
             autoComplete="current-password"
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Ingresar
+          <Link to="/Homepage">
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={() => window.location.href = "http://localhost:3000/Homepage"}
+            >
+              Ingresar
           </Button>
+          </Link>
+
           <Grid container>
             <Grid item>
               <Link href="#" variant="body2">
@@ -95,7 +99,8 @@ export default function SignIn() {
               </Link>
             </Grid>
           </Grid>
-        </form>
+        </div>
+
       </div>
       <Box mt={8}>
         <Copyright />
