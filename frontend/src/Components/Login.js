@@ -48,7 +48,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
-
+  const changeWindow =()=>{
+    window.location.href = "http://localhost:3000/Homepage"
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -56,7 +58,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Iniciar Sesión
         </Typography>
-        <form className={classes.form} noValidate>
+        <div className={classes.form}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -79,14 +81,15 @@ export default function SignIn() {
             id="password"
             autoComplete="current-password"
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Ingresar
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={() => changeWindow}
+            >
+              Ingresar
           </Button>
           <Grid container>
             <Grid item>
@@ -95,7 +98,8 @@ export default function SignIn() {
               </Link>
             </Grid>
           </Grid>
-        </form>
+        </div>
+
       </div>
       <Box mt={8}>
         <Copyright />

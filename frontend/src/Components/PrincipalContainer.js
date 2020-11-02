@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
     Hidden,
-    makeStyles
+    makeStyles,
+    Typography
 } from '@material-ui/core'
 import Navbar from './Navbar';
 import NavBarAdmin from './NavBarAdmin';
@@ -21,7 +22,7 @@ import Perfil from './Perfil';
 import EditarPerfil from './EditarPerfil';
 import Tarifa from './Tarifa';
 import EditarTarifa from './EditarTarifa';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect  } from 'react-router-dom';
 import ConsultAdvisory from './ConsultAdvisory';
 import ConsultTopic from './ConsultTopic';
 import Reports from './Reports';
@@ -35,6 +36,7 @@ import ConsultarPreguntas from '../Views/ConsultarPreguntas';
 import CrearPreguntasFrecuentes from '../Views/CrearPreguntasFrecuentes';
 import EditarUsuario from '../Views/EditarUsuario';
 import EditarPregunta from '../Views/EditarPregunta';
+import Home from '../Views/Home';
 const styles = makeStyles(theme => ({
     root: {
         display: 'flex'
@@ -55,49 +57,57 @@ const PrincipalContainer = () => {
         setStateOpen(!stateOpen)
     }
 
-        const role="advisor"
-        if(role=="advisor"){
-            return (
-                <Router>
-                    <div className={classes.root}>
-                        <Navbar openAction={openAction} />
-                        <Hidden xsDown>
-                            <DrawerBox
-                                variant="permanent"
-                                open={true}
-                            />
-                        </Hidden>
-                        <Hidden smUp>
-                            <DrawerBox
-                                variant="temporary"
-                                open={stateOpen}
-                                onClose={openAction}
-                            />
-                        </Hidden>
-                        <div className={classes.content} style={{backgroundColor: '#133C55'}}>
-                            <div className={classes.toolbar}></div>
-                            <Route exact path="/Registro" component={Registro}/>
-                            <Route exact path="/ConsultUser" component={ConsultUser}/>
-                            <Route exact path="/RegistrarAsesoria" component={RegistrarAsesoria}/>
-                            <Route exact path="/Materias" component={subjects}/>
-                            <Route exact path="/RegistrarMateria" component={RegistrarMateria}/>
-                            <Route exact path="/MisAsesorias" component={advisoryAdv}/>
-                            <Route exact path="/AprobarMateria" component={AprobarMateria}/>
-                            <Route exact path="/EditarAsesoria" component={EditarRegistroAsesoria}/>
-                            <Route exact path="/MetodoPago" component={MetodoPago}/>
-                            <Route exact path="/Perfil" component={Perfil}/>
-                            <Route exact path="/EditarPerfil" component={EditarPerfil}/>
-                            <Route exact path="/Tarifa" component={Tarifa}/>
-                            <Route exact path="/EstablecerTarifa" component={EstablecerTarifa}/>
-                            <Route exact path="passSubject" component={passSubject}/>
-                        </div>
+
+    const role = "admin"
+    if (role == "advisor") {
+        return (
+            <Router>
+                <div className={classes.root}>
+                    <Navbar openAction={openAction} />
+                    <Hidden xsDown>
+                        <DrawerBox
+                            variant="permanent"
+                            open={true}
+                        />
+                    </Hidden>
+                    <Hidden smUp>
+                        <DrawerBox
+                            variant="temporary"
+                            open={stateOpen}
+                            onClose={openAction}
+                        />
+                    </Hidden>
+                    <div className={classes.content} style={{ backgroundColor: '#133C55' }}>
+                        <div className={classes.toolbar}></div>
+                        <Route exact path="/Homepage"
+                            render={() => {
+                                return (
+                                    <Redirect to="/Inicio"/>
+                                )
+                            }} />
+                        <Route exact path="/Inicio" component={Home} />
+                        <Route exact path="/Registro" component={Registro} />
+                        <Route exact path="/ConsultUser" component={ConsultUser} />
+                        <Route exact path="/RegistrarAsesoria" component={RegistrarAsesoria} />
+                        <Route exact path="/Materias" component={subjects} />
+                        <Route exact path="/RegistrarMateria" component={RegistrarMateria} />
+                        <Route exact path="/MisAsesorias" component={advisoryAdv} />
+                        <Route exact path="/AprobarMateria" component={AprobarMateria} />
+                        <Route exact path="/EditarAsesoria" component={EditarRegistroAsesoria} />
+                        <Route exact path="/MetodoPago" component={MetodoPago} />
+                        <Route exact path="/Perfil" component={Perfil} />
+                        <Route exact path="/EditarPerfil" component={EditarPerfil} />
+                        <Route exact path="/Tarifa" component={Tarifa} />
+                        <Route exact path="/EstablecerTarifa" component={EstablecerTarifa} />
+                        <Route exact path="passSubject" component={passSubject} />
                     </div>
-                </Router>
+                </div>
+            </Router>
 
-            )
-        }
+        )
+    }
 
-        if(role=="admin"){
+    if (role == "admin") {
         return (
             <Router>
                 <div className={classes.root}>
@@ -115,32 +125,39 @@ const PrincipalContainer = () => {
                             onClose={openAction}
                         />
                     </Hidden>
-                    <div className={classes.content} style={{backgroundColor: '#133C55'}}>
+                    <div className={classes.content} style={{ backgroundColor: '#133C55' }}>
                         <div className={classes.toolbar}></div>
-                        <Route exact path="/Registro" component={Registro}/>
-                        <Route exact path="/AdminProfile" component={AdminProfile}/>
-                        <Route exact path="/ConsultarUsuario" component={ConsultarUsuario}/>
-                        <Route exact path="/EditarUsuario/:cuentaId" component={EditarUsuario}/>
-                        <Route exact path="/EditarPregunta/:preguntaId" component={EditarPregunta}/>
-                        <Route exact path="/ConsultAdvisory" component={ConsultAdvisory}/>
-                        <Route exact path="/Reports" component={Reports}/>
-                        <Route exact path="/ConsultTopic" component={ConsultTopic}/>
-                        <Route exact path="/CrearUsuario" component={CrearUsuario}/>
-                        <Route exact path="/CrearAdministrador" component={CrearAdministrador}/>
-                        <Route exact path="/PreguntasFrecuentes" component={ConsultarPreguntas}/>
-                        <Route exact path="/CrearPregunta" component={CrearPreguntasFrecuentes}/>
-                        <Route exact path="/Materias" component={subjects}/>
-                        <Route exact path="/RegistrarMateria" component={RegistrarMateria}/>
-                        <Route exact path="/passSubject" component={passSubject}/>
-                        <Route exact path="/MateriaAdmin" component={subjectAdmin}/>
-                        <Route exact path="/subjectAdmin" component={subjectAdmin}/>
+                        <Route exact path="/Homepage"
+                            render={() => {
+                                return (
+                                    <Redirect to="/Inicio"/>
+                                )
+                            }} />
+                        <Route exact path="/Inicio" component={Home} />
+                        <Route exact path="/Registro" component={Registro} />
+                        <Route exact path="/AdminProfile" component={AdminProfile} />
+                        <Route exact path="/ConsultarUsuario" component={ConsultarUsuario} />
+                        <Route exact path="/EditarUsuario/:cuentaId" component={EditarUsuario} />
+                        <Route exact path="/EditarPregunta/:preguntaId" component={EditarPregunta} />
+                        <Route exact path="/ConsultAdvisory" component={ConsultAdvisory} />
+                        <Route exact path="/Reports" component={Reports} />
+                        <Route exact path="/ConsultTopic" component={ConsultTopic} />
+                        <Route exact path="/CrearUsuario" component={CrearUsuario} />
+                        <Route exact path="/CrearAdministrador" component={CrearAdministrador} />
+                        <Route exact path="/PreguntasFrecuentes" component={ConsultarPreguntas} />
+                        <Route exact path="/CrearPregunta" component={CrearPreguntasFrecuentes} />
+                        <Route exact path="/Materias" component={subjects} />
+                        <Route exact path="/RegistrarMateria" component={RegistrarMateria} />
+                        <Route exact path="/passSubject" component={passSubject} />
+                        <Route exact path="/MateriaAdmin" component={subjectAdmin} />
+                        <Route exact path="/subjectAdmin" component={subjectAdmin} />
                     </div>
                 </div>
             </Router>
 
         )
-        }
-        if(role=="student"){
+    }
+    if (role == "student") {
         return (
             <Router>
                 <div className={classes.root}>
@@ -158,20 +175,29 @@ const PrincipalContainer = () => {
                             onClose={openAction}
                         />
                     </Hidden>
-                    <div className={classes.content} style={{backgroundColor: '#133C55'}}>
+                    <div className={classes.content} style={{ backgroundColor: '#133C55' }}>
                         <div className={classes.toolbar}></div>
-                        <Route exact path="/Registro" component={Registro}/>
-                        <Route exact path="/ConsultarUsuario" component={ConsultUser}/>
-                        <Route exact path="/RegistrarAsesoria" component={RegistrarAsesoria}/>
-                        <Route exact path="/Materias" component={subjects}/>
-                        <Route exact path="/RegistrarMateria" component={RegistrarMateria}/>
-                        <Route exact path="/Perfil" component={Perfil}/>
-                        <Route exact path="/EditarPerfil" component={EditarPerfil}/>
+                        <Route exact path="/Homepage"
+                            render={() => {
+                                return (
+                                    <Redirect to="/Inicio"/>
+                                )
+                            }} />
+                        <Route exact path="/Inicio" component={Home} />
+                        <Route exact path="/Registro" component={Registro} />
+                        <Route exact path="/ConsultarUsuario" component={ConsultUser} />
+                        <Route exact path="/RegistrarAsesoria" component={RegistrarAsesoria} />
+                        <Route exact path="/Materias" component={subjects} />
+                        <Route exact path="/RegistrarMateria" component={RegistrarMateria} />
+                        <Route exact path="/Perfil" component={Perfil} />
+                        <Route exact path="/EditarPerfil" component={EditarPerfil} />
                     </div>
                 </div>
             </Router>
 
-        )}
+        )
     }
+
+}
 
 export default PrincipalContainer
