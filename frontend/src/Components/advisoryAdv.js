@@ -41,11 +41,7 @@ const MisAsesorias = () => {
             title: 'Materia',
             field: 'materia_nombre'
         },
-        {
-            title: 'Asesor',
-            field: 'estudiante_id'
-        },
-        
+       
     ];
     const tableIcons = {
         Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
