@@ -62,7 +62,7 @@ const UserLists = () => {
                         </ListItem>
                     </Link>
                     <Divider />
-                    <Link to="/ConsultUser" style={{ textDecoration: 'none' }}>
+                    <Link to="/ConsultarUsuario" style={{ textDecoration: 'none' }}>
                         <ListItem button>
                             <ListItemIcon>
                                 <PeopleIcon color="primary" fontSize="large" />

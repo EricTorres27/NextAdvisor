@@ -18,10 +18,9 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
 
-const styles = {
 
-}
 const useStyles = makeStyles((theme) => ({
     modal: {
         position: "absolute",
@@ -45,7 +44,19 @@ const useStyles = makeStyles((theme) => ({
 const ConsultarUsuario = () => {
 
     const [modalCrearUsuario, setModalCrearusuario] = useState(false);
-
+    const [usuarioSeleccionado, setUsuarioSeleccionado] = useState({
+        cuenta_apellido_materno: "",
+        cuenta_apellido_paterno: "",
+        cuenta_correo: "",
+        cuenta_id:"",
+        cuenta_nombre: "",
+        cuenta_nombre_usuario: "",
+        rol_nombre: "",
+    })
+    const selecionarUsuario=(cuenta,caso)=>{
+        setUsuarioSeleccionado(cuenta);
+        (caso==="Eliminar")&&confirmacionEliminar(cuenta)
+    }
     const abirCerrarModalCrear = () => {
         setModalCrearusuario(!modalCrearUsuario);
     }
@@ -130,9 +141,75 @@ const ConsultarUsuario = () => {
                 setData(response.data);
             })
     }
+    const peticionDelete = async (cuentaId) => {
+        try {
+            const response = await axios.delete('http://localhost:8000/api/cuenta/eliminarUsuario/'+cuentaId,)
+            if (response.data.flag == 1) {
+                swal({
+                    title: "El usuario se ha eliminado con éxito",
+                    icon: "success"
+                }).then(respuesta => {
+                    window.location.reload();
+                })
+            } else {
+                swal({
+                    title: response.data.message,
+                    text: "Error interno, intentelo más tarde",
+                    icon: "info"
+                })
+            }
+
+        } catch (error) {
+            // Error 😨
+            if (error.response) {
+                /*
+                 * The request was made and the server responded with a
+                 * status code that falls out of the range of 2xx
+                 */
+                swal({
+                    title: "Error: " + error.response.status,
+                    text: "Verifique la información y vuelvalo a intentar",
+                    icon: "error"
+                })
+            } else if (error.request) {
+                /*
+                 * The request was made but no response was received, `error.request`
+                 * is an instance of XMLHttpRequest in the browser and an instance
+                 * of http.ClientRequest in Node.js
+                 */
+                swal({
+                    title: "Error",
+                    text: "No hubo respuesta intentelo mas tarde",
+                    icon: "error"
+                })
+            } else {
+                // Something happened in setting up the request and triggered an Error
+                swal({
+                    title: "Error",
+                    text: "No hubo respuesta intentelo mas tarde",
+                    icon: "error"
+                })
+            }
+            console.log(error);
+
+        }
+    }
     useEffect(() => {
         peticionGet();
     }, [])
+
+
+    const confirmacionEliminar = (cuentaSeleccionada) => {
+        swal({
+            title: "¿Seguro que desea eliminar al usuario "+cuentaSeleccionada.cuenta_nombre_usuario+" del sistema?",
+            text: "La información quedara guardada en la base de datos",
+            buttons: ["No", "Si"]
+        }).then(respuesta => {
+            if (respuesta) {
+                peticionDelete(cuentaSeleccionada.cuenta_id);
+            }
+        })
+    }
 
     return (
         <div>
@@ -152,7 +229,8 @@ const ConsultarUsuario = () => {
                         },
                         {
                             icon: DeleteOutline,
-                            tooltip: 'Eliminar'
+                            tooltip: 'Eliminar',
+                            onClick: (event, rowData)=>selecionarUsuario(rowData,"Eliminar")
                         },
                     ]}
                     options={{

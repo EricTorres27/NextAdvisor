@@ -7,5 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pregunta extends Model
 {
+    protected $table = 'pregunta';
+
     use HasFactory;
+
+    protected $fillable = [
+        'pregunta_pregunta',
+        'pregunta_respuesta',
+    ];
+
+    public function administrador(){
+
+        return $this->belongsTo(Administrador::class,'administrador_id','administrador_id');
+    }
 }

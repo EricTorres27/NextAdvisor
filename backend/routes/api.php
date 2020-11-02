@@ -5,6 +5,7 @@ use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\OfertaAsesoriaAsesorController;
 use App\Http\Controllers\TarifaController;
+use App\Http\Controllers\PreguntaController;
 use Carbon\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,8 +32,12 @@ Route::group([
     Route::post('crearEstudiante', [CuentaController::class, 'crearEstudiante']);
     Route::post('crearAdministrador', [CuentaController::class, 'crearAdministrador']);
     Route::get('listarCuentas', [CuentaController::class, 'index']);
+    Route::delete('eliminarUsuario/{idCuenta}', [CuentaController::class, 'eliminarUsuario']);
 });
 Route::resource('tarifa',TarifaController::class);
 Route::resource('materia',MateriaController::class);
 Route::resource('cuenta',CuentaController::class);
 Route::resource('estudiante',EstudianteController::class);
+Route::resource('pregunta',PreguntaController::class);
+
+

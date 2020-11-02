@@ -8,6 +8,7 @@ use App\Models\Cuenta;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Models\Estudiante;
+use App\Models\Rol;
 use Illuminate\Support\Facades\DB;
 
 class CuentaController extends Controller
@@ -154,7 +155,7 @@ class CuentaController extends Controller
 
                     $administrador = new Administrador();
                     $administrador->administrador_ocupacion = $request->administrador_ocupacion;
-                
+
                     if ($cuenta->administrador()->save($administrador)) {
                         DB::commit();
                         return response()->json([
@@ -171,6 +172,25 @@ class CuentaController extends Controller
                     ], 202);
                 }
             }
+        }
+    }
+
+    public function eliminarUsuario(int $idCuenta)
+    {
+        DB::beginTransaction();
+        try {
+            Cuenta::where('cuenta_id',$idCuenta)->delete();
+            DB::commit();
+            return response()->json([
+                'message' => 'Usuario eliminado con exito',
+                'flag' => 1
+            ], 201);
+        } catch (QueryException $err) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Error al eliminar usuario',
+                'flag' => 0,
+            ], 202);
         }
     }
 

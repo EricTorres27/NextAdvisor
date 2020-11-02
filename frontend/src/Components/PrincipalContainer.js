@@ -31,7 +31,8 @@ import { CrearUsuario } from '../Views/CrearUsuario';
 import { RegistrarMateria } from './RegistrarMateria';
 import { CrearAdministrador } from '../Views/CrearAdministrador';
 import EstablecerTarifa from './EstablecerTarifa';
-
+import ConsultarPreguntas from '../Views/ConsultarPreguntas';
+import CrearPreguntasFrecuentes from '../Views/CrearPreguntasFrecuentes';
 
 const styles = makeStyles(theme => ({
     root: {
@@ -88,7 +89,6 @@ const PrincipalContainer = () => {
                             <Route exact path="/Tarifa" component={Tarifa}/>
                             <Route exact path="/EstablecerTarifa" component={EstablecerTarifa}/>
                             <Route exact path="passSubject" component={passSubject}/>
-
                         </div>
                     </div>
                 </Router>
@@ -118,13 +118,14 @@ const PrincipalContainer = () => {
                         <div className={classes.toolbar}></div>
                         <Route exact path="/Registro" component={Registro}/>
                         <Route exact path="/AdminProfile" component={AdminProfile}/>
-                        <Route exact path="/ConsultUser" component={ConsultarUsuario}/>
+                        <Route exact path="/ConsultarUsuario" component={ConsultarUsuario}/>
                         <Route exact path="/ConsultAdvisory" component={ConsultAdvisory}/>
                         <Route exact path="/Reports" component={Reports}/>
                         <Route exact path="/ConsultTopic" component={ConsultTopic}/>
                         <Route exact path="/CrearUsuario" component={CrearUsuario}/>
                         <Route exact path="/CrearAdministrador" component={CrearAdministrador}/>
-
+                        <Route exact path="/PreguntasFrecuentes" component={ConsultarPreguntas}/>
+                        <Route exact path="/CrearPregunta" component={CrearPreguntasFrecuentes}/>
                         <Route exact path="/Materias" component={subjects}/>
                         <Route exact path="/RegistrarMateria" component={RegistrarMateria}/>
                         <Route exact path="/passSubject" component={passSubject}/>
