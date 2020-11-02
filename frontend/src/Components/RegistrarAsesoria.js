@@ -31,8 +31,8 @@ export const RegistrarAsesoria = () => {
             temp.oferta_tarifa = fieldValues.oferta_tarifa ? "" : "Este campo es obligatorio."
         if ('materia_id' in fieldValues)
             temp.materia_id = fieldValues.materia_id ? "" : "Este campo es obligatorio."
-        
-      
+
+
         setErrors({
             ...temp
         })
@@ -53,9 +53,9 @@ export const RegistrarAsesoria = () => {
     const handleSubmit = e => {
         e.preventDefault()
         if (validate())
-        
+
             confirmacion();
-           
+
     }
 
     const baseURL = "http://localhost:8000/api/asesoria";
@@ -64,12 +64,12 @@ export const RegistrarAsesoria = () => {
         try {
             const response = await axios.post('http://localhost:8000/api/asesoria',
                 {
-                   
-                  
+
+
                     "oferta_fecha": values.oferta_fecha,
                     "oferta_tarifa":values.oferta_tarifa,
                     "materia_id":values.materia_id
-                    
+
                 }
             )
             if (response.data.flag == 0) {
@@ -152,7 +152,7 @@ export const RegistrarAsesoria = () => {
 
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={6}>
-                                
+
                                     <Controls.Input
                                         name="oferta_fecha"
                                         label="Fecha : AAAA-MM-DD"
@@ -160,11 +160,11 @@ export const RegistrarAsesoria = () => {
                                         onChange={handleInputChange}
                                         error={errors.oferta_fecha}
                                     />
-                             
+
                             </Grid>
 
                         </Grid>
-                      
+
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={6}>
                                 <Controls.SelecTarifa
@@ -176,7 +176,7 @@ export const RegistrarAsesoria = () => {
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <Controls.SelectMateria 
+                                <Controls.SelectMateria
                                     name="materia_id"
                                     label="Materia"
                                     value={values.materia_id}z
@@ -192,7 +192,7 @@ export const RegistrarAsesoria = () => {
                                         size="large"
                                         text="Confirmar"
                                         type="submit"
-                                        
+
                                     />
                                     <Controls.ButtonSubmit
                                         size="large"
@@ -209,4 +209,5 @@ export const RegistrarAsesoria = () => {
         </div>
     )
 }
+
 export default RegistrarAsesoria;
