@@ -10,16 +10,7 @@ import 'fontsource-roboto';
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Router>
-          <Route exact path="/"
-            render={() => {
-              return (
-                <Redirect to="/Login" />
-              )
-            }} />
-          <Route exact path="/Login" component={Login} />
-          <Route exact path="/Homepage" component={PrincipalContainer} />
-      </Router>
+      <PrincipalContainer/>
     </ThemeProvider>
   );
 }

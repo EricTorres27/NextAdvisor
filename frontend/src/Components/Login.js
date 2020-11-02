@@ -48,7 +48,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
-
+  const changeWindow =()=>{
+    window.location.href = "http://localhost:3000/Homepage"
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -79,19 +81,16 @@ export default function SignIn() {
             id="password"
             autoComplete="current-password"
           />
-          <Link to="/Homepage">
             <Button
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={() => window.location.href = "http://localhost:3000/Homepage"}
+              onClick={() => changeWindow}
             >
               Ingresar
           </Button>
-          </Link>
-
           <Grid container>
             <Grid item>
               <Link href="#" variant="body2">
