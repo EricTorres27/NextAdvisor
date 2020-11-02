@@ -29,7 +29,7 @@ class OfertaAsesoriaAsesorController extends Controller
            $ofertaAsesoriaAsesor = OfertaAsesoriaAsesor::join('materia', 'oferta_asesoria.materia_id', '=', 'materia.materia_id')
             ->join('estudiante', 'oferta_asesoria.estudiante_id', '=', 'estudiante.estudiante_id')
     
-            ->select('oferta_fecha','oferta_tarifa','materia_nombre','oferta_asesoria.estudiante_id')
+            ->select('oferta_fecha','oferta_tarifa','materia_nombre')
             ->orderBy('oferta_fecha')
             ->get();
 

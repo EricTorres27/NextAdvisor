@@ -77,7 +77,7 @@ export const RegistrarAsesoria = () => {
                     title: "La asesoria se ha registrado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    return <Link to="/RegistrarAsesoria" />;
+                    window.location.href = "http://localhost:3000/MisAsesorias";
                 })
             } else {
                 swal({

@@ -69,7 +69,7 @@ export const RegistrarMateria = () => {
                     title: "La materia se ha registrado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    return <Link to="/RegistrarMateria" />;
+                    window.location.href = "http://localhost:3000/Materias"
                 })
             } else {
                 swal({
