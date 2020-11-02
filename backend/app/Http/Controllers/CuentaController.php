@@ -200,13 +200,12 @@ class CuentaController extends Controller
      * @param  \App\Models\Cuenta  $cuenta
      * @return \Illuminate\Http\Response
      */
-    public function show($cuenta)
+    public function obtenerCuenta(int $cuentaId)
     {
-        $cuentas = Cuenta::join('cuenta_rol', 'cuenta.cuenta_id', '=', 'cuenta_rol.cuenta_id')
-            ->join('rol', 'rol.rol_id', '=', 'cuenta_rol.rol_id')
-            ->select('cuenta.cuenta_id', 'cuenta_nombre_usuario', 'cuenta_correo', 'cuenta_nombre', 'cuenta_apellido_paterno', 'cuenta_apellido_materno', 'rol_nombre')
-            ->get();
-        return $cuentas;
+        $cuenta = Cuenta::findOrFail($cuentaId);
+        $resultado= $cuenta->roles()->get()
+        ->union($cuenta);
+        return $resultado;
     }
 
     /**

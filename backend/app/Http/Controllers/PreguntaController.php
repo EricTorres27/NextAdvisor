@@ -61,8 +61,9 @@ class PreguntaController extends Controller
      * @param  \App\Models\Pregunta  $pregunta
      * @return \Illuminate\Http\Response
      */
-    public function show(Pregunta $pregunta)
+    public function show(int $preguntaId)
     {
+        return Pregunta::where('pregunta_id', $preguntaId)->first();
     }
 
     /**
@@ -72,9 +73,26 @@ class PreguntaController extends Controller
      * @param  \App\Models\Pregunta  $pregunta
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pregunta $pregunta)
+    public function update(Request $request, int $preguntaId)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $pregunta = Pregunta::find($preguntaId);
+            $pregunta->pregunta_pregunta = $request->input('pregunta_pregunta');
+            $pregunta->pregunta_respuesta = $request->input('pregunta_respuesta');
+            $pregunta->save();
+            DB::commit();
+            return response()->json([
+                'message' => 'Pregunta actualizada con exito',
+                'flag' => 1
+            ], 201);
+        } catch (QueryException $err) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Error al actualizar pregunta',
+                'flag' => 0,
+            ], 202);
+        }
     }
 
     /**
@@ -87,7 +105,7 @@ class PreguntaController extends Controller
     {
         DB::beginTransaction();
         try {
-            Pregunta::where('pregunta_id',$idPregunta)->delete();
+            Pregunta::where('pregunta_id', $idPregunta)->delete();
             DB::commit();
             return response()->json([
                 'message' => 'Pregunta eliminada con exito',

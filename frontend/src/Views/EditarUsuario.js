@@ -1,13 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react';
 import { Box, Grid, Typography, Paper, Container, TextField, Button } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
-import axios from 'axios';
 import swal from 'sweetalert';
-import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 
+
+/*
+            <Typography>{match.params.cuentaId}</Typography>
+
+*/
+const styles = {
+    Paper: { height: 550, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
+}
 const initialValues = {
     cuenta_nombre: '',
     cuenta_apellido_paterno: '',
@@ -25,12 +32,8 @@ const initialValues = {
     rol_id: ''
 }
 
-const styles = {
-    Paper: { height: 500, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
-}
-
-export const CrearUsuario = () => {
-
+const EditarUsuario = (props) => {
+    const { match } = props;
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
         if ('cuenta_nombre' in fieldValues)
@@ -62,9 +65,7 @@ export const CrearUsuario = () => {
         })
         if (fieldValues == values)
             return Object.values(temp).every(x => x == "")
-
     }
-
     const {
         values,
         setValues,
@@ -80,76 +81,6 @@ export const CrearUsuario = () => {
             confirmacion();
     }
 
-    const baseURL = "http://localhost:8000/api/cuenta";
-
-    const peticionPost = async () => {
-        try {
-            const response = await axios.post('http://localhost:8000/api/cuenta/crearEstudiante',
-                {
-                    "cuenta_nombre_usuario": values.cuenta_nombre_usuario,
-                    "cuenta_correo": values.cuenta_correo,
-                    "contraseña": values.contraseña,
-                    "cuenta_telefono": values.cuenta_telefono,
-                    "cuenta_nombre": values.cuenta_nombre,
-                    "cuenta_apellido_paterno": values.cuenta_apellido_paterno,
-                    "cuenta_apellido_materno": values.cuenta_apellido_materno,
-                    "cuenta_genero":values.cuenta_genero,
-                    "estudiante_semestre": values.estudiante_semestre,
-                    "estudiante_carrera": values.estudiante_carrera,
-                    "estudiante_calificacion": 0,
-                    "asesor_calificacion": 0,
-                    "rol_id": values.rol_id
-                }
-            )
-            if (response.data.flag == 1) {
-                swal({
-                    title: "El usuario se ha creado con éxito",
-                    icon: "success"
-                }).then(respuesta => {
-                    window.location.href = "http://localhost:3000/ConsultarUsuario";
-                })
-            } else {
-                swal({
-                    title: response.data.message,
-                    text: "Cambie la información solicitada",
-                    icon: "info"
-                })
-            }
-
-        } catch (error) {
-            // Error 😨
-            if (error.response) {
-                /*
-                 * The request was made and the server responded with a
-                 * status code that falls out of the range of 2xx
-                 */
-                swal({
-                    title: "Error: " + error.response.status,
-                    text: "Verifique la información y vuelvalo a intentar",
-                    icon: "error"
-                })
-            } else if (error.request) {
-                /*
-                 * The request was made but no response was received, `error.request`
-                 * is an instance of XMLHttpRequest in the browser and an instance
-                 * of http.ClientRequest in Node.js
-                 */
-                swal({
-                    title: "Error",
-                    text: "No hubo respuesta intentelo mas tarde",
-                    icon: "error"
-                })
-            } else {
-                // Something happened in setting up the request and triggered an Error
-                swal({
-                    title: "Error",
-                    text: "No hubo respuesta intentelo mas tarde",
-                    icon: "error"
-                })
-            }
-        }
-    }
-
     const confirmacion = () => {
         swal({
             title: "¿Seguro que desea registrar al usuario?",
@@ -157,14 +88,27 @@ export const CrearUsuario = () => {
             buttons: ["No", "Si"]
         }).then(respuesta => {
             if (respuesta) {
-                peticionPost();
+                //peticionPost();
             }
         })
     }
+    const baseURL = "http://localhost:8000/api/cuenta/";
+
+    const peticionGet = async () => {
+        try {
+            await axios.get(baseURL)
+            .then(response => {
+                setValues(response.data);
+            })
+        } catch (error) {
+            
+        }
+    }
+
     return (
         <div style={{ height: "650px" }}>
             <Box color="primary.contrastText" mb={1}>
-                <Typography color="white" align="center" variant="h3">Crear nuevo usuario</Typography>
+                <Typography color="white" align="center" variant="h3">Editar usuario</Typography>
             </Box>
             <Paper elevation={3} style={styles.Paper}>
                 <Link to="/ConsultUser">
@@ -328,3 +272,5 @@ export const CrearUsuario = () => {
         </div>
     )
 }
+
+export default EditarUsuario

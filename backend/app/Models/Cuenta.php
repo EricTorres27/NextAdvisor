@@ -9,6 +9,7 @@ use App\Models\Estudiante;
 class Cuenta extends Model
 {
     protected $table = 'cuenta';
+    protected $primaryKey  = 'cuenta_id';
     use HasFactory;
 
     /**

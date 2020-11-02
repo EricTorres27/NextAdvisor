@@ -39,7 +39,9 @@ const ConsultarPreguntas = () => {
     })
     const selecionarPregunta=(pregunta,caso)=>{
         setPreguntaSeleccionada(pregunta);
-        (caso==="Eliminar")&&confirmacionEliminar(pregunta)
+        (caso==="Eliminar")?confirmacionEliminar(pregunta)
+        :
+        window.location.href = "http://localhost:3000/EditarPregunta/"+pregunta.pregunta_id;
     }
     const columnas = [
 
@@ -91,7 +93,7 @@ const ConsultarPreguntas = () => {
                 setData(response.data);
             })
     }
-
+    
     const peticionDelete = async (preguntaId) => {
         try {
             const response = await axios.delete('http://localhost:8000/api/pregunta/'+preguntaId,)
@@ -177,7 +179,8 @@ const ConsultarPreguntas = () => {
                     actions={[
                         {
                             icon: Edit,
-                            tooltip: 'Editar'
+                            tooltip: 'Editar',
+                            onClick: (event, rowData)=>selecionarPregunta(rowData,"Editar")
                         },
                         {
                             icon: DeleteOutline,

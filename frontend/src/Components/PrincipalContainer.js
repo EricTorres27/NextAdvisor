@@ -33,7 +33,8 @@ import { CrearAdministrador } from '../Views/CrearAdministrador';
 import EstablecerTarifa from './EstablecerTarifa';
 import ConsultarPreguntas from '../Views/ConsultarPreguntas';
 import CrearPreguntasFrecuentes from '../Views/CrearPreguntasFrecuentes';
-
+import EditarUsuario from '../Views/EditarUsuario';
+import EditarPregunta from '../Views/EditarPregunta';
 const styles = makeStyles(theme => ({
     root: {
         display: 'flex'
@@ -119,6 +120,8 @@ const PrincipalContainer = () => {
                         <Route exact path="/Registro" component={Registro}/>
                         <Route exact path="/AdminProfile" component={AdminProfile}/>
                         <Route exact path="/ConsultarUsuario" component={ConsultarUsuario}/>
+                        <Route exact path="/EditarUsuario/:cuentaId" component={EditarUsuario}/>
+                        <Route exact path="/EditarPregunta/:preguntaId" component={EditarPregunta}/>
                         <Route exact path="/ConsultAdvisory" component={ConsultAdvisory}/>
                         <Route exact path="/Reports" component={Reports}/>
                         <Route exact path="/ConsultTopic" component={ConsultTopic}/>

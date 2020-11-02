@@ -32,6 +32,7 @@ Route::group([
     Route::post('crearEstudiante', [CuentaController::class, 'crearEstudiante']);
     Route::post('crearAdministrador', [CuentaController::class, 'crearAdministrador']);
     Route::get('listarCuentas', [CuentaController::class, 'index']);
+    Route::get('obtenerCuenta/{cuentaId}', [CuentaController::class, 'obtenerCuenta']);
     Route::delete('eliminarUsuario/{idCuenta}', [CuentaController::class, 'eliminarUsuario']);
 });
 Route::resource('tarifa',TarifaController::class);

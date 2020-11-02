@@ -55,7 +55,9 @@ const ConsultarUsuario = () => {
     })
     const selecionarUsuario=(cuenta,caso)=>{
         setUsuarioSeleccionado(cuenta);
-        (caso==="Eliminar")&&confirmacionEliminar(cuenta)
+        (caso==="Eliminar")?confirmacionEliminar(cuenta)
+        :
+        window.location.href = "http://localhost:3000/EditarUsuario/"+cuenta.cuenta_id;
     }
     const abirCerrarModalCrear = () => {
         setModalCrearusuario(!modalCrearUsuario);
@@ -225,7 +227,8 @@ const ConsultarUsuario = () => {
                     actions={[
                         {
                             icon: Edit,
-                            tooltip: 'Editar'
+                            tooltip: 'Editar',
+                            onClick: (event, rowData)=>selecionarUsuario(rowData,"Editar")
                         },
                         {
                             icon: DeleteOutline,
