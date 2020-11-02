@@ -179,7 +179,7 @@ export const RegistrarAsesoria = () => {
                                 <Controls.SelectMateria 
                                     name="materia_id"
                                     label="Materia"
-                                    value={values.materia_id}
+                                    value={values.materia_id}z
                                     onChange={handleInputChange}
                                     error={errors.materia_id}
                                 />

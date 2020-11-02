@@ -55,7 +55,7 @@ const PrincipalContainer = () => {
         setStateOpen(!stateOpen)
     }
 
-        const role="admin"
+        const role="advisor"
         if(role=="advisor"){
             return (
                 <Router>

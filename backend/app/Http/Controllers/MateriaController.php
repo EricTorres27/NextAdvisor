@@ -18,8 +18,14 @@ class MateriaController extends Controller
      */
     public function index()
     {
-        $materias= Materia::all();
-        return $materias;
+       // $materias= Materia::all();
+        //return $materias;
+
+        $materias= Materia::join('area', 'materia.area_id', '=', 'area.area_id')
+        ->select('materia_id', 'materia_nombre', 'area.area_nombre')
+        ->orderBy('materia_id')
+        ->get();
+    return $materias;
     }
 
     /**
@@ -42,7 +48,7 @@ class MateriaController extends Controller
             Materia::create([
                 "materia_nombre"=>$request->materia_nombre,
                 "area_id"=>$request->area_id,
-                "administrador_id"=>$request->administrador_id
+                "administrador_id"=>"1"
             ]);
             
             return response()->json([

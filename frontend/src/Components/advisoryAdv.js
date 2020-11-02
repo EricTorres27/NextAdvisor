@@ -39,7 +39,7 @@ const MisAsesorias = () => {
         },
         {
             title: 'Materia',
-            field: 'materia_id'
+            field: 'materia_nombre'
         },
         {
             title: 'Asesor',

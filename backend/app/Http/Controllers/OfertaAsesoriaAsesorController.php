@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\OfertaAsesoriaAsesor;
+use App\Models\Materia;
+use App\Models\Estudiante;
+use App\Models\Cuenta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\QueryException;
@@ -20,10 +23,29 @@ class OfertaAsesoriaAsesorController extends Controller
 
     public function index()
     {
-        $ofertaAsesoriaAsesor = OfertaAsesoriaAsesor::all();
-        return $ofertaAsesoriaAsesor;
-    }
+        //$ofertaAsesoriaAsesor = OfertaAsesoriaAsesor::all();
+      //  return $ofertaAsesoriaAsesor;
+       
+           $ofertaAsesoriaAsesor = OfertaAsesoriaAsesor::join('materia', 'oferta_asesoria.materia_id', '=', 'materia.materia_id')
+            ->join('estudiante', 'oferta_asesoria.estudiante_id', '=', 'estudiante.estudiante_id')
+    
+            ->select('oferta_fecha','oferta_tarifa','materia_nombre','oferta_asesoria.estudiante_id')
+            ->orderBy('oferta_fecha')
+            ->get();
 
+        return $ofertaAsesoriaAsesor;
+           
+        /*  $ofertaAsesoriaAsesor = OfertaAsesoriaAsesor::join('materia', 'oferta_asesoria.materia_id', '=', 'materia.materia_id')
+            ->join('estudiante', 'oferta_asesoria.estudiante_id', '=', 'estudiante.estudiante_id')
+            ->select('oferta_fecha, oferta_tarifa, materia.materia_nombre, estudiante.estudiante_nombre')
+            ->orderBy('materia_id')
+            ->get();
+        return $ofertaAsesoriaAsesor;
+         */
+        
+
+    }
+ 
     /**
      * Store a newly created resource in storage.
      *
@@ -49,6 +71,25 @@ class OfertaAsesoriaAsesorController extends Controller
             
         //}
         }
+        public function eliminarUsuario(int $oferta_id)
+        {
+            DB::beginTransaction();
+            try {
+                OfertaAsesoriaAsesor::where('oferta_id',$oferta_id)->delete();
+                DB::commit();
+                return response()->json([
+                    'message' => 'Oferta de asesoría eliminado con exito',
+                    'flag' => 1
+                ], 201);
+            } catch (QueryException $err) {
+                DB::rollBack();
+                return response()->json([
+                    'message' => 'Error al eliminar usuario',
+                    'flag' => 0,
+                ], 202);
+            }
+        }
+    
     
 
     /**

@@ -38,7 +38,7 @@ const Materias = () => {
         },
         {
             title: 'Area',
-            field: 'area_id'
+            field: 'area_nombre'
         },
         
     ];

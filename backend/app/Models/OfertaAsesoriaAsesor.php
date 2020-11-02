@@ -12,6 +12,7 @@ class OfertaAsesoriaAsesor extends Model
 {
 
     protected $table = 'oferta_asesoria';
+    protected $primaryKey  = 'oferta_id';
 
     use HasFactory;
 

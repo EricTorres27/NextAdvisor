@@ -61,7 +61,7 @@ export const RegistrarMateria = () => {
                    
                     "materia_nombre":values.materia_nombre,
                     "area_id":values.area_id,
-                    "administrador_id":values.administrador_id
+                  
                 }
             )
             if (response.data.flag == 0) {
@@ -168,17 +168,8 @@ export const RegistrarMateria = () => {
                                 />
                             </Grid>
                         </Grid>
-                        <Grid container spacing={1}>
-                            <Grid item xs={12} sm={6}>
-                                <Controls.selectAdmin
-                                    name="administrador_id"
-                                    label="Administrador"
-                                    value={values.administrador_id}
-                                    onChange={handleInputChange}
-                                    error={errors.administrador_id}
-                                />
-                            </Grid>
-                        </Grid>
+                        
+                    
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={12}>
                                 <Box ml={3} mt={1} align="right">
