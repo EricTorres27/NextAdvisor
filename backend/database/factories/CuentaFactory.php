@@ -26,12 +26,13 @@ class CuentaFactory extends Factory
         return [
             'cuenta_nombre_usuario' => $faker->userName(),
             'cuenta_correo' => $faker->freeEmail(),
-            'contraseña' => $faker->password(),
+            'password' => $faker->password(),
             'cuenta_telefono' => $faker->phoneNumber(),
             'cuenta_nombre' => $faker->firstName(),
             'cuenta_apellido_paterno' => $faker->lastName (),
             'cuenta_apellido_materno'=> $faker->lastName(),
-            'cuenta_genero' => $faker->randomElement(['Hombre','Mujer'])
+            'cuenta_genero' => $faker->randomElement(['Hombre','Mujer']),
+            'rol_id'=>$faker-> numberBetween($min = 1, $max = 2),
         ];
     }
 }

@@ -17,7 +17,6 @@ class CreateTableEstudiante extends Migration
             $table->increments('estudiante_id');
             $table->integer('cuenta_id_estudiante');
             $table->integer('estudiante_calificacion');
-            $table->integer('asesor_calificacion');
             $table->string('estudiante_carrera');
             $table->integer('estudiante_semestre');
             $table->timestamps();

@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Estudiante;
 
-class Cuenta extends Model
+class Cuenta extends Authenticatable
 {
     protected $table = 'cuenta';
     protected $primaryKey  = 'cuenta_id';
+    protected $email  = 'cuenta_correo';
     use HasFactory;
 
     /**
@@ -20,7 +22,7 @@ class Cuenta extends Model
     protected $fillable = [
         'cuenta_nombre_usuario',
         'cuenta_correo',
-        'contraseña',
+        'password',
         'cuenta_telefono',
         'cuenta_nombre',
         'cuenta_apellido_paterno',
@@ -33,7 +35,8 @@ class Cuenta extends Model
      * @var array
      */
     protected $hidden = [
-        'contraseña',
+        'password',
+        'remember_token',
     ];
 
     public function roles()

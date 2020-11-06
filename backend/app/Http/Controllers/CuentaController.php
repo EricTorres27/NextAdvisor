@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Models\Estudiante;
 use App\Models\Rol;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class CuentaController extends Controller
 {
@@ -39,7 +41,7 @@ class CuentaController extends Controller
         $validator = Validator::make($request->all(), [
             'cuenta_nombre_usuario' => 'required|unique:cuenta',
             'cuenta_correo' => 'required|email|max:100',
-            'contraseña' => 'required|min:6',
+            'password' => 'required|min:6',
             'cuenta_telefono' => 'required|string|size:10',
             'cuenta_nombre' => 'required|string',
             'cuenta_apellido_paterno' => 'required|string',
@@ -69,7 +71,7 @@ class CuentaController extends Controller
                      */
                     $cuenta = Cuenta::create(array_merge(
                         $validator->validated(),
-                        ['contraseña' => bcrypt($request->password)]
+                        ['password' => bcrypt($request->password)]
                     ));
                     $rolId = $request->rol_id;
                     $cuenta->roles()->attach($rolId);
@@ -114,7 +116,7 @@ class CuentaController extends Controller
         $validator = Validator::make($request->all(), [
             'cuenta_nombre_usuario' => 'required|unique:cuenta',
             'cuenta_correo' => 'required|email|max:100',
-            'contraseña' => 'required|min:6',
+            'password' => 'required|min:6',
             'cuenta_telefono' => 'required|string|size:10',
             'cuenta_nombre' => 'required|string',
             'cuenta_apellido_paterno' => 'required|string',
@@ -144,7 +146,7 @@ class CuentaController extends Controller
                      */
                     $cuenta = Cuenta::create(array_merge(
                         $validator->validated(),
-                        ['contraseña' => bcrypt($request->password)]
+                        ['password' => bcrypt($request->password)]
                     ));
                     $rolId = 3;
                     $cuenta->roles()->attach($rolId);
@@ -208,27 +210,6 @@ class CuentaController extends Controller
         return $resultado;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Cuenta  $cuenta
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Cuenta $cuenta)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Cuenta  $cuenta
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Cuenta $cuenta)
-    {
-    }
     public function validarEmail(Request $request)
     {
 
@@ -239,4 +220,41 @@ class CuentaController extends Controller
 
         return Cuenta::where('cuenta_nombre_usuario', $request->cuenta_nombre_usuario)->exists();
     }
+
+    // ------------ [ User Login ] -------------------
+    public function cuentaLogin(Request $request) {
+
+        $validator=Validator::make($request->all(),
+            [
+                "cuenta_correo" =>"required|email",
+                "password"=>"required"
+            ]
+        );
+        if($validator->fails()) {
+            return response()->json(["status" => "failed", "validation_error" => $validator->errors()]);
+        }
+        
+        $email_status=Cuenta::where("cuenta_correo",$request->input('cuenta_correo'))->first();
+        if(!is_null($email_status)) {
+            if (Auth::attempt(['cuenta_correo' =>$request->input('cuenta_correo') , 'password' => $request->input('password')])) {
+                $user=$this->userDetail($request->input('cuenta_correo'));
+                return response()->json(["status" => $this->status_code, "success" => true, "message" => "You have logged in successfully", "data" => $user]);
+            }
+            else{
+                return response();
+            }
+        }
+        else{
+            return response()->json(["status" => "failed", "success" => false, "message" => "Unable to login. Email doesn't exist."]);
+        }
+    }
+
+    public function userDetail($email) {
+        $user=array();
+        if($email != "") {
+            $user=Cuenta::where("cuenta_correo",$email)->first();
+            return $user;
+        }
+    }
+
 }

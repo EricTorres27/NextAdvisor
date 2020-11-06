@@ -17,12 +17,14 @@ class CreateTableCuenta extends Migration
             $table->increments('cuenta_id');
             $table->string('cuenta_nombre_usuario')->unique();
             $table->string('cuenta_correo')->unique();
-            $table->string('contraseña');
+            $table->string('password');
             $table->string('cuenta_telefono');
             $table->string('cuenta_nombre');
             $table->string('cuenta_apellido_paterno');
             $table->string('cuenta_apellido_materno');
             $table->string('cuenta_genero');
+            $table->unsignedInteger('rol_id');
+            $table->foreign('rol_id')->references('rol_id')->on('rol')->onDelete('cascade');
             $table->timestamps();
 
         });

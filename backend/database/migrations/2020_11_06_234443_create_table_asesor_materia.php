@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableOfertaAsesoriaAsesor extends Migration
+class CreateTableAsesorMateria extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateTableOfertaAsesoriaAsesor extends Migration
      */
     public function up()
     {
-        Schema::create('oferta_asesoria_asesor', function (Blueprint $table) {
-            $table->unsignedInteger('oferta_id');
-            $table->foreign('oferta_id')->references('oferta_id')->on('oferta_asesoria')->onDelete('cascade');
+        Schema::create('asesor_materia', function (Blueprint $table) {
+            $table->increments('asesor_materia_id');
             $table->unsignedInteger('estudiante_id');
             $table->foreign('estudiante_id')->references('estudiante_id')->on('estudiante')->onDelete('cascade');
-            $table->date('fecha_aprobacion');
+            $table->unsignedInteger('materia_id');
+            $table->foreign('materia_id')->references('materia_id')->on('materia')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateTableOfertaAsesoriaAsesor extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('oferta_asesoria_asesor');
+        Schema::dropIfExists('asesor_materia');
     }
 }

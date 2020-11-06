@@ -1,18 +1,8 @@
-POST http://localhost:8000/api/cuenta HTTP/1.1
+POST http://localhost:8000/api/cuenta/cuentaLogin' HTTP/1.1
 Accept: application/application/json
 Content-Type: : application/json
 
 {
-    "cuenta_nombre_usuario": "Estudiante2",
-    "cuenta_correo": "estudiante2@gmail.com",
-    "contraseña": "prueba27",
-    "cuenta_telefono": "4432298979",
-    "cuenta_nombre": "Estudiante2",
-    "cuenta_apellido_paterno":"Student",
-    "cuenta_apellido_materno": "Student",
-    "rol_id": "1",
-    "estudiante_semestre":"1",
-    "estudiante_carrera":"ISC",
-    "estudiante_calificacion":0,
-    "asesor_calificacion":0
+    "cuenta_correo": "eric@gmail.com",
+    "contraseña": "erictorres27",
 }

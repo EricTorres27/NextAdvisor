@@ -34,8 +34,6 @@ class DatabaseSeeder extends Seeder
             'rol_descripcion' => Str::random(20),
         ]);
         Cuenta::factory()->count(20)->create();
-        $this->call([
-            CuentaRolSeeder::class,
-        ]);
+
     }
 }
