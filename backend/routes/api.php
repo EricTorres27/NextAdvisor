@@ -6,6 +6,7 @@ use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\OfertaAsesoriaAsesorController;
 use App\Http\Controllers\TarifaController;
 use App\Http\Controllers\PreguntaController;
+use App\Http\Controllers\OfertaAsesoriaController;
 use Carbon\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -40,5 +41,4 @@ Route::resource('materia',MateriaController::class);
 Route::resource('cuenta',CuentaController::class);
 Route::resource('estudiante',EstudianteController::class);
 Route::resource('pregunta',PreguntaController::class);
-
-
+Route::resource('historial',OfertaAsesoriaController::class);
