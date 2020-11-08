@@ -22,7 +22,7 @@ import Perfil from './Perfil';
 import Tarifa from './Tarifa';
 import EditarPerfil from './EditarPerfil';
 import { BrowserRouter as Router, Route, Redirect  } from 'react-router-dom';
-import ConsultAdvisory from './ConsultAdvisory';
+import HistorialAsesoria from '../Views/HistorialAsesoria';
 import ConsultTopic from './ConsultTopic';
 import Reports from './Reports';
 import AdminProfile from './AdminProfile';
@@ -138,7 +138,7 @@ const PrincipalContainer = () => {
                         <Route exact path="/ConsultarUsuario" component={ConsultarUsuario} />
                         <Route exact path="/EditarUsuario/:cuentaId" component={EditarUsuario} />
                         <Route exact path="/EditarPregunta/:preguntaId" component={EditarPregunta} />
-                        <Route exact path="/ConsultAdvisory" component={ConsultAdvisory} />
+                        <Route exact path="/HistorialAsesoria" component={HistorialAsesoria} />
                         <Route exact path="/Reports" component={Reports} />
                         <Route exact path="/ConsultTopic" component={ConsultTopic} />
                         <Route exact path="/CrearUsuario" component={CrearUsuario} />
