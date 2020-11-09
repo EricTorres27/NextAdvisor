@@ -152,7 +152,7 @@ const ConsultarPreguntas = () => {
     
     const confirmacionEliminar = (preguntaSeleccionada) => {
         swal({
-            title: "¿Seguro que desea eliminar la pregunta "+preguntaSeleccionada.pregunta_pregunta+" del sistema?",
+            title: "¿Seguro que desea eliminar la pregunta del sistema?",
             text: "La información quedara guardada en la base de datos",
             buttons: ["No", "Si"]
         }).then(respuesta => {

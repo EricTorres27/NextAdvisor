@@ -149,7 +149,7 @@ const EditarPregunta = (props) => {
     return (
         <div style={{ height: "650px" }}>
             <Box color="primary.contrastText" mb={1}>
-                <Typography color="white" align="center" variant="h3">Crear nuevo pregunta</Typography>
+                <Typography color="white" align="center" variant="h3">Editar pregunta</Typography>
             </Box>
             <Paper elevation={3} style={styles.Paper}>
                 <Link to="/PreguntasFrecuentes">

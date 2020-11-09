@@ -1,0 +1,9 @@
+POST http://localhost:8000/api/historial HTTP/1.1
+Accept: application/application/json
+Content-Type: : application/json
+
+{
+"oferta_fecha":"2020-11-04"
+"estudiante_nombre":"Diana"
+"materia_id":"1"
+}

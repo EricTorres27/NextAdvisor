@@ -13,7 +13,6 @@ const initialValues = {
    oferta_tarifa: '',
    materia_id: '',
    estudiante_id: ''
-
 }
 
 const styles = {

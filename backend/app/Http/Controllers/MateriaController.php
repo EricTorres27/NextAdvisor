@@ -94,6 +94,7 @@ class MateriaController extends Controller
                 'message' => 'Pregunta actualizada con exito',
                 'flag' => 1
             ], 201);
+            
         } catch (QueryException $err) {
             DB::rollBack();
             return response()->json([
