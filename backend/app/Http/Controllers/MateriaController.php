@@ -6,7 +6,7 @@ use App\Models\Materia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\QueryException;
-
+use Symfony\Component\Console\Input\Input;
 use Illuminate\Support\Facades\DB;
 
 class MateriaController extends Controller
@@ -68,9 +68,9 @@ class MateriaController extends Controller
      * @param  \App\Models\Materia  $materia
      * @return \Illuminate\Http\Response
      */
-    public function show($materia)
+    public function show($materia_id)
     {
-       
+        return Materia::where('materia_id', $materia_id)->first();
     }
 
     /**
@@ -80,9 +80,27 @@ class MateriaController extends Controller
      * @param  \App\Models\Materia  $materia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Materia $materia)
+    public function update(Request $request, int $materia_id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            
+            $mat = Materia::find($materia_id);
+            $mat->materia_nombre = $request->input('materia_nombre');
+            $mat->area_nombre = $request->input('area_nombre');
+            $mat->save();
+            DB::commit();
+            return response()->json([
+                'message' => 'Pregunta actualizada con exito',
+                'flag' => 1
+            ], 201);
+        } catch (QueryException $err) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Error al actualizar pregunta',
+                'flag' => 0,
+            ], 202);
+        }
     }
 
     /**
@@ -91,9 +109,23 @@ class MateriaController extends Controller
      * @param  \App\Models\Materia  $materia
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Materia $materia)
+    public function destroy(int $idMateria)
     {
-        //
+        DB::beginTransaction();
+        try {
+            Materia::where('materia_id', $idMateria)->delete();
+            DB::commit();
+            return response()->json([
+                'message' => 'Materia eliminada con exito',
+                'flag' => 1
+            ], 201);
+        } catch (QueryException $err) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Error al eliminar materia',
+                'flag' => 0,
+            ], 202);
+        }
     }
 
     public function validarMateria(Request $request)

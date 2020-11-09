@@ -34,6 +34,8 @@ import EstablecerTarifa from './EstablecerTarifa';
 import ConsultarPreguntas from '../Views/ConsultarPreguntas';
 import CrearPreguntasFrecuentes from '../Views/CrearPreguntasFrecuentes';
 import EditarUsuario from '../Views/EditarUsuario';
+import EditarMateria from '../Views/EditarMateria';
+import EditarAsesoria from '../Views/EditarAsesoria';
 import EditarPregunta from '../Views/EditarPregunta';
 import Home from '../Views/Home';
 const styles = makeStyles(theme => ({
@@ -92,13 +94,14 @@ const PrincipalContainer = () => {
                         <Route exact path="/RegistrarMateria" component={RegistrarMateria} />
                         <Route exact path="/MisAsesorias" component={advisoryAdv} />
                         <Route exact path="/AprobarMateria" component={AprobarMateria} />
-                        <Route exact path="/EditarAsesoria" component={EditarRegistroAsesoria} />
+                        <Route exact path="/EditarAsesoria/:ofertaId" component={EditarAsesoria} />
                         <Route exact path="/MetodoPago" component={MetodoPago} />
                         <Route exact path="/Perfil" component={Perfil} />
                         <Route exact path="/EditarPerfil" component={EditarPerfil} />
                         <Route exact path="/Tarifa" component={Tarifa} />
                         <Route exact path="/EstablecerTarifa" component={EstablecerTarifa} />
                         <Route exact path="passSubject" component={passSubject} />
+                        <Route exact path="/EditarMateria/:materia_id" component={EditarMateria} />
                     </div>
                 </div>
             </Router>

@@ -5,8 +5,8 @@ Content-Type: : application/json
 {
     
     "oferta_fecha":"2020-10-10",
-    "oferta_tarifa": "60",
-    "materia_id":"1"
+    "oferta_tarifa": "80",
+    "materia_id":"11"
 
    
     

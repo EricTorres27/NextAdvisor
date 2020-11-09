@@ -76,8 +76,11 @@ class PreguntaController extends Controller
     public function update(Request $request, int $preguntaId)
     {
         DB::beginTransaction();
+        
         try {
+            
             $pregunta = Pregunta::find($preguntaId);
+            
             $pregunta->pregunta_pregunta = $request->input('pregunta_pregunta');
             $pregunta->pregunta_respuesta = $request->input('pregunta_respuesta');
             $pregunta->save();

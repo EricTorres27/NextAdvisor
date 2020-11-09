@@ -60,7 +60,7 @@ const ConsultarPreguntas = () => {
 
         },
         {
-            title: 'Resuesta',
+            title: 'Respuesta',
             field: 'pregunta_respuesta',
 
         },

@@ -29,8 +29,8 @@ class OfertaAsesoriaAsesorController extends Controller
            $ofertaAsesoriaAsesor = OfertaAsesoriaAsesor::join('materia', 'oferta_asesoria.materia_id', '=', 'materia.materia_id')
             ->join('estudiante', 'oferta_asesoria.estudiante_id', '=', 'estudiante.estudiante_id')
     
-            ->select('oferta_fecha','oferta_tarifa','materia_nombre')
-            ->orderBy('oferta_fecha')
+            ->select('oferta_id','oferta_fecha','oferta_tarifa','materia_nombre')
+            ->orderBy('oferta_id')
             ->get();
 
         return $ofertaAsesoriaAsesor;
@@ -71,25 +71,7 @@ class OfertaAsesoriaAsesorController extends Controller
             
         //}
         }
-        public function eliminarUsuario(int $oferta_id)
-        {
-            DB::beginTransaction();
-            try {
-                OfertaAsesoriaAsesor::where('oferta_id',$oferta_id)->delete();
-                DB::commit();
-                return response()->json([
-                    'message' => 'Oferta de asesoría eliminado con exito',
-                    'flag' => 1
-                ], 201);
-            } catch (QueryException $err) {
-                DB::rollBack();
-                return response()->json([
-                    'message' => 'Error al eliminar usuario',
-                    'flag' => 0,
-                ], 202);
-            }
-        }
-    
+      
     
 
     /**
@@ -98,9 +80,9 @@ class OfertaAsesoriaAsesorController extends Controller
      * @param  \App\Models\OfertaAsesoriaAsesor  $ofertaAsesoriaAsesor
      * @return \Illuminate\Http\Response
      */
-    public function show(OfertaAsesoriaAsesor $ofertaAsesoriaAsesor)
+    public function show( $ofertaId)
     {
-        //
+       // return OfertaAsesoriaAsesor::where('oferta_id', $ofertaId)->first();
     }
 
     /**
@@ -121,9 +103,23 @@ class OfertaAsesoriaAsesorController extends Controller
      * @param  \App\Models\OfertaAsesoriaAsesor  $ofertaAsesoriaAsesor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OfertaAsesoriaAsesor $ofertaAsesoriaAsesor)
+    public function destroy(int $idOferta)
     {
-        //
+        DB::beginTransaction();
+        try {
+            OfertaAsesoriaAsesor::where('oferta_id', $idOferta)->delete();
+            DB::commit();
+            return response()->json([
+                'message' => 'Oferta eliminada con exito',
+                'flag' => 1
+            ], 201);
+        } catch (QueryException $err) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Error al eliminar Oferta',
+                'flag' => 0,
+            ], 202);
+        }
     }
 
    // public function validarAsesoria(Request $request)

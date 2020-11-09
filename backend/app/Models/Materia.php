@@ -12,7 +12,7 @@ class Materia extends Model
 {
 
     protected $table = 'materia';
-
+    protected $primaryKey  = 'materia_id';
     use HasFactory;
 
     /**
