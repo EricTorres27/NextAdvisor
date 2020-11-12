@@ -28,9 +28,8 @@ class CuentaController extends Controller
             ->orderBy('cuenta_id')
             ->get();
         return $cuentas;
-    }
 
-    
+    }
 
     /**
      * Crear un estudiante en el sistema.

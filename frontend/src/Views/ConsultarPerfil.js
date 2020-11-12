@@ -23,7 +23,6 @@ const initialValues = {
     cuenta_correo: '',
     cuenta_nombre_usuario: '',
     contraseña: '',
-    contraseñaConfirmar: '',
     cuenta_telefono: '',
     estudiante_semestre: '',
     estudiante_carrera: '',
@@ -36,7 +35,7 @@ const ConsultarPerfil = (props) => {
         setValues
     } = useForm(initialValues);
 
-    // const baseURL = "http://localhost:8000/api/cuenta/";
+   const baseURL = "http://localhost:8000/api/cuenta/";
 
     const peticionGet = async () => {
         try {
@@ -183,6 +182,9 @@ const ConsultarPerfil = (props) => {
                                 <Box ml={3} mt={1} align="right">
                                     <Button size="large" href="/EditarPerfil">
                                       Editar
+                                    </Button>
+                                    <Button size="large">
+                                      Eliminar
                                     </Button>
                                 </Box>
                             </Grid>

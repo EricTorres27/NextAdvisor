@@ -21,7 +21,7 @@ import {
 } from '@material-ui/core'
 
 
-const role="admin"
+const role="advisor"
 const UserLists = () => {
 
     if (role=="student") {
@@ -105,8 +105,8 @@ const UserLists = () => {
                         <ListItemIcon>
                             <GradeIcon color="primary" fontSize="large" />
                         </ListItemIcon>
-                        <Link to="">
-                            <ListItemText primary='Evaluación' />
+                        <Link to="/Evaluaciones">
+                            <ListItemText primary='Evaluaciones' />
                         </Link>
                     </ListItem>
                 </List>

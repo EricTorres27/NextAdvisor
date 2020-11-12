@@ -79,7 +79,7 @@ const EditarPerfil = (props) => {
 
     const confirmacion = () => {
         swal({
-            title: "¿Seguro que desea registrar al usuario?",
+            title: "¿Seguro que desea editar su perfil?",
             text: "La información quedara guardada en la base de datos",
             buttons: ["No", "Si"]
         }).then(respuesta => {
@@ -88,7 +88,8 @@ const EditarPerfil = (props) => {
             }
         })
     }
-    // const baseURL = "http://localhost:8000/api/cuenta/";
+
+    const baseURL = "http://localhost:8000/api/cuenta/";
 
     const peticionGet = async () => {
         try {

@@ -16,7 +16,7 @@ class Cuenta extends Authenticatable
 
     /**
      * The attributes that are mass assignable.
-     * 
+     *
      * @var array
      */
     protected $fillable = [
@@ -51,6 +51,6 @@ class Cuenta extends Authenticatable
     {
         return $this->hasOne(Estudiante::class,'cuenta_id_administrador','cuenta_id');
     }
-    
+
 
 }

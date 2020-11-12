@@ -36,6 +36,13 @@ import CrearPreguntasFrecuentes from '../Views/CrearPreguntasFrecuentes';
 import EditarUsuario from '../Views/EditarUsuario';
 import EditarPregunta from '../Views/EditarPregunta';
 import Home from '../Views/Home';
+import Evaluaciones from '../Views/Evaluaciones';
+import AmbienteConstruido from '../Views/AmbienteConstruido';
+import CienciasSociales from '../Views/CienciasSociales';
+import EstudiosCreativos from '../Views/EstudiosCreativos';
+import Ingenieria from '../Views/Ingenieria';
+import Negocios from '../Views/Negocios';
+import Salud from '../Views/Salud';
 import ConsultarPerfil from '../Views/ConsultarPerfil';
 const styles = makeStyles(theme => ({
     root: {
@@ -58,7 +65,7 @@ const PrincipalContainer = () => {
     }
 
 
-    const role = "admin"
+    const role = "advisor"
     if (role == "advisor") {
         return (
             <Router>
@@ -100,6 +107,13 @@ const PrincipalContainer = () => {
                         <Route exact path="/Tarifa" component={Tarifa} />
                         <Route exact path="/EstablecerTarifa" component={EstablecerTarifa} />
                         <Route exact path="/ConsultarPerfil" component={ConsultarPerfil} />
+                        <Route exact path="/Evaluaciones" component={Evaluaciones} />
+                        <Route exact path="/AmbienteConstruido" component={AmbienteConstruido} />
+                        <Route exact path="/CienciasSociales" component={CienciasSociales} />
+                        <Route exact path="/EstudiosCreativos" component={EstudiosCreativos} />
+                        <Route exact path="/Ingenieria" component={Ingenieria} />
+                        <Route exact path="/Negocios" component={Negocios} />
+                        <Route exact path="/Salud" component={Salud} />
                         <Route exact path="passSubject" component={passSubject} />
                     </div>
                 </div>
