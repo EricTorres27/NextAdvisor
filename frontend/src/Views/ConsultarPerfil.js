@@ -71,9 +71,6 @@ const ConsultarPerfil = (props) => {
                                         name="cuenta_nombre"
                                         label="Nombre"
                                         value={values.cuenta_nombre}
-                                        InputProps={{
-                                          readOnly: true,
-                                        }}
                                     />
                                 </Box>
                                 <Box mb={2} mr={2} ml={2}>

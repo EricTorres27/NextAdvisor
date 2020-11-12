@@ -30,6 +30,8 @@ class CuentaController extends Controller
         return $cuentas;
     }
 
+    
+
     /**
      * Crear un estudiante en el sistema.
      *
@@ -233,7 +235,7 @@ class CuentaController extends Controller
         if($validator->fails()) {
             return response()->json(["status" => "failed", "validation_error" => $validator->errors()]);
         }
-        
+
         $email_status=Cuenta::where("cuenta_correo",$request->input('cuenta_correo'))->first();
         if(!is_null($email_status)) {
             if (Auth::attempt(['cuenta_correo' =>$request->input('cuenta_correo') , 'password' => $request->input('password')])) {
