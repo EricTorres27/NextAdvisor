@@ -34,7 +34,7 @@ const UserLists = () => {
                         <ListItemIcon>
                             <AccountCircleIcon color="primary" fontSize="large" />
                         </ListItemIcon>
-                        <Link to="">
+                        <Link to="/ConsultarPerfil">
                             <ListItemText primary='Mi perfil' />
                         </Link>
                     </ListItem>
@@ -60,7 +60,7 @@ const UserLists = () => {
                         <ListItemIcon>
                             <AccountCircleIcon color="primary" fontSize="large" />
                         </ListItemIcon>
-                        <Link to="">
+                        <Link to="/ConsultarPerfil">
                             <ListItemText primary='Mi perfil' />
                         </Link>
                     </ListItem>
@@ -119,7 +119,7 @@ const UserLists = () => {
             <div>
 
                 <List component='nav'>
-                    <Link to="/AdminProfile" style={{ textDecoration: 'none' }} >
+                    <Link to="/ConsultarPerfil" style={{ textDecoration: 'none' }} >
                         <ListItem button>
                             <ListItemIcon >
                                 <AccountCircleIcon color="primary" fontSize="large" />
