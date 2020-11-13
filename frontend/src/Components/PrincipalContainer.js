@@ -94,14 +94,14 @@ const PrincipalContainer = () => {
                         <Route exact path="/RegistrarMateria" component={RegistrarMateria} />
                         <Route exact path="/MisAsesorias" component={advisoryAdv} />
                         <Route exact path="/AprobarMateria" component={AprobarMateria} />
-                        <Route exact path="/EditarAsesoria/:ofertaId" component={EditarAsesoria} />
+                        <Route exact path="/EditarAsesoria/:oferta_id" component={EditarAsesoria} />
                         <Route exact path="/MetodoPago" component={MetodoPago} />
                         <Route exact path="/Perfil" component={Perfil} />
                         <Route exact path="/EditarPerfil" component={EditarPerfil} />
                         <Route exact path="/Tarifa" component={Tarifa} />
                         <Route exact path="/EstablecerTarifa" component={EstablecerTarifa} />
                         <Route exact path="passSubject" component={passSubject} />
-                        <Route exact path="/EditarMateria/:materia_id" component={EditarMateria} />
+                       
                     </div>
                 </div>
             </Router>
@@ -148,11 +148,13 @@ const PrincipalContainer = () => {
                         <Route exact path="/CrearAdministrador" component={CrearAdministrador} />
                         <Route exact path="/PreguntasFrecuentes" component={ConsultarPreguntas} />
                         <Route exact path="/CrearPregunta" component={CrearPreguntasFrecuentes} />
-                        <Route exact path="/Materias" component={subjects} />
+                        <Route exact path="/Materias" component={subjectAdmin} />
                         <Route exact path="/RegistrarMateria" component={RegistrarMateria} />
                         <Route exact path="/passSubject" component={passSubject} />
                         <Route exact path="/MateriaAdmin" component={subjectAdmin} />
                         <Route exact path="/subjectAdmin" component={subjectAdmin} />
+                        <Route exact path="/EditarMateria/:materia_id" component={EditarMateria} />
+                        <Route exact path="/EditarAsesoria/:oferta_id" component={EditarAsesoria} />
                     </div>
                 </div>
             </Router>

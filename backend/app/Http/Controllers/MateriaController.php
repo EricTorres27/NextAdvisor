@@ -80,14 +80,14 @@ class MateriaController extends Controller
      * @param  \App\Models\Materia  $materia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, int $materia_id)
+    public function update(Request $request, int $materiaId)
     {
         DB::beginTransaction();
         try {
             
-            $mat = Materia::find($materia_id);
+            $mat = Materia::find($materiaId);
             $mat->materia_nombre = $request->input('materia_nombre');
-            $mat->area_nombre = $request->input('area_nombre');
+            $mat->area_id = $request->input('area_id');
             $mat->save();
             DB::commit();
             return response()->json([

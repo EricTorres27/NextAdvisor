@@ -26,10 +26,10 @@ class OfertaAsesoriaController extends Controller
         ->select('oferta_asesoria.estudiante_id','materia_nombre','oferta_fecha')
         ->orderBy('oferta_fecha')
         ->get();
-    }
+    
 
     return $ofertaAsesoria;
-
+}
     /**
      * Store a newly created resource in storage.
      *

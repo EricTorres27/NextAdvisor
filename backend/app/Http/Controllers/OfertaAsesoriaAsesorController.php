@@ -80,9 +80,9 @@ class OfertaAsesoriaAsesorController extends Controller
      * @param  \App\Models\OfertaAsesoriaAsesor  $ofertaAsesoriaAsesor
      * @return \Illuminate\Http\Response
      */
-    public function show( $ofertaId)
+    public function show( $oferta_id)
     {
-       // return OfertaAsesoriaAsesor::where('oferta_id', $ofertaId)->first();
+        return OfertaAsesoriaAsesor::where('oferta_id', $oferta_id)->first();
     }
 
     /**
@@ -92,9 +92,29 @@ class OfertaAsesoriaAsesorController extends Controller
      * @param  \App\Models\OfertaAsesoriaAsesor  $ofertaAsesoriaAsesor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OfertaAsesoriaAsesor $ofertaAsesoriaAsesor)
+    public function update(Request $request, int $asesoria)
     {
-        //
+        DB::beginTransaction();
+        try {
+            
+            $as = OfertaAsesoriaAsesor::find($asesoria);
+            $as->oferta_fecha = $request->input('oferta_fecha');
+            $as->oferta_tarifa = $request->input('oferta_tarifa');
+            $as->materia_id = $request->input('materia_id');
+            $as->save();
+            DB::commit();
+            return response()->json([
+                'message' => 'Asesoria actualizada con exito',
+                'flag' => 1
+            ], 201);
+            
+        } catch (QueryException $err) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Error al actualizar asesoria',
+                'flag' => 0,
+            ], 202);
+        }  
     }
 
     /**

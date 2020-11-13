@@ -174,18 +174,7 @@ const Materias = () => {
                     columns={columnas}
                     data={data}
                     icons={tableIcons}
-                    actions={[
-                        {
-                            icon: Edit,
-                            tooltip: 'Editar',
-                            onClick: (event, rowData)=>selecionarMateria(rowData,"Editar")
-                        },
-                        {
-                            icon: DeleteOutline,
-                            tooltip: 'Eliminar',
-                            onClick: (event, rowData)=>selecionarMateria(rowData,"Eliminar")
-                        },
-                    ]}
+                   
                     options={{
                         actionsColumnIndex: -1
                     }}

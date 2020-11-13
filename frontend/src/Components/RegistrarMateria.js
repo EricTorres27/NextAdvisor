@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Grid, Typography, Paper, Container, TextField, Button } from '@material-ui/core';
+import { Grid, Typography, Paper, Button,Card, CardContent,CardMedia, Container, Box,TextField } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
@@ -7,6 +7,9 @@ import Controls from '../Components/controls/Controls';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { Redirect } from 'react-router-dom';
+import { FormControl, InputLabel, MenuItem, Select as MuiSelect } from '@material-ui/core';
+
+let s;
 
 const initialValues = {
     materia_nombre: '',

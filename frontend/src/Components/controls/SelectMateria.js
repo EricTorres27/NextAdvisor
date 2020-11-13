@@ -21,10 +21,9 @@ export default function SelectMateria(props) {
                     value={value}
                     onChange={onChange}>
                     <MenuItem value="">Seleccione la materia</MenuItem>
-                    <MenuItem key="1" value="1">Álgebra lineal</MenuItem>
-                    <MenuItem key="1" value="2">Diseño gráfico</MenuItem>
-                    <MenuItem key="1" value="3">Expresión oral y escrita</MenuItem>
-                    <MenuItem key="4" value="4">Matemáticas</MenuItem>
+                    <MenuItem key="3" value="3">Diseño gráfico</MenuItem>
+                    <MenuItem key="6" value="6">Expresión oral y escrita</MenuItem>
+                   
                    
                 </MuiSelect>
                 {error && <FormHelperText>{error}</FormHelperText>}

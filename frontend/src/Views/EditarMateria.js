@@ -87,14 +87,14 @@ const styles = {
         try {
             const response = await axios.put("http://localhost:8000/api/materia/"+values.materia_id,
                 {
-                    "area_nombre": values.area_nombre,
+                    "area_id": values.area_id,
                     "materia_nombre": values.materia_nombre, 
                     //"materia_id": values.materia_id, 
                 }
             )
             if (response.data.flag == 1) {
                 swal({
-                    title: "La pregunta se ha creado con éxito",
+                    title: "La información se ha guardado con éxito",
                     icon: "success"
                 }).then(respuesta => {
                     window.location.href = "http://localhost:3000/materia";
@@ -166,9 +166,6 @@ const styles = {
                 </Link>
                 <Box mt={5} ml={5}>
                     <Form onSubmit={handleSubmitMateria}>
-                       
-
-
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={6}>
                                 

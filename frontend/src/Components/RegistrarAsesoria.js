@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Grid, Typography, Paper, Container, TextField, Button } from '@material-ui/core';
+import { Box, Grid, Typography, Paper, Container,  Button,Card, CardContent, CardMedia, makeStyles, TextField} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import { useForm, Form } from './useForm';
 import Controls from './controls/Controls';
 import axios from 'axios';
 import swal from 'sweetalert';
+import { FormControl, InputLabel, MenuItem, Select as MuiSelect } from '@material-ui/core';
+
+
+
 
 
 const initialValues = {
@@ -22,6 +26,7 @@ const styles = {
 
 export const RegistrarAsesoria = () => {
 
+    const [materia_id, setMateria] = useState([]);
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
         if ('oferta_fecha' in fieldValues)
@@ -121,7 +126,12 @@ export const RegistrarAsesoria = () => {
 
         }
     }
-
+    const peticionGetMateria = async () => {
+        await axios.get(baseURL + 'materia/getMateria')
+            .then(response => {
+                setMateria(response.data);
+            })
+    }
     const confirmacion = () => {
         swal({
             title: "¿Seguro que desea registrar la asesoría?",
@@ -178,11 +188,14 @@ export const RegistrarAsesoria = () => {
                                 <Controls.SelectMateria
                                     name="materia_id"
                                     label="Materia"
-                                    value={values.materia_id}z
+                                    value={values.materia_id}
                                     onChange={handleInputChange}
                                     error={errors.materia_id}
                                 />
                             </Grid>
+
+                           
+
                         </Grid>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={12}>
