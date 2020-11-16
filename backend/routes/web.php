@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('CurrentDate',function(){
+    $timestamp=time();
+    return date("Y-m-d H:i:s",$timestamp);
+});

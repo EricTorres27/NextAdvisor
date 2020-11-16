@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use App\Models\Estudiante;
 use App\Models\Rol;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 class CuentaController extends Controller
@@ -22,8 +21,7 @@ class CuentaController extends Controller
      */
     public function index()
     {
-        $cuentas = Cuenta::join('cuenta_rol', 'cuenta.cuenta_id', '=', 'cuenta_rol.cuenta_id')
-            ->join('rol', 'rol.rol_id', '=', 'cuenta_rol.rol_id')
+        $cuentas = Cuenta::join('rol', 'cuenta.rol_id', '=', 'rol.rol_id')
             ->select('cuenta.cuenta_id', 'cuenta_nombre_usuario', 'cuenta_correo', 'cuenta_nombre', 'cuenta_apellido_paterno', 'cuenta_apellido_materno', 'rol_nombre')
             ->orderBy('cuenta_id')
             ->get();
@@ -46,7 +44,8 @@ class CuentaController extends Controller
             'cuenta_nombre' => 'required|string',
             'cuenta_apellido_paterno' => 'required|string',
             'cuenta_apellido_materno' => 'required|string',
-            'cuenta_genero' => 'required|string'
+            'cuenta_genero' => 'required|string',
+            'rol_id' => 'required'
         ]);
         /**
          * Revisar que el correo no exista ya
@@ -73,8 +72,6 @@ class CuentaController extends Controller
                         $validator->validated(),
                         ['password' => bcrypt($request->password)]
                     ));
-                    $rolId = $request->rol_id;
-                    $cuenta->roles()->attach($rolId);
                     /**
                      * Crear un estudiante en el sistema
                      */
@@ -84,7 +81,6 @@ class CuentaController extends Controller
                     $estudiante->estudiante_carrera = $request->estudiante_carrera;
                     $estudiante->estudiante_semestre = $request->estudiante_semestre;
                     $estudiante->estudiante_calificacion = $request->estudiante_calificacion;
-                    $estudiante->asesor_calificacion = $request->asesor_calificacion;
 
                     if ($cuenta->estudiante()->save($estudiante)) {
                         DB::commit();
@@ -121,7 +117,8 @@ class CuentaController extends Controller
             'cuenta_nombre' => 'required|string',
             'cuenta_apellido_paterno' => 'required|string',
             'cuenta_apellido_materno' => 'required|string',
-            'cuenta_genero' => 'required|string'
+            'cuenta_genero' => 'required|string',
+            'rol_id' => 'required'
         ]);
         /**
          * Revisar que el correo no exista ya
@@ -148,10 +145,8 @@ class CuentaController extends Controller
                         $validator->validated(),
                         ['password' => bcrypt($request->password)]
                     ));
-                    $rolId = 3;
-                    $cuenta->roles()->attach($rolId);
                     /**
-                     * Crear un estudiante en el sistema
+                     * Crear un administrador en el sistema
                      */
                     $cuenta = Cuenta::where('cuenta_correo', $request->cuenta_correo)->first();
 
@@ -181,7 +176,7 @@ class CuentaController extends Controller
     {
         DB::beginTransaction();
         try {
-            Cuenta::where('cuenta_id',$idCuenta)->delete();
+            Cuenta::where('cuenta_id', $idCuenta)->delete();
             DB::commit();
             return response()->json([
                 'message' => 'Usuario eliminado con exito',
@@ -204,57 +199,26 @@ class CuentaController extends Controller
      */
     public function obtenerCuenta(int $cuentaId)
     {
-        $cuenta = Cuenta::findOrFail($cuentaId);
-        $resultado= $cuenta->roles()->get()
-        ->union($cuenta);
-        return $resultado;
+        $hash = Cuenta::where('cuenta_id', $cuentaId)
+            ->select('password')
+            ->first();
+        $plaintext_password = "contraseña";
+
+        // The hash of the password that 
+        // can be stored in the database 
+        $hash = password_hash(
+            $plaintext_password,
+            PASSWORD_DEFAULT
+        );
+        echo($hash);
     }
 
     public function validarEmail(Request $request)
     {
-
         return Cuenta::where('cuenta_correo', $request->cuenta_correo)->exists();
     }
     public function validarNombreUsuario(Request $request)
     {
-
         return Cuenta::where('cuenta_nombre_usuario', $request->cuenta_nombre_usuario)->exists();
     }
-
-    // ------------ [ User Login ] -------------------
-    public function cuentaLogin(Request $request) {
-
-        $validator=Validator::make($request->all(),
-            [
-                "cuenta_correo" =>"required|email",
-                "password"=>"required"
-            ]
-        );
-        if($validator->fails()) {
-            return response()->json(["status" => "failed", "validation_error" => $validator->errors()]);
-        }
-        
-        $email_status=Cuenta::where("cuenta_correo",$request->input('cuenta_correo'))->first();
-        if(!is_null($email_status)) {
-            if (Auth::attempt(['cuenta_correo' =>$request->input('cuenta_correo') , 'password' => $request->input('password')])) {
-                $user=$this->userDetail($request->input('cuenta_correo'));
-                return response()->json(["status" => $this->status_code, "success" => true, "message" => "You have logged in successfully", "data" => $user]);
-            }
-            else{
-                return response();
-            }
-        }
-        else{
-            return response()->json(["status" => "failed", "success" => false, "message" => "Unable to login. Email doesn't exist."]);
-        }
-    }
-
-    public function userDetail($email) {
-        $user=array();
-        if($email != "") {
-            $user=Cuenta::where("cuenta_correo",$email)->first();
-            return $user;
-        }
-    }
-
 }

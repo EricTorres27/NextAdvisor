@@ -19,6 +19,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
+import API from '../apis/api';
 
 const useStyles = makeStyles((theme) => ({
     Paper: { height: 650, padding: 20, marginLeft: 50, marginRight: 50, overflowY: 'auto' },
@@ -86,9 +87,8 @@ const ConsultarPreguntas = () => {
         ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
     };
 
-    const baseURL = "http://localhost:8000/api/pregunta";
     const peticionGet = async () => {
-        await axios.get(baseURL)
+        await API.get("pregunta")
             .then(response => {
                 setData(response.data);
             })
@@ -96,7 +96,7 @@ const ConsultarPreguntas = () => {
     
     const peticionDelete = async (preguntaId) => {
         try {
-            const response = await axios.delete('http://localhost:8000/api/pregunta/'+preguntaId,)
+            const response = await API.delete('pregunta/'+preguntaId,)
             if (response.data.flag == 1) {
                 swal({
                     title: "La pregunta se ha eliminado con éxito",

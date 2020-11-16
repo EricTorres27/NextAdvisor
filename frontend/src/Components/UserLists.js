@@ -21,10 +21,10 @@ import {
 } from '@material-ui/core'
 
 
-const role="admin"
+const role = localStorage.getItem("rol");
 const UserLists = () => {
 
-    if (role=="student") {
+    if (role=="estudiante") {
         return (
             <div>
 
@@ -51,7 +51,7 @@ const UserLists = () => {
         )
     }
 
-    if (role=="admin") {
+    if (role=="administrador") {
         return (
             <div>
 
@@ -115,7 +115,7 @@ const UserLists = () => {
         )
     }
 
-    if (role=="advisor") {
+    if (role=="asesor") {
         return (
             <div>
 

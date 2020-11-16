@@ -6,6 +6,7 @@ use App\Http\Controllers\MateriaController;
 use App\Http\Controllers\OfertaAsesoriaAsesorController;
 use App\Http\Controllers\TarifaController;
 use App\Http\Controllers\PreguntaController;
+use App\Http\Controllers\JWTAuthController;
 use Carbon\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,17 @@ Route::group([
     Route::delete('eliminarUsuario/{idCuenta}', [CuentaController::class, 'eliminarUsuario']);
     Route::post('cuentaLogin', [CuentaController::class, 'cuentaLogin']);
 });
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth'
+], function ($router) {
+    Route::post('register', [JWTAuthController::class, 'register']);
+    Route::post('login', [JWTAuthController::class, 'login']);
+    Route::post('logout', [JWTAuthController::class, 'logout']);
+    Route::post('refresh', [JWTAuthController::class, 'refresh']);
+    Route::get('profile', [JWTAuthController::class, 'profile']);
+});
+
 Route::resource('tarifa',TarifaController::class);
 Route::resource('materia',MateriaController::class);
 Route::resource('estudiante',EstudianteController::class);

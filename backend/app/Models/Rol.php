@@ -13,6 +13,6 @@ class Rol extends Model
 
     public function cuentas()
     {
-        return $this->belongsToMany(Cuenta::class,'cuenta_rol','rol_id','cuenta_id');
+        return $this->hasMany(Cuenta::class,'rol_id','cuenta_id');
     }
 }
