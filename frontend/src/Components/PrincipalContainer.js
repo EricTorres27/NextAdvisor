@@ -23,6 +23,9 @@ import Tarifa from './Tarifa';
 import EditarPerfil from '../Views/EditarPerfil';
 import { BrowserRouter as Router, Route, Redirect  } from 'react-router-dom';
 import HistorialAsesoria from '../Views/HistorialAsesoria';
+import EditarPerfil from './EditarPerfil';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import ConsultAdvisory from './ConsultAdvisory';
 import ConsultTopic from './ConsultTopic';
 import Reports from './Reports';
 import AdminProfile from './AdminProfile';
@@ -37,8 +40,9 @@ import EditarUsuario from '../Views/EditarUsuario';
 import EditarMateria from '../Views/EditarMateria';
 import EditarAsesoria from '../Views/EditarAsesoria';
 import EditarPregunta from '../Views/EditarPregunta';
-import Home from '../Views/Home';
-import ConsultarPerfil from '../Views/ConsultarPerfil';
+import Cookies from 'js-cookie';
+import logo from '../img/main logo-dark.png';
+
 const styles = makeStyles(theme => ({
     root: {
         display: 'flex'
@@ -46,8 +50,13 @@ const styles = makeStyles(theme => ({
     toolbar: theme.mixins.toolbar,
     content: {
         flexGrow: 1,
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: '#133C55',
+        backgroundImage: logo,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
         padding: theme.spacing(3),
+        height: 1000,
     },
 }))
 
@@ -60,8 +69,8 @@ const PrincipalContainer = () => {
     }
 
 
-    const role = "advisor"
-    if (role == "advisor") {
+    const role = localStorage.getItem("rol");
+    if (role == "asesor") {
         return (
             <Router>
                 <div className={classes.root}>
@@ -79,15 +88,14 @@ const PrincipalContainer = () => {
                             onClose={openAction}
                         />
                     </Hidden>
-                    <div className={classes.content} style={{ backgroundColor: '#133C55' }}>
+                    <div className={classes.content}>
                         <div className={classes.toolbar}></div>
                         <Route exact path="/Homepage"
                             render={() => {
                                 return (
-                                    <Redirect to="/Inicio"/>
+                                    <Redirect to="/Inicio" />
                                 )
                             }} />
-                        <Route exact path="/Inicio" component={Home} />
                         <Route exact path="/Registro" component={Registro} />
                         <Route exact path="/ConsultUser" component={ConsultUser} />
                         <Route exact path="/RegistrarAsesoria" component={RegistrarAsesoria} />
@@ -111,11 +119,11 @@ const PrincipalContainer = () => {
         )
     }
 
-    if (role == "admin") {
+    if (role == "administrador") {
         return (
             <Router>
                 <div className={classes.root}>
-                    <NavBarAdmin openAction={openAction} />
+                    <Navbar openAction={openAction} />
                     <Hidden xsDown>
                         <DrawerBox
                             variant="permanent"
@@ -129,15 +137,14 @@ const PrincipalContainer = () => {
                             onClose={openAction}
                         />
                     </Hidden>
-                    <div className={classes.content} style={{ backgroundColor: '#133C55' }}>
+                    <div className={classes.content}>
                         <div className={classes.toolbar}></div>
                         <Route exact path="/Homepage"
                             render={() => {
                                 return (
-                                    <Redirect to="/Inicio"/>
+                                    <Redirect to="/Inicio" />
                                 )
                             }} />
-                        <Route exact path="/Inicio" component={Home} />
                         <Route exact path="/Registro" component={Registro} />
                         <Route exact path="/AdminProfile" component={AdminProfile} />
                         <Route exact path="/ConsultarUsuario" component={ConsultarUsuario} />
@@ -165,11 +172,11 @@ const PrincipalContainer = () => {
 
         )
     }
-    if (role == "student") {
+    if (role == "estudiante") {
         return (
             <Router>
                 <div className={classes.root}>
-                    <NavBarStudent openAction={openAction} />
+                    <Navbar openAction={openAction} />
                     <Hidden xsDown>
                         <DrawerBox
                             variant="permanent"
@@ -183,20 +190,11 @@ const PrincipalContainer = () => {
                             onClose={openAction}
                         />
                     </Hidden>
-                    <div className={classes.content} style={{ backgroundColor: '#133C55' }}>
+                    <div className={classes.content}>
                         <div className={classes.toolbar}></div>
-                        <Route exact path="/Homepage"
-                            render={() => {
-                                return (
-                                    <Redirect to="/Inicio"/>
-                                )
-                            }} />
-                        <Route exact path="/Inicio" component={Home} />
                         <Route exact path="/Registro" component={Registro} />
-                        <Route exact path="/ConsultarUsuario" component={ConsultUser} />
                         <Route exact path="/RegistrarAsesoria" component={RegistrarAsesoria} />
                         <Route exact path="/Materias" component={subjects} />
-                        <Route exact path="/RegistrarMateria" component={RegistrarMateria} />
                         <Route exact path="/Perfil" component={Perfil} />
                         <Route exact path="/EditarPerfil" component={EditarPerfil} />
                         <Route exact path="/ConsultarPerfil" component={ConsultarPerfil} />
@@ -206,7 +204,6 @@ const PrincipalContainer = () => {
 
         )
     }
-
 }
 
 export default PrincipalContainer

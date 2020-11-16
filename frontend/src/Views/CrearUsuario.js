@@ -7,6 +7,7 @@ import Controls from '../Components/controls/Controls';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { Redirect } from 'react-router-dom';
+import API from '../apis/api';
 
 const initialValues = {
     cuenta_nombre: '',
@@ -15,8 +16,8 @@ const initialValues = {
     cuenta_genero: '',
     cuenta_correo: '',
     cuenta_nombre_usuario: '',
-    contraseña: '',
-    contraseñaConfirmar: '',
+    password: '',
+    passwordConfirmar: '',
     cuenta_telefono: '',
     estudiante_semestre: '',
     estudiante_carrera: '',
@@ -45,10 +46,10 @@ export const CrearUsuario = () => {
             temp.cuenta_telefono = fieldValues.cuenta_telefono.length == 10 ? "" : "Se requieren 10 digitos."
         if ('cuenta_genero' in fieldValues)
             temp.cuenta_genero = fieldValues.cuenta_genero.length != 0 ? "" : "Esta campo es requerido"
-        if ('contraseña' in fieldValues)
-            temp.contraseña = fieldValues.contraseña.length > 6 ? "" : "La contraseña debe ser mayor 6 caracteres"
-        if ('contraseñaConfirmar' in fieldValues)
-            temp.contraseñaConfirmar = fieldValues.contraseñaConfirmar.length > 0 && values.contraseña === fieldValues.contraseñaConfirmar ? "" : "La contraseña debe ser la misma"
+        if ('password' in fieldValues)
+            temp.password = fieldValues.password.length > 6 ? "" : "La contraseña debe ser mayor 6 caracteres"
+        if ('passwordConfirmar' in fieldValues)
+            temp.passwordConfirmar = fieldValues.passwordConfirmar.length > 0 && values.password === fieldValues.passwordConfirmar ? "" : "La contraseña debe ser la misma"
         if ('rol_id' in fieldValues)
             temp.rol_id = fieldValues.rol_id.length != 0 ? "" : "Esta campo es requerido"
         if ('cuenta_nombre_usuario' in fieldValues)
@@ -84,11 +85,11 @@ export const CrearUsuario = () => {
 
     const peticionPost = async () => {
         try {
-            const response = await axios.post('http://localhost:8000/api/cuenta/crearEstudiante',
+            const response = await API.post('cuenta/crearEstudiante',
                 {
                     "cuenta_nombre_usuario": values.cuenta_nombre_usuario,
                     "cuenta_correo": values.cuenta_correo,
-                    "contraseña": values.contraseña,
+                    "password": values.password,
                     "cuenta_telefono": values.cuenta_telefono,
                     "cuenta_nombre": values.cuenta_nombre,
                     "cuenta_apellido_paterno": values.cuenta_apellido_paterno,
@@ -97,10 +98,10 @@ export const CrearUsuario = () => {
                     "estudiante_semestre": values.estudiante_semestre,
                     "estudiante_carrera": values.estudiante_carrera,
                     "estudiante_calificacion": 0,
-                    "asesor_calificacion": 0,
                     "rol_id": values.rol_id
-                }
+                },{ headers: { "Authorization": "Bearer " + localStorage.token } }
             )
+            console.log(response.data);
             if (response.data.flag == 1) {
                 swal({
                     title: "El usuario se ha creado con éxito",
@@ -247,22 +248,22 @@ export const CrearUsuario = () => {
                                 </Box>
                                 <Box mb={2} mr={2} ml={2}>
                                     <Controls.Input
-                                        name="contraseña"
+                                        name="password"
                                         label="Contraseña"
-                                        value={values.contraseña}
+                                        value={values.password}
                                         onChange={handleInputChange}
                                         type={values.showPassword ? 'text' : 'password'}
-                                        error={errors.contraseña}
+                                        error={errors.password}
                                     />
                                 </Box>
                                 <Box mb={2} mr={2} ml={2}>
                                     <Controls.Input
-                                        name="contraseñaConfirmar"
+                                        name="passwordConfirmar"
                                         label="Confrimar contraseña"
-                                        value={values.contraseñaConfirmar}
+                                        value={values.passwordConfirmar}
                                         onChange={handleInputChange}
                                         type={values.showPassword ? 'text' : 'password'}
-                                        error={errors.contraseñaConfirmar}
+                                        error={errors.passwordConfirmar}
                                     />
                                 </Box>
 

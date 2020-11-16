@@ -6,6 +6,8 @@ import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
 import swal from 'sweetalert';
 import axios from 'axios';
+import jwt_decode from "jwt-decode";
+import API from '../apis/api';
 
 
 const initialValues = {
@@ -15,8 +17,8 @@ const initialValues = {
     cuenta_genero: '',
     cuenta_correo: '',
     cuenta_nombre_usuario: '',
-    contraseña: '',
-    contraseñaConfirmar: '',
+    password: '',
+    passwordConfirmar: '',
     cuenta_telefono: '',
     administrador_ocupacion: '',
 }
@@ -43,10 +45,10 @@ export const CrearAdministrador = () => {
             temp.cuenta_telefono = fieldValues.cuenta_telefono.length == 10 ? "" : "Se requieren 10 digitos."
         if ('cuenta_genero' in fieldValues)
             temp.cuenta_genero = fieldValues.cuenta_genero.length != 0 ? "" : "Esta campo es requerido"
-        if ('contraseña' in fieldValues)
-            temp.contraseña = fieldValues.contraseña.length > 6 ? "" : "La contraseña debe ser mayor 6 caracteres"
-        if ('contraseñaConfirmar' in fieldValues)
-            temp.contraseñaConfirmar = fieldValues.contraseñaConfirmar.length > 0 && values.contraseña === fieldValues.contraseñaConfirmar ? "" : "La contraseña debe ser la misma"
+        if ('password' in fieldValues)
+            temp.password = fieldValues.password.length > 6 ? "" : "La contraseña debe ser mayor 6 caracteres"
+        if ('passwordConfirmar' in fieldValues)
+            temp.passwordConfirmar = fieldValues.passwordConfirmar.length > 0 && values.password === fieldValues.passwordConfirmar ? "" : "La contraseña debe ser la misma"
         if ('cuenta_nombre_usuario' in fieldValues)
             temp.cuenta_nombre_usuario = fieldValues.cuenta_nombre_usuario ? "" : "Esta campo es requerido"
         if ('administrador_ocupacion' in fieldValues)
@@ -75,69 +77,82 @@ export const CrearAdministrador = () => {
     } = useForm(initialValues, true, validate);
 
     const peticionPost = async () => {
-        try {
-            const response = await axios.post('http://localhost:8000/api/cuenta/crearAdministrador',
-                {
-                    "cuenta_nombre_usuario": values.cuenta_nombre_usuario,
-                    "cuenta_correo": values.cuenta_correo,
-                    "contraseña": values.contraseña,
-                    "cuenta_telefono": values.cuenta_telefono,
-                    "cuenta_nombre": values.cuenta_nombre,
-                    "cuenta_apellido_paterno": values.cuenta_apellido_paterno,
-                    "cuenta_apellido_materno": values.cuenta_apellido_materno,
-                    "cuenta_genero":values.cuenta_genero,
-                    "administrador_ocupacion": values.administrador_ocupacion,
+        if (revisarToken) {
+            try {
+                const response = await API.post('cuenta/crearAdministrador',
+                    {
+                        "cuenta_nombre_usuario": values.cuenta_nombre_usuario,
+                        "cuenta_correo": values.cuenta_correo,
+                        "password": values.password,
+                        "cuenta_telefono": values.cuenta_telefono,
+                        "cuenta_nombre": values.cuenta_nombre,
+                        "cuenta_apellido_paterno": values.cuenta_apellido_paterno,
+                        "cuenta_apellido_materno": values.cuenta_apellido_materno,
+                        "cuenta_genero": values.cuenta_genero,
+                        "administrador_ocupacion": values.administrador_ocupacion,
+                        "rol_id": 3
+                    }, { headers: { "Authorization": "Bearer " + localStorage.token } }
+                )
+                if (response.data.flag == 1) {
+                    swal({
+                        title: "El usuario se ha creado con éxito",
+                        icon: "success"
+                    }).then(respuesta => {
+                        window.location.href = "http://localhost:3000/ConsultarUsuario";
+                    })
+                } else {
+                    swal({
+                        title: response.data.message,
+                        text: "Cambie la información solicitada",
+                        icon: "info"
+                    })
                 }
-            )
-            if (response.data.flag == 1) {
-                swal({
-                    title: "El usuario se ha creado con éxito",
-                    icon: "success"
-                }).then(respuesta => {
-                    window.location.href = "http://localhost:3000/ConsultarUsuario";
-                })
-            } else {
-                swal({
-                    title: response.data.message,
-                    text: "Cambie la información solicitada",
-                    icon: "info"
-                })
-            }
 
-        } catch (error) {
-            // Error 😨
-            if (error.response) {
-                /*
-                 * The request was made and the server responded with a
-                 * status code that falls out of the range of 2xx
-                 */
-                swal({
-                    title: "Error: " + error.response.status,
-                    text: "Verifique la información y vuelvalo a intentar",
-                    icon: "error"
-                })
-            } else if (error.request) {
-                /*
-                 * The request was made but no response was received, `error.request`
-                 * is an instance of XMLHttpRequest in the browser and an instance
-                 * of http.ClientRequest in Node.js
-                 */
-                swal({
-                    title: "Error",
-                    text: "No hubo respuesta intentelo mas tarde",
-                    icon: "error"
-                })
-            } else {
-                // Something happened in setting up the request and triggered an Error
-                swal({
-                    title: "Error",
-                    text: "No hubo respuesta intentelo mas tarde",
-                    icon: "error"
-                })
-            }
-            console.log(error);
+            } catch (error) {
+                // Error 😨
+                if (error.response) {
+                    /*
+                     * The request was made and the server responded with a
+                     * status code that falls out of the range of 2xx
+                     */
+                    swal({
+                        title: "Error: " + error.response.status,
+                        text: "Verifique la información y vuelvalo a intentar",
+                        icon: "error"
+                    })
+                } else if (error.request) {
+                    /*
+                     * The request was made but no response was received, `error.request`
+                     * is an instance of XMLHttpRequest in the browser and an instance
+                     * of http.ClientRequest in Node.js
+                     */
+                    swal({
+                        title: "Error",
+                        text: "No hubo respuesta intentelo mas tarde",
+                        icon: "error"
+                    })
+                } else {
+                    // Something happened in setting up the request and triggered an Error
+                    swal({
+                        title: "Error",
+                        text: "No hubo respuesta intentelo mas tarde",
+                        icon: "error"
+                    })
+                }
+                console.log(error);
 
+            }
+        } else {
+            swal({
+                title: "Sesión expirada",
+                text: "Devolviendo a la pantalla de inicio",
+                icon: "info"
+            }).then(respuesta => {
+                localStorage.clear();
+                window.location.href = "http://localhost:3000";
+            })
         }
+
     }
 
     const confirmacion = () => {
@@ -150,6 +165,18 @@ export const CrearAdministrador = () => {
                 peticionPost();
             }
         })
+    }
+    const revisarToken = () => {
+        let time = Date.now()
+        time = time / 1000;
+        time = Math.trunc(time);
+        let timeToken = jwt_decode(localStorage.token);
+        let timeLeft = timeToken.exp - time
+        if (timeLeft > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     return (
@@ -238,22 +265,22 @@ export const CrearAdministrador = () => {
                                 </Box>
                                 <Box mb={2} mr={2} ml={2}>
                                     <Controls.Input
-                                        name="contraseña"
+                                        name="password"
                                         label="Contraseña"
-                                        value={values.contraseña}
+                                        value={values.password}
                                         onChange={handleInputChange}
                                         type={values.showPassword ? 'text' : 'password'}
-                                        error={errors.contraseña}
+                                        error={errors.password}
                                     />
                                 </Box>
                                 <Box mb={2} mr={2} ml={2}>
                                     <Controls.Input
-                                        name="contraseñaConfirmar"
+                                        name="passwordConfirmar"
                                         label="Confrimar contraseña"
-                                        value={values.contraseñaConfirmar}
+                                        value={values.passwordConfirmar}
                                         onChange={handleInputChange}
                                         type={values.showPassword ? 'text' : 'password'}
-                                        error={errors.contraseñaConfirmar}
+                                        error={errors.passwordConfirmar}
                                     />
                                 </Box>
                             </Grid>

@@ -19,6 +19,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
+import API from '../apis/api';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -145,7 +146,7 @@ const ConsultarUsuario = () => {
     }
     const peticionDelete = async (cuentaId) => {
         try {
-            const response = await axios.delete('http://localhost:8000/api/cuenta/eliminarUsuario/'+cuentaId,)
+            const response = await API.delete('cuenta/eliminarUsuario/'+cuentaId,)
             if (response.data.flag == 1) {
                 swal({
                     title: "El usuario se ha eliminado con éxito",
