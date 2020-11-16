@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Typography, Paper, Button,Card, CardContent,CardMedia, Container, Box,TextField } from '@material-ui/core';
+import { Grid, makeStyles,Typography, Paper, Button,Card, CardContent,CardMedia, Container, Box,TextField } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
@@ -24,6 +24,9 @@ const styles = {
 
 
 export const RegistrarMateria = () => {
+
+    const classes = styles()
+    const [data, setData] = useState([]);
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }

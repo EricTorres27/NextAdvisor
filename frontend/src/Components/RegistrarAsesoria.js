@@ -8,7 +8,7 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import { FormControl, InputLabel, MenuItem, Select as MuiSelect } from '@material-ui/core';
 
-
+let s;
 
 
 
@@ -19,13 +19,13 @@ const initialValues = {
    estudiante_id: ''
 }
 
-const styles = {
+const styles = makeStyles(theme =>({
     Paper: { height: 500, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
-}
+}))
 
 
 export const RegistrarAsesoria = () => {
-
+    const classes = styles()
     const [materia_id, setMateria] = useState([]);
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -61,6 +61,7 @@ export const RegistrarAsesoria = () => {
             confirmacion();
 
     }
+   
 
     const baseURL = "http://localhost:8000/api/asesoria";
 
@@ -126,12 +127,16 @@ export const RegistrarAsesoria = () => {
 
         }
     }
+    const base = "http://localhost:8000/api/";
+
     const peticionGetMateria = async () => {
-        await axios.get(baseURL + 'materia/getMateria')
+         axios.get(base + 'materia/getMateria')
             .then(response => {
                 setMateria(response.data);
             })
     }
+
+
     const confirmacion = () => {
         swal({
             title: "¿Seguro que desea registrar la asesoría?",
@@ -194,7 +199,20 @@ export const RegistrarAsesoria = () => {
                                 />
                             </Grid>
 
-                           
+                            <Grid item xs={12} sm={3}>
+                            <FormControl variant="outlined" className={classes.selects}>
+                                <InputLabel>Materia</InputLabel>
+                                <MuiSelect
+                                    name="materia"
+                                    value={materia_id.materia_id}
+                                    onChange={handleInputChange}>
+                                      <MenuItem value=''>Ninguno</MenuItem>
+                                    {materia_id.map((materia_id) => (
+                                        <MenuItem key={materia_id.materia_id} value={materia_id.materia_nombre}>{materia_id.materia_nombre}</MenuItem>
+                                    ))}
+                                </MuiSelect>
+                            </FormControl>
+                        </Grid>  
 
                         </Grid>
                         <Grid container spacing={1}>

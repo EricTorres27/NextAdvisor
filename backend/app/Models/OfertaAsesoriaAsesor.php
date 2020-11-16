@@ -11,8 +11,8 @@ use App\Models\Materia;
 class OfertaAsesoriaAsesor extends Model
 {
 
-    protected $table = 'oferta_asesoria';
-    protected $primaryKey  = 'oferta_id';
+    public $table = 'oferta_asesoria';
+    public $primaryKey  = 'oferta_id';
 
     use HasFactory;
 
