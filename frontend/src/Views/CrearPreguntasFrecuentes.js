@@ -6,6 +6,7 @@ import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
 import swal from 'sweetalert';
 import axios from 'axios';
+import API from '../apis/api';
 
 const initialValues = {
     administrador_id: '1',
@@ -48,7 +49,7 @@ const CrearPreguntasFrecuentes = () => {
 
     const peticionPost = async () => {
         try {
-            const response = await axios.post('http://localhost:8000/api/pregunta',
+            const response = await API.post('pregunta',
                 {
                     "pregunta_pregunta": values.pregunta_pregunta,
                     "pregunta_respuesta": values.pregunta_respuesta,

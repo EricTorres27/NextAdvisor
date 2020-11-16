@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react';
 import { Box, Grid, Typography, Paper, Container, TextField, Button } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
-import axios from 'axios';
 import swal from 'sweetalert';
-import { Redirect } from 'react-router-dom';
-import API from '../apis/api';
+import axios from 'axios';
 
+/*
+            <Typography>{match.params.cuentaId}</Typography>
+
+*/
+const styles = {
+    Paper: { height: 550, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
+}
 const initialValues = {
     cuenta_nombre: '',
     cuenta_apellido_paterno: '',
@@ -16,22 +21,15 @@ const initialValues = {
     cuenta_genero: '',
     cuenta_correo: '',
     cuenta_nombre_usuario: '',
-    password: '',
-    passwordConfirmar: '',
+    contraseña: '',
+    contraseñaConfirmar: '',
     cuenta_telefono: '',
     estudiante_semestre: '',
     estudiante_carrera: '',
-    estudiante_calificacion: '',
-    asesor_calificacion: '',
-    rol_id: ''
 }
 
-const styles = {
-    Paper: { height: 500, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
-}
-
-export const CrearUsuario = () => {
-
+const EditarPerfil = (props) => {
+    const { match } = props;
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
         if ('cuenta_nombre' in fieldValues)
@@ -46,10 +44,10 @@ export const CrearUsuario = () => {
             temp.cuenta_telefono = fieldValues.cuenta_telefono.length == 10 ? "" : "Se requieren 10 digitos."
         if ('cuenta_genero' in fieldValues)
             temp.cuenta_genero = fieldValues.cuenta_genero.length != 0 ? "" : "Esta campo es requerido"
-        if ('password' in fieldValues)
-            temp.password = fieldValues.password.length > 6 ? "" : "La contraseña debe ser mayor 6 caracteres"
-        if ('passwordConfirmar' in fieldValues)
-            temp.passwordConfirmar = fieldValues.passwordConfirmar.length > 0 && values.password === fieldValues.passwordConfirmar ? "" : "La contraseña debe ser la misma"
+        if ('contraseña' in fieldValues)
+            temp.contraseña = fieldValues.contraseña.length > 6 ? "" : "La contraseña debe ser mayor 6 caracteres"
+        if ('contraseñaConfirmar' in fieldValues)
+            temp.contraseñaConfirmar = fieldValues.contraseñaConfirmar.length > 0 && values.contraseña === fieldValues.contraseñaConfirmar ? "" : "La contraseña debe ser la misma"
         if ('rol_id' in fieldValues)
             temp.rol_id = fieldValues.rol_id.length != 0 ? "" : "Esta campo es requerido"
         if ('cuenta_nombre_usuario' in fieldValues)
@@ -63,9 +61,7 @@ export const CrearUsuario = () => {
         })
         if (fieldValues == values)
             return Object.values(temp).every(x => x == "")
-
     }
-
     const {
         values,
         setValues,
@@ -81,76 +77,6 @@ export const CrearUsuario = () => {
             confirmacion();
     }
 
-    const baseURL = "http://localhost:8000/api/cuenta";
-
-    const peticionPost = async () => {
-        try {
-            const response = await API.post('cuenta/crearEstudiante',
-                {
-                    "cuenta_nombre_usuario": values.cuenta_nombre_usuario,
-                    "cuenta_correo": values.cuenta_correo,
-                    "password": values.password,
-                    "cuenta_telefono": values.cuenta_telefono,
-                    "cuenta_nombre": values.cuenta_nombre,
-                    "cuenta_apellido_paterno": values.cuenta_apellido_paterno,
-                    "cuenta_apellido_materno": values.cuenta_apellido_materno,
-                    "cuenta_genero":values.cuenta_genero,
-                    "estudiante_semestre": values.estudiante_semestre,
-                    "estudiante_carrera": values.estudiante_carrera,
-                    "estudiante_calificacion": 0,
-                    "rol_id": values.rol_id
-                },{ headers: { "Authorization": "Bearer " + localStorage.token } }
-            )
-            console.log(response.data);
-            if (response.data.flag == 1) {
-                swal({
-                    title: "El usuario se ha creado con éxito",
-                    icon: "success"
-                }).then(respuesta => {
-                    window.location.href = "http://localhost:3000/ConsultarUsuario";
-                })
-            } else {
-                swal({
-                    title: response.data.message,
-                    text: "Cambie la información solicitada",
-                    icon: "info"
-                })
-            }
-
-        } catch (error) {
-            // Error 😨
-            if (error.response) {
-                /*
-                 * The request was made and the server responded with a
-                 * status code that falls out of the range of 2xx
-                 */
-                swal({
-                    title: "Error: " + error.response.status,
-                    text: "Verifique la información y vuelvalo a intentar",
-                    icon: "error"
-                })
-            } else if (error.request) {
-                /*
-                 * The request was made but no response was received, `error.request`
-                 * is an instance of XMLHttpRequest in the browser and an instance
-                 * of http.ClientRequest in Node.js
-                 */
-                swal({
-                    title: "Error",
-                    text: "No hubo respuesta intentelo mas tarde",
-                    icon: "error"
-                })
-            } else {
-                // Something happened in setting up the request and triggered an Error
-                swal({
-                    title: "Error",
-                    text: "No hubo respuesta intentelo mas tarde",
-                    icon: "error"
-                })
-            }
-        }
-    }
-
     const confirmacion = () => {
         swal({
             title: "¿Seguro que desea registrar al usuario?",
@@ -158,17 +84,30 @@ export const CrearUsuario = () => {
             buttons: ["No", "Si"]
         }).then(respuesta => {
             if (respuesta) {
-                peticionPost();
+                //peticionPost();
             }
         })
     }
+    // const baseURL = "http://localhost:8000/api/cuenta/";
+
+    const peticionGet = async () => {
+        try {
+            await axios.get(baseURL)
+            .then(response => {
+                setValues(response.data);
+            })
+        } catch (error) {
+
+        }
+    }
+
     return (
         <div style={{ height: "650px" }}>
             <Box color="primary.contrastText" mb={1}>
-                <Typography color="white" align="center" variant="h3">Crear nuevo usuario</Typography>
+                <Typography color="white" align="center" variant="h3">Editar perfil</Typography>
             </Box>
             <Paper elevation={3} style={styles.Paper}>
-                <Link to="/ConsultUser">
+                <Link to="/ConsultarPerfil">
                     <ArrowBackIcon button fontSize="large" />
                 </Link>
                 <Box mt={5} ml={5}>
@@ -210,7 +149,7 @@ export const CrearUsuario = () => {
                                 <Box mb={2} mr={2} ml={2}>
                                     <Controls.Select
                                         name="cuenta_genero"
-                                        label="Genero"
+                                        label="Género"
                                         value={values.cuenta_genero}
                                         onChange={handleInputChange}
                                         error={errors.cuenta_genero}
@@ -219,7 +158,7 @@ export const CrearUsuario = () => {
                                 <Box mb={2} mr={2} ml={2}>
                                     <Controls.Input
                                         name="cuenta_telefono"
-                                        label="Telefono(10 digitos)"
+                                        label="Telefono (10 digitos)"
                                         value={values.cuenta_telefono}
                                         onChange={handleInputChange}
                                         error={errors.cuenta_telefono}
@@ -236,6 +175,9 @@ export const CrearUsuario = () => {
                                     />
                                 </Box>
                             </Grid>
+                            <Box ml={3} mb={2}>
+                                <Typography variant="h5">Datos de la cuenta</Typography>
+                            </Box>
                             <Grid item xs={12} sm={12}>
                                 <Box mb={2} mr={2} ml={2}>
                                     <Controls.Input
@@ -248,22 +190,22 @@ export const CrearUsuario = () => {
                                 </Box>
                                 <Box mb={2} mr={2} ml={2}>
                                     <Controls.Input
-                                        name="password"
+                                        name="contraseña"
                                         label="Contraseña"
-                                        value={values.password}
+                                        value={values.contraseña}
                                         onChange={handleInputChange}
                                         type={values.showPassword ? 'text' : 'password'}
-                                        error={errors.password}
+                                        error={errors.contraseña}
                                     />
                                 </Box>
                                 <Box mb={2} mr={2} ml={2}>
                                     <Controls.Input
-                                        name="passwordConfirmar"
-                                        label="Confrimar contraseña"
-                                        value={values.passwordConfirmar}
+                                        name="contraseñaConfirmar"
+                                        label="Confirmar contraseña"
+                                        value={values.contraseñaConfirmar}
                                         onChange={handleInputChange}
                                         type={values.showPassword ? 'text' : 'password'}
-                                        error={errors.passwordConfirmar}
+                                        error={errors.contraseñaConfirmar}
                                     />
                                 </Box>
 
@@ -271,7 +213,7 @@ export const CrearUsuario = () => {
 
                         </Grid>
                         <Box ml={3} mb={2}>
-                            <Typography variant="h5">Datos academicos</Typography>
+                            <Typography variant="h5">Datos académicos</Typography>
                         </Box>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={6}>
@@ -284,6 +226,8 @@ export const CrearUsuario = () => {
                                         error={errors.estudiante_carrera}
                                     />
                                 </Box>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
                                 <Box mb={2} mr={2} ml={2}>
                                     <Controls.Input
                                         name="estudiante_semestre"
@@ -295,16 +239,7 @@ export const CrearUsuario = () => {
                                         error={errors.estudiante_semestre}
                                     />
                                 </Box>
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <Controls.SelectRol
-                                    name="rol_id"
-                                    label="Rol"
-                                    value={values.rol_id}
-                                    onChange={handleInputChange}
-                                    error={errors.rol_id}
-                                />
-                            </Grid>
+                          </Grid>
                         </Grid>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={12}>
@@ -329,3 +264,5 @@ export const CrearUsuario = () => {
         </div>
     )
 }
+
+export default EditarPerfil

@@ -21,10 +21,10 @@ import {
 } from '@material-ui/core'
 
 
-const role="advisor"
+const role = localStorage.getItem("rol");
 const UserLists = () => {
 
-    if (role=="student") {
+    if (role=="estudiante") {
         return (
             <div>
 
@@ -34,7 +34,7 @@ const UserLists = () => {
                         <ListItemIcon>
                             <AccountCircleIcon color="primary" fontSize="large" />
                         </ListItemIcon>
-                        <Link to="">
+                        <Link to="/ConsultarPerfil">
                             <ListItemText primary='Mi perfil' />
                         </Link>
                     </ListItem>
@@ -51,6 +51,7 @@ const UserLists = () => {
         )
     }
 
+<<<<<<< HEAD
     if (role=="advisor") {
         return (
             <div>
@@ -60,7 +61,7 @@ const UserLists = () => {
                         <ListItemIcon>
                             <AccountCircleIcon color="primary" fontSize="large" />
                         </ListItemIcon>
-                        <Link to="">
+                        <Link to="/ConsultarPerfil">
                             <ListItemText primary='Mi perfil' />
                         </Link>
                     </ListItem>
@@ -115,11 +116,14 @@ const UserLists = () => {
     }
 
     if (role=="admin") {
+=======
+    if (role=="administrador") {
+>>>>>>> Eric/AuthJWT
         return (
             <div>
 
                 <List component='nav'>
-                    <Link to="/AdminProfile" style={{ textDecoration: 'none' }} >
+                    <Link to="/ConsultarPerfil" style={{ textDecoration: 'none' }} >
                         <ListItem button>
                             <ListItemIcon >
                                 <AccountCircleIcon color="primary" fontSize="large" />
@@ -178,6 +182,71 @@ const UserLists = () => {
         )
     }
 
+<<<<<<< HEAD
+=======
+    if (role=="asesor") {
+        return (
+            <div>
+
+                <List component='nav'>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AccountCircleIcon color="primary" fontSize="large" />
+                        </ListItemIcon>
+                        <Link to="">
+                            <ListItemText primary='Mi perfil' />
+                        </Link>
+                    </ListItem>
+                    <Divider />
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AssignmentIcon color="primary" fontSize="large" />
+                        </ListItemIcon>
+                        <Link to="Materias">
+                            <ListItemText primary='Materias' />
+                        </Link>
+                    </ListItem>
+                    <Divider />
+                    <ListItem button>
+                        <ListItemIcon>
+                            <EventIcon color="primary" fontSize="large" />
+                        </ListItemIcon>
+                        <Link to="MisAsesorias">
+                            <ListItemText primary='Asesorías' />
+                        </Link>
+                    </ListItem>
+                    <Divider />
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AttachMoneyIcon color="primary" fontSize="large" />
+                        </ListItemIcon>
+                        <Link to="Tarifa">
+                            <ListItemText primary='Tarifa' />
+                        </Link>
+                    </ListItem>
+                    <Divider />
+                    <ListItem button>
+                        <ListItemIcon>
+                            <CreditCardIcon color="primary" fontSize="large" />
+                        </ListItemIcon>
+                        <Link to="MetodoPago">
+                            <ListItemText primary='Método de pago' />
+                        </Link>
+                    </ListItem>
+                    <Divider />
+                    <ListItem button>
+                        <ListItemIcon>
+                            <GradeIcon color="primary" fontSize="large" />
+                        </ListItemIcon>
+                        <Link to="">
+                            <ListItemText primary='Evaluación' />
+                        </Link>
+                    </ListItem>
+                </List>
+            </div>
+        )
+    }
+>>>>>>> Eric/AuthJWT
 
 }
 

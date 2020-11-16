@@ -6,6 +6,7 @@ import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
 import swal from 'sweetalert';
 import axios from 'axios';
+import API from '../apis/api';
 
 const initialValues = {
     administrador_id: '',
@@ -61,9 +62,8 @@ const EditarPregunta = (props) => {
         resetForm
     } = useForm(initialValues, true, validate);
 
-    const baseURL = "http://localhost:8000/api/pregunta";
     const peticionGet = async () => {
-        await axios.get(baseURL+'/'+match.params.preguntaId)
+        await API.get('pregunta/'+match.params.preguntaId)
             .then(response => {
                 setValues(response.data);
                 initialValues.administrador_id=response.data.administrador_id;
@@ -75,7 +75,7 @@ const EditarPregunta = (props) => {
 
     const peticionPut = async () => {
         try {
-            const response = await axios.put('http://localhost:8000/api/pregunta/'+values.pregunta_id,
+            const response = await API.put('pregunta/'+values.pregunta_id,
                 {
                     "pregunta_pregunta": values.pregunta_pregunta,
                     "pregunta_respuesta": values.pregunta_respuesta,
