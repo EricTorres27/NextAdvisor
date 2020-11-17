@@ -36,7 +36,7 @@ const ConsultarPerfil = (props) => {
         setValues
     } = useForm(initialValues);
 
-    // const baseURL = "http://localhost:8000/api/cuenta/";
+     const baseURL = "http://localhost:8000/api/cuenta/";
 
     const peticionGet = async () => {
         try {

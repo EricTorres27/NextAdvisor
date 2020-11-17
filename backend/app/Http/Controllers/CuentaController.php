@@ -223,44 +223,4 @@ class CuentaController extends Controller
     {
         return Cuenta::where('cuenta_nombre_usuario', $request->cuenta_nombre_usuario)->exists();
     }
-<<<<<<< HEAD
-
-    // ------------ [ User Login ] -------------------
-    public function cuentaLogin(Request $request) {
-
-        $validator=Validator::make($request->all(),
-            [
-                "cuenta_correo" =>"required|email",
-                "password"=>"required"
-            ]
-        );
-        if($validator->fails()) {
-            return response()->json(["status" => "failed", "validation_error" => $validator->errors()]);
-        }
-
-        $email_status=Cuenta::where("cuenta_correo",$request->input('cuenta_correo'))->first();
-        if(!is_null($email_status)) {
-            if (Auth::attempt(['cuenta_correo' =>$request->input('cuenta_correo') , 'password' => $request->input('password')])) {
-                $user=$this->userDetail($request->input('cuenta_correo'));
-                return response()->json(["status" => $this->status_code, "success" => true, "message" => "You have logged in successfully", "data" => $user]);
-            }
-            else{
-                return response();
-            }
-        }
-        else{
-            return response()->json(["status" => "failed", "success" => false, "message" => "Unable to login. Email doesn't exist."]);
-        }
-    }
-
-    public function userDetail($email) {
-        $user=array();
-        if($email != "") {
-            $user=Cuenta::where("cuenta_correo",$email)->first();
-            return $user;
-        }
-    }
-
-=======
->>>>>>> Eric/AuthJWT
 }

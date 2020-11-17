@@ -51,74 +51,7 @@ const UserLists = () => {
         )
     }
 
-<<<<<<< HEAD
-    if (role=="advisor") {
-        return (
-            <div>
-
-                <List component='nav'>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <AccountCircleIcon color="primary" fontSize="large" />
-                        </ListItemIcon>
-                        <Link to="/ConsultarPerfil">
-                            <ListItemText primary='Mi perfil' />
-                        </Link>
-                    </ListItem>
-                    <Divider />
-                    <ListItem button>
-                        <ListItemIcon>
-                            <AssignmentIcon color="primary" fontSize="large" />
-                        </ListItemIcon>
-                        <Link to="Materias">
-                            <ListItemText primary='Materias' />
-                        </Link>
-                    </ListItem>
-                    <Divider />
-                    <ListItem button>
-                        <ListItemIcon>
-                            <EventIcon color="primary" fontSize="large" />
-                        </ListItemIcon>
-                        <Link to="/MisAsesorias">
-                            <ListItemText primary='Asesorías' />
-                        </Link>
-                    </ListItem>
-                    <Divider />
-                    <ListItem button>
-                        <ListItemIcon>
-                            <AttachMoneyIcon color="primary" fontSize="large" />
-                        </ListItemIcon>
-                        <Link to="Tarifa">
-                            <ListItemText primary='Tarifa' />
-                        </Link>
-                    </ListItem>
-                    <Divider />
-                    <ListItem button>
-                        <ListItemIcon>
-                            <CreditCardIcon color="primary" fontSize="large" />
-                        </ListItemIcon>
-                        <Link to="MetodoPago">
-                            <ListItemText primary='Método de pago' />
-                        </Link>
-                    </ListItem>
-                    <Divider />
-                    <ListItem button>
-                        <ListItemIcon>
-                            <GradeIcon color="primary" fontSize="large" />
-                        </ListItemIcon>
-                        <Link to="">
-                            <ListItemText primary='Evaluación' />
-                        </Link>
-                    </ListItem>
-                </List>
-            </div>
-        )
-    }
-
-    if (role=="admin") {
-=======
     if (role=="administrador") {
->>>>>>> Eric/AuthJWT
         return (
             <div>
 
@@ -182,8 +115,6 @@ const UserLists = () => {
         )
     }
 
-<<<<<<< HEAD
-=======
     if (role=="asesor") {
         return (
             <div>
@@ -246,7 +177,6 @@ const UserLists = () => {
             </div>
         )
     }
->>>>>>> Eric/AuthJWT
 
 }
 

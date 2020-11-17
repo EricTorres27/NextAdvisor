@@ -20,11 +20,9 @@ import Registro from './Registro';
 import subjects from './subjects';
 import Perfil from './Perfil';
 import Tarifa from './Tarifa';
-import EditarPerfil from '../Views/EditarPerfil';
+
 import { BrowserRouter as Router, Route, Redirect  } from 'react-router-dom';
 import HistorialAsesoria from '../Views/HistorialAsesoria';
-import EditarPerfil from './EditarPerfil';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import ConsultAdvisory from './ConsultAdvisory';
 import ConsultTopic from './ConsultTopic';
 import Reports from './Reports';
@@ -40,6 +38,8 @@ import EditarUsuario from '../Views/EditarUsuario';
 import EditarMateria from '../Views/EditarMateria';
 import EditarAsesoria from '../Views/EditarAsesoria';
 import EditarPregunta from '../Views/EditarPregunta';
+import EditarPerfil from '../Views/EditarPerfil';
+import ConsultarPerfil from '../Views/ConsultarPerfil';
 import Cookies from 'js-cookie';
 import logo from '../img/main logo-dark.png';
 

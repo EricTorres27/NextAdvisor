@@ -88,7 +88,7 @@ const EditarPerfil = (props) => {
             }
         })
     }
-    // const baseURL = "http://localhost:8000/api/cuenta/";
+     const baseURL = "http://localhost:8000/api/cuenta/";
 
     const peticionGet = async () => {
         try {
