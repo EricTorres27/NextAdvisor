@@ -38,11 +38,8 @@ import EditarUsuario from '../Views/EditarUsuario';
 import EditarMateria from '../Views/EditarMateria';
 import EditarAsesoria from '../Views/EditarAsesoria';
 import EditarPregunta from '../Views/EditarPregunta';
-import EditarPerfil from '../Views/EditarPerfil';
-import ConsultarPerfil from '../Views/ConsultarPerfil';
-import Cookies from 'js-cookie';
 import logo from '../img/main logo-dark.png';
-
+import ConsultarPerfil from '../Views/ConsultarPerfil'
 const styles = makeStyles(theme => ({
     root: {
         display: 'flex'
@@ -67,7 +64,6 @@ const PrincipalContainer = () => {
     const openAction = () => {
         setStateOpen(!stateOpen)
     }
-
 
     const role = localStorage.getItem("rol");
     if (role == "asesor") {
