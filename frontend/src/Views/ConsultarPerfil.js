@@ -8,7 +8,7 @@ import swal from 'sweetalert';
 import axios from 'axios';
 
 /*
-            <Typography>{match.params.cuentaId}</Typography>
+    <Typography>{match.params.cuentaId}</Typography>
 
 */
 const styles = {
@@ -36,7 +36,7 @@ const ConsultarPerfil = (props) => {
         setValues
     } = useForm(initialValues);
 
-    // const baseURL = "http://localhost:8000/api/cuenta/";
+    const baseURL = "http://localhost:8000/api/cuenta/";
 
     const peticionGet = async () => {
         try {

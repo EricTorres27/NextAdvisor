@@ -7,7 +7,6 @@ import Container from '@material-ui/core/Container';
 import logo from '../img/mainLogo.png';
 import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
-import Cookies from 'js-cookie';
 import API from '../apis/api';
 import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
@@ -88,7 +87,6 @@ export default function SignIn() {
       },
       { headers: { "Accept": "application/json" } },
     ).then(res => {
-      Cookies.set('jwt', res.data['access_token']);
       localStorage.setItem("token",res.data['access_token']);
       API.get('/auth/profile',{ headers: { "Authorization": "Bearer " + localStorage.token } })
         .then(res => {

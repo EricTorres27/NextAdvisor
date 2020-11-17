@@ -6,9 +6,8 @@ import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
 import swal from 'sweetalert';
 import axios from 'axios';
-import jwt_decode from "jwt-decode";
 import API from '../apis/api';
-
+import jwt_decode from "jwt-decode";
 
 const initialValues = {
     cuenta_nombre: '',
@@ -166,6 +165,7 @@ export const CrearAdministrador = () => {
             }
         })
     }
+
     const revisarToken = () => {
         let time = Date.now()
         time = time / 1000;
