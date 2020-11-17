@@ -139,14 +139,14 @@ const ConsultarUsuario = () => {
 
     const baseURL = "http://localhost:8000/api/cuenta/listarCuentas";
     const peticionGet = async () => {
-        await axios.get(baseURL)
+        await API.get("cuenta/listarCuentas", { headers: { "Authorization": "Bearer " + localStorage.token } })
             .then(response => {
                 setData(response.data);
             })
     }
     const peticionDelete = async (cuentaId) => {
         try {
-            const response = await API.delete('cuenta/eliminarUsuario/'+cuentaId,)
+            const response = await API.delete('cuenta/eliminarUsuario/'+cuentaId, { headers: { "Authorization": "Bearer " + localStorage.token } })
             if (response.data.flag == 1) {
                 swal({
                     title: "El usuario se ha eliminado con éxito",
