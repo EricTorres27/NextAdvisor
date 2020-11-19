@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Box, Grid, Typography, Paper, Container, TextField, Button } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
 import swal from 'sweetalert';
 import axios from 'axios';
-
+import API from '../apis/api';
 
 /*
             <Typography>{match.params.cuentaId}</Typography>
@@ -22,13 +22,12 @@ const initialValues = {
     cuenta_genero: '',
     cuenta_correo: '',
     cuenta_nombre_usuario: '',
-    contraseña: '',
-    contraseñaConfirmar: '',
+    password: '',
+    passwordConfirmar: '',
     cuenta_telefono: '',
     estudiante_semestre: '',
     estudiante_carrera: '',
     estudiante_calificacion: '',
-    asesor_calificacion: '',
     rol_id: ''
 }
 
@@ -48,10 +47,10 @@ const EditarUsuario = (props) => {
             temp.cuenta_telefono = fieldValues.cuenta_telefono.length == 10 ? "" : "Se requieren 10 digitos."
         if ('cuenta_genero' in fieldValues)
             temp.cuenta_genero = fieldValues.cuenta_genero.length != 0 ? "" : "Esta campo es requerido"
-        if ('contraseña' in fieldValues)
-            temp.contraseña = fieldValues.contraseña.length > 6 ? "" : "La contraseña debe ser mayor 6 caracteres"
-        if ('contraseñaConfirmar' in fieldValues)
-            temp.contraseñaConfirmar = fieldValues.contraseñaConfirmar.length > 0 && values.contraseña === fieldValues.contraseñaConfirmar ? "" : "La contraseña debe ser la misma"
+        if ('password' in fieldValues)
+            temp.password = fieldValues.password.length > 6 ? "" : "La contraseña debe ser mayor 6 caracteres"
+        if ('passwordConfirmar' in fieldValues)
+            temp.passwordConfirmar = fieldValues.passwordConfirmar.length > 0 && values.password === fieldValues.passwordConfirmar ? "" : "La contraseña debe ser la misma"
         if ('rol_id' in fieldValues)
             temp.rol_id = fieldValues.rol_id.length != 0 ? "" : "Esta campo es requerido"
         if ('cuenta_nombre_usuario' in fieldValues)
@@ -75,6 +74,25 @@ const EditarUsuario = (props) => {
         resetForm
     } = useForm(initialValues, true, validate);
 
+    const getUsuario = async () => {
+        await API.get('cuenta/obtenerCuenta/' + match.params.cuentaId)
+            .then(response => {
+                setValues(response.data);
+                initialValues.cuenta_nombre = response.data.cuenta_nombre;
+                initialValues.cuenta_apellido_paterno = response.data.cuenta_apellido_paterno;
+                initialValues.cuenta_apellido_materno = response.data.cuenta_apellido_materno;
+                initialValues.cuenta_genero = response.data.cuenta_genero;
+                initialValues.cuenta_correo = response.data.cuenta_correo;
+                initialValues.cuenta_nombre_usuario = response.data.cuenta_nombre_usuario;
+                initialValues.cuenta_telefono = response.data.cuenta_telefono;
+                initialValues.estudiante_semestre = response.data.estudiante_semestre;
+                initialValues.estudiante_carrera = response.data.estudiante_carrera;
+                initialValues.estudiante_calificacion = response.data.estudiante_calificacion;
+                initialValues.rol_id = response.data.rol_id;
+            })
+            console.log(initialValues);
+    }
+
     const handleSubmit = e => {
         e.preventDefault()
         if (validate())
@@ -92,18 +110,10 @@ const EditarUsuario = (props) => {
             }
         })
     }
-    const baseURL = "http://localhost:8000/api/cuenta/";
 
-    const peticionGet = async () => {
-        try {
-            await axios.get(baseURL)
-            .then(response => {
-                setValues(response.data);
-            })
-        } catch (error) {
-            
-        }
-    }
+    useEffect(() => {
+        getUsuario();
+    }, [])
 
     return (
         <div style={{ height: "650px" }}>
@@ -191,22 +201,22 @@ const EditarUsuario = (props) => {
                                 </Box>
                                 <Box mb={2} mr={2} ml={2}>
                                     <Controls.Input
-                                        name="contraseña"
+                                        name="password"
                                         label="Contraseña"
-                                        value={values.contraseña}
+                                        value={values.password}
                                         onChange={handleInputChange}
                                         type={values.showPassword ? 'text' : 'password'}
-                                        error={errors.contraseña}
+                                        error={errors.password}
                                     />
                                 </Box>
                                 <Box mb={2} mr={2} ml={2}>
                                     <Controls.Input
-                                        name="contraseñaConfirmar"
+                                        name="passwordConfirmar"
                                         label="Confrimar contraseña"
-                                        value={values.contraseñaConfirmar}
+                                        value={values.passwordConfirmar}
                                         onChange={handleInputChange}
                                         type={values.showPassword ? 'text' : 'password'}
-                                        error={errors.contraseñaConfirmar}
+                                        error={errors.passwordConfirmar}
                                     />
                                 </Box>
 

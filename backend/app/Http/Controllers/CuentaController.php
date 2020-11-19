@@ -201,18 +201,10 @@ class CuentaController extends Controller
      */
     public function obtenerCuenta(int $cuentaId)
     {
-        $hash = Cuenta::where('cuenta_id', $cuentaId)
-            ->select('password')
-            ->first();
-        $plaintext_password = "contraseña";
-
-        // The hash of the password that 
-        // can be stored in the database 
-        $hash = password_hash(
-            $plaintext_password,
-            PASSWORD_DEFAULT
-        );
-        echo($hash);
+        $cuenta=Cuenta::join('estudiante', 'cuenta.cuenta_id', '=', 'estudiante.cuenta_id_estudiante')
+        ->select()
+        ->where('cuenta_id',$cuentaId)->first();
+        echo($cuenta);
     }
 
     public function validarEmail(Request $request)
