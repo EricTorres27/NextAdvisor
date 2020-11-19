@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "homepage": "http://nextadvisor.com.mx",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",
