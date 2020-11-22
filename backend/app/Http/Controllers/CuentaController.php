@@ -174,6 +174,38 @@ class CuentaController extends Controller
         }
     }
 
+    public function actualizarCuenta(Request $request, int $idCuenta)
+    {
+        DB::beginTransaction();
+        try {
+            $cuenta = Cuenta::find($idCuenta);
+            $cuenta->cuenta_nombre =$request->input('cuenta_nombre');
+            $cuenta->cuenta_nombre_usuario =$request->input('cuenta_nombre_usuario');
+            $cuenta->cuenta_telefono=$request->input('cuenta_telefono');
+            $cuenta->cuenta_correo=$request->input('cuenta_correo');
+            $cuenta->cuenta_apellido_paterno=$request->input('cuenta_apellido_paterno');
+            $cuenta->cuenta_apellido_materno=$request->input('cuenta_apellido_materno');
+            $cuenta->cuenta_genero=$request->input('cuenta_genero');
+            $cuenta->rol_id=$request->input('rol_id');
+            $cuenta->save();
+            $estudiante= Estudiante::where('cuenta_id_estudiante','=',$idCuenta)->first();
+            $estudiante->estudiante_carrera =$request->input('estudiante_carrera');
+            $estudiante->estudiante_semestre =$request->input('estudiante_semestre');
+            $cuenta->estudiante()->save($estudiante);
+            DB::commit();
+            return response()->json([
+                'message' => 'Pregunta actualizada con exito',
+                'flag' => 1
+            ], 201);
+        } catch (QueryException $err) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Error al actualizar pregunta',
+                'flag' => 0,
+            ], 202);
+        }
+    }
+
     public function eliminarUsuario(int $idCuenta)
     {
         DB::beginTransaction();
@@ -202,9 +234,8 @@ class CuentaController extends Controller
     public function obtenerCuenta(int $cuentaId)
     {
         $cuenta=Cuenta::join('estudiante', 'cuenta.cuenta_id', '=', 'estudiante.cuenta_id_estudiante')
-        ->select()
-        ->where('cuenta_id',$cuentaId)->first();
-        echo($cuenta);
+        ->where('cuenta_id','=',$cuentaId)->first();
+        return $cuenta;
     }
 
     public function validarEmail(Request $request)
@@ -215,4 +246,5 @@ class CuentaController extends Controller
     {
         return Cuenta::where('cuenta_nombre_usuario', $request->cuenta_nombre_usuario)->exists();
     }
+
 }

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Box, Grid, Typography, Paper, Container, TextField, Button } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
@@ -8,10 +8,6 @@ import swal from 'sweetalert';
 import axios from 'axios';
 import API from '../apis/api';
 
-/*
-            <Typography>{match.params.cuentaId}</Typography>
-
-*/
 const styles = {
     Paper: { height: 550, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
 }
@@ -22,8 +18,6 @@ const initialValues = {
     cuenta_genero: '',
     cuenta_correo: '',
     cuenta_nombre_usuario: '',
-    password: '',
-    passwordConfirmar: '',
     cuenta_telefono: '',
     estudiante_semestre: '',
     estudiante_carrera: '',
@@ -47,10 +41,6 @@ const EditarUsuario = (props) => {
             temp.cuenta_telefono = fieldValues.cuenta_telefono.length == 10 ? "" : "Se requieren 10 digitos."
         if ('cuenta_genero' in fieldValues)
             temp.cuenta_genero = fieldValues.cuenta_genero.length != 0 ? "" : "Esta campo es requerido"
-        if ('password' in fieldValues)
-            temp.password = fieldValues.password.length > 6 ? "" : "La contraseña debe ser mayor 6 caracteres"
-        if ('passwordConfirmar' in fieldValues)
-            temp.passwordConfirmar = fieldValues.passwordConfirmar.length > 0 && values.password === fieldValues.passwordConfirmar ? "" : "La contraseña debe ser la misma"
         if ('rol_id' in fieldValues)
             temp.rol_id = fieldValues.rol_id.length != 0 ? "" : "Esta campo es requerido"
         if ('cuenta_nombre_usuario' in fieldValues)
@@ -89,14 +79,96 @@ const EditarUsuario = (props) => {
                 initialValues.estudiante_carrera = response.data.estudiante_carrera;
                 initialValues.estudiante_calificacion = response.data.estudiante_calificacion;
                 initialValues.rol_id = response.data.rol_id;
+                console.log(initialValues);
+                console.log(values);
+                console.log(response.data);
             })
-            console.log(initialValues);
+
+    }
+
+    const peticionPutUsuario = async () => {
+        try {
+            const response = await API.put('cuenta/actualizarCuenta/'+match.params.cuentaId,
+                {
+                    "cuenta_nombre": values.cuenta_nombre,
+                    "cuenta_apellido_materno": values.cuenta_apellido_materno,
+                    "cuenta_apellido_paterno": values.cuenta_apellido_paterno,
+                    "cuenta_genero": values.cuenta_genero,
+                    "cuenta_correo": values.cuenta_correo,
+                    "cuenta_nombre_usuario": values.cuenta_nombre_usuario,
+                    "cuenta_telefono": values.cuenta_telefono,
+                    "estudiante_semestre": values.estudiante_semestre,
+                    "estudiante_carrera": values.estudiante_carrera,
+                    "rol_id": values.rol_id,   
+                }
+            )
+            if (response.data.flag == 1) {
+                swal({
+                    title: "El usuario se ha editado con éxito",
+                    icon: "success"
+                }).then(respuesta => {
+                    window.location.href = "http://localhost:3000/ConsultarUsuario";
+                })
+            } else {
+                swal({
+                    title: response.data.message,
+                    text: "Cambie la información solicitada",
+                    icon: "info"
+                })
+            }
+        } catch (error) {
+            if (error.response) {
+                swal({
+                    title: "Error: " + error.response.status,
+                    text: "Verifique la información y vuelvalo a intentar",
+                    icon: "error"
+                })
+            } else if (error.request) {
+                swal({
+                    title: "Error",
+                    text: "No hubo respuesta intentelo mas tarde",
+                    icon: "error"
+                })
+            } else {
+                swal({
+                    title: "Error",
+                    text: "No hubo respuesta intentelo mas tarde",
+                    icon: "error"
+                })
+            }
+        }
+    }
+
+    const validacionIgual = () =>{
+        let flag=0;
+        if(initialValues.cuenta_nombre==values.cuenta_nombre &&
+            initialValues.cuenta_apellido_paterno==values.cuenta_apellido_paterno &&
+            initialValues.cuenta_apellido_materno==values.cuenta_apellido_materno &&
+            initialValues.cuenta_genero==values.cuenta_genero &&
+            initialValues.cuenta_correo == values.cuenta_correo &&
+            initialValues.cuenta_nombre_usuario==values.cuenta_nombre_usuario &&
+            initialValues.cuenta_telefono==values.cuenta_telefono &&
+            initialValues.estudiante_semestre==values.estudiante_semestre &&
+            initialValues.estudiante_carrera==values.estudiante_carrera &&
+            initialValues.rol_id==values.rol_id
+        ){
+            flag=1;
+        }
+        return flag;
     }
 
     const handleSubmit = e => {
         e.preventDefault()
-        if (validate())
+        if(validacionIgual()==0){
+            if (validate())
             confirmacion();
+        }else{
+            swal({
+                title: "No se ha realizado ningun cambio",
+                text: "Es necesario realizar al menos un cambio en la información",
+                icon: "info"
+            })
+        }
     }
 
     const confirmacion = () => {
@@ -106,7 +178,7 @@ const EditarUsuario = (props) => {
             buttons: ["No", "Si"]
         }).then(respuesta => {
             if (respuesta) {
-                //peticionPost();
+                peticionPutUsuario();
             }
         })
     }
@@ -199,27 +271,6 @@ const EditarUsuario = (props) => {
                                         error={errors.cuenta_nombre_usuario}
                                     />
                                 </Box>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <Controls.Input
-                                        name="password"
-                                        label="Contraseña"
-                                        value={values.password}
-                                        onChange={handleInputChange}
-                                        type={values.showPassword ? 'text' : 'password'}
-                                        error={errors.password}
-                                    />
-                                </Box>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <Controls.Input
-                                        name="passwordConfirmar"
-                                        label="Confrimar contraseña"
-                                        value={values.passwordConfirmar}
-                                        onChange={handleInputChange}
-                                        type={values.showPassword ? 'text' : 'password'}
-                                        error={errors.passwordConfirmar}
-                                    />
-                                </Box>
-
                             </Grid>
 
                         </Grid>

@@ -38,6 +38,7 @@ Route::group([
     Route::get('obtenerCuenta/{cuentaId}', [CuentaController::class, 'obtenerCuenta']);
     Route::delete('eliminarUsuario/{idCuenta}', [CuentaController::class, 'eliminarUsuario']);
     Route::post('cuentaLogin', [CuentaController::class, 'cuentaLogin']);
+    Route::put('actualizarCuenta/{idCuenta}',[CuentaController::class,'actualizarCuenta']);
 });
 Route::group([
     'middleware' => 'api',
