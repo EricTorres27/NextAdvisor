@@ -6,6 +6,7 @@ import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
 import swal from 'sweetalert';
 import axios from 'axios';
+import API from '../apis/api';
 
 /*
     <Typography>{match.params.cuentaId}</Typography>
@@ -15,6 +16,8 @@ const styles = {
     Paper: { height: 550, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
 }
 
+localStorage.setItem("variable",true);
+
 const initialValues = {
     cuenta_nombre: '',
     cuenta_apellido_paterno: '',
@@ -22,8 +25,6 @@ const initialValues = {
     cuenta_genero: '',
     cuenta_correo: '',
     cuenta_nombre_usuario: '',
-    contraseña: '',
-    contraseñaConfirmar: '',
     cuenta_telefono: '',
     estudiante_semestre: '',
     estudiante_carrera: '',
@@ -36,18 +37,30 @@ const ConsultarPerfil = (props) => {
         setValues
     } = useForm(initialValues);
 
-    const baseURL = "http://localhost:8000/api/cuenta/";
+    const baseURL = "http://localhost:8000/api/cuenta/miPerfil";
 
-    const peticionGet = async () => {
-        try {
-            await axios.get(baseURL)
+    const getUsuario = async () => {
+        await API.get('cuenta/miPerfil', { headers: { "Authorization": "Bearer " + localStorage.token } })
             .then(response => {
                 setValues(response.data);
+                initialValues.cuenta_nombre = response.data.cuenta_nombre;
+                initialValues.cuenta_apellido_paterno = response.data.cuenta_apellido_paterno;
+                initialValues.cuenta_apellido_materno = response.data.cuenta_apellido_materno;
+                initialValues.cuenta_genero = response.data.cuenta_genero;
+                initialValues.cuenta_correo = response.data.cuenta_correo;
+                initialValues.cuenta_nombre_usuario = response.data.cuenta_nombre_usuario;
+                initialValues.cuenta_telefono = response.data.cuenta_telefono;
+                initialValues.estudiante_semestre = response.data.estudiante_semestre;
+                initialValues.estudiante_carrera = response.data.estudiante_carrera;
+                initialValues.estudiante_calificacion = response.data.estudiante_calificacion;
+                console.log(initialValues);
+                console.log(values);
+                console.log(response.data);
             })
-        } catch (error) {
 
-        }
     }
+
+    getUsuario();
 
     const { match } = props;
 
@@ -133,16 +146,6 @@ const ConsultarPerfil = (props) => {
                                         name="cuenta_nombre_usuario"
                                         label="Nombre de usuario"
                                         value={values.cuenta_nombre_usuario}
-                                    />
-                                </Box>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <TextField
-                                        disabled
-                                        variant="outlined"
-                                        name="contraseña"
-                                        label="Contraseña"
-                                        value={values.contraseña}
-                                        type={values.showPassword ? 'text' : 'password'}
                                     />
                                 </Box>
 

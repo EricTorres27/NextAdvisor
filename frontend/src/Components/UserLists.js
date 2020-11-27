@@ -21,7 +21,8 @@ import {
 } from '@material-ui/core'
 
 
-const role = localStorage.getItem("rol");
+//const role = localStorage.getItem("rol");
+const role = "estudiante";
 const UserLists = () => {
 
     if (role=="estudiante") {
@@ -124,7 +125,7 @@ const UserLists = () => {
                         <ListItemIcon>
                             <AccountCircleIcon color="primary" fontSize="large" />
                         </ListItemIcon>
-                        <Link to="">
+                        <Link to="/ConsultarPerfil">
                             <ListItemText primary='Mi perfil' />
                         </Link>
                     </ListItem>
@@ -146,30 +147,11 @@ const UserLists = () => {
                             <ListItemText primary='Asesorías' />
                         </Link>
                     </ListItem>
-                    <Divider />
-                    <ListItem button>
-                        <ListItemIcon>
-                            <AttachMoneyIcon color="primary" fontSize="large" />
-                        </ListItemIcon>
-                        <Link to="Tarifa">
-                            <ListItemText primary='Tarifa' />
-                        </Link>
-                    </ListItem>
-                    <Divider />
-                    <ListItem button>
-                        <ListItemIcon>
-                            <CreditCardIcon color="primary" fontSize="large" />
-                        </ListItemIcon>
-                        <Link to="MetodoPago">
-                            <ListItemText primary='Método de pago' />
-                        </Link>
-                    </ListItem>
-                    <Divider />
                     <ListItem button>
                         <ListItemIcon>
                             <GradeIcon color="primary" fontSize="large" />
                         </ListItemIcon>
-                        <Link to="">
+                        <Link to="/Evaluaciones">
                             <ListItemText primary='Evaluación' />
                         </Link>
                     </ListItem>

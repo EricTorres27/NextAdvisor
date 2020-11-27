@@ -28,7 +28,14 @@ class CuentaController extends Controller
         return $cuentas;
     }
 
-    
+    public function perfil(int $idCuenta)
+    {
+        $cuenta = Cuenta::join('estudiante', 'estudiante.cuenta_id_estudiante', '=', 'cuenta.cuenta_id')
+            ->where('cuenta.cuenta_id', '=', '1')
+            ->select('cuenta.cuenta_id', 'cuenta_nombre_usuario', 'cuenta_correo', 'cuenta_nombre', 'cuenta_apellido_paterno', 'cuenta_apellido_materno', 'estudiante_carrera', 'estudiante_semestre')
+            ->get();
+        return $cuenta;
+    }
 
     /**
      * Crear un estudiante en el sistema.

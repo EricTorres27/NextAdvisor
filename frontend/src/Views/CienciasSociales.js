@@ -15,7 +15,7 @@ const AmbienteConstruido = (props) => {
     return (
         <div style={{ height: "650px" }}>
             <Box color="primary.contrastText" mb={1}>
-                <Typography color="white" align="center" variant="h3">Evaluación Ambiente Construido</Typography>
+                <Typography color="white" align="center" variant="h3">Evaluación</Typography>
             </Box>
             <Paper elevation={3} style={styles.Paper}>
 

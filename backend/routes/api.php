@@ -34,6 +34,7 @@ Route::group([
     Route::post('crearEstudiante', [CuentaController::class, 'crearEstudiante']);
     Route::post('crearAdministrador', [CuentaController::class, 'crearAdministrador']);
     Route::get('listarCuentas', [CuentaController::class, 'index']);
+    Route::get('miPerfil', [CuentaController::class, 'perfil']);
     Route::get('pruebaContraseña', [CuentaController::class, 'pruebaContraseña']);
     Route::get('obtenerCuenta/{cuentaId}', [CuentaController::class, 'obtenerCuenta']);
     Route::delete('eliminarUsuario/{idCuenta}', [CuentaController::class, 'eliminarUsuario']);
