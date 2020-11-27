@@ -87,6 +87,7 @@ export default function SignIn() {
       },
       { headers: { "Accept": "application/json" } },
     ).then(res => {
+      console.log(res.data)
       localStorage.setItem("token",res.data['access_token']);
       API.get('/auth/profile',{ headers: { "Authorization": "Bearer " + localStorage.token } })
         .then(res => {
