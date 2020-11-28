@@ -26,10 +26,7 @@ const AmbienteConstruido = (props) => {
                 <Box mt={5} ml={5}>
                     <Form align="center">
                         <Box ml={3} mb={2}>
-                            <Typography variant="h7">“Apegándome al Código de Ética de los Estudiantes del Tecnológico de Monterrey,
-                            me comprometo a que mi actuación en esta actividad de evaluación esté regida por la honestidad académica.
-                            En congruencia con el mismo, realizaré esta actividad de forma honesta y personal, para reflejar a través
-                            de ella mis conocimientos y competencias”.
+                            <Typography variant="h7">“Me comprometo a realizar esta actividad de forma honesta y personal, para reflejar mi capacidad de asesorar alumnos en esta área”.
                             </Typography>
                         </Box>
 

@@ -8,6 +8,8 @@ import swal from 'sweetalert';
 import axios from 'axios';
 import API from '../apis/api';
 
+const cuentaId = localStorage.getItem("cuentaId");
+
 /*
     <Typography>{match.params.cuentaId}</Typography>
 
@@ -16,7 +18,7 @@ const styles = {
     Paper: { height: 550, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
 }
 
-localStorage.setItem("variable",true);
+// localStorage.setItem("variable",true);
 
 const initialValues = {
     cuenta_nombre: '',
@@ -37,10 +39,10 @@ const ConsultarPerfil = (props) => {
         setValues
     } = useForm(initialValues);
 
-    const baseURL = "http://localhost:8000/api/cuenta/miPerfil";
+    const baseURL = "http://localhost:8000/api/cuenta/obtenerCuenta";
 
     const getUsuario = async () => {
-        await API.get('cuenta/miPerfil', { headers: { "Authorization": "Bearer " + localStorage.token } })
+        await API.get('cuenta/obtenerCuenta', { headers: { "Authorization": "Bearer " + localStorage.token } })
             .then(response => {
                 setValues(response.data);
                 initialValues.cuenta_nombre = response.data.cuenta_nombre;
@@ -61,8 +63,6 @@ const ConsultarPerfil = (props) => {
     }
 
     getUsuario();
-
-    const { match } = props;
 
     return (
         <div style={{ height: "650px" }}>

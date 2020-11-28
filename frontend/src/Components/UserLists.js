@@ -22,7 +22,7 @@ import {
 
 
 //const role = localStorage.getItem("rol");
-const role = "estudiante";
+const role = "asesor";
 const UserLists = () => {
 
     if (role=="estudiante") {

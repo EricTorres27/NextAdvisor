@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Grid, Typography, Paper, Container, TextField, Button } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
@@ -6,14 +6,12 @@ import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
 import swal from 'sweetalert';
 import axios from 'axios';
+import API from '../apis/api';
 
-/*
-            <Typography>{match.params.cuentaId}</Typography>
-
-*/
 const styles = {
     Paper: { height: 550, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
 }
+
 const initialValues = {
     cuenta_nombre: '',
     cuenta_apellido_paterno: '',
@@ -21,11 +19,11 @@ const initialValues = {
     cuenta_genero: '',
     cuenta_correo: '',
     cuenta_nombre_usuario: '',
-    contraseña: '',
-    contraseñaConfirmar: '',
     cuenta_telefono: '',
     estudiante_semestre: '',
     estudiante_carrera: '',
+    estudiante_calificacion: '',
+    rol_id: ''
 }
 
 const EditarPerfil = (props) => {
@@ -44,10 +42,6 @@ const EditarPerfil = (props) => {
             temp.cuenta_telefono = fieldValues.cuenta_telefono.length == 10 ? "" : "Se requieren 10 digitos."
         if ('cuenta_genero' in fieldValues)
             temp.cuenta_genero = fieldValues.cuenta_genero.length != 0 ? "" : "Esta campo es requerido"
-        if ('contraseña' in fieldValues)
-            temp.contraseña = fieldValues.contraseña.length > 6 ? "" : "La contraseña debe ser mayor 6 caracteres"
-        if ('contraseñaConfirmar' in fieldValues)
-            temp.contraseñaConfirmar = fieldValues.contraseñaConfirmar.length > 0 && values.contraseña === fieldValues.contraseñaConfirmar ? "" : "La contraseña debe ser la misma"
         if ('rol_id' in fieldValues)
             temp.rol_id = fieldValues.rol_id.length != 0 ? "" : "Esta campo es requerido"
         if ('cuenta_nombre_usuario' in fieldValues)
@@ -71,10 +65,111 @@ const EditarPerfil = (props) => {
         resetForm
     } = useForm(initialValues, true, validate);
 
+    const getUsuario = async () => {
+        await API.get('cuenta/obtenerCuenta/' + match.params.cuentaId)
+            .then(response => {
+                setValues(response.data);
+                initialValues.cuenta_nombre = response.data.cuenta_nombre;
+                initialValues.cuenta_apellido_paterno = response.data.cuenta_apellido_paterno;
+                initialValues.cuenta_apellido_materno = response.data.cuenta_apellido_materno;
+                initialValues.cuenta_genero = response.data.cuenta_genero;
+                initialValues.cuenta_correo = response.data.cuenta_correo;
+                initialValues.cuenta_nombre_usuario = response.data.cuenta_nombre_usuario;
+                initialValues.cuenta_telefono = response.data.cuenta_telefono;
+                initialValues.estudiante_semestre = response.data.estudiante_semestre;
+                initialValues.estudiante_carrera = response.data.estudiante_carrera;
+                initialValues.estudiante_calificacion = response.data.estudiante_calificacion;
+                initialValues.rol_id = response.data.rol_id;
+                console.log(initialValues);
+                console.log(values);
+                console.log(response.data);
+            })
+
+    }
+
+    const peticionPutUsuario = async () => {
+        try {
+            const response = await API.put('cuenta/actualizarCuenta/'+match.params.cuentaId,
+                {
+                    "cuenta_nombre": values.cuenta_nombre,
+                    "cuenta_apellido_materno": values.cuenta_apellido_materno,
+                    "cuenta_apellido_paterno": values.cuenta_apellido_paterno,
+                    "cuenta_genero": values.cuenta_genero,
+                    "cuenta_correo": values.cuenta_correo,
+                    "cuenta_nombre_usuario": values.cuenta_nombre_usuario,
+                    "cuenta_telefono": values.cuenta_telefono,
+                    "estudiante_semestre": values.estudiante_semestre,
+                    "estudiante_carrera": values.estudiante_carrera,
+                    "rol_id": values.rol_id,
+                }
+            )
+            if (response.data.flag == 1) {
+                swal({
+                    title: "El usuario se ha editado con éxito",
+                    icon: "success"
+                }).then(respuesta => {
+                    window.location.href = "http://localhost:3000/ConsultarPerfil";
+                })
+            } else {
+                swal({
+                    title: response.data.message,
+                    text: "Cambie la información solicitada",
+                    icon: "info"
+                })
+            }
+        } catch (error) {
+            if (error.response) {
+                swal({
+                    title: "Error: " + error.response.status,
+                    text: "Verifique la información y vuelvalo a intentar",
+                    icon: "error"
+                })
+            } else if (error.request) {
+                swal({
+                    title: "Error",
+                    text: "No hubo respuesta intentelo mas tarde",
+                    icon: "error"
+                })
+            } else {
+                swal({
+                    title: "Error",
+                    text: "No hubo respuesta intentelo mas tarde",
+                    icon: "error"
+                })
+            }
+        }
+    }
+
+    const validacionIgual = () =>{
+        let flag=0;
+        if(initialValues.cuenta_nombre==values.cuenta_nombre &&
+            initialValues.cuenta_apellido_paterno==values.cuenta_apellido_paterno &&
+            initialValues.cuenta_apellido_materno==values.cuenta_apellido_materno &&
+            initialValues.cuenta_genero==values.cuenta_genero &&
+            initialValues.cuenta_correo == values.cuenta_correo &&
+            initialValues.cuenta_nombre_usuario==values.cuenta_nombre_usuario &&
+            initialValues.cuenta_telefono==values.cuenta_telefono &&
+            initialValues.estudiante_semestre==values.estudiante_semestre &&
+            initialValues.estudiante_carrera==values.estudiante_carrera &&
+            initialValues.rol_id==values.rol_id
+        ){
+            flag=1;
+        }
+        return flag;
+    }
+
     const handleSubmit = e => {
         e.preventDefault()
-        if (validate())
+        if(validacionIgual()==0){
+            if (validate())
             confirmacion();
+        }else{
+            swal({
+                title: "No se ha realizado ningun cambio",
+                text: "Es necesario realizar al menos un cambio en la información",
+                icon: "info"
+            })
+        }
     }
 
     const confirmacion = () => {
@@ -84,27 +179,19 @@ const EditarPerfil = (props) => {
             buttons: ["No", "Si"]
         }).then(respuesta => {
             if (respuesta) {
-                //peticionPost();
+                peticionPutUsuario();
             }
         })
     }
-     const baseURL = "http://localhost:8000/api/cuenta/";
 
-    const peticionGet = async () => {
-        try {
-            await axios.get(baseURL)
-            .then(response => {
-                setValues(response.data);
-            })
-        } catch (error) {
-
-        }
-    }
+    useEffect(() => {
+        getUsuario();
+    }, [])
 
     return (
         <div style={{ height: "650px" }}>
             <Box color="primary.contrastText" mb={1}>
-                <Typography color="white" align="center" variant="h3">Editar perfil</Typography>
+                <Typography color="white" align="center" variant="h3">Editar Perfil</Typography>
             </Box>
             <Paper elevation={3} style={styles.Paper}>
                 <Link to="/ConsultarPerfil">
@@ -149,7 +236,7 @@ const EditarPerfil = (props) => {
                                 <Box mb={2} mr={2} ml={2}>
                                     <Controls.Select
                                         name="cuenta_genero"
-                                        label="Género"
+                                        label="Genero"
                                         value={values.cuenta_genero}
                                         onChange={handleInputChange}
                                         error={errors.cuenta_genero}
@@ -158,7 +245,7 @@ const EditarPerfil = (props) => {
                                 <Box mb={2} mr={2} ml={2}>
                                     <Controls.Input
                                         name="cuenta_telefono"
-                                        label="Telefono (10 digitos)"
+                                        label="Telefono(10 digitos)"
                                         value={values.cuenta_telefono}
                                         onChange={handleInputChange}
                                         error={errors.cuenta_telefono}
@@ -175,9 +262,6 @@ const EditarPerfil = (props) => {
                                     />
                                 </Box>
                             </Grid>
-                            <Box ml={3} mb={2}>
-                                <Typography variant="h5">Datos de la cuenta</Typography>
-                            </Box>
                             <Grid item xs={12} sm={12}>
                                 <Box mb={2} mr={2} ml={2}>
                                     <Controls.Input
@@ -188,32 +272,11 @@ const EditarPerfil = (props) => {
                                         error={errors.cuenta_nombre_usuario}
                                     />
                                 </Box>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <Controls.Input
-                                        name="contraseña"
-                                        label="Contraseña"
-                                        value={values.contraseña}
-                                        onChange={handleInputChange}
-                                        type={values.showPassword ? 'text' : 'password'}
-                                        error={errors.contraseña}
-                                    />
-                                </Box>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <Controls.Input
-                                        name="contraseñaConfirmar"
-                                        label="Confirmar contraseña"
-                                        value={values.contraseñaConfirmar}
-                                        onChange={handleInputChange}
-                                        type={values.showPassword ? 'text' : 'password'}
-                                        error={errors.contraseñaConfirmar}
-                                    />
-                                </Box>
-
                             </Grid>
 
                         </Grid>
                         <Box ml={3} mb={2}>
-                            <Typography variant="h5">Datos académicos</Typography>
+                            <Typography variant="h5">Datos academicos</Typography>
                         </Box>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={6}>
@@ -226,8 +289,6 @@ const EditarPerfil = (props) => {
                                         error={errors.estudiante_carrera}
                                     />
                                 </Box>
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
                                 <Box mb={2} mr={2} ml={2}>
                                     <Controls.Input
                                         name="estudiante_semestre"
@@ -239,7 +300,16 @@ const EditarPerfil = (props) => {
                                         error={errors.estudiante_semestre}
                                     />
                                 </Box>
-                          </Grid>
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <Controls.SelectRol
+                                    name="rol_id"
+                                    label="Rol"
+                                    value={values.rol_id}
+                                    onChange={handleInputChange}
+                                    error={errors.rol_id}
+                                />
+                            </Grid>
                         </Grid>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={12}>

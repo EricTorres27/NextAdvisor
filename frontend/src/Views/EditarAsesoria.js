@@ -7,11 +7,6 @@ import Controls from '../Components/controls/Controls';
 import swal from 'sweetalert';
 import axios from 'axios';
 
-
-
-
-
-
 const initialValues = {
     oferta_id:'',
    oferta_fecha: '',
@@ -34,7 +29,7 @@ const EditarAsesoria = (props) => {
             temp.oferta_tarifa = fieldValues.oferta_tarifa ? "" : "Este campo es obligatorio."
         if ('materia_id' in fieldValues)
             temp.materia_id = fieldValues.materia_id ? "" : "Este campo es obligatorio."
-      
+
             setErrors({
             ...temp
         })
@@ -62,7 +57,7 @@ const EditarAsesoria = (props) => {
                 icon: "info"
             })
         }
-    } 
+    }
 
     const {
         values,
@@ -86,8 +81,8 @@ const EditarAsesoria = (props) => {
                 initialValues.materia_id=response.data.materia_id;
                 initialValues.estudiante_id=response.data.estudiante_id;
                 initialValues.oferta_id=response.data.oferta_id;
-                
-              
+
+
             })
     }
 
@@ -96,8 +91,8 @@ const EditarAsesoria = (props) => {
             const response = await axios.put("http://localhost:8000/api/asesoria/"+values.oferta_id,
                 {
                     "oferta_fecha": values.oferta_fecha,
-                    "oferta_tarifa": values.oferta_tarifa, 
-                    "materia_id": values.materia_id, 
+                    "oferta_tarifa": values.oferta_tarifa,
+                    "materia_id": values.materia_id,
                 }
             )
             if (response.data.flag == 1) {
@@ -209,7 +204,7 @@ const EditarAsesoria = (props) => {
                                 />
                             </Grid>
 
-                           
+
 
                         </Grid>
                         <Grid container spacing={1}>
