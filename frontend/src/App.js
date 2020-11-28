@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import 'fontsource-roboto';
 import Registro from './Components/Registro'
 
-let login = true;//localStorage.getItem("isLoggedIn");
+let login = localStorage.getItem("isLoggedIn");
 function App() {
   return (
     <ThemeProvider theme={theme}>

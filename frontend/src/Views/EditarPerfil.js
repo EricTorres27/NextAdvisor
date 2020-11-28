@@ -8,6 +8,8 @@ import swal from 'sweetalert';
 import axios from 'axios';
 import API from '../apis/api';
 
+const cuentaId = localStorage.getItem("cuentaId");
+
 const styles = {
     Paper: { height: 550, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
 }
@@ -66,7 +68,7 @@ const EditarPerfil = (props) => {
     } = useForm(initialValues, true, validate);
 
     const getUsuario = async () => {
-        await API.get('cuenta/obtenerCuenta/' + match.params.cuentaId)
+        await API.get('cuenta/obtenerCuenta/' + cuentaId)
             .then(response => {
                 setValues(response.data);
                 initialValues.cuenta_nombre = response.data.cuenta_nombre;
@@ -89,7 +91,7 @@ const EditarPerfil = (props) => {
 
     const peticionPutUsuario = async () => {
         try {
-            const response = await API.put('cuenta/actualizarCuenta/'+match.params.cuentaId,
+            const response = await API.put('cuenta/actualizarCuenta/' + cuentaId,
                 {
                     "cuenta_nombre": values.cuenta_nombre,
                     "cuenta_apellido_materno": values.cuenta_apellido_materno,

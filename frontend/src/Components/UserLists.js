@@ -21,8 +21,8 @@ import {
 } from '@material-ui/core'
 
 
-//const role = localStorage.getItem("rol");
-const role = "asesor";
+const role = localStorage.getItem("rol");
+// const role = "administrador";
 const UserLists = () => {
 
     if (role=="estudiante") {

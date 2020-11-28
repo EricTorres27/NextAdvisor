@@ -34,15 +34,16 @@ const initialValues = {
 
 const ConsultarPerfil = (props) => {
 
+    const { match } = props;
+
     const {
         values,
         setValues
     } = useForm(initialValues);
 
-    const baseURL = "http://localhost:8000/api/cuenta/obtenerCuenta";
-
     const getUsuario = async () => {
-        await API.get('cuenta/obtenerCuenta', { headers: { "Authorization": "Bearer " + localStorage.token } })
+
+        await API.get('cuenta/obtenerCuenta/' + cuentaId, { headers: { "Authorization": "Bearer " + localStorage.token } })
             .then(response => {
                 setValues(response.data);
                 initialValues.cuenta_nombre = response.data.cuenta_nombre;
@@ -59,7 +60,6 @@ const ConsultarPerfil = (props) => {
                 console.log(values);
                 console.log(response.data);
             })
-
     }
 
     getUsuario();
