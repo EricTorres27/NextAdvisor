@@ -195,7 +195,7 @@ const PrincipalContainer = () => {
                         <Route exact path="/Materias" component={subjects} />
                         <Route exact path="/EditarPerfil" component={EditarPerfil} />
                         <Route exact path="/ConsultarPerfil" component={ConsultarPerfil} />
-                        <Route exact path="/MisAsesorias" component={ConsultarPerfil} />
+                        <Route exact path="/MisAsesorias" component={MisAsesorias} />
                     </div>
                 </div>
             </Router>
