@@ -98,7 +98,11 @@ const styles = {
                     title: "La información se ha guardado con éxito",
                     icon: "success"
                 }).then(respuesta => {
+<<<<<<< HEAD
                     window.location.href = "http://www.nextadvisor.com.mx/materias";
+=======
+                    window.location.href = "http://nextadvisor.com.mx/materia";
+>>>>>>> Fani/Ligas
                 })
             } else {
                 swal({

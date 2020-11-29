@@ -118,7 +118,11 @@ const EditarAsesoria = (props) => {
                     title: "La información se ha guardado con éxito",
                     icon: "success"
                 }).then(respuesta => {
+<<<<<<< HEAD
                     window.location.href = "http:www.nextadvisor.com.mx/MisAsesorias";
+=======
+                    window.location.href = "http://nextadvisor.com.mx/asesoria";
+>>>>>>> Fani/Ligas
                 })
             } else {
                 swal({

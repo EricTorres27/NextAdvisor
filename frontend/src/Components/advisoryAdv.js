@@ -45,7 +45,11 @@ const MisAsesorias = () => {
         setAsesoriaSeleccionada(oferta_asesoria);
         (caso==="Eliminar")?confirmacionEliminar(oferta_asesoria)
         :
+<<<<<<< HEAD
         window.location.href = "http://www.nextadvisor.com/EditarAsesoria/"+oferta_asesoria.oferta_id;
+=======
+        window.location.href = "http://nextadvisor.com.mx/EditarAsesoria/"+oferta_asesoria.oferta_id;
+>>>>>>> Fani/Ligas
     }
 
     const columnas = [

@@ -88,7 +88,11 @@ export const RegistrarMateria = () => {
                     title: "La materia se ha registrado con éxito",
                     icon: "success"
                 }).then(respuesta => {
+<<<<<<< HEAD
                     window.location.href = "http://www.nextadvisor.com.mx/Materias"
+=======
+                    window.location.href = "http://nextadvisor.com.mx/Materias"
+>>>>>>> Fani/Ligas
                 })
             } else {
                 swal({

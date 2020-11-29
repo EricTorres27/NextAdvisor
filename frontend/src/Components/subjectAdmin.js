@@ -43,7 +43,11 @@ const Materias = () => {
         setMateriaSeleccionada(materia);
         (caso==="Eliminar")?confirmacionEliminar(materia)
         :
+<<<<<<< HEAD
         window.location.href = "http://www.nextadvisor.com.mx/EditarMateria/"+materia.materia_id;
+=======
+        window.location.href = "http://nextadvisor.com.mx/EditarMateria/"+materia.materia_id;
+>>>>>>> Fani/Ligas
     }
 
 

@@ -99,7 +99,7 @@ const EditarUsuario = (props) => {
                     "cuenta_telefono": values.cuenta_telefono,
                     "estudiante_semestre": values.estudiante_semestre,
                     "estudiante_carrera": values.estudiante_carrera,
-                    "rol_id": values.rol_id,   
+                    "rol_id": values.rol_id,
                 }
             )
             if (response.data.flag == 1) {
@@ -107,7 +107,7 @@ const EditarUsuario = (props) => {
                     title: "El usuario se ha editado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http://localhost:3000/ConsultarUsuario";
+                    window.location.href = "http://nextadvisor.com.mx/ConsultarUsuario";
                 })
             } else {
                 swal({

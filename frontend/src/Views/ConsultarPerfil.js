@@ -184,11 +184,13 @@ const ConsultarPerfil = (props) => {
                         </Grid>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={12}>
+                              <Link to ="/EditarPerfil">
                                 <Box ml={3} mt={1} align="right">
-                                    <Button size="large" href="/EditarPerfil">
+                                    <Button size="large">
                                       Editar
                                     </Button>
                                 </Box>
+                              </Link>
                             </Grid>
                         </Grid>
                     </Form>

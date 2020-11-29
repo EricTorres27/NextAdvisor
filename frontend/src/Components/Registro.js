@@ -283,7 +283,7 @@ export default function SignUp() {
                 <Box mb={2} mr={2} ml={2}>
                   <Controls.Input
                     name="cuenta_telefono"
-                    label="Telefono(10 digitos)"
+                    label="Teléfono (10 digitos)"
                     value={values.cuenta_telefono}
                     onChange={handleInputChange}
                     error={errors.cuenta_telefono}
@@ -293,7 +293,7 @@ export default function SignUp() {
                 <Box mb={2} mr={2} ml={2}>
                   <Controls.Input
                     name="cuenta_correo"
-                    label="Correo electronico"
+                    label="Correo electrónico"
                     value={values.cuenta_correo}
                     onChange={handleInputChange}
                     error={errors.cuenta_correo}
@@ -323,7 +323,7 @@ export default function SignUp() {
                 <Box mb={2} mr={2} ml={2}>
                   <Controls.Input
                     name="passwordConfirmar"
-                    label="Confrimar contraseña"
+                    label="Confirmar contraseña"
                     value={values.passwordConfirmar}
                     onChange={handleInputChange}
                     type={values.showPassword ? 'text' : 'password'}

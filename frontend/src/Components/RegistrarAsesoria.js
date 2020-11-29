@@ -82,7 +82,11 @@ export const RegistrarAsesoria = () => {
                     title: "La asesoria se ha registrado con éxito",
                     icon: "success"
                 }).then(respuesta => {
+<<<<<<< HEAD
                     window.location.href = "http://www.nextadvisor.com.mx/MisAsesorias";
+=======
+                    window.location.href = "http://nextadvisor.com.mx/MisAsesorias";
+>>>>>>> Fani/Ligas
                 })
             } else {
                 swal({
