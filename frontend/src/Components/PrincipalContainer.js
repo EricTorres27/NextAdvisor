@@ -191,7 +191,7 @@ const PrincipalContainer = () => {
                     <div className={classes.content}>
                         <div className={classes.toolbar}></div>
                         <Route exact path="/Registro" component={Registro} />
-                        <Route exact path="/RegistrarAsesoria" component={RegistrarAsesoria} />
+                        <Route exact path="/HistorialAsesoria" component={HistorialAsesoria} />
                         <Route exact path="/Materias" component={subjects} />
                         <Route exact path="/EditarPerfil" component={EditarPerfil} />
                         <Route exact path="/ConsultarPerfil" component={ConsultarPerfil} />

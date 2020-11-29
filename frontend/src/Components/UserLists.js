@@ -44,8 +44,8 @@ const UserLists = () => {
                         <ListItemIcon>
                             <EventIcon color="primary" fontSize="large" />
                         </ListItemIcon>
-                        <Link to="">
-                            <ListItemText primary='Mis asesorías' />
+                        <Link to="MisAsesorias">
+                            <ListItemText primary='Asesorías' />
                         </Link>
                     </ListItem>
                 </List>
