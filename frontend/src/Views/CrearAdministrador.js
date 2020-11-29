@@ -97,7 +97,7 @@ export const CrearAdministrador = () => {
                         title: "El usuario se ha creado con éxito",
                         icon: "success"
                     }).then(respuesta => {
-                        window.location.href = "http://localhost:3000/ConsultarUsuario";
+                        window.location.href = "http://nextadvisor.com.mx/ConsultarUsuario";
                     })
                 } else {
                     swal({
@@ -148,7 +148,7 @@ export const CrearAdministrador = () => {
                 icon: "info"
             }).then(respuesta => {
                 localStorage.clear();
-                window.location.href = "http://localhost:3000";
+                window.location.href = "http://nextadvisor.com.mx";
             })
         }
 

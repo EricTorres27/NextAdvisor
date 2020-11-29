@@ -72,7 +72,7 @@ export const RegistrarMateria = () => {
                     title: "La materia se ha registrado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http://localhost:3000/Materias"
+                    window.location.href = "http://nextadvisor.com.mx/Materias"
                 })
             } else {
                 swal({

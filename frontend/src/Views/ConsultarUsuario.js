@@ -58,7 +58,7 @@ const ConsultarUsuario = () => {
         setUsuarioSeleccionado(cuenta);
         (caso==="Eliminar")?confirmacionEliminar(cuenta)
         :
-        window.location.href = "http://localhost:3000/EditarUsuario/"+cuenta.cuenta_id;
+        window.location.href = "http://nextadvisor.com.mx/EditarUsuario/"+cuenta.cuenta_id;
     }
     const abirCerrarModalCrear = () => {
         setModalCrearusuario(!modalCrearUsuario);
@@ -247,4 +247,3 @@ const ConsultarUsuario = () => {
 }
 
 export default ConsultarUsuario
-

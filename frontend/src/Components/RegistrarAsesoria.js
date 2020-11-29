@@ -81,7 +81,7 @@ export const RegistrarAsesoria = () => {
                     title: "La asesoria se ha registrado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http://localhost:3000/MisAsesorias";
+                    window.location.href = "http://nextadvisor.com.mx/MisAsesorias";
                 })
             } else {
                 swal({

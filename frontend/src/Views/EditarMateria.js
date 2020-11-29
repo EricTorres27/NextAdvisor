@@ -97,7 +97,7 @@ const styles = {
                     title: "La información se ha guardado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http://localhost:3000/materia";
+                    window.location.href = "http://nextadvisor.com.mx/materia";
                 })
             } else {
                 swal({

@@ -43,7 +43,7 @@ const MisAsesorias = () => {
         setAsesoriaSeleccionada(oferta_asesoria);
         (caso==="Eliminar")?confirmacionEliminar(oferta_asesoria)
         :
-        window.location.href = "http://localhost:3000/EditarAsesoria/"+oferta_asesoria.oferta_id;
+        window.location.href = "http://nextadvisor.com.mx/EditarAsesoria/"+oferta_asesoria.oferta_id;
     }
 
     const columnas = [

@@ -110,7 +110,7 @@ const EditarPerfil = (props) => {
                     title: "El usuario se ha editado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http://localhost:3000/ConsultarPerfil";
+                    window.location.href = "http://nextadvisor.com.mx/ConsultarPerfil";
                 })
             } else {
                 swal({

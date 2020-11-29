@@ -42,7 +42,7 @@ const Materias = () => {
         setMateriaSeleccionada(materia);
         (caso==="Eliminar")?confirmacionEliminar(materia)
         :
-        window.location.href = "http://localhost:3000/EditarMateria/"+materia.materia_id;
+        window.location.href = "http://nextadvisor.com.mx/EditarMateria/"+materia.materia_id;
     }
 
 

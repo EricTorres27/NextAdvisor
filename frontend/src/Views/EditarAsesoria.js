@@ -100,7 +100,7 @@ const EditarAsesoria = (props) => {
                     title: "La información se ha guardado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http://localhost:3000/asesoria";
+                    window.location.href = "http://nextadvisor.com.mx/asesoria";
                 })
             } else {
                 swal({

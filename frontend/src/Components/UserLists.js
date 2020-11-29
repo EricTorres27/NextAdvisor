@@ -152,7 +152,7 @@ const UserLists = () => {
                             <GradeIcon color="primary" fontSize="large" />
                         </ListItemIcon>
                         <Link to="/Evaluaciones">
-                            <ListItemText primary='Evaluación' />
+                            <ListItemText primary='Evaluaciones' />
                         </Link>
                     </ListItem>
                 </List>
