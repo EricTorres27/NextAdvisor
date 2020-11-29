@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Estudiante extends Model
 {
     protected $table = 'estudiante';
+    protected $primaryKey  = 'estudiante_id';
     use HasFactory;
     /**
      * The attributes that are mass assignable.

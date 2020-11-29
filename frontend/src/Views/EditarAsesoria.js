@@ -40,7 +40,7 @@ const EditarAsesoria = (props) => {
             temp.oferta_tarifa = fieldValues.oferta_tarifa ? "" : "Este campo es obligatorio."
         if ('materia_id' in fieldValues)
             temp.materia_id = fieldValues.materia_id ? "" : "Este campo es obligatorio."
-      
+
             setErrors({
             ...temp
         })
@@ -68,7 +68,7 @@ const EditarAsesoria = (props) => {
                 icon: "info"
             })
         }
-    } 
+    }
 
     const {
         values,
@@ -99,8 +99,8 @@ const EditarAsesoria = (props) => {
                 initialValues.materia_id=response.data.materia_id;
                 initialValues.estudiante_id=response.data.estudiante_id;
                 initialValues.oferta_id=response.data.oferta_id;
-                
-              
+
+
             })
     }
 
@@ -109,8 +109,8 @@ const EditarAsesoria = (props) => {
             const response = await API.put("asesoria/"+values.oferta_id,
                 {
                     "oferta_fecha": values.oferta_fecha,
-                    "oferta_tarifa": values.oferta_tarifa, 
-                    "materia_id": values.materia_id, 
+                    "oferta_tarifa": values.oferta_tarifa,
+                    "materia_id": values.materia_id,
                 }
             )
             if (response.data.flag == 1) {

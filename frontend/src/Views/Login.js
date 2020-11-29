@@ -87,6 +87,7 @@ export default function SignIn() {
       },
       { headers: { "Accept": "application/json" } },
     ).then(res => {
+      console.log(res.data)
       localStorage.setItem("token",res.data['access_token']);
       API.get('/auth/profile',{ headers: { "Authorization": "Bearer " + localStorage.token } })
         .then(res => {
@@ -107,7 +108,7 @@ export default function SignIn() {
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("nombreCuenta",res.data['cuenta_nombre_usuario'])
           localStorage.setItem("cuentaId", res.data['cuenta_id']);
-          window.location.reload();
+          window.location.href = "http://nextadvisor.com.mx";
         })
         .catch(err => {
           console.log(err);
