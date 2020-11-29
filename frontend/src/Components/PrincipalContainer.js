@@ -75,6 +75,9 @@ const PrincipalContainer = () => {
         setStateOpen(!stateOpen)
     }
 
+   const role = localStorage.getItem("rol");
+   
+ 
     const role = localStorage.getItem("rol");
     // const role = "administrador";
     if (role == "asesor") {
@@ -117,6 +120,8 @@ const PrincipalContainer = () => {
                         <Route exact path="/EstablecerTarifa" component={EstablecerTarifa} />
                         <Route exact path="/ConsultarPerfil" component={ConsultarPerfil} />
                         <Route exact path="passSubject" component={passSubject} />
+                        <Route exact path="/asesores/:cuenta_id" component={advisoryAdv} />
+                       
                         <Route exact path="/Evaluaciones" component={Evaluaciones} />
                         <Route exact path="/AmbienteConstruido" component={AmbienteConstruido} />
                         <Route exact path="/CienciasSociales" component={CienciasSociales} />

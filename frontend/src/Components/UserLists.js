@@ -22,6 +22,10 @@ import {
 
 
 const role = localStorage.getItem("rol");
+<<<<<<< HEAD
+
+=======
+>>>>>>> Marcela/RegistrarMateria_Asesor
 // const role = "administrador";
 const UserLists = () => {
 
