@@ -22,7 +22,10 @@ import {
 
 
 const role = localStorage.getItem("rol");
+<<<<<<< HEAD
 
+=======
+>>>>>>> Marcela/RegistrarMateria_Asesor
 // const role = "administrador";
 const UserLists = () => {
 
@@ -148,9 +151,6 @@ const UserLists = () => {
                             <ListItemText primary='Asesorías' />
                         </Link>
                     </ListItem>
-                    <Divider />
-                    <Divider />
-                    <Divider />
                     <ListItem button>
                         <ListItemIcon>
                             <GradeIcon color="primary" fontSize="large" />
