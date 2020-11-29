@@ -8,9 +8,6 @@ import swal from 'sweetalert';
 import axios from 'axios';
 import API from '../apis/api';
 
-
-
-
 const initialValues = {
     materia_id: '',
     materia_nombre: '',
@@ -29,7 +26,7 @@ const styles = {
             temp.materia_nombre = fieldValues.materia_nombre ? "" : "Este campo es obligatorio."
         if ('area_id' in fieldValues)
             temp.area_id = fieldValues.area_id ? "" : "Este campo es obligatorio."
-        
+
         setErrors({
             ...temp
         })
@@ -56,7 +53,7 @@ const styles = {
                 icon: "info"
             })
         }
-    } 
+    }
     const {
         values,
         setValues,
@@ -66,12 +63,7 @@ const styles = {
         resetForm
     } = useForm(initialValues, true, validate);
 
-   
-  
-    
 
-    
-    
     const peticionGet = async () => {
         await API.get('materia/'+match.params.materia_id)
             .then(response => {
@@ -80,7 +72,7 @@ const styles = {
                 initialValues.materia_nombre=response.data.materia_nombre;
                 initialValues.materia_id=response.data.materia_id;
                 initialValues.administrador_id=response.data.administrador_id;
-              
+
             })
     }
 
@@ -89,8 +81,8 @@ const styles = {
             const response = await API.put("materia/"+values.materia_id,
                 {
                     "area_id": values.area_id,
-                    "materia_nombre": values.materia_nombre, 
-                    //"materia_id": values.materia_id, 
+                    "materia_nombre": values.materia_nombre,
+                    //"materia_id": values.materia_id,
                 }
             )
             if (response.data.flag == 1) {
@@ -98,11 +90,7 @@ const styles = {
                     title: "La información se ha guardado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-<<<<<<< HEAD
                     window.location.href = "http://www.nextadvisor.com.mx/materias";
-=======
-                    window.location.href = "http://nextadvisor.com.mx/materia";
->>>>>>> Fani/Ligas
                 })
             } else {
                 swal({
@@ -173,7 +161,7 @@ const styles = {
                     <Form onSubmit={handleSubmitMateria}>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={6}>
-                                
+
                                     <Controls.Input
                                         name="materia_nombre"
                                         label="Nombre"
@@ -181,11 +169,11 @@ const styles = {
                                         onChange={handleInputChange}
                                         error={errors.materia_nombre}
                                     />
-                             
+
                             </Grid>
 
                         </Grid>
-                        
+
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={6}>
                                 <Controls.SelectArea
@@ -197,8 +185,8 @@ const styles = {
                                 />
                             </Grid>
                         </Grid>
-                        
-                    
+
+
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={12}>
                                 <Box ml={3} mt={1} align="right">

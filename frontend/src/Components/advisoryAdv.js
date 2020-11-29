@@ -45,18 +45,14 @@ const MisAsesorias = () => {
         setAsesoriaSeleccionada(oferta_asesoria);
         (caso==="Eliminar")?confirmacionEliminar(oferta_asesoria)
         :
-<<<<<<< HEAD
         window.location.href = "http://www.nextadvisor.com/EditarAsesoria/"+oferta_asesoria.oferta_id;
-=======
-        window.location.href = "http://nextadvisor.com.mx/EditarAsesoria/"+oferta_asesoria.oferta_id;
->>>>>>> Fani/Ligas
     }
 
     const columnas = [
         {
             title: 'Id',
             field: 'oferta_id',
-            
+
         },
         {
             title: 'Fecha',
@@ -71,7 +67,7 @@ const MisAsesorias = () => {
             title: 'Materia',
             field: 'materia_nombre'
         },
-       
+
     ];
     const tableIcons = {
         Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -93,7 +89,7 @@ const MisAsesorias = () => {
         ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
     };
 
-    
+
 
     const cuentaId=localStorage.getItem("cuentaId");
 
@@ -107,7 +103,7 @@ const MisAsesorias = () => {
 
     const peticionDelete = async (asesoriaId) => {
         try {
-            
+
             const response = await API.delete("asesoria/"+ asesoriaId)
             if (response.data.flag == 1) {
                 swal({
@@ -171,7 +167,7 @@ const MisAsesorias = () => {
                 peticionDelete(asesoriaSeleccionada.oferta_id);
             }
         })
-    }    
+    }
     return (
         <div>
             <Paper elevation={3} sclassName={styles.Paper}>

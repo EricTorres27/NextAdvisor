@@ -35,7 +35,7 @@ export const RegistrarMateria = () => {
             temp.materia_nombre = fieldValues.materia_nombre ? "" : "Este campo es obligatorio."
         if ('area_id' in fieldValues)
             temp.area_id = fieldValues.area_id ? "" : "Este campo es obligatorio."
-        
+
         setErrors({
             ...temp
         })
@@ -77,10 +77,10 @@ export const RegistrarMateria = () => {
         try {
             const response = await API.post('materia',
                 {
-                   
+
                     "materia_nombre":values.materia_nombre,
                     "area_id":values.area_id,
-                  
+
                 }
             )
             if (response.data.flag == 0) {
@@ -88,11 +88,7 @@ export const RegistrarMateria = () => {
                     title: "La materia se ha registrado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-<<<<<<< HEAD
                     window.location.href = "http://www.nextadvisor.com.mx/Materias"
-=======
-                    window.location.href = "http://nextadvisor.com.mx/Materias"
->>>>>>> Fani/Ligas
                 })
             } else {
                 swal({
@@ -151,7 +147,7 @@ export const RegistrarMateria = () => {
     }
 
 
-    
+
     return (
         <div style={{ height: "650px" }}>
             <Box color="primary.contrastText" mb={1}>
@@ -170,7 +166,7 @@ export const RegistrarMateria = () => {
 
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={6}>
-                                
+
                                     <Controls.Input
                                         name="materia_nombre"
                                         label="Nombre"
@@ -178,11 +174,11 @@ export const RegistrarMateria = () => {
                                         onChange={handleInputChange}
                                         error={errors.materia_nombre}
                                     />
-                             
+
                             </Grid>
 
                         </Grid>
-                        
+
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={6}>
                                 <Controls.SelectArea
@@ -194,8 +190,8 @@ export const RegistrarMateria = () => {
                                 />
                             </Grid>
                         </Grid>
-                        
-                    
+
+
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={12}>
                                 <Box ml={3} mt={1} align="right">

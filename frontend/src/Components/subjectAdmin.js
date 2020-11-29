@@ -43,11 +43,7 @@ const Materias = () => {
         setMateriaSeleccionada(materia);
         (caso==="Eliminar")?confirmacionEliminar(materia)
         :
-<<<<<<< HEAD
         window.location.href = "http://www.nextadvisor.com.mx/EditarMateria/"+materia.materia_id;
-=======
-        window.location.href = "http://nextadvisor.com.mx/EditarMateria/"+materia.materia_id;
->>>>>>> Fani/Ligas
     }
 
 
@@ -66,7 +62,7 @@ const Materias = () => {
             title: 'Area',
             field: 'area_nombre'
         },
-        
+
     ];
     const tableIcons = {
         Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -100,7 +96,7 @@ const Materias = () => {
 
     const peticionDelete = async (materiaId) => {
         try {
-            
+
             const response = await API.delete("materia/"+ materiaId)
             if (response.data.flag == 1) {
                 swal({
@@ -164,7 +160,7 @@ const Materias = () => {
                 peticionDelete(materiaSeleccionada.materia_id);
             }
         })
-    }    
+    }
     return (
         <div>
             <Paper  elevation={3} className={styles.Paper}>

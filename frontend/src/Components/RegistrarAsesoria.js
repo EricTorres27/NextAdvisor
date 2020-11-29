@@ -15,7 +15,7 @@ const initialValues = {
    oferta_fecha: '',
    oferta_tarifa: '',
    materia_id: '',
-   estudiante_id:cuentaId 
+   estudiante_id:cuentaId
 }
 
 const styles = makeStyles(theme =>({
@@ -25,7 +25,7 @@ const styles = makeStyles(theme =>({
 export const RegistrarAsesoria = () => {
     const classes = styles()
     const [materia, setMateria] = useState([]);
-   
+
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -33,7 +33,7 @@ export const RegistrarAsesoria = () => {
             temp.oferta_fecha = fieldValues.oferta_fecha ? "" : "Este campo es obligatorio."
         if ('oferta_tarifa' in fieldValues)
             temp.oferta_tarifa = fieldValues.oferta_tarifa ? "" : "Este campo es obligatorio."
-        
+
 
 
         setErrors({
@@ -58,13 +58,13 @@ export const RegistrarAsesoria = () => {
         if (validate())
             confirmacion();
     }
-   
+
 
    // const baseURL = "http://localhost:8000/api/asesoria";
-    
-   
+
+
     const peticionPost = async () => {
-        
+
         try {
             console.log(cuentaId)
             const response = await API.post('asesoria',
@@ -74,7 +74,7 @@ export const RegistrarAsesoria = () => {
                     "materia_id":values.materia_id,
                     "estudiante_id":cuentaId
                 },{ headers: { "Authorization": "Bearer " + localStorage.token } }
-                            
+
             )
             console.log(response.data)
             if (response.data.flag == 0) {
@@ -82,11 +82,7 @@ export const RegistrarAsesoria = () => {
                     title: "La asesoria se ha registrado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-<<<<<<< HEAD
                     window.location.href = "http://www.nextadvisor.com.mx/MisAsesorias";
-=======
-                    window.location.href = "http://nextadvisor.com.mx/MisAsesorias";
->>>>>>> Fani/Ligas
                 })
             } else {
                 swal({
@@ -139,7 +135,7 @@ export const RegistrarAsesoria = () => {
                 setMateria(response.data);
             })
     }
-    
+
     useEffect(() => {
         peticionGetMateria();
     }, [])
@@ -196,7 +192,7 @@ export const RegistrarAsesoria = () => {
                                     error={errors.oferta_tarifa}
                                 />
                             </Grid>
-                            
+
                             <Grid item xs={12} sm={6}>
                                 <FormControl variant="outlined"  className={classes.selects} >
                                     <InputLabel>Materia</InputLabel>
@@ -207,14 +203,14 @@ export const RegistrarAsesoria = () => {
                                     >
                                         <MenuItem value=''>Elija una materia</MenuItem>
                                         {materia.map((materia)=> (
-                                            <MenuItem key={materia.materia_id} value={materia.materia_id}>{materia.materia_nombre}</MenuItem>  
+                                            <MenuItem key={materia.materia_id} value={materia.materia_id}>{materia.materia_nombre}</MenuItem>
                                          ) )}
 
-                                        
+
                                     </MuiSelect>
                                 </FormControl>
                             </Grid>
- 
+
 
                         </Grid>
                         <Grid container spacing={1}>

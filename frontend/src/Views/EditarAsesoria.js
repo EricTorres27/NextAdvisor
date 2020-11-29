@@ -9,10 +9,6 @@ import axios from 'axios';
 import { FormControl, InputLabel, MenuItem, Select as MuiSelect } from '@material-ui/core';
 import API from '../apis/api';
 
-
-
-
-
 const initialValues = {
    oferta_id:'',
    oferta_fecha: '',
@@ -26,7 +22,7 @@ const styles = makeStyles(theme =>({
 }))
 
 const EditarAsesoria = (props) => {
-    
+
 
     const { match } = props;
     const classes = styles()
@@ -118,11 +114,7 @@ const EditarAsesoria = (props) => {
                     title: "La información se ha guardado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-<<<<<<< HEAD
                     window.location.href = "http:www.nextadvisor.com.mx/MisAsesorias";
-=======
-                    window.location.href = "http://nextadvisor.com.mx/asesoria";
->>>>>>> Fani/Ligas
                 })
             } else {
                 swal({
@@ -177,7 +169,7 @@ const EditarAsesoria = (props) => {
         })
     }
     useEffect(() => {
-        
+
         peticionGet();
         peticionGetMateria();
     }, [])
@@ -228,14 +220,14 @@ const EditarAsesoria = (props) => {
                                     >
                                         <MenuItem value=''>Elija una materia</MenuItem>
                                         {materia.map((materia)=> (
-                                            <MenuItem key={materia.materia_id} value={materia.materia_id}>{materia.materia_nombre}</MenuItem>  
+                                            <MenuItem key={materia.materia_id} value={materia.materia_id}>{materia.materia_nombre}</MenuItem>
                                          ) )}
 
-                                        
+
                                     </MuiSelect>
                                 </FormControl>
                             </Grid>
-                           
+
 
                         </Grid>
                         <Grid container spacing={1}>

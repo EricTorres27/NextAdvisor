@@ -76,10 +76,7 @@ const PrincipalContainer = () => {
     }
 
    const role = localStorage.getItem("rol");
-   
- 
-    const role = localStorage.getItem("rol");
-    // const role = "administrador";
+   // const role = "administrador";
     if (role == "asesor") {
         return (
             <Router>
@@ -121,7 +118,7 @@ const PrincipalContainer = () => {
                         <Route exact path="/ConsultarPerfil" component={ConsultarPerfil} />
                         <Route exact path="passSubject" component={passSubject} />
                         <Route exact path="/asesores/:cuenta_id" component={advisoryAdv} />
-                       
+
                         <Route exact path="/Evaluaciones" component={Evaluaciones} />
                         <Route exact path="/AmbienteConstruido" component={AmbienteConstruido} />
                         <Route exact path="/CienciasSociales" component={CienciasSociales} />
@@ -181,7 +178,7 @@ const PrincipalContainer = () => {
                         <Route exact path="/MateriaAdmin" component={subjectAdmin} />
                         <Route exact path="/subjectAdmin" component={subjectAdmin} />
                         <Route exact path="/EditarMateria/:materia_id" component={EditarMateria} />
-                        
+
                         <Route exact path="/EditarAsesoria/:oferta_id" component={EditarAsesoria} />
                         <Route exact path="/AsesoresRegistrados" component={AsesoresRegistrados} />
                     </div>
