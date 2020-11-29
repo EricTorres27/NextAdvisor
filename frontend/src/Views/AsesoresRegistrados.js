@@ -2,6 +2,7 @@ import {Bar} from 'react-chartjs-2'
 import { Box, Paper, makeStyles } from '@material-ui/core';
 import React, { forwardRef, useState, useEffect } from 'react';
 import axios from 'axios';
+import API from '../apis/api';
 
 const useStyles = makeStyles((theme) => ({
     Paper: { height: 650, padding: 20, marginLeft: 50, marginRight: 50, overflowY: 'auto' },
@@ -32,7 +33,7 @@ function AsesoresRegistrados() {
                     borderWidht: 1,
                     hoverBackgroundColor: '#59a5d8',
                     hoverBorderColor: 'pink',
-                    data:[Asesor,Estudiante]
+                    data:[Asesor,Estudiante,0]
         }]
 
         
@@ -46,7 +47,7 @@ function AsesoresRegistrados() {
                     borderWidht: 1,
                     hoverBackgroundColor: '#59a5d8',
                     hoverBorderColor: 'pink',
-                    data:[Ambiente,Negocios,Ciencias,Creativos,Salud,Ingenieria]
+                    data:[Ambiente,Negocios,Ciencias,Creativos,Salud,Ingenieria,0]
         }]
     };
     
@@ -67,50 +68,50 @@ function AsesoresRegistrados() {
 
     }, [])  
     const peticionAmbiente=async()=>{
-        var valor = await axios.get('http://www.nextadvisor.com.mx/api/area/ambiente')
+        var valor = await API.get('area/ambiente')
         .then(response=>{
             setAmbiente(response.data);
         })
     }
     const peticionNegocios=async()=>{
-        var valor = await axios.get('http://www.nextadvisor.com.mx/api/area/negocios')
+        var valor = await API.get('area/negocios')
         .then(response=>{
             setNegocios(response.data);
         })
     }
     const peticionCiencias=async()=>{
-        var valor = await axios.get('http://www.nextadvisor.com.mx/api/area/ciencias')
+        var valor = await API.get('area/ciencias')
         .then(response=>{
             setCiencias(response.data);
         })
     }
     const peticionCreativos=async()=>{
-        var valor = await axios.get('http://www.nextadvisor.com.mx/api/area/creativos')
+        var valor = await API.get('area/creativos')
         .then(response=>{
             setCreativos(response.data);
         })
     }
     const peticionSalud=async()=>{
-        var valor = await axios.get('http://www.nextadvisor.com.mx/api/area/salud')
+        var valor = await API.get('area/salud')
         .then(response=>{
             setSalud(response.data);
         })
     } 
     const peticionIngenieria=async()=>{
-        var valor = await axios.get('http://www.nextadvisor.com.mx/api/area/ingenieria')
+        var valor = await API.get('area/ingenieria')
         .then(response=>{
             setIngenieria(response.data);
         })
     }
 
     const peticionAsesor=async()=>{
-    var valor = await axios.get('http://www.nextadvisor.com.mx/api/asesor')
+    var valor = await API.get('asesor')
     .then(response=>{
         setAsesor(response.data);
     })
 }
 const peticionEstudiante=async()=>{
-    var valor = await axios.get('http://www.nextadvisor.com.mx/api/estudiante')
+    var valor = await API.get('estudiante')
     .then(response=>{
         setEstudiante(response.data);
     })
