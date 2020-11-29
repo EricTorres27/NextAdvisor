@@ -90,14 +90,14 @@ export const EstablecerTarifa = () => {
                  */
                 swal({
                     title: "Error",
-                    text: "No hubo respuesta intentelo mas tarde",
+                    text: "No hubo respuesta, intentelo más tarde.",
                     icon: "error",
                 })
             } else {
                 // Something happened in setting up the request and triggered an Error
                 swal({
                     title: "Error",
-                    text: "No hubo respuesta intentelo mas tarde",
+                    text: "No hubo respuesta, intentelo más tarde.",
                     icon: "error"
                 })
             }
@@ -108,8 +108,8 @@ export const EstablecerTarifa = () => {
 
     const confirmacion = () => {
         swal({
-            title: "¿Seguro que desea registrar la tarifa?",
-            text: "La información quedara guardada en la base de datos",
+            title: "¿Está seguro que desea registrar la tarifa?",
+            text: "La información quedara guardada en la base de datos.",
             buttons: ["Si", "No"]
         }).then(respuesta => {
             if (respuesta) {

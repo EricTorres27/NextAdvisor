@@ -120,19 +120,19 @@ const EditarUsuario = (props) => {
             if (error.response) {
                 swal({
                     title: "Error: " + error.response.status,
-                    text: "Verifique la información y vuelvalo a intentar",
+                    text: "Verifique la información y vuelva a intentarlo.",
                     icon: "error"
                 })
             } else if (error.request) {
                 swal({
                     title: "Error",
-                    text: "No hubo respuesta intentelo mas tarde",
+                    text: "No hubo respuesta, intentelo más tarde.",
                     icon: "error"
                 })
             } else {
                 swal({
                     title: "Error",
-                    text: "No hubo respuesta intentelo mas tarde",
+                    text: "No hubo respuesta, intentelo más tarde.",
                     icon: "error"
                 })
             }
@@ -173,8 +173,8 @@ const EditarUsuario = (props) => {
 
     const confirmacion = () => {
         swal({
-            title: "¿Seguro que desea registrar al usuario?",
-            text: "La información quedara guardada en la base de datos",
+            title: "¿Está seguro que desea registrar al usuario?",
+            text: "La información quedara guardada en la base de datos.",
             buttons: ["No", "Si"]
         }).then(respuesta => {
             if (respuesta) {
@@ -261,6 +261,10 @@ const EditarUsuario = (props) => {
                                     />
                                 </Box>
                             </Grid>
+                            
+                            <Box ml={3} mb={2}>
+                                <Typography variant="h5">Datos de la cuenta</Typography>
+                            </Box>
                             <Grid item xs={12} sm={12}>
                                 <Box mb={2} mr={2} ml={2}>
                                     <Controls.Input

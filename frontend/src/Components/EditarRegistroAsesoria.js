@@ -22,7 +22,7 @@ export default class passSubject extends Component {
         }
         const deleted=()=>{
             swal({
-                title:"¿Seguro que desea eliminar el registro de asesoría?",
+                title:"¿Está seguro que desea eliminar el registro de asesoría?",
                 icon: "warning",
                 buttons: ["No", "Si"]
 

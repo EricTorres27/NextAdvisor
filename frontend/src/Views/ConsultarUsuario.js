@@ -157,7 +157,7 @@ const ConsultarUsuario = () => {
             } else {
                 swal({
                     title: response.data.message,
-                    text: "Error interno, intentelo más tarde",
+                    text: "Error interno, intentelo más tarde.",
                     icon: "info"
                 })
             }
@@ -166,19 +166,19 @@ const ConsultarUsuario = () => {
             if (error.response) {
                 swal({
                     title: "Error: " + error.response.status,
-                    text: "Verifique la información y vuelvalo a intentar",
+                    text: "Verifique la información y vuelva a intentarlo.",
                     icon: "error"
                 })
             } else if (error.request) {
                 swal({
                     title: "Error",
-                    text: "No hubo respuesta intentelo mas tarde",
+                    text: "No hubo respuesta, intentelo más tarde.",
                     icon: "error"
                 })
             } else {
                 swal({
                     title: "Error",
-                    text: "No hubo respuesta intentelo mas tarde",
+                    text: "No hubo respuesta, intentelo más tarde.",
                     icon: "error"
                 })
             }
@@ -193,8 +193,8 @@ const ConsultarUsuario = () => {
 
     const confirmacionEliminar = (cuentaSeleccionada) => {
         swal({
-            title: "¿Seguro que desea eliminar al usuario "+cuentaSeleccionada.cuenta_nombre_usuario+" del sistema?",
-            text: "La información quedara guardada en la base de datos",
+            title: "¿Está seguro que desea eliminar al usuario "+cuentaSeleccionada.cuenta_nombre_usuario+" del sistema?",
+            text: "La información quedara guardada en la base de datos.",
             buttons: ["No", "Si"]
         }).then(respuesta => {
             if (respuesta) {

@@ -93,13 +93,13 @@ const ConsultarPreguntas = () => {
                 setData(response.data);
             })
     }
-    
+
     const peticionDelete = async (preguntaId) => {
         try {
             const response = await API.delete('pregunta/'+preguntaId,)
             if (response.data.flag == 1) {
                 swal({
-                    title: "La pregunta se ha eliminado con éxito",
+                    title: "La pregunta se ha eliminado con éxito.",
                     icon: "success"
                 }).then(respuesta => {
                     window.location.reload();
@@ -107,7 +107,7 @@ const ConsultarPreguntas = () => {
             } else {
                 swal({
                     title: response.data.message,
-                    text: "Error interno, intentelo más tarde",
+                    text: "Error interno, intentelo más tarde.",
                     icon: "info"
                 })
             }
@@ -121,7 +121,7 @@ const ConsultarPreguntas = () => {
                  */
                 swal({
                     title: "Error: " + error.response.status,
-                    text: "Verifique la información y vuelvalo a intentar",
+                    text: "Verifique la información y vuelva a intentarlo.",
                     icon: "error"
                 })
             } else if (error.request) {
@@ -132,14 +132,14 @@ const ConsultarPreguntas = () => {
                  */
                 swal({
                     title: "Error",
-                    text: "No hubo respuesta intentelo mas tarde",
+                    text: "No hubo respuesta, intentelo más tarde.",
                     icon: "error"
                 })
             } else {
                 // Something happened in setting up the request and triggered an Error
                 swal({
                     title: "Error",
-                    text: "No hubo respuesta intentelo mas tarde",
+                    text: "No hubo respuesta, intentelo más tarde.",
                     icon: "error"
                 })
             }
@@ -149,11 +149,11 @@ const ConsultarPreguntas = () => {
     useEffect(() => {
         peticionGet();
     }, [])
-    
+
     const confirmacionEliminar = (preguntaSeleccionada) => {
         swal({
-            title: "¿Seguro que desea eliminar la pregunta del sistema?",
-            text: "La información quedara guardada en la base de datos",
+            title: "¿Está seguro que desea eliminar la pregunta del sistema?",
+            text: "La información quedara guardada en la base de datos.",
             buttons: ["No", "Si"]
         }).then(respuesta => {
             if (respuesta) {
@@ -161,7 +161,7 @@ const ConsultarPreguntas = () => {
             }
         })
     }    
-    
+
 
     return (
         <div>

@@ -107,7 +107,7 @@ const MisAsesorias = () => {
             const response = await API.delete("asesoria/"+ asesoriaId)
             if (response.data.flag == 1) {
                 swal({
-                    title: "La asesoría se ha eliminado con éxito",
+                    title: "La asesoría se ha eliminado con éxito.",
                     icon: "success"
                 }).then(respuesta => {
                     window.location.reload();
@@ -115,7 +115,7 @@ const MisAsesorias = () => {
             } else {
                 swal({
                     title: response.data.message,
-                    text: "Error interno, intentelo más tarde",
+                    text: "Error interno, intentelo más tarde..",
                     icon: "info"
                 })
             }
@@ -129,7 +129,7 @@ const MisAsesorias = () => {
                  */
                 swal({
                     title: "Error: " + error.response.status,
-                    text: "Verifique la información y vuelvalo a intentar",
+                    text: "Verifique la información y vuelva a intentarlo.",
                     icon: "error"
                 })
             } else if (error.request) {
@@ -140,14 +140,14 @@ const MisAsesorias = () => {
                  */
                 swal({
                     title: "Error",
-                    text: "No hubo respuesta intentelo mas tarde",
+                    text: "No hubo respuesta, intentelo más tarde.",
                     icon: "error"
                 })
             } else {
                 // Something happened in setting up the request and triggered an Error
                 swal({
                     title: "Error",
-                    text: "No hubo respuesta intentelo mas tarde",
+                    text: "No hubo respuesta, intentelo más tarde.",
                     icon: "error"
                 })
             }
@@ -159,8 +159,8 @@ const MisAsesorias = () => {
 
     const confirmacionEliminar = (asesoriaSeleccionada) => {
         swal({
-            title: "¿Seguro que desea eliminar la asesoria "+asesoriaSeleccionada.materia_nombre+" del sistema?",
-            text: "La información quedara guardada en la base de datos",
+            title: "¿Está seguro que desea eliminar la asesoria "+asesoriaSeleccionada.materia_nombre+" del sistema?",
+            text: "La información quedara guardada en la base de datos.",
             buttons: ["No", "Si"]
         }).then(respuesta => {
             if (respuesta) {

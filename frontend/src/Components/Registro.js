@@ -179,7 +179,7 @@ export default function SignUp() {
       } else {
         swal({
           title: response.data.message,
-          text: "Cambie la información solicitada",
+          text: "Por favor, cambie la información solicitada.",
           icon: "info"
         })
       }
@@ -188,19 +188,19 @@ export default function SignUp() {
       if (error.response) {
         swal({
           title: "Error: " + error.response.status,
-          text: "Verifique la información y vuelvalo a intentar",
+          text: "Verifique la información y vuelva a intentarlo.",
           icon: "error"
         })
       } else if (error.request) {
         swal({
           title: "Error",
-          text: "No hubo respuesta intentelo mas tarde",
+          text: "No hubo respuesta, intentelo más tarde.",
           icon: "error"
         })
       } else {
         swal({
           title: "Error",
-          text: "No hubo respuesta intentelo mas tarde",
+          text: "No hubo respuesta, intentelo más tarde.",
           icon: "error"
         })
       }
@@ -208,8 +208,8 @@ export default function SignUp() {
   }
   const confirmacion = () => {
     swal({
-      title: "¿Registrar con los datos ingresados?",
-      text: "Podra editar la información cuando lo necesite",
+      title: "¿Desea registrarse con los datos ingresados?",
+      text: "Podrá editar la información cuando lo necesite.",
       buttons: ["No", "Si"]
     }).then(respuesta => {
       if (respuesta) {
@@ -300,6 +300,11 @@ export default function SignUp() {
                   />
                 </Box>
               </Grid>
+
+              <Box ml={3} mb={2}>
+                  <Typography variant="h5">Datos de la cuenta</Typography>
+              </Box>
+
               <Grid item xs={12} sm={12}>
                 <Box mb={2} mr={2} ml={2}>
                   <Controls.Input

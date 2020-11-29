@@ -39,6 +39,7 @@ const UserLists = () => {
                             <ListItemText primary='Mi perfil' />
                         </Link>
                     </ListItem>
+                    <Divider />
                     <ListItem button>
                         <ListItemIcon>
                             <EventIcon color="primary" fontSize="large" />
@@ -147,6 +148,7 @@ const UserLists = () => {
                             <ListItemText primary='Asesorías' />
                         </Link>
                     </ListItem>
+                    <Divider />
                     <ListItem button>
                         <ListItemIcon>
                             <GradeIcon color="primary" fontSize="large" />

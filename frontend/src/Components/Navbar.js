@@ -49,7 +49,7 @@ const Navbar = (props) => {
         setAnchorEl(null);
         logOut();
         localStorage.clear();
-        window.location.href = "http://nextadvisor.com.mx";
+        window.location.href = "http://www.nextadvisor.com.mx";
     };
     return (
         <AppBar className={classes.appBar}>

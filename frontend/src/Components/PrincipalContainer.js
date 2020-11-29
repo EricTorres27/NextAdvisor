@@ -8,26 +8,17 @@ import Navbar from './Navbar';
 import NavBarAdmin from './NavBarAdmin';
 import NavBarStudent from './NavBarStudent';
 import advisoryAdv from './advisoryAdv';
-import AprobarMateria from './AprobarMateria';
 import subjectAdmin from './subjectAdmin';
 import EditarRegistroAsesoria from './EditarRegistroAsesoria';
-import MetodoPago from './MetodoPago';
 import DrawerBox from './DrawerBox';
-import passSubject from './passSubject';
 import ConsultUser from './ConsultUser';
 import RegistrarAsesoria from './RegistrarAsesoria';
 import Registro from './Registro';
 import subjects from './subjects';
-import Perfil from './Perfil';
 import AsesoresRegistrados from '../Views/AsesoresRegistrados';
-import Tarifa from './Tarifa';
 
 import { BrowserRouter as Router, Route, Redirect  } from 'react-router-dom';
 import HistorialAsesoria from '../Views/HistorialAsesoria';
-import ConsultAdvisory from './ConsultAdvisory';
-import ConsultTopic from './ConsultTopic';
-import Reports from './Reports';
-import AdminProfile from './AdminProfile';
 import ConsultarUsuario from '../Views/ConsultarUsuario';
 import { CrearUsuario } from '../Views/CrearUsuario';
 import { RegistrarMateria } from './RegistrarMateria';
@@ -109,14 +100,10 @@ const PrincipalContainer = () => {
                         <Route exact path="/Materias" component={subjects} />
                         <Route exact path="/RegistrarMateria" component={RegistrarMateria} />
                         <Route exact path="/MisAsesorias" component={advisoryAdv} />
-                        <Route exact path="/AprobarMateria" component={AprobarMateria} />
                         <Route exact path="/EditarAsesoria/:oferta_id" component={EditarAsesoria} />
-                        <Route exact path="/MetodoPago" component={MetodoPago} />
-                        <Route exact path="/Perfil" component={Perfil} />
                         <Route exact path="/EditarPerfil" component={EditarPerfil} />
                         <Route exact path="/EstablecerTarifa" component={EstablecerTarifa} />
                         <Route exact path="/ConsultarPerfil" component={ConsultarPerfil} />
-                        <Route exact path="passSubject" component={passSubject} />
                         <Route exact path="/asesores/:cuenta_id" component={advisoryAdv} />
 
                         <Route exact path="/Evaluaciones" component={Evaluaciones} />
@@ -160,13 +147,10 @@ const PrincipalContainer = () => {
                                 )
                             }} />
                         <Route exact path="/Registro" component={Registro} />
-                        <Route exact path="/AdminProfile" component={AdminProfile} />
                         <Route exact path="/ConsultarUsuario" component={ConsultarUsuario} />
                         <Route exact path="/EditarUsuario/:cuentaId" component={EditarUsuario} />
                         <Route exact path="/EditarPregunta/:preguntaId" component={EditarPregunta} />
                         <Route exact path="/HistorialAsesoria" component={HistorialAsesoria} />
-                        <Route exact path="/Reports" component={Reports} />
-                        <Route exact path="/ConsultTopic" component={ConsultTopic} />
                         <Route exact path="/CrearUsuario" component={CrearUsuario} />
                         <Route exact path="/CrearAdministrador" component={CrearAdministrador} />
                         <Route exact path="/PreguntasFrecuentes" component={ConsultarPreguntas} />
@@ -174,7 +158,6 @@ const PrincipalContainer = () => {
                         <Route exact path="/Materias" component={subjectAdmin} />
                         <Route exact path="/RegistrarMateria" component={RegistrarMateria} />
                         <Route exact path="/ConsultarPerfil" component={ConsultarPerfil} />
-                        <Route exact path="/passSubject" component={passSubject} />
                         <Route exact path="/MateriaAdmin" component={subjectAdmin} />
                         <Route exact path="/subjectAdmin" component={subjectAdmin} />
                         <Route exact path="/EditarMateria/:materia_id" component={EditarMateria} />
@@ -210,7 +193,6 @@ const PrincipalContainer = () => {
                         <Route exact path="/Registro" component={Registro} />
                         <Route exact path="/RegistrarAsesoria" component={RegistrarAsesoria} />
                         <Route exact path="/Materias" component={subjects} />
-                        <Route exact path="/Perfil" component={Perfil} />
                         <Route exact path="/EditarPerfil" component={EditarPerfil} />
                         <Route exact path="/ConsultarPerfil" component={ConsultarPerfil} />
                     </div>

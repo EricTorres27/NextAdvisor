@@ -108,7 +108,7 @@ const Materias = () => {
             } else {
                 swal({
                     title: response.data.message,
-                    text: "Error interno, intentelo más tarde",
+                    text: "Error interno, intentelo más tarde.",
                     icon: "info"
                 })
             }
@@ -122,7 +122,7 @@ const Materias = () => {
                  */
                 swal({
                     title: "Error: " + error.response.status,
-                    text: "Verifique la información y vuelvalo a intentar",
+                    text: "Verifique la información y vuelva a intentarlo.",
                     icon: "error"
                 })
             } else if (error.request) {
@@ -133,14 +133,14 @@ const Materias = () => {
                  */
                 swal({
                     title: "Error",
-                    text: "No hubo respuesta intentelo mas tarde",
+                    text: "No hubo respuesta, intentelo más tarde.",
                     icon: "error"
                 })
             } else {
                 // Something happened in setting up the request and triggered an Error
                 swal({
                     title: "Error",
-                    text: "No hubo respuesta intentelo mas tarde",
+                    text: "No hubo respuesta, intentelo más tarde.",
                     icon: "error"
                 })
             }
@@ -152,8 +152,8 @@ const Materias = () => {
 
     const confirmacionEliminar = (materiaSeleccionada) => {
         swal({
-            title: "¿Seguro que desea eliminar la materia "+materiaSeleccionada.materia_nombre+" del sistema?",
-            text: "La información quedara guardada en la base de datos",
+            title: "¿Está seguro que desea eliminar la materia "+materiaSeleccionada.materia_nombre+" del sistema?",
+            text: "La información quedara guardada en la base de datos.",
             buttons: ["No", "Si"]
         }).then(respuesta => {
             if (respuesta) {
