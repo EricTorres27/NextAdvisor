@@ -274,7 +274,7 @@ export default function SignUp() {
                 <Box mb={2} mr={2} ml={2}>
                   <Controls.Select
                     name="cuenta_genero"
-                    label="Genero"
+                    label="Género"
                     value={values.cuenta_genero}
                     onChange={handleInputChange}
                     error={errors.cuenta_genero}

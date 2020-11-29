@@ -59,8 +59,8 @@ const EditarAsesoria = (props) => {
             confirmacion();
         }else{
             swal({
-                title: "No se ha realizado ningun cambio",
-                text: "Es necesario realizar al menos un cambio en la información",
+                title: "No se ha realizado ningún cambio.",
+                text: "Es necesario realizar al menos un cambio en la información.",
                 icon: "info"
             })
         }

@@ -167,8 +167,8 @@ const EditarPerfil = (props) => {
             confirmacion();
         }else{
             swal({
-                title: "No se ha realizado ningun cambio",
-                text: "Es necesario realizar al menos un cambio en la información",
+                title: "No se ha realizado ningún cambio.",
+                text: "Es necesario realizar al menos un cambio en la información.",
                 icon: "info"
             })
         }
@@ -238,7 +238,7 @@ const EditarPerfil = (props) => {
                                 <Box mb={2} mr={2} ml={2}>
                                     <Controls.Select
                                         name="cuenta_genero"
-                                        label="Genero"
+                                        label="Género"
                                         value={values.cuenta_genero}
                                         onChange={handleInputChange}
                                         error={errors.cuenta_genero}
@@ -264,7 +264,7 @@ const EditarPerfil = (props) => {
                                     />
                                 </Box>
                             </Grid>
-                            
+
                             <Box ml={3} mb={2}>
                                 <Typography variant="h5">Datos de la cuenta</Typography>
                             </Box>

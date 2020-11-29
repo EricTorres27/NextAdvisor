@@ -85,10 +85,10 @@ export const RegistrarMateria = () => {
             )
             if (response.data.flag == 0) {
                 swal({
-                    title: "La materia se ha registrado con éxito",
+                    title: "La materia se ha registrado con éxito.",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http://www.nextadvisor.com.mx/Materias"
+                    window.location.href = "http://www.nextadvisor.com.mx/subjectAdmin"
                 })
             } else {
                 swal({

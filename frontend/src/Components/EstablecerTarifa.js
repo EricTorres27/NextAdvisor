@@ -57,7 +57,7 @@ export const EstablecerTarifa = () => {
             )
             if (response.data.flag == 0) {
                 swal({
-                    title: "La tarifa se ha registrado con éxito",
+                    title: "La tarifa se ha registrado con éxito.",
                     icon: "success"
                 }).then(respuesta => {
                     return <Link to="/ConsultarTarifa" />;

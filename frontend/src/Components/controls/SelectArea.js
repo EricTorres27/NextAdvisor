@@ -21,7 +21,7 @@ export default function SelectArea(props) {
                     <MenuItem key="3" value="3">Ciencias sociales</MenuItem>
                     <MenuItem key="4" value="4">Estudios creativos</MenuItem>
                     <MenuItem key="5" value="5">Salud</MenuItem>
-                    <MenuItem key="6" value="6">Ingenieria</MenuItem>
+                    <MenuItem key="6" value="6">Ingeniería</MenuItem>
                 </MuiSelect>
                 {error && <FormHelperText>{error}</FormHelperText>}
             </FormControl>

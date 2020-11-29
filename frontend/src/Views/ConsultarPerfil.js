@@ -191,6 +191,13 @@ const ConsultarPerfil = (props) => {
                                     </Button>
                                 </Box>
                               </Link>
+                              <Link to ="/EditarPerfil">
+                                <Box ml={3} mt={1} align="right">
+                                    <Button size="large">
+                                      Eliminar
+                                    </Button>
+                                </Box>
+                              </Link>
                             </Grid>
                         </Grid>
                     </Form>

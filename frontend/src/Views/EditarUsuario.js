@@ -164,8 +164,8 @@ const EditarUsuario = (props) => {
             confirmacion();
         }else{
             swal({
-                title: "No se ha realizado ningun cambio",
-                text: "Es necesario realizar al menos un cambio en la información",
+                title: "No se ha realizado ningún cambio.",
+                text: "Es necesario realizar al menos un cambio en la información.",
                 icon: "info"
             })
         }
@@ -193,7 +193,7 @@ const EditarUsuario = (props) => {
                 <Typography color="white" align="center" variant="h3">Editar usuario</Typography>
             </Box>
             <Paper elevation={3} style={styles.Paper}>
-                <Link to="/ConsultUser">
+                <Link to="/ConsultarUsuario">
                     <ArrowBackIcon button fontSize="large" />
                 </Link>
                 <Box mt={5} ml={5}>
@@ -235,7 +235,7 @@ const EditarUsuario = (props) => {
                                 <Box mb={2} mr={2} ml={2}>
                                     <Controls.Select
                                         name="cuenta_genero"
-                                        label="Genero"
+                                        label="Género"
                                         value={values.cuenta_genero}
                                         onChange={handleInputChange}
                                         error={errors.cuenta_genero}
@@ -261,7 +261,7 @@ const EditarUsuario = (props) => {
                                     />
                                 </Box>
                             </Grid>
-                            
+
                             <Box ml={3} mb={2}>
                                 <Typography variant="h5">Datos de la cuenta</Typography>
                             </Box>

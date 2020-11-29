@@ -46,7 +46,7 @@ const MisAsesorias = () => {
     }
 
     const columnas = [
-       
+
         {
             title: 'Fecha',
             field: 'oferta_fecha',
@@ -72,7 +72,7 @@ const MisAsesorias = () => {
             title: '',
             field: 'cuenta_apellido_materno'
         },
-       
+
     ];
     const tableIcons = {
         Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -94,7 +94,7 @@ const MisAsesorias = () => {
         ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
     };
 
-    
+
 
     const baseURL = "http://localhost:8000/api/asesoria";
     const peticionGet = async () => {
@@ -106,7 +106,7 @@ const MisAsesorias = () => {
 
     const peticionDelete = async (asesoriaId) => {
         try {
-            
+
             const response = await axios.delete("http://localhost:8000/api/asesoria/"+ asesoriaId)
             if (response.data.flag == 1) {
                 swal({
@@ -170,7 +170,7 @@ const MisAsesorias = () => {
                 peticionDelete(asesoriaSeleccionada.oferta_id);
             }
         })
-    }    
+    }
     return (
         <div>
             <Paper elevation={3} sclassName={styles.Paper}>
@@ -179,7 +179,7 @@ const MisAsesorias = () => {
                     columns={columnas}
                     data={data}
                     icons={tableIcons}
-                   
+
                     options={{
                         actionsColumnIndex: -1
                     }}

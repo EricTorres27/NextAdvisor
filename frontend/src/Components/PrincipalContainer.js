@@ -161,7 +161,7 @@ const PrincipalContainer = () => {
                         <Route exact path="/MateriaAdmin" component={subjectAdmin} />
                         <Route exact path="/subjectAdmin" component={subjectAdmin} />
                         <Route exact path="/EditarMateria/:materia_id" component={EditarMateria} />
-
+                        <Route exact path="/EditarPerfil" component={EditarPerfil} />
                         <Route exact path="/EditarAsesoria/:oferta_id" component={EditarAsesoria} />
                         <Route exact path="/AsesoresRegistrados" component={AsesoresRegistrados} />
                     </div>

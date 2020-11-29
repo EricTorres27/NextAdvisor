@@ -79,7 +79,7 @@ export const RegistrarAsesoria = () => {
             console.log(response.data)
             if (response.data.flag == 0) {
                 swal({
-                    title: "La asesoria se ha registrado con éxito",
+                    title: "La asesoria se ha registrado con éxito.",
                     icon: "success"
                 }).then(respuesta => {
                     window.location.href = "http://www.nextadvisor.com.mx/MisAsesorias";
