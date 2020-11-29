@@ -78,8 +78,8 @@ const PrincipalContainer = () => {
    const role = localStorage.getItem("rol");
    
  
-    const role = localStorage.getItem("rol");
-    // const role = "administrador";
+   
+    //const role = "administrador";
     if (role == "asesor") {
         return (
             <Router>

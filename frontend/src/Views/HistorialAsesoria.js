@@ -19,6 +19,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
+import API from '../apis/api';
 
 const useStyles = makeStyles((theme) => ({
     Paper: { height: 650, padding: 20, marginLeft: 50, marginRight: 50, overflowY: 'auto' },
@@ -98,7 +99,7 @@ const MisAsesorias = () => {
 
     const baseURL = "http://localhost:8000/api/asesoria";
     const peticionGet = async () => {
-        await axios.get(baseURL)
+        await API.get("asesoria")
             .then(response => {
                 setData(response.data);
             })
@@ -107,7 +108,7 @@ const MisAsesorias = () => {
     const peticionDelete = async (asesoriaId) => {
         try {
             
-            const response = await axios.delete("http://localhost:8000/api/asesoria/"+ asesoriaId)
+            const response = await API.delete("asesoria/"+ asesoriaId)
             if (response.data.flag == 1) {
                 swal({
                     title: "La asesoría se ha eliminado con éxito",
