@@ -56,6 +56,7 @@ const ConsultarPerfil = (props) => {
                 initialValues.estudiante_semestre = response.data.estudiante_semestre;
                 initialValues.estudiante_carrera = response.data.estudiante_carrera;
                 initialValues.estudiante_calificacion = response.data.estudiante_calificacion;
+                initialValues.rol_id = response.data.rol_id;
                 console.log(initialValues);
                 console.log(values);
                 console.log(response.data);
