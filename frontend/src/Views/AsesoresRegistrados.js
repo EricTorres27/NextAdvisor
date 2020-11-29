@@ -67,50 +67,50 @@ function AsesoresRegistrados() {
 
     }, [])  
     const peticionAmbiente=async()=>{
-        var valor = await axios.get('http://localhost:8000/api/area/ambiente')
+        var valor = await axios.get('http://www.nextadvisor.com.mx/api/area/ambiente')
         .then(response=>{
             setAmbiente(response.data);
         })
     }
     const peticionNegocios=async()=>{
-        var valor = await axios.get('http://localhost:8000/api/area/negocios')
+        var valor = await axios.get('http://www.nextadvisor.com.mx/api/area/negocios')
         .then(response=>{
             setNegocios(response.data);
         })
     }
     const peticionCiencias=async()=>{
-        var valor = await axios.get('http://localhost:8000/api/area/ciencias')
+        var valor = await axios.get('http://www.nextadvisor.com.mx/api/area/ciencias')
         .then(response=>{
             setCiencias(response.data);
         })
     }
     const peticionCreativos=async()=>{
-        var valor = await axios.get('http://localhost:8000/api/area/creativos')
+        var valor = await axios.get('http://www.nextadvisor.com.mx/api/area/creativos')
         .then(response=>{
             setCreativos(response.data);
         })
     }
     const peticionSalud=async()=>{
-        var valor = await axios.get('http://localhost:8000/api/area/salud')
+        var valor = await axios.get('http://www.nextadvisor.com.mx/api/area/salud')
         .then(response=>{
             setSalud(response.data);
         })
     } 
     const peticionIngenieria=async()=>{
-        var valor = await axios.get('http://localhost:8000/api/area/ingenieria')
+        var valor = await axios.get('http://www.nextadvisor.com.mx/api/area/ingenieria')
         .then(response=>{
             setIngenieria(response.data);
         })
     }
 
     const peticionAsesor=async()=>{
-    var valor = await axios.get('http://localhost:8000/api/asesor')
+    var valor = await axios.get('http://www.nextadvisor.com.mx/api/asesor')
     .then(response=>{
         setAsesor(response.data);
     })
 }
 const peticionEstudiante=async()=>{
-    var valor = await axios.get('http://localhost:8000/api/estudiante')
+    var valor = await axios.get('http://www.nextadvisor.com.mx/api/estudiante')
     .then(response=>{
         setEstudiante(response.data);
     })

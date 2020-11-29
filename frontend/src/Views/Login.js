@@ -89,7 +89,7 @@ export default function SignIn() {
     ).then(res => {
       console.log(res.data)
       localStorage.setItem("token",res.data['access_token']);
-      API.get('/auth/profile',{ headers: { "Authorization": "Bearer " + localStorage.token } })
+      API.get('auth/profile',{ headers: { "Authorization": "Bearer " + localStorage.token } })
         .then(res => {
           switch (res.data['rol_id']) {
             case 1:
