@@ -7,6 +7,8 @@ use App\Http\Controllers\OfertaAsesoriaAsesorController;
 use App\Http\Controllers\TarifaController;
 use App\Http\Controllers\PreguntaController;
 use App\Http\Controllers\OfertaAsesoriaController;
+use App\Http\Controllers\AdministradorController;
+use App\Http\Controllers\AreaController;
 use App\Http\Controllers\JWTAuthController;
 use Carbon\Factory;
 use Illuminate\Http\Request;
@@ -27,6 +29,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::resource('asesoria',OfertaAsesoriaAsesorController::class);
+
+
 Route::group([
     'middleware' => 'api',
     'prefix' => 'cuenta'
@@ -55,3 +59,39 @@ Route::resource('materia',MateriaController::class);
 Route::resource('estudiante',EstudianteController::class);
 Route::resource('pregunta',PreguntaController::class);
 Route::resource('historial',OfertaAsesoriaController::class);
+Route::resource('asesor',AdministradorController::class);
+Route::resource('estudiante',EstudianteController::class);
+
+Route::group([
+    'middleware'=>'api',
+    'prefix' => 'materias'
+], function ($router){
+    Route::get('getMateria',[OfertaAsesoriaAsesorController::class,'getMateria']);
+    Route::get('conseguirEstudiante/{idCuenta}', [OfertaAsesoriaAsesorController::class, 'conseguirEstudiante']);
+    Route::get('MiAsesoria/{idCuenta}', [OfertaAsesoriaAsesorController::class, 'MiAsesoria']);
+});
+
+
+
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'area'
+], function ($router) {
+    Route::get('ambiente', [AreaController::class, 'ambiente']);
+    Route::get('negocios', [AreaController::class, 'negocios']);
+    Route::get('ciencias', [AreaController::class, 'ciencias']);
+    Route::get('creativos', [AreaController::class, 'creativos']);
+    Route::get('salud', [AreaController::class, 'salud']);
+    Route::get('ingenieria', [AreaController::class, 'ingenieria']);
+
+});
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'asesores'
+], function ($router) {
+    Route::get('mostrar', [OfertaAsesoriaAsesorController::class, 'mostrar']);
+   
+
+});
+

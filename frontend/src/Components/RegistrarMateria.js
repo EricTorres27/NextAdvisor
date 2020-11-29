@@ -8,7 +8,8 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import { Redirect } from 'react-router-dom';
 import { FormControl, InputLabel, MenuItem, Select as MuiSelect } from '@material-ui/core';
-
+import jwt_decode from "jwt-decode";
+import API from '../apis/api';
 let s;
 
 const initialValues = {
@@ -25,7 +26,7 @@ const styles = {
 
 export const RegistrarMateria = () => {
 
-    const classes = styles()
+
     const [data, setData] = useState([]);
 
     const validate = (fieldValues = values) => {
@@ -58,11 +59,23 @@ export const RegistrarMateria = () => {
             confirmacion();
     }
 
-    const baseURL = "http://localhost:8000/api/materia";
-
+    //const baseURL = "http://localhost:8000/api/materia";
+    const revisarToken = () => {
+        let time = Date.now()
+        time = time / 1000;
+        time = Math.trunc(time);
+        let timeToken = jwt_decode(localStorage.token);
+        let timeLeft = timeToken.exp - time
+        if (timeLeft > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     const peticionPost = async () => {
+        if (revisarToken) {
         try {
-            const response = await axios.post('http://localhost:8000/api/materia',
+            const response = await API.post('materia',
                 {
                    
                     "materia_nombre":values.materia_nombre,
@@ -75,7 +88,7 @@ export const RegistrarMateria = () => {
                     title: "La materia se ha registrado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http://localhost:3000/Materias"
+                    window.location.href = "http://www.nextadvisor.com.mx/Materias"
                 })
             } else {
                 swal({
@@ -119,7 +132,7 @@ export const RegistrarMateria = () => {
             console.log(error);
 
         }
-    }
+    }}
 
     const confirmacion = () => {
         swal({
@@ -132,6 +145,9 @@ export const RegistrarMateria = () => {
             }
         })
     }
+
+
+    
     return (
         <div style={{ height: "650px" }}>
             <Box color="primary.contrastText" mb={1}>

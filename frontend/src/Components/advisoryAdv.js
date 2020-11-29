@@ -20,6 +20,8 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
+import API from '../apis/api';
+
 
 const useStyles = makeStyles((theme) => ({
     Paper: { height: 650, padding: 20, marginLeft: 50, marginRight: 50, overflowY: 'auto' },
@@ -43,7 +45,7 @@ const MisAsesorias = () => {
         setAsesoriaSeleccionada(oferta_asesoria);
         (caso==="Eliminar")?confirmacionEliminar(oferta_asesoria)
         :
-        window.location.href = "http://localhost:3000/EditarAsesoria/"+oferta_asesoria.oferta_id;
+        window.location.href = "http://www.nextadvisor.com/EditarAsesoria/"+oferta_asesoria.oferta_id;
     }
 
     const columnas = [
@@ -89,9 +91,11 @@ const MisAsesorias = () => {
 
     
 
-    const baseURL = "http://localhost:8000/api/asesoria";
+    const cuentaId=localStorage.getItem("cuentaId");
+
+    //const baseURL = "http://localhost:8000/api/materias/conseguirEstudiante/"+ cuentaId;
     const peticionGet = async () => {
-        await axios.get(baseURL)
+        await API.get('materias/conseguirEstudiante/'+cuentaId)
             .then(response => {
                 setData(response.data);
             })
@@ -100,7 +104,7 @@ const MisAsesorias = () => {
     const peticionDelete = async (asesoriaId) => {
         try {
             
-            const response = await axios.delete("http://localhost:8000/api/asesoria/"+ asesoriaId)
+            const response = await API.delete("asesoria/"+ asesoriaId)
             if (response.data.flag == 1) {
                 swal({
                     title: "La asesoría se ha eliminado con éxito",

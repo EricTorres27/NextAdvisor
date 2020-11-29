@@ -19,6 +19,7 @@ import RegistrarAsesoria from './RegistrarAsesoria';
 import Registro from './Registro';
 import subjects from './subjects';
 import Perfil from './Perfil';
+import AsesoresRegistrados from '../Views/AsesoresRegistrados';
 import Tarifa from './Tarifa';
 
 import { BrowserRouter as Router, Route, Redirect  } from 'react-router-dom';
@@ -38,6 +39,7 @@ import EditarUsuario from '../Views/EditarUsuario';
 import EditarMateria from '../Views/EditarMateria';
 import EditarAsesoria from '../Views/EditarAsesoria';
 import EditarPregunta from '../Views/EditarPregunta';
+import EditarPerfil from '../Views/EditarPerfil';
 import logo from '../img/main logo-dark.png';
 import ConsultarPerfil from '../Views/ConsultarPerfil'
 const styles = makeStyles(theme => ({
@@ -65,7 +67,9 @@ const PrincipalContainer = () => {
         setStateOpen(!stateOpen)
     }
 
-    const role = localStorage.getItem("rol");
+   const role = localStorage.getItem("rol");
+   
+ 
     if (role == "asesor") {
         return (
             <Router>
@@ -103,10 +107,10 @@ const PrincipalContainer = () => {
                         <Route exact path="/MetodoPago" component={MetodoPago} />
                         <Route exact path="/Perfil" component={Perfil} />
                         <Route exact path="/EditarPerfil" component={EditarPerfil} />
-                        <Route exact path="/Tarifa" component={Tarifa} />
                         <Route exact path="/EstablecerTarifa" component={EstablecerTarifa} />
                         <Route exact path="/ConsultarPerfil" component={ConsultarPerfil} />
                         <Route exact path="passSubject" component={passSubject} />
+                        <Route exact path="/asesores/:cuenta_id" component={advisoryAdv} />
                        
                     </div>
                 </div>
@@ -160,8 +164,9 @@ const PrincipalContainer = () => {
                         <Route exact path="/MateriaAdmin" component={subjectAdmin} />
                         <Route exact path="/subjectAdmin" component={subjectAdmin} />
                         <Route exact path="/EditarMateria/:materia_id" component={EditarMateria} />
+                        
                         <Route exact path="/EditarAsesoria/:oferta_id" component={EditarAsesoria} />
-                        <Route exact path="/EditarPerfil" component={EditarPerfil} />
+                        <Route exact path="/AsesoresRegistrados" component={AsesoresRegistrados} />
                     </div>
                 </div>
             </Router>

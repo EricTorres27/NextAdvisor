@@ -7,34 +7,33 @@ import Controls from './controls/Controls';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { FormControl, InputLabel, MenuItem, Select as MuiSelect } from '@material-ui/core';
+import API from '../apis/api';
 
-let s;
-
-
+const cuentaId=localStorage.getItem("cuentaId");
 
 const initialValues = {
    oferta_fecha: '',
    oferta_tarifa: '',
    materia_id: '',
-   estudiante_id: ''
+   estudiante_id:cuentaId 
 }
 
 const styles = makeStyles(theme =>({
     Paper: { height: 500, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
 }))
 
-
 export const RegistrarAsesoria = () => {
     const classes = styles()
-    const [materia_id, setMateria] = useState([]);
+    const [materia, setMateria] = useState([]);
+   
+
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
         if ('oferta_fecha' in fieldValues)
             temp.oferta_fecha = fieldValues.oferta_fecha ? "" : "Este campo es obligatorio."
         if ('oferta_tarifa' in fieldValues)
             temp.oferta_tarifa = fieldValues.oferta_tarifa ? "" : "Este campo es obligatorio."
-        if ('materia_id' in fieldValues)
-            temp.materia_id = fieldValues.materia_id ? "" : "Este campo es obligatorio."
+        
 
 
         setErrors({
@@ -57,32 +56,33 @@ export const RegistrarAsesoria = () => {
     const handleSubmit = e => {
         e.preventDefault()
         if (validate())
-
             confirmacion();
-
     }
    
 
-    const baseURL = "http://localhost:8000/api/asesoria";
-
+   // const baseURL = "http://localhost:8000/api/asesoria";
+    
+   
     const peticionPost = async () => {
+        
         try {
-            const response = await axios.post('http://localhost:8000/api/asesoria',
+            console.log(cuentaId)
+            const response = await API.post('asesoria',
                 {
-
-
                     "oferta_fecha": values.oferta_fecha,
                     "oferta_tarifa":values.oferta_tarifa,
-                    "materia_id":values.materia_id
-
-                }
+                    "materia_id":values.materia_id,
+                    "estudiante_id":cuentaId
+                },{ headers: { "Authorization": "Bearer " + localStorage.token } }
+                            
             )
+            console.log(response.data)
             if (response.data.flag == 0) {
                 swal({
                     title: "La asesoria se ha registrado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http://localhost:3000/MisAsesorias";
+                    window.location.href = "http://www.nextadvisor.com.mx/MisAsesorias";
                 })
             } else {
                 swal({
@@ -127,15 +127,18 @@ export const RegistrarAsesoria = () => {
 
         }
     }
-    const base = "http://localhost:8000/api/";
+   // const base = "http://localhost:8000/api/";
 
     const peticionGetMateria = async () => {
-         axios.get(base + 'materia/getMateria')
+         API.get( 'materias/getMateria')
             .then(response => {
                 setMateria(response.data);
             })
     }
-
+    
+    useEffect(() => {
+        peticionGetMateria();
+    }, [])
 
     const confirmacion = () => {
         swal({
@@ -189,30 +192,25 @@ export const RegistrarAsesoria = () => {
                                     error={errors.oferta_tarifa}
                                 />
                             </Grid>
+                            
                             <Grid item xs={12} sm={6}>
-                                <Controls.SelectMateria
+                                <FormControl variant="outlined"  className={classes.selects} >
+                                    <InputLabel>Materia</InputLabel>
+                                    <MuiSelect
                                     name="materia_id"
-                                    label="Materia"
                                     value={values.materia_id}
                                     onChange={handleInputChange}
-                                    error={errors.materia_id}
-                                />
-                            </Grid>
+                                    >
+                                        <MenuItem value=''>Elija una materia</MenuItem>
+                                        {materia.map((materia)=> (
+                                            <MenuItem key={materia.materia_id} value={materia.materia_id}>{materia.materia_nombre}</MenuItem>  
+                                         ) )}
 
-                            <Grid item xs={12} sm={3}>
-                            <FormControl variant="outlined" className={classes.selects}>
-                                <InputLabel>Materia</InputLabel>
-                                <MuiSelect
-                                    name="materia"
-                                    value={materia_id.materia_id}
-                                    onChange={handleInputChange}>
-                                      <MenuItem value=''>Ninguno</MenuItem>
-                                    {materia_id.map((materia_id) => (
-                                        <MenuItem key={materia_id.materia_id} value={materia_id.materia_nombre}>{materia_id.materia_nombre}</MenuItem>
-                                    ))}
-                                </MuiSelect>
-                            </FormControl>
-                        </Grid>  
+                                        
+                                    </MuiSelect>
+                                </FormControl>
+                            </Grid>
+ 
 
                         </Grid>
                         <Grid container spacing={1}>

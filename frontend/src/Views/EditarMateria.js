@@ -6,6 +6,7 @@ import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
 import swal from 'sweetalert';
 import axios from 'axios';
+import API from '../apis/api';
 
 
 
@@ -70,9 +71,9 @@ const styles = {
     
 
     
-    const baseURL = "http://localhost:8000/api/materia";
+    
     const peticionGet = async () => {
-        await axios.get(baseURL+'/'+match.params.materia_id)
+        await API.get('materia/'+match.params.materia_id)
             .then(response => {
                 setValues(response.data);
                 initialValues.area_id=response.data.area_id;
@@ -85,7 +86,7 @@ const styles = {
 
     const peticionPut = async () => {
         try {
-            const response = await axios.put("http://localhost:8000/api/materia/"+values.materia_id,
+            const response = await API.put("materia/"+values.materia_id,
                 {
                     "area_id": values.area_id,
                     "materia_nombre": values.materia_nombre, 
@@ -97,7 +98,7 @@ const styles = {
                     title: "La información se ha guardado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http://localhost:3000/materia";
+                    window.location.href = "http://www.nextadvisor.com.mx/materias";
                 })
             } else {
                 swal({

@@ -1,0 +1,143 @@
+import {Bar} from 'react-chartjs-2'
+import { Box, Paper, makeStyles } from '@material-ui/core';
+import React, { forwardRef, useState, useEffect } from 'react';
+import axios from 'axios';
+
+const useStyles = makeStyles((theme) => ({
+    Paper: { height: 650, padding: 20, marginLeft: 50, marginRight: 50, overflowY: 'auto' },
+    Button: {
+        textTransform: 'none',
+        margin: theme.spacing(3)
+    }
+}))
+
+function AsesoresRegistrados() {
+    
+    const [Asesor, setAsesor] = useState([]);
+    const [Ambiente, setAmbiente] = useState([]);
+    const [Negocios, setNegocios] = useState([]);
+    const [Ciencias, setCiencias] = useState([]);
+    const [Creativos, setCreativos] = useState([]);
+    const [Salud, setSalud] = useState([]);
+    const [Ingenieria, setIngenieria] = useState([]);
+    const [Estudiante, setEstudiante] = useState([]);
+    const styles = useStyles();
+
+    const data={
+        labels: ['Asesores', 'Estudiantes'],
+        datasets: [{
+                    label:'Usuarios registrados',
+                    backgroundColor: '#386fa4',
+                    borderColor: 'black',
+                    borderWidht: 1,
+                    hoverBackgroundColor: '#59a5d8',
+                    hoverBorderColor: 'pink',
+                    data:[Asesor,Estudiante]
+        }]
+
+        
+    };
+    const datas={
+        labels: ['Ambiente construido', 'Negocios','Ciencias', 'Estudios creativos', 'Salud', 'Ingenieria'],
+        datasets: [{
+                    label:'Materias registradas',
+                    backgroundColor: '#386fa4',
+                    borderColor: 'black',
+                    borderWidht: 1,
+                    hoverBackgroundColor: '#59a5d8',
+                    hoverBorderColor: 'pink',
+                    data:[Ambiente,Negocios,Ciencias,Creativos,Salud,Ingenieria]
+        }]
+    };
+    
+
+    const opciones={
+        maintainAspectRatio: false,
+        responsive:true
+    }
+    useEffect(() => {
+        peticionAsesor();
+        peticionEstudiante();
+        peticionAmbiente();
+        peticionNegocios();
+        peticionCiencias();
+        peticionCreativos();
+        peticionSalud();
+        peticionIngenieria();
+
+    }, [])  
+    const peticionAmbiente=async()=>{
+        var valor = await axios.get('http://localhost:8000/api/area/ambiente')
+        .then(response=>{
+            setAmbiente(response.data);
+        })
+    }
+    const peticionNegocios=async()=>{
+        var valor = await axios.get('http://localhost:8000/api/area/negocios')
+        .then(response=>{
+            setNegocios(response.data);
+        })
+    }
+    const peticionCiencias=async()=>{
+        var valor = await axios.get('http://localhost:8000/api/area/ciencias')
+        .then(response=>{
+            setCiencias(response.data);
+        })
+    }
+    const peticionCreativos=async()=>{
+        var valor = await axios.get('http://localhost:8000/api/area/creativos')
+        .then(response=>{
+            setCreativos(response.data);
+        })
+    }
+    const peticionSalud=async()=>{
+        var valor = await axios.get('http://localhost:8000/api/area/salud')
+        .then(response=>{
+            setSalud(response.data);
+        })
+    } 
+    const peticionIngenieria=async()=>{
+        var valor = await axios.get('http://localhost:8000/api/area/ingenieria')
+        .then(response=>{
+            setIngenieria(response.data);
+        })
+    }
+
+    const peticionAsesor=async()=>{
+    var valor = await axios.get('http://localhost:8000/api/asesor')
+    .then(response=>{
+        setAsesor(response.data);
+    })
+}
+const peticionEstudiante=async()=>{
+    var valor = await axios.get('http://localhost:8000/api/estudiante')
+    .then(response=>{
+        setEstudiante(response.data);
+    })
+}
+    return(
+        <Paper  elevation={3} className={styles.Paper}>
+        <Box align="center" mb={2}>
+            <div className='App'style={{width: '80%',height: '400px'}}>
+                <h2>Número de usuarios registrados</h2>
+                <Bar data={data} options={opciones}/>
+          </div>
+        </Box>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <Box align="center" mb={2}>
+            <div className='App'style={{width: '80%',height: '400px'}}>
+                <h2>Número de materias registradas por área</h2>
+                <Bar data={datas} options={opciones}/>
+          </div>
+        </Box>
+
+        </Paper>
+        
+        
+    );
+}
+
+export default AsesoresRegistrados;

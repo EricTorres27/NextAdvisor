@@ -22,6 +22,7 @@ import {
 
 
 const role = localStorage.getItem("rol");
+
 const UserLists = () => {
 
     if (role=="estudiante") {
@@ -92,7 +93,7 @@ const UserLists = () => {
                         </ListItem>
                     </Link>
                     <Divider />
-                    <Link to="/Reports" style={{ textDecoration: 'none' }}>
+                    <Link to="/AsesoresRegistrados" style={{ textDecoration: 'none' }}>
                         <ListItem button>
                             <ListItemIcon>
                                 <AssessmentIcon color="primary" fontSize="large" />
@@ -147,23 +148,7 @@ const UserLists = () => {
                         </Link>
                     </ListItem>
                     <Divider />
-                    <ListItem button>
-                        <ListItemIcon>
-                            <AttachMoneyIcon color="primary" fontSize="large" />
-                        </ListItemIcon>
-                        <Link to="Tarifa">
-                            <ListItemText primary='Tarifa' />
-                        </Link>
-                    </ListItem>
                     <Divider />
-                    <ListItem button>
-                        <ListItemIcon>
-                            <CreditCardIcon color="primary" fontSize="large" />
-                        </ListItemIcon>
-                        <Link to="MetodoPago">
-                            <ListItemText primary='Método de pago' />
-                        </Link>
-                    </ListItem>
                     <Divider />
                     <ListItem button>
                         <ListItemIcon>

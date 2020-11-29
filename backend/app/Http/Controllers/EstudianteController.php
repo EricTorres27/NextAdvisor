@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cuenta;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Estudiante;
+use App\Models\Rol;
 use Illuminate\Http\Request;
 
 
@@ -17,7 +18,13 @@ class EstudianteController extends Controller
      */
     public function index()
     {
-        //
+        $Estudiantes = Cuenta::join('estudiante', 'cuenta.cuenta_id', '=', 'estudiante.cuenta_id_estudiante')
+        ->join('rol', 'cuenta.rol_id', '=', 'rol.rol_id')
+        ->select ('cuenta.cuenta_nombre','cuenta.cuenta_apellido_paterno','cuenta.cuenta_apellido_materno','rol.rol_nombre')
+        ->where('rol.rol_nombre','=','Estudiante')
+        ->orderBy('estudiante_id')
+        ->get();
+    return $Estudiantes->count();
     }
 
     /**

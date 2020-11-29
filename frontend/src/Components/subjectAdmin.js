@@ -19,6 +19,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
+import API from '../apis/api';
 
 const useStyles = makeStyles((theme) => ({
     Paper: { height: 650, padding: 20, marginLeft: 50, marginRight: 50, overflowY: 'auto' },
@@ -42,7 +43,7 @@ const Materias = () => {
         setMateriaSeleccionada(materia);
         (caso==="Eliminar")?confirmacionEliminar(materia)
         :
-        window.location.href = "http://localhost:3000/EditarMateria/"+materia.materia_id;
+        window.location.href = "http://www.nextadvisor.com.mx/EditarMateria/"+materia.materia_id;
     }
 
 
@@ -85,9 +86,9 @@ const Materias = () => {
 
     //const [data, setData] = useState([]);
 
-    const baseURL = "http://localhost:8000/api/materia";
+    //const baseURL = "http://localhost:8000/api/materia";
     const peticionGet = async () => {
-        await axios.get(baseURL)
+        await API.get('materia')
             .then(response => {
                 setData(response.data);
             })
@@ -96,7 +97,7 @@ const Materias = () => {
     const peticionDelete = async (materiaId) => {
         try {
             
-            const response = await axios.delete("http://localhost:8000/api/materia/"+ materiaId)
+            const response = await API.delete("materia/"+ materiaId)
             if (response.data.flag == 1) {
                 swal({
                     title: "La materia se ha eliminado con éxito",

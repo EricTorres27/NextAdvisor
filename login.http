@@ -1,0 +1,15 @@
+POST http://localhost:8000/auth/login HTTP/1.1
+Accept: application/application/json
+Content-Type: : application/json
+
+{
+    
+    "oferta_fecha":"2020-10-10",
+    "oferta_tarifa": "80",
+    "materia_id":"11",
+    "estudiante_id": "3",
+
+   
+    
+   
+}

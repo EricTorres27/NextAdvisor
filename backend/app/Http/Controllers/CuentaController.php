@@ -22,6 +22,7 @@ class CuentaController extends Controller
     public function index()
     {
         $cuentas = Cuenta::join('rol', 'cuenta.rol_id', '=', 'rol.rol_id')
+        
             ->select('cuenta.cuenta_id', 'cuenta_nombre_usuario', 'cuenta_correo', 'cuenta_nombre', 'cuenta_apellido_paterno', 'cuenta_apellido_materno', 'rol_nombre')
             ->orderBy('cuenta_id')
             ->get();

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Administrador;
+use App\Models\Rol;
+use App\Models\Cuenta;
 use Illuminate\Http\Request;
 
 class AdministradorController extends Controller
@@ -14,7 +16,13 @@ class AdministradorController extends Controller
      */
     public function index()
     {
-        //
+        $Asesores = Cuenta::join('estudiante', 'cuenta.cuenta_id', '=', 'estudiante.cuenta_id_estudiante')
+            ->join('rol', 'cuenta.rol_id', '=', 'rol.rol_id')
+            ->select ('cuenta.cuenta_nombre','cuenta.cuenta_apellido_paterno','cuenta.cuenta_apellido_materno','rol.rol_nombre')
+            ->where('rol.rol_nombre','=','Asesor')
+            ->orderBy('estudiante_id')
+            ->get();
+        return $Asesores->count();
     }
 
     /**

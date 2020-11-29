@@ -28,20 +28,13 @@ class OfertaAsesoriaAsesorController extends Controller
        
            $ofertaAsesoriaAsesor = OfertaAsesoriaAsesor::join('materia', 'oferta_asesoria.materia_id', '=', 'materia.materia_id')
             ->join('estudiante', 'oferta_asesoria.estudiante_id', '=', 'estudiante.estudiante_id')
-    
-            ->select('oferta_id','oferta_fecha','oferta_tarifa','materia_nombre')
+            ->join('cuenta', 'cuenta.cuenta_id', '=', 'estudiante.cuenta_id_estudiante')
+            ->select('estudiante.estudiante_id','oferta_id','oferta_fecha','oferta_tarifa','materia_nombre','cuenta_nombre','cuenta_apellido_paterno','cuenta_apellido_materno','cuenta_id')
             ->orderBy('oferta_id')
             ->get();
 
         return $ofertaAsesoriaAsesor;
-           
-        /*  $ofertaAsesoriaAsesor = OfertaAsesoriaAsesor::join('materia', 'oferta_asesoria.materia_id', '=', 'materia.materia_id')
-            ->join('estudiante', 'oferta_asesoria.estudiante_id', '=', 'estudiante.estudiante_id')
-            ->select('oferta_fecha, oferta_tarifa, materia.materia_nombre, estudiante.estudiante_nombre')
-            ->orderBy('materia_id')
-            ->get();
-        return $ofertaAsesoriaAsesor;
-         */
+        
         
 
     }
@@ -54,25 +47,39 @@ class OfertaAsesoriaAsesorController extends Controller
      */
     public function store(Request $request)
     {
+        
+    $idEstudiante = Estudiante:: where('cuenta_id_estudiante', '=', $request->estudiante_id)
+    ->select('estudiante_id')
+    ->first();
+   
 
+        OfertaAsesoriaAsesor::create([
 
-            OfertaAsesoriaAsesor::create([
                 "oferta_fecha"=>$request->oferta_fecha,
                 "oferta_tarifa"=>$request->oferta_tarifa,
-                "estudiante_id"=>"1",
+                "estudiante_id"=>$idEstudiante->estudiante_id,
                 "materia_id"=>$request->materia_id
             ]);
-
             return response()->json([
                 'message' => 'Exitoso',
                 'flag' => 0,
             ], 200);
-             
-            
-        //}
         }
       
-    
+        public function MiAsesoria(){
+          
+            
+            $ofertaAsesoriaAsesor = OfertaAsesoriaAsesor::join('materia', 'oferta_asesoria.materia_id', '=', 'materia.materia_id')
+            ->join('estudiante', 'oferta_asesoria.estudiante_id', '=', 'estudiante.estudiante_id')
+            ->join('cuenta', 'cuenta.cuenta_id', '=', 'estudiante.cuenta_id_estudiante')
+            ->select('estudiante.estudiante_id','oferta_id','oferta_fecha','oferta_tarifa','materia_nombre','cuenta_nombre','cuenta_apellido_paterno','cuenta_apellido_materno','cuenta_id')
+            -> where('oferta_asesoria.estudiante_id', '=' , $idEstudiante->estudiante_id )
+            ->orderBy('oferta_id')
+            ->get();
+        
+        return $ofertaAsesoriaAsesor;
+             
+        }
 
     /**
      * Display the specified resource.
@@ -103,6 +110,7 @@ class OfertaAsesoriaAsesorController extends Controller
             $as->materia_id = $request->input('materia_id');
             $as->save();
             DB::commit();
+            
             return response()->json([
                 'message' => 'Asesoria actualizada con exito',
                 'flag' => 1
@@ -142,8 +150,32 @@ class OfertaAsesoriaAsesorController extends Controller
         }
     }
 
-   // public function validarAsesoria(Request $request)
-    //{
-    //    return OfertaAsesoriaAsesor::where('oferta_id', $oferta_id)->exists();
-   // }
+    public function getMateria(){
+        $materia=Materia::select('materia_id','materia_nombre')->get();
+        return $materia;
+    }
+
+    
+
+public function conseguirEstudiante($idCuenta){
+
+    $idEstudiante = Estudiante:: where('cuenta_id_estudiante', '=', $idCuenta)
+    ->select('estudiante_id')
+    ->first();
+    $ofertaAsesoriaAsesor = OfertaAsesoriaAsesor::join('materia', 'oferta_asesoria.materia_id', '=', 'materia.materia_id')
+            ->join('estudiante', 'oferta_asesoria.estudiante_id', '=', 'estudiante.estudiante_id')
+            ->join('cuenta', 'cuenta.cuenta_id', '=', 'estudiante.cuenta_id_estudiante')
+            ->select('estudiante.estudiante_id','oferta_id','oferta_fecha','oferta_tarifa','materia_nombre','cuenta_nombre','cuenta_apellido_paterno','cuenta_apellido_materno','cuenta_id')
+            -> where('estudiante.estudiante_id', '=' ,  $idEstudiante->estudiante_id )
+            ->orderBy('oferta_id')
+            ->get();
+        
+        return $ofertaAsesoriaAsesor;
+             
+ 
+}
+
+
+
+
 }

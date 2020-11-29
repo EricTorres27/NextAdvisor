@@ -133,4 +133,6 @@ class MateriaController extends Controller
     {
         return Materia::where('materia_nombre', $request->materia_nombre)->exists();
     }
+
+   
 }

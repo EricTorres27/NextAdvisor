@@ -1,31 +1,37 @@
-import React, {useEffect} from 'react';
-import { Box, Grid, Typography, Paper, Container, TextField, Button } from '@material-ui/core';
+import React, { useState,useEffect} from 'react';
+import {Box, Grid, Typography, Paper, Container,  Button,Card, CardContent, CardMedia, makeStyles, TextField } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
 import swal from 'sweetalert';
 import axios from 'axios';
-
+import { FormControl, InputLabel, MenuItem, Select as MuiSelect } from '@material-ui/core';
+import API from '../apis/api';
 
 
 
 
 
 const initialValues = {
-    oferta_id:'',
+   oferta_id:'',
    oferta_fecha: '',
    oferta_tarifa: '',
    materia_id: '',
    estudiante_id: '',
 }
 
-const styles = {
+const styles = makeStyles(theme =>({
     Paper: { height: 500, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
-}
+}))
 
 const EditarAsesoria = (props) => {
+    
+
     const { match } = props;
+    const classes = styles()
+    const [materia, setMateria ] = useState([]);
+
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
         if ('oferta_fecha' in fieldValues)
@@ -45,7 +51,7 @@ const EditarAsesoria = (props) => {
 
     const validacionIgual = () =>{
         let flag=0;
-        if(initialValues.oferta_fecha==values.oferta_fecha && initialValues.oferta_tarifa==values.oferta_tarifa){
+        if(initialValues.oferta_fecha==values.oferta_fecha && initialValues.oferta_tarifa==values.oferta_tarifa&&initialValues.materia_id==values.materia_id){
             flag=1;
         }
         return flag;
@@ -73,12 +79,19 @@ const EditarAsesoria = (props) => {
         resetForm
     } = useForm(initialValues, true, validate);
 
-    const baseURL = "http://localhost:8000/api/asesoria";
+   // const baseURL = "http://localhost:8000/api/asesoria";
 
+   // const base = "http://localhost:8000/api/";
 
+    const peticionGetMateria = async () => {
+         API.get( 'materias/getMateria')
+            .then(response => {
+                setMateria(response.data);
+            })
+    }
 
     const peticionGet = async () => {
-        await axios.get(baseURL+'/'+match.params.oferta_id)
+        await API.get('/'+match.params.oferta_id)
             .then(response => {
                 setValues(response.data);
                 initialValues.oferta_fecha=response.data.oferta_fecha;
@@ -93,7 +106,7 @@ const EditarAsesoria = (props) => {
 
     const peticionPut = async () => {
         try {
-            const response = await axios.put("http://localhost:8000/api/asesoria/"+values.oferta_id,
+            const response = await API.put("asesoria/"+values.oferta_id,
                 {
                     "oferta_fecha": values.oferta_fecha,
                     "oferta_tarifa": values.oferta_tarifa, 
@@ -105,7 +118,7 @@ const EditarAsesoria = (props) => {
                     title: "La información se ha guardado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http://localhost:3000/asesoria";
+                    window.location.href = "http:www.nextadvisor.com.mx/MisAsesorias";
                 })
             } else {
                 swal({
@@ -150,7 +163,7 @@ const EditarAsesoria = (props) => {
 
     const confirmacion = () => {
         swal({
-            title: "¿Seguro que desea registrar la nueva información de la pregunta?",
+            title: "¿Seguro que desea registrar la nueva información de la Asesoria?",
             text: "La información quedara guardada en la base de datos",
             buttons: ["No", "Si"]
         }).then(respuesta => {
@@ -160,7 +173,9 @@ const EditarAsesoria = (props) => {
         })
     }
     useEffect(() => {
+        
         peticionGet();
+        peticionGetMateria();
     }, [])
 
     return (
@@ -200,15 +215,22 @@ const EditarAsesoria = (props) => {
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
-                                <Controls.SelectMateria
+                                <FormControl variant="outlined"  className={classes.selects} >
+                                    <InputLabel>Materia</InputLabel>
+                                    <MuiSelect
                                     name="materia_id"
-                                    label="Materia"
                                     value={values.materia_id}
                                     onChange={handleInputChange}
-                                    error={errors.materia_id}
-                                />
-                            </Grid>
+                                    >
+                                        <MenuItem value=''>Elija una materia</MenuItem>
+                                        {materia.map((materia)=> (
+                                            <MenuItem key={materia.materia_id} value={materia.materia_id}>{materia.materia_nombre}</MenuItem>  
+                                         ) )}
 
+                                        
+                                    </MuiSelect>
+                                </FormControl>
+                            </Grid>
                            
 
                         </Grid>

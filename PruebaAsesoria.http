@@ -3,12 +3,8 @@ Accept: application/application/json
 Content-Type: : application/json
 
 {
-    
-    "oferta_fecha":"2020-10-10",
-    "oferta_tarifa": "80",
-    "materia_id":"11"
-
-   
-    
-   
+    "oferta_fecha":"2010-10-10",
+    "oferta_tarifa": "100",
+    "materia_id":"2",
+    "estudiante_id":"3" 
 }
