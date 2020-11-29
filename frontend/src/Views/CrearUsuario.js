@@ -107,7 +107,7 @@ export const CrearUsuario = () => {
                     title: "El usuario se ha creado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http://nextadvisor.com.mx/ConsultarUsuario";
+                    window.location.href = "http://www.nextadvisor.com.mx/ConsultarUsuario";
                 })
             } else {
                 swal({

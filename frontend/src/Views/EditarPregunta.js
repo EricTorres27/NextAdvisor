@@ -87,7 +87,7 @@ const EditarPregunta = (props) => {
                     title: "La pregunta se ha creado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http://nextadvisor.com.mx/PreguntasFrecuentes";
+                    window.location.href = "http://www.nextadvisor.com.mx/PreguntasFrecuentes";
                 })
             } else {
                 swal({

@@ -139,7 +139,7 @@ export default function SignUp() {
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("nombreCuenta",res.data['cuenta_nombre_usuario'])
           localStorage.setItem("cuentaId", res.data['cuenta_id']);
-          window.location.href = "http://nextadvisor.com.mx";
+          window.location.href = "http://www.nextadvisor.com.mx";
         })
         .catch(err => {
           console.log(err);

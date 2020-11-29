@@ -42,7 +42,7 @@ const ConsultarPreguntas = () => {
         setPreguntaSeleccionada(pregunta);
         (caso==="Eliminar")?confirmacionEliminar(pregunta)
         :
-        window.location.href = "http://nextadvisor.com.mx/EditarPregunta/"+pregunta.pregunta_id;
+        window.location.href = "http://www.nextadvisor.com.mx/EditarPregunta/"+pregunta.pregunta_id;
     }
     const columnas = [
 
@@ -160,7 +160,7 @@ const ConsultarPreguntas = () => {
                 peticionDelete(preguntaSeleccionada.pregunta_id);
             }
         })
-    }    
+    }
 
 
     return (
