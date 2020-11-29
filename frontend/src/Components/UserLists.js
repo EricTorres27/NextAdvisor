@@ -23,6 +23,7 @@ import {
 
 const role = localStorage.getItem("rol");
 
+// const role = "administrador";
 const UserLists = () => {
 
     if (role=="estudiante") {
@@ -125,7 +126,7 @@ const UserLists = () => {
                         <ListItemIcon>
                             <AccountCircleIcon color="primary" fontSize="large" />
                         </ListItemIcon>
-                        <Link to="">
+                        <Link to="/ConsultarPerfil">
                             <ListItemText primary='Mi perfil' />
                         </Link>
                     </ListItem>
@@ -154,7 +155,7 @@ const UserLists = () => {
                         <ListItemIcon>
                             <GradeIcon color="primary" fontSize="large" />
                         </ListItemIcon>
-                        <Link to="">
+                        <Link to="/Evaluaciones">
                             <ListItemText primary='Evaluación' />
                         </Link>
                     </ListItem>

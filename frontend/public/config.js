@@ -1,0 +1,1 @@
+window.baseURL="http://api.nextadvisor.com.mx/api/";
