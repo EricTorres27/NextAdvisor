@@ -1,6 +1,5 @@
 import React, { forwardRef, useState, useEffect } from 'react';
 import { Box, Button, Divider, Grid, Typography, Paper, Container, Select, MenuItem, List,makeStyles } from '@material-ui/core';
-import axios from 'axios';
 import MaterialTable from 'material-table'
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -29,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const Materias = () => {
+const Materias = (props) => {
     const styles = useStyles();
     const [data, setData] = useState([]);
     const [materiaSeleccionada, setMateriaSeleccionada] = useState({
@@ -43,7 +42,8 @@ const Materias = () => {
         setMateriaSeleccionada(materia);
         (caso==="Eliminar")?confirmacionEliminar(materia)
         :
-        window.location.href = "http://www.nextadvisor.com.mx/EditarMateria/"+materia.materia_id;
+        props.history.push("/subjectAdmin/"+materia.materia_id);
+
     }
 
 
@@ -84,9 +84,7 @@ const Materias = () => {
         ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
     };
 
-    //const [data, setData] = useState([]);
 
-    //const baseURL = "http://localhost:8000/api/materia";
     const peticionGet = async () => {
         await API.get('materia')
             .then(response => {

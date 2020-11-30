@@ -4,7 +4,6 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import { useForm, Form } from './useForm';
 import Controls from './controls/Controls';
-import axios from 'axios';
 import swal from 'sweetalert';
 import { FormControl, InputLabel, MenuItem, Select as MuiSelect } from '@material-ui/core';
 import API from '../apis/api';
@@ -22,7 +21,7 @@ const styles = makeStyles(theme =>({
     Paper: { height: 500, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
 }))
 
-export const RegistrarAsesoria = () => {
+export const RegistrarAsesoria = (props) => {
     const classes = styles()
     const [materia, setMateria] = useState([]);
 
@@ -60,13 +59,11 @@ export const RegistrarAsesoria = () => {
     }
 
 
-   // const baseURL = "http://localhost:8000/api/asesoria";
 
 
     const peticionPost = async () => {
 
         try {
-            console.log(cuentaId)
             const response = await API.post('asesoria',
                 {
                     "oferta_fecha": values.oferta_fecha,
@@ -82,7 +79,8 @@ export const RegistrarAsesoria = () => {
                     title: "La asesoria se ha registrado con éxito.",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http://www.nextadvisor.com.mx/MisAsesorias";
+                    props.history.push("/MisAsesorias");
+
                 })
             } else {
                 swal({
@@ -127,7 +125,6 @@ export const RegistrarAsesoria = () => {
 
         }
     }
-   // const base = "http://localhost:8000/api/";
 
     const peticionGetMateria = async () => {
          API.get( 'materias/getMateria')

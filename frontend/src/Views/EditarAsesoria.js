@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
 import swal from 'sweetalert';
-import axios from 'axios';
 import { FormControl, InputLabel, MenuItem, Select as MuiSelect } from '@material-ui/core';
 import API from '../apis/api';
 
@@ -75,9 +74,6 @@ const EditarAsesoria = (props) => {
         resetForm
     } = useForm(initialValues, true, validate);
 
-   // const baseURL = "http://localhost:8000/api/asesoria";
-
-   // const base = "http://localhost:8000/api/";
 
     const peticionGetMateria = async () => {
          API.get( 'materias/getMateria')
@@ -114,7 +110,7 @@ const EditarAsesoria = (props) => {
                     title: "La información se ha guardado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http:www.nextadvisor.com.mx/MisAsesorias";
+                    props.history.push("/MisAsesorias");
                 })
             } else {
                 swal({

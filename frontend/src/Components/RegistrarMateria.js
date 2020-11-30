@@ -4,7 +4,6 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
-import axios from 'axios';
 import swal from 'sweetalert';
 import { Redirect } from 'react-router-dom';
 import { FormControl, InputLabel, MenuItem, Select as MuiSelect } from '@material-ui/core';
@@ -24,7 +23,7 @@ const styles = {
 }
 
 
-export const RegistrarMateria = () => {
+export const RegistrarMateria = (props) => {
 
 
     const [data, setData] = useState([]);
@@ -59,7 +58,6 @@ export const RegistrarMateria = () => {
             confirmacion();
     }
 
-    //const baseURL = "http://localhost:8000/api/materia";
     const revisarToken = () => {
         let time = Date.now()
         time = time / 1000;
@@ -88,7 +86,7 @@ export const RegistrarMateria = () => {
                     title: "La materia se ha registrado con éxito.",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http://www.nextadvisor.com.mx/subjectAdmin"
+                    props.history.push("/subjectAdmin");
                 })
             } else {
                 swal({
@@ -215,3 +213,4 @@ export const RegistrarMateria = () => {
         </div>
     )
 }
+export default RegistrarMateria

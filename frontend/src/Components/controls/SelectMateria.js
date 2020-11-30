@@ -1,11 +1,6 @@
 import React from 'react'
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select as MuiSelect } from '@material-ui/core';
-//import axios from 'axios';
 
-//componentDidMount(){
-
-
-//}
 export default function SelectMateria(props) {
 
     const { name, label, value, onChange, error = null } = props;

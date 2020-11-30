@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
 import swal from 'sweetalert';
-import axios from 'axios';
 import API from '../apis/api';
 
+const cuentaId=localStorage.getItem("cuentaId");
 const initialValues = {
-    administrador_id: '1',
+    administrador_id: cuentaId,
     pregunta_pregunta: '',
     pregunta_respuesta: '',
 
@@ -18,7 +18,7 @@ const initialValues = {
 const styles = {
     Paper: { height: 500, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
 }
-const CrearPreguntasFrecuentes = () => {
+const CrearPreguntasFrecuentes = (props) => {
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -53,7 +53,7 @@ const CrearPreguntasFrecuentes = () => {
                 {
                     "pregunta_pregunta": values.pregunta_pregunta,
                     "pregunta_respuesta": values.pregunta_respuesta,
-                    "administrador_id": values.administrador_id,
+                    "administrador_id": cuentaId,
                 }
             )
             if (response.data.flag == 1) {
@@ -61,7 +61,7 @@ const CrearPreguntasFrecuentes = () => {
                     title: "La pregunta se ha creado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http://www.nextadvisor.com.mx/PreguntasFrecuentes";
+                    props.history.push("/PreguntasFrecuentes");
                 })
             } else {
                 swal({

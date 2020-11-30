@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
 import swal from 'sweetalert';
-import axios from 'axios';
 import API from '../apis/api';
 
 const styles = {
@@ -65,7 +64,7 @@ const EditarUsuario = (props) => {
     } = useForm(initialValues, true, validate);
 
     const getUsuario = async () => {
-        await API.get('cuenta/obtenerCuenta/' + match.params.cuentaId)
+        await API.get('cuenta/obtenerCuenta/' + props.match.params.cuentaId)
             .then(response => {
                 setValues(response.data);
                 initialValues.cuenta_nombre = response.data.cuenta_nombre;
@@ -79,16 +78,15 @@ const EditarUsuario = (props) => {
                 initialValues.estudiante_carrera = response.data.estudiante_carrera;
                 initialValues.estudiante_calificacion = response.data.estudiante_calificacion;
                 initialValues.rol_id = response.data.rol_id;
-                console.log(initialValues);
-                console.log(values);
-                console.log(response.data);
+
             })
 
     }
 
     const peticionPutUsuario = async () => {
         try {
-            const response = await API.put('cuenta/actualizarCuenta/'+match.params.cuentaId,
+            
+            const response = await API.put('cuenta/actualizarCuenta/'+props.match.params.cuentaId,
                 {
                     "cuenta_nombre": values.cuenta_nombre,
                     "cuenta_apellido_materno": values.cuenta_apellido_materno,
@@ -107,7 +105,7 @@ const EditarUsuario = (props) => {
                     title: "El usuario se ha editado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http://www.nextadvisor.com.mx/ConsultarUsuario";
+                    props.history.push("/ConsultarUsuario");
                 })
             } else {
                 swal({

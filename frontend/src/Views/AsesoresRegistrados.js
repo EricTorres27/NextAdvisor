@@ -1,7 +1,6 @@
 import {Bar} from 'react-chartjs-2'
 import { Box, Paper, makeStyles } from '@material-ui/core';
 import React, { forwardRef, useState, useEffect } from 'react';
-import axios from 'axios';
 import API from '../apis/api';
 
 const useStyles = makeStyles((theme) => ({

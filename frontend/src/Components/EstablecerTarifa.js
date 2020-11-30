@@ -4,8 +4,8 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
-import axios from 'axios';
 import swal from 'sweetalert';
+import API from '../apis/api';
 
 const initialValues = {
     oferta_tarifa: '',
@@ -45,11 +45,10 @@ export const EstablecerTarifa = () => {
             confirmacion();
     }
 
-    const baseURL = "http://localhost:8000/api/tarifa";
 
     const peticionPost = async () => {
         try {
-            const response = await axios.post('http://localhost:8000/api/tarifa',
+            const response = await API.post('tarifa',
                 {
 
                     "oferta_tarifa":values.oferta_tarifa,

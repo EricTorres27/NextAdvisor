@@ -1,6 +1,5 @@
 import React, { forwardRef, useState, useEffect } from 'react';
 import { Box, Button, Divider, Grid, Typography, Paper, Container, Select, MenuItem, List , makeStyles} from '@material-ui/core';
-import axios from 'axios';
 import MaterialTable from 'material-table'
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -29,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const MisAsesorias = () => {
+const MisAsesorias = (props) => {
     const styles = useStyles();
     const [data, setData] = useState([]);
     const [asesoriaSeleccionada, setAsesoriaSeleccionada] = useState({
@@ -43,7 +42,8 @@ const MisAsesorias = () => {
         setAsesoriaSeleccionada(oferta_asesoria);
         (caso==="Eliminar")?confirmacionEliminar(oferta_asesoria)
         :
-        window.location.href = "http://localhost:3000/EditarAsesoria/"+oferta_asesoria.oferta_id;
+        props.history.push("/EditarAsesoria/"+oferta_asesoria.oferta_id);
+        
     }
 
     const columnas = [
@@ -97,7 +97,6 @@ const MisAsesorias = () => {
 
 
 
-    const baseURL = "http://localhost:8000/api/asesoria";
     const peticionGet = async () => {
         await API.get("asesoria")
             .then(response => {
@@ -108,7 +107,7 @@ const MisAsesorias = () => {
     const peticionDelete = async (asesoriaId) => {
         try {
 
-            const response = await axios.delete("http://localhost:8000/api/asesoria/"+ asesoriaId)
+            const response = await API.delete("asesoria/"+ asesoriaId)
             if (response.data.flag == 1) {
                 swal({
                     title: "La asesoría se ha eliminado con éxito",

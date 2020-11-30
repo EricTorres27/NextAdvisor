@@ -4,7 +4,6 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
-import axios from 'axios';
 import swal from 'sweetalert';
 import { Redirect } from 'react-router-dom';
 import API from '../apis/api';
@@ -30,7 +29,7 @@ const styles = {
     Paper: { height: 500, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
 }
 
-export const CrearUsuario = () => {
+export const CrearUsuario = (props) => {
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -81,7 +80,6 @@ export const CrearUsuario = () => {
             confirmacion();
     }
 
-    const baseURL = "http://localhost:8000/api/cuenta";
 
     const peticionPost = async () => {
         try {
@@ -107,7 +105,7 @@ export const CrearUsuario = () => {
                     title: "El usuario se ha creado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http://www.nextadvisor.com.mx/ConsultarUsuario";
+                    props.history.push("/ConsultarUsuario");
                 })
             } else {
                 swal({
@@ -329,3 +327,4 @@ export const CrearUsuario = () => {
         </div>
     )
 }
+export default CrearUsuario

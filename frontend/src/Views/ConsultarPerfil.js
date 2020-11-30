@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
 import swal from 'sweetalert';
-import axios from 'axios';
 import API from '../apis/api';
 
 const cuentaId = localStorage.getItem("cuentaId");

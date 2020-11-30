@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
 import swal from 'sweetalert';
-import axios from 'axios';
 import API from '../apis/api';
 
 const initialValues = {
@@ -87,7 +86,7 @@ const EditarPregunta = (props) => {
                     title: "La pregunta se ha creado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http://www.nextadvisor.com.mx/PreguntasFrecuentes";
+                    props.history.push("/PreguntasFrecuentes");
                 })
             } else {
                 swal({

@@ -1,6 +1,5 @@
 import React, { forwardRef, useState, useEffect } from 'react';
 import { Box, Button, Grid, Typography, Paper, Container, Select, MenuItem, List, makeStyles, Modal } from '@material-ui/core';
-import axios from 'axios';
 import MaterialTable from 'material-table'
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -29,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const ConsultarPreguntas = () => {
+const ConsultarPreguntas = (props) => {
     const styles = useStyles();
     const [data, setData] = useState([]);
     const [preguntaSeleccionada, setPreguntaSeleccionada] = useState({
@@ -42,7 +41,7 @@ const ConsultarPreguntas = () => {
         setPreguntaSeleccionada(pregunta);
         (caso==="Eliminar")?confirmacionEliminar(pregunta)
         :
-        window.location.href = "http://www.nextadvisor.com.mx/EditarPregunta/"+pregunta.pregunta_id;
+        props.history.push("/EditarPregunta/"+pregunta.pregunta_id);
     }
     const columnas = [
 

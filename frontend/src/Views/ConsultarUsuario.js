@@ -1,6 +1,5 @@
 import React, { forwardRef, useState, useEffect } from 'react';
 import { Box, Button, Grid, Typography, Paper, Container, Select, MenuItem, List, makeStyles, Modal } from '@material-ui/core';
-import axios from 'axios';
 import MaterialTable from 'material-table'
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -42,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const ConsultarUsuario = () => {
+const ConsultarUsuario = (props) => {
 
     const [modalCrearUsuario, setModalCrearusuario] = useState(false);
     const [usuarioSeleccionado, setUsuarioSeleccionado] = useState({
@@ -58,7 +57,7 @@ const ConsultarUsuario = () => {
         setUsuarioSeleccionado(cuenta);
         (caso==="Eliminar")?confirmacionEliminar(cuenta)
         :
-        window.location.href = "http://www.nextadvisor.com.mx/EditarUsuario/"+cuenta.cuenta_id;
+        props.history.push("/EditarUsuario/"+cuenta.cuenta_id);
     }
     const abirCerrarModalCrear = () => {
         setModalCrearusuario(!modalCrearUsuario);
@@ -137,7 +136,6 @@ const ConsultarUsuario = () => {
 
     const [data, setData] = useState([]);
 
-    const baseURL = "http://localhost:8000/api/cuenta/listarCuentas";
     const peticionGet = async () => {
         await API.get("cuenta/listarCuentas", { headers: { "Authorization": "Bearer " + localStorage.token } })
             .then(response => {
