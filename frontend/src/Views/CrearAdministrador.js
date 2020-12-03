@@ -45,6 +45,18 @@ const useStyles = makeStyles((theme) => ( {
             marginRight: 100,
             overflowY: 'auto',
         },
+    },
+    Title: {
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1.0rem',
+            textAlign: 'center',
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.0rem',
+        },
+        [theme.breakpoints.up('lg')]: {
+
+        },
     }
 }))
 
@@ -170,7 +182,6 @@ export const CrearAdministrador = (props) => {
                 text: "Devolviendo a la pantalla de inicio",
                 icon: "info"
             }).then(respuesta => {
-                localStorage.clear();
                 window.location.href = "http://www.nextadvisor.com.mx";
             })
         }
@@ -209,8 +220,8 @@ export const CrearAdministrador = (props) => {
     }, [])
         return (
             <div style={{ height: "650px" }}>
-                <Box color="primary.contrastText" mb={1}>
-                    <Typography color="white" align="center" variant="h3">Crear nuevo administrador</Typography>
+                <Box className={styles.Title} color="primary.contrastText" mb={1}>
+                    <Typography className={styles.Title} color="white" align="center" variant="h3">Crear nuevo administrador</Typography>
                 </Box>
                 <Paper elevation={3} className={styles.Paper}>
                     <Link to="/ConsultUser">
@@ -219,7 +230,7 @@ export const CrearAdministrador = (props) => {
                     <Box mt={5} ml={5}>
                         <Form onSubmit={handleSubmitAdmin}>
                             <Box ml={3} mb={2}>
-                                <Typography variant="h5">Datos generales</Typography>
+                                <Typography className={styles.Title} variant="h5">Datos generales</Typography>
                             </Box>
                             <Grid container spacing={1}>
                                 <Grid item xs={12} sm={6}>
@@ -314,7 +325,7 @@ export const CrearAdministrador = (props) => {
                                 </Grid>
                             </Grid>
                             <Box ml={3} mb={2}>
-                                <Typography variant="h5">Datos administrativos</Typography>
+                                <Typography className={styles.Title} variant="h5">Datos administrativos</Typography>
                             </Box>
                             <Grid container spacing={1}>
                                 <Grid item xs={12} sm={6}>

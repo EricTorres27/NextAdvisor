@@ -39,6 +39,18 @@ const useStyles = makeStyles((theme) => ({
             marginRight: 100,
             overflowY: 'auto',
         },
+    },
+    Title: {
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1.0rem',
+            textAlign: 'center',
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.0rem',
+        },
+        [theme.breakpoints.up('lg')]: {
+
+        },
     }
 }));
 const CrearPreguntasFrecuentes = (props) => {
@@ -147,11 +159,11 @@ const CrearPreguntasFrecuentes = (props) => {
             props.history.goBack();
         }
     }, [])
-    
+
     return (
         <div style={{ height: "650px" }}>
-            <Box color="primary.contrastText" mb={1}>
-                <Typography color="white" align="center" variant="h3">Crear nueva pregunta</Typography>
+            <Box className={styles.Title} color="primary.contrastText" mb={1}>
+                <Typography className={styles.Title} color="white" align="center" variant="h3">Crear nueva pregunta</Typography>
             </Box>
             <Paper elevation={3} className={styles.Paper}>
                 <Link to="/PreguntasFrecuentes">

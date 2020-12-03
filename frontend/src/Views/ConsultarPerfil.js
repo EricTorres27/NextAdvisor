@@ -37,6 +37,18 @@ const useStyles = makeStyles((theme) => ( {
             marginRight: 100,
             overflowY: 'auto',
         },
+    },
+    Title: {
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1.0rem',
+            textAlign: 'center',
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.0rem',
+        },
+        [theme.breakpoints.up('lg')]: {
+
+        },
     }
 }))
 
@@ -91,14 +103,14 @@ const ConsultarPerfil = (props) => {
 
     return (
         <div style={{ height: "650px" }}>
-            <Box color="primary.contrastText" mb={1}>
-                <Typography color="white" align="center" variant="h3">Consultar perfil</Typography>
+            <Box  className={styles.Title} color="primary.contrastText" mb={1}>
+                <Typography  className={styles.Title} color="white" align="center" variant="h3">Consultar perfil</Typography>
             </Box>
             <Paper elevation={3} className={styles.Paper}>
                 <Box mt={5} ml={5}>
                     <Form>
                         <Box ml={3} mb={2}>
-                            <Typography variant="h5">Datos generales</Typography>
+                            <Typography  className={styles.Title} variant="h5">Datos generales</Typography>
                         </Box>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={6}>
@@ -161,7 +173,7 @@ const ConsultarPerfil = (props) => {
                                 </Box>
                             </Grid>
                             <Box ml={3} mb={2}>
-                                <Typography variant="h5">Datos de la cuenta</Typography>
+                                <Typography  className={styles.Title} variant="h5">Datos de la cuenta</Typography>
                             </Box>
                             <Grid item xs={12} sm={12}>
                                 <Box mb={2} mr={2} ml={2}>
@@ -178,7 +190,7 @@ const ConsultarPerfil = (props) => {
 
                         </Grid>
                         <Box ml={3} mb={2}>
-                            <Typography variant="h5">Datos académicos</Typography>
+                            <Typography  className={styles.Title} variant="h5">Datos académicos</Typography>
                         </Box>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={6}>

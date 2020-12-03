@@ -18,7 +18,43 @@ const initialValues = {
 }
 
 const useStyles =  makeStyles(theme => ( {
-    Paper: { height: 500, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
+        Paper: {
+            [theme.breakpoints.down('sm')]: {
+                fontSize: '0.5rem',
+                height: 700,
+                padding: 5,
+                marginLeft: 10,
+                marginRight: 10,
+                overflowY: 'auto',
+                textAlign: 'center',
+            },
+            [theme.breakpoints.up('md')]: {
+                height: 550,
+                padding: 20,
+                marginLeft: 50,
+                marginRight: 50,
+                overflowY: 'auto',
+            },
+            [theme.breakpoints.up('lg')]: {
+                height: 500,
+                padding: 20,
+                marginLeft: 100,
+                marginRight: 100,
+                overflowY: 'auto',
+            },
+        },
+        Title: {
+            [theme.breakpoints.down('sm')]: {
+                fontSize: '1.0rem',
+                textAlign: 'center',
+            },
+            [theme.breakpoints.up('md')]: {
+                fontSize: '1.0rem',
+            },
+            [theme.breakpoints.up('lg')]: {
+    
+            },
+        }
 }));
 
 
@@ -152,8 +188,8 @@ export const RegistrarMateria = (props) => {
 
     return (
         <div style={{ height: "650px" }}>
-            <Box color="primary.contrastText" mb={1}>
-                <Typography color="white" align="center" variant="h3">Registrar materia</Typography>
+            <Box className={styles.Title} color="primary.contrastText" mb={1}>
+                <Typography className={styles.Title} color="white" align="center" variant="h3">Registrar materia</Typography>
             </Box>
             <Paper elevation={3} className={styles.Paper}>
                 <Link to="/RegistrarMateria">

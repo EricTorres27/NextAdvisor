@@ -41,17 +41,19 @@ const Navbar = (props) => {
             { headers: { "Authorization": "Bearer " + localStorage.token } }
             );
             console.log(response);
-
+            localStorage.clear();
+            window.location.href="http://nextadvisor.com.mx"
         } catch (error) {
             console.log(error);
+            localStorage.clear();
+            window.location.href="http://nextadvisor.com.mx"
+
         }
     }
 
     const handleLogOut = () => {
         logOut();
-        localStorage.clear();
         setAnchorEl(null);
-        window.location.href = "http://www.nextadvisor.com.mx";
     };
     return (
         <AppBar className={classes.appBar}>

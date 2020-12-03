@@ -36,7 +36,7 @@ const DrawerBox = (props) => {
             onClose={props.onClose ? props.onClose : null}
         >   <Paper elevation={6}>
                 <div style={{ backgroundColor: '' }}>
-                    <Link to="/Inicio" style={{ textDecoration: 'none' }}>
+                    <Link to="/" style={{ textDecoration: 'none' }}>
                         <img src={logo} alt="Logo"
                             style={{ width: "50%", margin: "30px 60px" }}
                         />

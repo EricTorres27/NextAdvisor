@@ -33,7 +33,19 @@ const useStyles = makeStyles((theme) => ( {
             marginRight: 50,
             overflowY: 'auto',
         },
-     }
+     },
+     Title: {
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1.0rem',
+            textAlign: 'center',
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.0rem',
+        },
+        [theme.breakpoints.up('lg')]: {
+
+        },
+    }
 }))
 
 const initialValues = {
@@ -215,8 +227,8 @@ const EditarPerfil = (props) => {
 
     return (
         <div style={{ height: "650px" }}>
-            <Box color="primary.contrastText" mb={1}>
-                <Typography color="white" align="center" variant="h3">Editar Perfil</Typography>
+            <Box className={styles.Title} color="primary.contrastText" mb={1}>
+                <Typography className={styles.Title} color="white" align="center" variant="h3">Editar Perfil</Typography>
             </Box>
             <Paper elevation={3} className={styles.Paper}>
                 <Link to="/ConsultarPerfil">
@@ -225,7 +237,7 @@ const EditarPerfil = (props) => {
                 <Box mt={5} ml={5}>
                     <Form onSubmit={handleSubmit}>
                         <Box ml={3} mb={2}>
-                            <Typography variant="h5">Datos generales</Typography>
+                            <Typography className={styles.Title} variant="h5">Datos generales</Typography>
                         </Box>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={6}>
@@ -289,7 +301,7 @@ const EditarPerfil = (props) => {
                             </Grid>
 
                             <Box ml={3} mb={2}>
-                                <Typography variant="h5">Datos de la cuenta</Typography>
+                                <Typography className={styles.Title} variant="h5">Datos de la cuenta</Typography>
                             </Box>
                             <Grid item xs={12} sm={12}>
                                 <Box mb={2} mr={2} ml={2}>
@@ -305,7 +317,7 @@ const EditarPerfil = (props) => {
 
                         </Grid>
                         <Box ml={3} mb={2}>
-                            <Typography variant="h5">Datos academicos</Typography>
+                            <Typography className={styles.Title} variant="h5">Datos academicos</Typography>
                         </Box>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={6}>
