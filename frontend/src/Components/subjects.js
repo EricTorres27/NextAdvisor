@@ -21,10 +21,47 @@ import swal from 'sweetalert';
 import API from '../apis/api';
 
 const useStyles = makeStyles((theme) => ({
-    Paper: { height: 650, padding: 20, marginLeft: 50, marginRight: 50, overflowY: 'auto' },
+    Paper: {
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '0.5rem',
+            height: 700,
+            padding: 5,
+            marginLeft: 10,
+            marginRight: 10,
+            overflowY: 'auto',
+            textAlign: 'center',
+        },
+        [theme.breakpoints.up('md')]: {
+            height: 550,
+            padding: 20,
+            marginLeft: 50,
+            marginRight: 50,
+            overflowY: 'auto',
+        },
+        [theme.breakpoints.up('lg')]: {
+            height: 650,
+            padding: 20,
+            marginLeft: 50,
+            marginRight: 50,
+            overflowY: 'auto',
+        },
+    },
     Button: {
         textTransform: 'none',
         margin: theme.spacing(3)
+    },
+    BoxStyle: {
+        [theme.breakpoints.down('sm')]: {
+            textAlign:"center",
+            justifyContent: 'center'
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.0rem',
+            
+        },
+        [theme.breakpoints.up('lg')]: {
+
+        },
     }
 }))
 
@@ -168,9 +205,9 @@ const Materias = (props) => {
             <div>
                 <Paper elevation={3} className={styles.Paper}>
                     <Link to="/RegistrarMateria" style={{ textDecoration: 'none' }}>
-                        <Box align="right" mb={2}>
+                        <Box className={styles.BoxStyle} align="right" mb={2}>
 
-                            <Button variant="contained" color="primary">Registrar materia</Button>
+                            <Button  variant="contained" color="primary">Registrar materia</Button>
                         </Box>
                     </Link>
                     <MaterialTable

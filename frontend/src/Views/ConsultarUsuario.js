@@ -61,6 +61,19 @@ const useStyles = makeStyles((theme) => ({
     Button: {
         textTransform: 'none',
         margin: theme.spacing(3)
+    },
+    BoxStyle: {
+        [theme.breakpoints.down('sm')]: {
+            textAlign:"center",
+            justifyContent: 'center'
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.0rem',
+            
+        },
+        [theme.breakpoints.up('lg')]: {
+
+        },
     }
 }))
 
@@ -94,7 +107,7 @@ const ConsultarUsuario = (props) => {
                 <Box align="center" mt={5} mb={10}>
                     <Typography variant="h5">¿Que desea crear?</Typography>
                 </Box>
-                <Box ml={3} mt={1} align="center">
+                <Box className={styles.BoxStyle} ml={3} mt={1} align="center">
                     <Link to="/CrearUsuario" style={{ textDecoration: 'none' }}>
                         <Button onClick={() => abirCerrarModalCrear()} className={styles.Button} variant="contained" color="primary">Estudiante</Button>
 

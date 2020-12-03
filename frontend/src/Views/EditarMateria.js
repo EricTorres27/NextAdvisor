@@ -37,7 +37,32 @@ const useStyles = makeStyles((theme) => ( {
             marginRight: 50,
             overflowY: 'auto',
         },
-     }
+     },
+     Title: {
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1.0rem',
+            textAlign: 'center',
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.0rem',
+        },
+        [theme.breakpoints.up('lg')]: {
+
+        },
+    },
+     BoxStyle: {
+        [theme.breakpoints.down('sm')]: {
+            textAlign:"center",
+            justifyContent: 'center'
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.0rem',
+            
+        },
+        [theme.breakpoints.up('lg')]: {
+
+        },
+    }
 }))
 
 const EditarMateria = (props) => {
@@ -177,10 +202,10 @@ const EditarMateria = (props) => {
         return (
             <div style={{ height: "650px" }}>
                 <Box color="primary.contrastText" mb={1}>
-                    <Typography color="white" align="center" variant="h3">Editar materia</Typography>
+                    <Typography className={styles.Title} color="white" align="center" variant="h3">Editar materia</Typography>
                 </Box>
                 <Paper elevation={3} className={styles.Paper}>
-                    <Link to="/RegistrarMateria">
+                    <Link to="/subjectAdmin">
                         <ArrowBackIcon button fontSize="large" />
                     </Link>
                     <Box mt={5} ml={5}>
@@ -215,7 +240,7 @@ const EditarMateria = (props) => {
 
                             <Grid container spacing={1}>
                                 <Grid item xs={12} sm={12}>
-                                    <Box ml={3} mt={1} align="right">
+                                    <Box className={styles.BoxStyle} ml={3} mt={1} align="right">
                                         <Controls.ButtonSubmit
                                             size="large"
                                             text="Confirmar"

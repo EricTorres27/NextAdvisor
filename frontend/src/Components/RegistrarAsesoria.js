@@ -17,9 +17,59 @@ const initialValues = {
     estudiante_id: cuentaId
 }
 
-const useStyles = makeStyles(theme => ({
-    Paper: { height: 500, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
-}))
+const useStyles = makeStyles((theme) => ({
+    Paper: {
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1.0rem',
+            height: 700,
+            padding: 5,
+            marginLeft: 10,
+            marginRight: 10,
+            overflowY: 'auto',
+            align: "center"
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.0rem',
+            height: 500,
+            padding: 20,
+            marginLeft: 100,
+            marginRight: 100,
+            overflowY: 'auto',
+        },
+        [theme.breakpoints.up('lg')]: {
+            height: 500,
+            padding: 20,
+            marginLeft: 100,
+            marginRight: 100,
+            overflowY: 'auto',
+        },
+    },
+    Title: {
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1.0rem',
+            textAlign: 'center',
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.0rem',
+        },
+        [theme.breakpoints.up('lg')]: {
+
+        },
+    },
+    BoxStyle: {
+        [theme.breakpoints.down('sm')]: {
+            textAlign:"center",
+            justifyContent: 'center'
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.0rem',
+            
+        },
+        [theme.breakpoints.up('lg')]: {
+
+        },
+    }
+}));
 
 export const RegistrarAsesoria = (props) => {
     const styles = useStyles()
@@ -155,17 +205,17 @@ export const RegistrarAsesoria = (props) => {
 
         return (
             <div style={{ height: "650px" }}>
-                <Box color="primary.contrastText" mb={1}>
-                    <Typography color="white" align="center" variant="h3">Registrar asesoría</Typography>
+                <Box  className={styles.Title} color="primary.contrastText" mb={1}>
+                    <Typography className={styles.Title}  color="white" align="center" variant="h3">Registrar asesoría</Typography>
                 </Box>
                 <Paper elevation={3} className={styles.Paper}>
-                    <Link to="/RegistrarAsesoria">
+                    <Link to="/MisAsesorias">
                         <ArrowBackIcon button fontSize="large" />
                     </Link>
                     <Box mt={5} ml={5}>
                         <Form onSubmit={handleSubmit}>
                             <Box ml={3} mb={2}>
-                                <Typography variant="h5">Registro</Typography>
+                                <Typography className={styles.Title}  variant="h5">Registro</Typography>
                             </Box>
 
 
@@ -217,7 +267,7 @@ export const RegistrarAsesoria = (props) => {
                             </Grid>
                             <Grid container spacing={1}>
                                 <Grid item xs={12} sm={12}>
-                                    <Box ml={3} mt={1} align="right">
+                                    <Box className={styles.BoxStyle} ml={3} mt={1} align="right">
                                         <Controls.ButtonSubmit
                                             size="large"
                                             text="Confirmar"

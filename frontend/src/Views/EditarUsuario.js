@@ -43,6 +43,19 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('lg')]: {
 
         },
+    },
+    BoxStyle: {
+        [theme.breakpoints.down('sm')]: {
+            textAlign:"center",
+            justifyContent: 'center'
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.0rem',
+            
+        },
+        [theme.breakpoints.up('lg')]: {
+
+        },
     }
 }));
 const initialValues = {
@@ -354,7 +367,7 @@ const EditarUsuario = (props) => {
                         </Grid>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={12}>
-                                <Box ml={3} mt={1} align="right">
+                                <Box className={styles.BoxStyle} ml={3} mt={1} align="right">
                                     <Controls.ButtonSubmit
                                         size="large"
                                         text="Confirmar"

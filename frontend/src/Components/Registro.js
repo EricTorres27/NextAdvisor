@@ -226,7 +226,7 @@ export default function SignUp(props) {
         <Grid container spacing={1}>
           <Grid item xs={12} sm={6}>
             <Box ml={50} mt={1} align="left">
-              <Link to="/login">
+              <Link to="/">
                 <ArrowBackIcon button fontSize="large" />
               </Link>
             </Box>

@@ -40,6 +40,31 @@ const useStyles = makeStyles(theme => ({
             marginRight: 50,
             overflowY: 'auto',
         },
+    },
+    Title: {
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1.0rem',
+            textAlign: 'center',
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.0rem',
+        },
+        [theme.breakpoints.up('lg')]: {
+
+        },
+    },
+    BoxStyle: {
+        [theme.breakpoints.down('sm')]: {
+            textAlign:"center",
+            justifyContent: 'center'
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.0rem',
+            
+        },
+        [theme.breakpoints.up('lg')]: {
+
+        },
     }
 }))
 
@@ -195,85 +220,85 @@ const EditarAsesoria = (props) => {
         peticionGetMateria();
     }, [])
 
-        return (
-            <div style={{ height: "650px" }}>
-                <Box color="primary.contrastText" mb={1}>
-                    <Typography color="white" align="center" variant="h3">Editar asesoría</Typography>
+    return (
+        <div style={{ height: "650px" }}>
+            <Box className={styles.Title} color="primary.contrastText" mb={1}>
+                <Typography className={styles.Title} color="white" align="center" variant="h3">Editar asesoría</Typography>
+            </Box>
+            <Paper elevation={3} className={styles.Paper}>
+                <Link to="/MisAsesorias">
+                    <ArrowBackIcon button fontSize="large" />
+                </Link>
+                <Box mt={5} ml={5}>
+                    <Form onSubmit={handleSubmitAsesoria}>
+                        <Grid container spacing={1}>
+                            <Grid item xs={12} sm={6}>
+
+                                <Controls.Input
+                                    name="oferta_fecha"
+                                    label="Fecha : AAAA-MM-DD"
+                                    value={values.oferta_fecha}
+                                    onChange={handleInputChange}
+                                    error={errors.oferta_fecha}
+                                />
+
+                            </Grid>
+
+                        </Grid>
+
+                        <Grid container spacing={1}>
+                            <Grid item xs={12} sm={6}>
+                                <Controls.SelecTarifa
+                                    name="oferta_tarifa"
+                                    label="Tarifa MXN"
+                                    value={values.oferta_tarifa}
+                                    onChange={handleInputChange}
+                                    error={errors.oferta_tarifa}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <FormControl variant="outlined" className={styles.selects} >
+                                    <InputLabel>Materia</InputLabel>
+                                    <MuiSelect
+                                        name="materia_id"
+                                        value={values.materia_id}
+                                        onChange={handleInputChange}
+                                    >
+                                        <MenuItem value=''>Elija una materia</MenuItem>
+                                        {materia.map((materia) => (
+                                            <MenuItem key={materia.materia_id} value={materia.materia_id}>{materia.materia_nombre}</MenuItem>
+                                        ))}
+
+
+                                    </MuiSelect>
+                                </FormControl>
+                            </Grid>
+
+
+                        </Grid>
+                        <Grid container spacing={1}>
+                            <Grid item xs={12} sm={12}>
+                                <Box className={styles.BoxStyle} ml={3} mt={1} align="right">
+                                    <Controls.ButtonSubmit
+                                        size="large"
+                                        text="Confirmar"
+                                        type="submit"
+
+                                    />
+                                    <Controls.ButtonSubmit
+                                        size="large"
+                                        text="Reiniciar"
+                                        color="default"
+                                        onClick={resetForm}
+                                    />
+                                </Box>
+                            </Grid>
+                        </Grid>
+                    </Form>
                 </Box>
-                <Paper elevation={3} className={styles.Paper}>
-                    <Link to="/RegistrarAsesoria">
-                        <ArrowBackIcon button fontSize="large" />
-                    </Link>
-                    <Box mt={5} ml={5}>
-                        <Form onSubmit={handleSubmitAsesoria}>
-                            <Grid container spacing={1}>
-                                <Grid item xs={12} sm={6}>
-
-                                    <Controls.Input
-                                        name="oferta_fecha"
-                                        label="Fecha : AAAA-MM-DD"
-                                        value={values.oferta_fecha}
-                                        onChange={handleInputChange}
-                                        error={errors.oferta_fecha}
-                                    />
-
-                                </Grid>
-
-                            </Grid>
-
-                            <Grid container spacing={1}>
-                                <Grid item xs={12} sm={6}>
-                                    <Controls.SelecTarifa
-                                        name="oferta_tarifa"
-                                        label="Tarifa MXN"
-                                        value={values.oferta_tarifa}
-                                        onChange={handleInputChange}
-                                        error={errors.oferta_tarifa}
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <FormControl variant="outlined" className={styles.selects} >
-                                        <InputLabel>Materia</InputLabel>
-                                        <MuiSelect
-                                            name="materia_id"
-                                            value={values.materia_id}
-                                            onChange={handleInputChange}
-                                        >
-                                            <MenuItem value=''>Elija una materia</MenuItem>
-                                            {materia.map((materia) => (
-                                                <MenuItem key={materia.materia_id} value={materia.materia_id}>{materia.materia_nombre}</MenuItem>
-                                            ))}
-
-
-                                        </MuiSelect>
-                                    </FormControl>
-                                </Grid>
-
-
-                            </Grid>
-                            <Grid container spacing={1}>
-                                <Grid item xs={12} sm={12}>
-                                    <Box ml={3} mt={1} align="right">
-                                        <Controls.ButtonSubmit
-                                            size="large"
-                                            text="Confirmar"
-                                            type="submit"
-
-                                        />
-                                        <Controls.ButtonSubmit
-                                            size="large"
-                                            text="Reiniciar"
-                                            color="default"
-                                            onClick={resetForm}
-                                        />
-                                    </Box>
-                                </Grid>
-                            </Grid>
-                        </Form>
-                    </Box>
-                </Paper>
-            </div>
-        )
+            </Paper>
+        </div>
+    )
 }
 
 export default EditarAsesoria

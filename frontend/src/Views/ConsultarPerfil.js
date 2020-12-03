@@ -49,6 +49,19 @@ const useStyles = makeStyles((theme) => ( {
         [theme.breakpoints.up('lg')]: {
 
         },
+    },
+    BoxStyle: {
+        [theme.breakpoints.down('sm')]: {
+            textAlign:"center",
+            justifyContent: 'center'
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.0rem',
+            
+        },
+        [theme.breakpoints.up('lg')]: {
+
+        },
     }
 }))
 
@@ -221,7 +234,7 @@ const ConsultarPerfil = (props) => {
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={12}>
                                 <Link to="/EditarPerfil">
-                                    <Box ml={3} mt={1} align="right">
+                                    <Box className={styles.BoxStyle} ml={3} mt={1} align="right">
                                         <Button size="large">
                                             Editar
                                     </Button>

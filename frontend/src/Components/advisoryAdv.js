@@ -23,10 +23,48 @@ import API from '../apis/api';
 
 
 const useStyles = makeStyles((theme) => ({
-    Paper: { height: 650, padding: 20, marginLeft: 50, marginRight: 50, overflowY: 'auto' },
+    Paper: {
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1.0rem',
+            height: 700,
+            padding: 5,
+            marginLeft: 10,
+            marginRight: 10,
+            overflowY: 'auto',
+            align: "center"
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.0rem',
+            height: 500,
+            padding: 20,
+            marginLeft: 100,
+            marginRight: 100,
+            overflowY: 'auto',
+        },
+        [theme.breakpoints.up('lg')]: {
+            height: 500,
+            padding: 20,
+            marginLeft: 100,
+            marginRight: 100,
+            overflowY: 'auto',
+        },
+    },
     Button: {
         textTransform: 'none',
         margin: theme.spacing(3)
+    },
+    BoxStyle: {
+        [theme.breakpoints.down('sm')]: {
+            textAlign:"center",
+            justifyContent: 'center'
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.0rem',
+            
+        },
+        [theme.breakpoints.up('lg')]: {
+
+        },
     }
 }))
 
@@ -174,7 +212,7 @@ const MisAsesorias = (props) => {
             <div>
                 <Paper elevation={3} className={styles.Paper}>
                     <Link to="/RegistrarAsesoria" style={{ textDecoration: 'none' }}>
-                        <Box align="right" mb={2}>
+                        <Box className={styles.BoxStyle} align="right" mb={2}>
 
                             <Button variant="contained" color="primary">Registrar asesoría</Button>
                         </Box>

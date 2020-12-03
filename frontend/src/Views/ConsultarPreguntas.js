@@ -48,6 +48,19 @@ const useStyles = makeStyles((theme) => ({
     Button: {
         textTransform: 'none',
         margin: theme.spacing(3)
+    },
+    BoxStyle: {
+        [theme.breakpoints.down('sm')]: {
+            textAlign:"center",
+            justifyContent: 'center'
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.0rem',
+            
+        },
+        [theme.breakpoints.up('lg')]: {
+
+        },
     }
 }))
 
@@ -190,7 +203,7 @@ const ConsultarPreguntas = (props) => {
         return (
             <div>
                 <Paper elevation={3} className={styles.Paper}>
-                    <Box align="right" mb={2}>
+                    <Box className={styles.BoxStyle} align="right" mb={2}>
                         <Link to="/CrearPregunta">
                             <Button variant="contained" color="primary">Crear pregunta</Button>
                         </Link>
