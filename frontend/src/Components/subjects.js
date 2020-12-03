@@ -143,7 +143,12 @@ const Materias = (props) => {
             }
         }
     }
+
     useEffect(() => {
+        if(localStorage.getItem("rol") != 'administrador' && localStorage.getItem("rol") != 'asesor' )
+        {
+            props.history.goBack();
+        }
         peticionGet();
     }, [])
 
@@ -158,8 +163,7 @@ const Materias = (props) => {
             }
         })
     }
-    const role = localStorage.getItem("rol");
-    if (role == "administrador" || role=="asesor") {
+
         return (
             <div>
                 <Paper elevation={3} className={styles.Paper}>
@@ -187,11 +191,7 @@ const Materias = (props) => {
                 </Paper>
             </div>
         )
-    } else {
-        return <div>
-            <Redirect to="/inicio" />
-        </div>
-    }
+
 }
 
 export default Materias

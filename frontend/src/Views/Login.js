@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
   const classes = useStyles();
   const validate = (fieldValues = values) => {
     let temp = { ...errors }
@@ -106,7 +106,8 @@ export default function SignIn() {
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("nombreCuenta",res.data['cuenta_nombre_usuario'])
           localStorage.setItem("cuentaId", res.data['cuenta_id']);
-          window.location.href = "http://nextadvisor.com.mx/inicio";
+          console.log(localStorage.getItem("isLoggedIn"));
+          window.location.href = "http://nextadvisor.com.mx";
         })
         .catch(err => {
           console.log(err);

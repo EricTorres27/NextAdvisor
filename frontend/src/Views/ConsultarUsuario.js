@@ -173,7 +173,7 @@ const ConsultarUsuario = (props) => {
                     title: "El usuario se ha eliminado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.href = "http://nextadvisor.com.mx/ConsultarUsuario";
+                    window.location.reload();
                 })
             } else {
                 swal({
@@ -208,6 +208,10 @@ const ConsultarUsuario = (props) => {
         }
     }
     useEffect(() => {
+        if(localStorage.getItem("rol") != 'administrador')
+        {
+            props.history.goBack();
+        }
         peticionGet();
     }, [])
 
@@ -223,8 +227,6 @@ const ConsultarUsuario = (props) => {
             }
         })
     }
-    const role = localStorage.getItem("rol");
-    if (role == "administrador") {
         return (
             <div>
                 <Paper elevation={3} className={styles.Paper}>
@@ -266,11 +268,6 @@ const ConsultarUsuario = (props) => {
                 </Modal>
             </div>
         )
-    } else {
-        return <div>
-            <Redirect to="/inicio" />
-        </div>
-    }
 }
 
 export default ConsultarUsuario

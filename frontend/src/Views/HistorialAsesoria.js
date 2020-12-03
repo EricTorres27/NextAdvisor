@@ -171,34 +171,33 @@ const HistorialAsesoria = (props) => {
             }
         })
     }
-    const role = localStorage.getItem("rol");
-    if (role == "administrador" || role == "estudiante" ) {
-        return (
-            <div>
-                <Paper elevation={3} className={styles.Paper}>
-                    <MaterialTable
-                        title="Historial de asesorías registradas"
-                        columns={columnas}
-                        data={data}
-                        icons={tableIcons}
+    useEffect(() => {
+        if (localStorage.getItem("rol") != 'administrador' && localStorage.getItem("rol") != 'asesor') {
+            props.history.goBack();
+        }
+    }, []);
 
-                        options={{
-                            actionsColumnIndex: -1
-                        }}
-                        localization={{
-                            header: {
-                                actions: 'Acciones'
-                            }
-                        }}
-                    />
-                </Paper>
-            </div>
-        )
-    } else {
-        return <div>
-            <Redirect to="/inicio" />
+    return (
+        <div>
+            <Paper elevation={3} className={styles.Paper}>
+                <MaterialTable
+                    title="Historial de asesorías registradas"
+                    columns={columnas}
+                    data={data}
+                    icons={tableIcons}
+
+                    options={{
+                        actionsColumnIndex: -1
+                    }}
+                    localization={{
+                        header: {
+                            actions: 'Acciones'
+                        }
+                    }}
+                />
+            </Paper>
         </div>
-    }
+    )
 }
 
 export default HistorialAsesoria

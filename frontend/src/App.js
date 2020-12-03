@@ -10,8 +10,6 @@ import Registro from './Components/Registro'
 import Rutas from './Components/ControlRutas';
 import DrawerBox from './Components/DrawerBox';
 
-let login = localStorage.getItem("isLoggedIn");
-let administrador = localStorage.getItem("administrador");
 const styles = makeStyles(theme => ({
   root: {
     display: 'flex'
@@ -42,14 +40,16 @@ const styles = makeStyles(theme => ({
 }))
 
 function App() {
-  const classes = styles()
+  const classes = styles();
   const [stateOpen, setStateOpen] = React.useState(false)
   const openAction = () => {
     setStateOpen(!stateOpen)
   }
+
+  console.log(localStorage.getItem("isLoggedIn"));
   return (
     <ThemeProvider theme={theme}>
-      {login ? (
+      {localStorage.getItem("isLoggedIn") ? (
         <Router>
           <div className={classes.root}>
             <Navbar openAction={openAction} />
@@ -68,13 +68,7 @@ function App() {
             </Hidden>
             <div className={classes.content}  >
               <div className={classes.toolbar}></div>
-              <Route exact path=""
-                render={() => {
-                  return (
-                    <Redirect to="/inicio" />
-                  )
-                }} />
-              <Route exact path="/inicio" component={Rutas.Inicio} />
+              <Route exact path="/" component={Rutas.Inicio} />
               <Route exact path="/ConsultarUsuario" component={Rutas.ConsultarUsuario} />
               <Route exact path="/EditarPregunta/:preguntaId" component={Rutas.EditarPregunta} />
               <Route exact path="/EditarUsuario/:cuentaId" component={Rutas.EditarUsuario} />
@@ -106,13 +100,7 @@ function App() {
         </Router>
       ) : (
           < Router >
-            <Route exact path=""
-              render={() => {
-                return (
-                  <Redirect to="/login" />
-                )
-              }} />
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/" component={Login} />
             <Route exact path="/Registro" component={Registro} />
           </Router>
         )

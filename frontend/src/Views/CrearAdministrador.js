@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Box, Grid, Typography, Paper, makeStyles } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link, Redirect } from 'react-router-dom';
@@ -201,9 +201,12 @@ export const CrearAdministrador = (props) => {
             return false;
         }
     }
-
-    const role = localStorage.getItem("rol");
-    if (role == "administrador") {
+    useEffect(() => {
+        if(localStorage.getItem("rol") != 'administrador' )
+        {
+            props.history.goBack();
+        }
+    }, [])
         return (
             <div style={{ height: "650px" }}>
                 <Box color="primary.contrastText" mb={1}>
@@ -348,11 +351,6 @@ export const CrearAdministrador = (props) => {
                 </Paper>
             </div>
         )
-    } else {
-        return <div>
-            <Redirect to="/inicio" />
-        </div>
-    }
 }
 export default CrearAdministrador
 

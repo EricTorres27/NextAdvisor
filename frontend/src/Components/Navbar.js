@@ -37,19 +37,21 @@ const Navbar = (props) => {
     };
     const logOut = async () => {
         try {
-            const response = await API.post('auth/logout')
+            const response = await API.post('auth/logout',
+            { headers: { "Authorization": "Bearer " + localStorage.token } }
+            );
+            console.log(response);
 
         } catch (error) {
             console.log(error);
-
         }
     }
 
     const handleLogOut = () => {
-        setAnchorEl(null);
         logOut();
         localStorage.clear();
-        window.location.href = "http://www.nextadvisor.com.mx/login";
+        setAnchorEl(null);
+        window.location.href = "http://www.nextadvisor.com.mx";
     };
     return (
         <AppBar className={classes.appBar}>

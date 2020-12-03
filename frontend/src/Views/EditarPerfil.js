@@ -218,7 +218,7 @@ const EditarPerfil = (props) => {
             <Box color="primary.contrastText" mb={1}>
                 <Typography color="white" align="center" variant="h3">Editar Perfil</Typography>
             </Box>
-            <Paper elevation={3} style={styles.Paper}>
+            <Paper elevation={3} className={styles.Paper}>
                 <Link to="/ConsultarPerfil">
                     <ArrowBackIcon button fontSize="large" />
                 </Link>

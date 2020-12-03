@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Grid, Typography, Paper, Container, TextField, Button } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link, Redirect } from 'react-router-dom';
@@ -11,8 +11,11 @@ const styles = {
 const AmbienteConstruido = (props) => {
 
     const { match } = props;
-    const role = localStorage.getItem("rol");
-    if (role == "administrador" || role=="asesor") {
+    useEffect(() => {
+        if (localStorage.getItem("rol") != 'administrador' && localStorage.getItem("rol") != 'asesor') {
+            props.history.goBack();
+        }
+    }, []);
     return (
         <div style={{ height: "650px" }}>
             <Box color="primary.contrastText" mb={1}>
@@ -31,17 +34,12 @@ const AmbienteConstruido = (props) => {
                             </Typography>
                         </Box>
 
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScM5YCCmHzwKedk2p3FVk9VR6oVFcaEjs4ELZkHMgGYcU9Sew/viewform?embedded=true" width="640" height="1583" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
-                      </Form>
+                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScM5YCCmHzwKedk2p3FVk9VR6oVFcaEjs4ELZkHMgGYcU9Sew/viewform?embedded=true" width="640" height="1583" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+                    </Form>
                 </Box>
             </Paper>
         </div>
     )
-    }else{
-        return <div>
-            <Redirect to="/inicio" />
-        </div>
-    }
 }
 
 export default AmbienteConstruido

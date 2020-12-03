@@ -134,6 +134,10 @@ export const RegistrarAsesoria = (props) => {
     }
 
     useEffect(() => {
+        if(localStorage.getItem("rol") != 'administrador' && localStorage.getItem("rol") != 'asesor' )
+        {
+            props.history.goBack();
+        }
         peticionGetMateria();
     }, [])
 
@@ -148,8 +152,7 @@ export const RegistrarAsesoria = (props) => {
             }
         })
     }
-    const role = localStorage.getItem("rol");
-    if (role == "administrador" || role=="asesor") {
+
         return (
             <div style={{ height: "650px" }}>
                 <Box color="primary.contrastText" mb={1}>
@@ -235,11 +238,7 @@ export const RegistrarAsesoria = (props) => {
                 </Paper>
             </div>
         )
-    } else {
-        return <div>
-            <Redirect to="/inicio" />
-        </div>
-    }
+
 }
 
 export default RegistrarAsesoria;

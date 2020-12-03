@@ -168,11 +168,12 @@ const EditarMateria = (props) => {
         })
     }
     useEffect(() => {
+        if (localStorage.getItem("rol") != 'administrador') {
+            props.history.goBack();
+        }
         peticionGet();
     }, [])
-
-    const role = localStorage.getItem("rol");
-    if (role == "administrador") {
+    
         return (
             <div style={{ height: "650px" }}>
                 <Box color="primary.contrastText" mb={1}>
@@ -234,11 +235,6 @@ const EditarMateria = (props) => {
                 </Paper>
             </div>
         )
-    } else {
-        return <div>
-            <Redirect to="/inicio" />
-        </div>
-    }
 }
 
 export default EditarMateria

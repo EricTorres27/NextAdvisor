@@ -206,6 +206,10 @@ const EditarUsuario = (props) => {
     }
 
     useEffect(() => {
+        if(localStorage.getItem("rol") != 'administrador' )
+        {
+            props.history.goBack();
+        }
         getUsuario();
     }, [])
 

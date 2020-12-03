@@ -136,7 +136,7 @@ export default function SignUp(props) {
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("nombreCuenta",res.data['cuenta_nombre_usuario'])
           localStorage.setItem("cuentaId", res.data['cuenta_id']);
-          window.location.href = "http://www.nextadvisor.com.mx/inicio";
+          props.history.goBack();
         })
         .catch(err => {
           console.log(err);

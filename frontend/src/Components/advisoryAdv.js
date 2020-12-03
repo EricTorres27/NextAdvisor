@@ -152,6 +152,10 @@ const MisAsesorias = (props) => {
         }
     }
     useEffect(() => {
+        if(localStorage.getItem("rol") != 'administrador' && localStorage.getItem("rol") != 'asesor' )
+        {
+            props.history.goBack();
+        }
         peticionGet();
     }, [])
 
@@ -166,8 +170,6 @@ const MisAsesorias = (props) => {
             }
         })
     }
-    const role = localStorage.getItem("rol");
-    if (role == "administrador" || role=="asesor") {
         return (
             <div>
                 <Paper elevation={3} className={styles.Paper}>
@@ -206,11 +208,7 @@ const MisAsesorias = (props) => {
                 </Paper>
             </div>
         )
-    } else {
-        return <div>
-            <Redirect to="/inicio" />
-        </div>
-    }
+
 }
 
 export default MisAsesorias
