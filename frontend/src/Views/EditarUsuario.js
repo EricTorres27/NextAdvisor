@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Box, Grid, Typography, Paper, Container, TextField, Button } from '@material-ui/core';
+import { Box, Grid, Typography, Paper, makeStyles } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
@@ -7,9 +7,32 @@ import Controls from '../Components/controls/Controls';
 import swal from 'sweetalert';
 import API from '../apis/api';
 
-const styles = {
-    Paper: { height: 550, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
-}
+const useStyles = makeStyles((theme) => ({
+    Paper: {
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '0.5rem',
+            height: 700,
+            padding: 5,
+            marginLeft: 10,
+            marginRight: 10,
+            overflowY: 'auto',
+        },
+        [theme.breakpoints.up('md')]: {
+            height: 500,
+            padding: 20,
+            marginLeft: 50,
+            marginRight: 50,
+            overflowY: 'auto',
+        },
+        [theme.breakpoints.up('lg')]: {
+            height: 500,
+            padding: 20,
+            marginLeft: 100,
+            marginRight: 100,
+            overflowY: 'auto',
+        },
+    }
+}));
 const initialValues = {
     cuenta_nombre: '',
     cuenta_apellido_paterno: '',
@@ -25,6 +48,7 @@ const initialValues = {
 }
 
 const EditarUsuario = (props) => {
+    const styles =useStyles();
     const { match } = props;
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -85,8 +109,8 @@ const EditarUsuario = (props) => {
 
     const peticionPutUsuario = async () => {
         try {
-            
-            const response = await API.put('cuenta/actualizarCuenta/'+props.match.params.cuentaId,
+
+            const response = await API.put('cuenta/actualizarCuenta/' + props.match.params.cuentaId,
                 {
                     "cuenta_nombre": values.cuenta_nombre,
                     "cuenta_apellido_materno": values.cuenta_apellido_materno,
@@ -137,30 +161,30 @@ const EditarUsuario = (props) => {
         }
     }
 
-    const validacionIgual = () =>{
-        let flag=0;
-        if(initialValues.cuenta_nombre==values.cuenta_nombre &&
-            initialValues.cuenta_apellido_paterno==values.cuenta_apellido_paterno &&
-            initialValues.cuenta_apellido_materno==values.cuenta_apellido_materno &&
-            initialValues.cuenta_genero==values.cuenta_genero &&
+    const validacionIgual = () => {
+        let flag = 0;
+        if (initialValues.cuenta_nombre == values.cuenta_nombre &&
+            initialValues.cuenta_apellido_paterno == values.cuenta_apellido_paterno &&
+            initialValues.cuenta_apellido_materno == values.cuenta_apellido_materno &&
+            initialValues.cuenta_genero == values.cuenta_genero &&
             initialValues.cuenta_correo == values.cuenta_correo &&
-            initialValues.cuenta_nombre_usuario==values.cuenta_nombre_usuario &&
-            initialValues.cuenta_telefono==values.cuenta_telefono &&
-            initialValues.estudiante_semestre==values.estudiante_semestre &&
-            initialValues.estudiante_carrera==values.estudiante_carrera &&
-            initialValues.rol_id==values.rol_id
-        ){
-            flag=1;
+            initialValues.cuenta_nombre_usuario == values.cuenta_nombre_usuario &&
+            initialValues.cuenta_telefono == values.cuenta_telefono &&
+            initialValues.estudiante_semestre == values.estudiante_semestre &&
+            initialValues.estudiante_carrera == values.estudiante_carrera &&
+            initialValues.rol_id == values.rol_id
+        ) {
+            flag = 1;
         }
         return flag;
     }
 
     const handleSubmit = e => {
         e.preventDefault()
-        if(validacionIgual()==0){
+        if (validacionIgual() == 0) {
             if (validate())
-            confirmacion();
-        }else{
+                confirmacion();
+        } else {
             swal({
                 title: "No se ha realizado ningún cambio.",
                 text: "Es necesario realizar al menos un cambio en la información.",
@@ -190,7 +214,7 @@ const EditarUsuario = (props) => {
             <Box color="primary.contrastText" mb={1}>
                 <Typography color="white" align="center" variant="h3">Editar usuario</Typography>
             </Box>
-            <Paper elevation={3} style={styles.Paper}>
+            <Paper elevation={3} className={styles.Paper}>
                 <Link to="/ConsultarUsuario">
                     <ArrowBackIcon button fontSize="large" />
                 </Link>

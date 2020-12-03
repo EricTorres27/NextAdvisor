@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, Typography, Paper, Container, TextField, Button } from '@material-ui/core';
+import { Box, Grid, Typography, Paper, Container, TextField, Button,makeStyles } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
@@ -13,9 +13,33 @@ const cuentaId = localStorage.getItem("cuentaId");
     <Typography>{match.params.cuentaId}</Typography>
 
 */
-const styles = {
-    Paper: { height: 550, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
-}
+const useStyles = makeStyles((theme) => ( {
+    Paper: {
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '0.5rem',
+            height: 700,
+            padding: 5,
+            marginLeft: 10,
+            marginRight: 10,
+            overflowY: 'auto',
+        },
+        [theme.breakpoints.up('md')]: {
+            height: 550,
+            padding: 20,
+            marginLeft: 50,
+            marginRight: 50,
+            overflowY: 'auto',
+        },
+        [theme.breakpoints.up('lg')]: {
+            height: 550,
+            padding: 20,
+            marginLeft: 100,
+            marginRight: 100,
+            overflowY: 'auto',
+        },
+    }
+}))
+
 
 // localStorage.setItem("variable",true);
 
@@ -32,6 +56,7 @@ const initialValues = {
 }
 
 const ConsultarPerfil = (props) => {
+    const styles = useStyles();
 
     const { match } = props;
 
@@ -69,7 +94,7 @@ const ConsultarPerfil = (props) => {
             <Box color="primary.contrastText" mb={1}>
                 <Typography color="white" align="center" variant="h3">Consultar perfil</Typography>
             </Box>
-            <Paper elevation={3} style={styles.Paper}>
+            <Paper elevation={3} className={styles.Paper}>
                 <Box mt={5} ml={5}>
                     <Form>
                         <Box ml={3} mb={2}>
@@ -166,8 +191,8 @@ const ConsultarPerfil = (props) => {
                                         value={values.estudiante_carrera}
                                     />
                                 </Box>
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
                                 <Box mb={2} mr={2} ml={2}>
                                     <TextField
                                         disabled
@@ -179,17 +204,17 @@ const ConsultarPerfil = (props) => {
                                         pattern="[0-9]*"
                                     />
                                 </Box>
-                          </Grid>
+                            </Grid>
                         </Grid>
                         <Grid container spacing={1}>
                             <Grid item xs={12} sm={12}>
-                              <Link to ="/EditarPerfil">
-                                <Box ml={3} mt={1} align="right">
-                                    <Button size="large">
-                                      Editar
+                                <Link to="/EditarPerfil">
+                                    <Box ml={3} mt={1} align="right">
+                                        <Button size="large">
+                                            Editar
                                     </Button>
-                                </Box>
-                              </Link>
+                                    </Box>
+                                </Link>
                             </Grid>
                         </Grid>
                     </Form>

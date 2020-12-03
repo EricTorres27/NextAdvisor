@@ -5,7 +5,32 @@ import API from '../apis/api';
 import { Link, Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
-    Paper: { height: 650, padding: 20, marginLeft: 50, marginRight: 50, overflowY: 'auto' },
+
+    Paper: {
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '0.5rem',
+            height: 980,
+            padding: 5,
+            marginLeft: 10,
+            marginRight: 10,
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.5rem',
+            height: 650,
+            padding: 20,
+            marginLeft: 50,
+            marginRight: 50,
+            overflowY: 'auto',
+        },
+        [theme.breakpoints.up('lg')]: {
+            fontSize: '2rem',
+            height: 650,
+            padding: 20,
+            marginLeft: 50,
+            marginRight: 50,
+            overflowY: 'auto',
+        },
+    },
     Button: {
         textTransform: 'none',
         margin: theme.spacing(3)

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, makeStyles,Typography, Paper, Button,Card, CardContent,CardMedia, Container, Box,TextField } from '@material-ui/core';
+import { Grid, makeStyles,Typography, Paper,Box } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link, Redirect } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
@@ -17,13 +17,14 @@ const initialValues = {
     administrador_id: ''
 }
 
-const styles = {
+const useStyles =  makeStyles(theme => ( {
     Paper: { height: 500, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
-}
+}));
 
 
 export const RegistrarMateria = (props) => {
 
+    const styles= useStyles();
 
     const [data, setData] = useState([]);
 
@@ -151,7 +152,7 @@ export const RegistrarMateria = (props) => {
             <Box color="primary.contrastText" mb={1}>
                 <Typography color="white" align="center" variant="h3">Registrar materia</Typography>
             </Box>
-            <Paper elevation={3} style={styles.Paper}>
+            <Paper elevation={3} className={styles.Paper}>
                 <Link to="/RegistrarMateria">
                     <ArrowBackIcon button fontSize="large" />
                 </Link>

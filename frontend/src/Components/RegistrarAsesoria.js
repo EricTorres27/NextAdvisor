@@ -17,12 +17,12 @@ const initialValues = {
     estudiante_id: cuentaId
 }
 
-const styles = makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
     Paper: { height: 500, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
 }))
 
 export const RegistrarAsesoria = (props) => {
-    const classes = styles()
+    const styles = useStyles()
     const [materia, setMateria] = useState([]);
 
 
@@ -155,7 +155,7 @@ export const RegistrarAsesoria = (props) => {
                 <Box color="primary.contrastText" mb={1}>
                     <Typography color="white" align="center" variant="h3">Registrar asesoría</Typography>
                 </Box>
-                <Paper elevation={3} style={styles.Paper}>
+                <Paper elevation={3} className={styles.Paper}>
                     <Link to="/RegistrarAsesoria">
                         <ArrowBackIcon button fontSize="large" />
                     </Link>
@@ -193,7 +193,7 @@ export const RegistrarAsesoria = (props) => {
                                 </Grid>
 
                                 <Grid item xs={12} sm={6}>
-                                    <FormControl variant="outlined" className={classes.selects} >
+                                    <FormControl variant="outlined" className={styles.selects} >
                                         <InputLabel>Materia</InputLabel>
                                         <MuiSelect
                                             name="materia_id"

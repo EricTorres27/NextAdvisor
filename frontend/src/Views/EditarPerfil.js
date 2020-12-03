@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Box, Grid, Typography, Paper, Container, TextField, Button } from '@material-ui/core';
+import { Box, Grid, Typography, Paper,makeStyles } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
@@ -9,9 +9,32 @@ import API from '../apis/api';
 
 const cuentaId = localStorage.getItem("cuentaId");
 
-const styles = {
-    Paper: { height: 550, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
-}
+const useStyles = makeStyles((theme) => ( {
+    Paper: { 
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '0.5rem',
+            height: 700,
+            padding: 5,
+            marginLeft: 10,
+            marginRight: 10,
+            overflowY: 'auto',
+        },
+        [theme.breakpoints.up('md')]: {
+            height: 500,
+            padding: 20,
+            marginLeft: 50,
+            marginRight: 50,
+            overflowY: 'auto',
+        },
+        [theme.breakpoints.up('lg')]: {
+            height: 550,
+            padding: 20,
+            marginLeft: 50,
+            marginRight: 50,
+            overflowY: 'auto',
+        },
+     }
+}))
 
 const initialValues = {
     cuenta_nombre: '',
@@ -28,6 +51,7 @@ const initialValues = {
 }
 
 const EditarPerfil = (props) => {
+    const styles =useStyles();
     const { match } = props;
     const validate = (fieldValues = values) => {
         let temp = { ...errors }

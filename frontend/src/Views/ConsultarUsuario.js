@@ -34,7 +34,30 @@ const useStyles = makeStyles((theme) => ({
         left: '50%',
         transform: 'translate(-50%,-50%)',
     },
-    Paper: { height: 650, padding: 20, marginLeft: 50, marginRight: 50, overflowY: 'auto' },
+    Paper: { 
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '0.5rem',
+            height: 700,
+            padding: 5,
+            marginLeft: 10,
+            marginRight: 10,
+            overflowY: 'auto',
+        },
+        [theme.breakpoints.up('md')]: {
+            height: 650,
+            padding: 20,
+            marginLeft: 50,
+            marginRight: 50,
+            overflowY: 'auto',
+        },
+        [theme.breakpoints.up('lg')]: {
+            height: 630,
+            padding: 20,
+            marginLeft: 50,
+            marginRight: 50,
+            overflowY: 'auto',
+        },
+    },
     Button: {
         textTransform: 'none',
         margin: theme.spacing(3)
@@ -150,7 +173,7 @@ const ConsultarUsuario = (props) => {
                     title: "El usuario se ha eliminado con éxito",
                     icon: "success"
                 }).then(respuesta => {
-                    window.location.reload();
+                    window.location.href = "http://nextadvisor.com.mx/ConsultarUsuario";
                 })
             } else {
                 swal({

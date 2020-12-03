@@ -16,15 +16,38 @@ const initialValues = {
     estudiante_id: '',
 }
 
-const styles = makeStyles(theme => ({
-    Paper: { height: 500, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
+const useStyles = makeStyles(theme => ({
+    Paper: {
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '0.5rem',
+            height: 700,
+            padding: 5,
+            marginLeft: 10,
+            marginRight: 10,
+            overflowY: 'auto',
+        },
+        [theme.breakpoints.up('md')]: {
+            height: 500,
+            padding: 20,
+            marginLeft: 50,
+            marginRight: 50,
+            overflowY: 'auto',
+        },
+        [theme.breakpoints.up('lg')]: {
+            height: 500,
+            padding: 20,
+            marginLeft: 50,
+            marginRight: 50,
+            overflowY: 'auto',
+        },
+    }
 }))
 
 const EditarAsesoria = (props) => {
 
 
     const { match } = props;
-    const classes = styles()
+    const styles = useStyles()
     const [materia, setMateria] = useState([]);
 
     const validate = (fieldValues = values) => {
@@ -170,13 +193,13 @@ const EditarAsesoria = (props) => {
         peticionGetMateria();
     }, [])
     const role = localStorage.getItem("rol");
-    if (role == "administrador" || role=="asesor") {
+    if (role == "administrador" || role == "asesor") {
         return (
             <div style={{ height: "650px" }}>
                 <Box color="primary.contrastText" mb={1}>
                     <Typography color="white" align="center" variant="h3">Editar asesoría</Typography>
                 </Box>
-                <Paper elevation={3} style={styles.Paper}>
+                <Paper elevation={3} className={styles.Paper}>
                     <Link to="/RegistrarAsesoria">
                         <ArrowBackIcon button fontSize="large" />
                     </Link>
@@ -208,7 +231,7 @@ const EditarAsesoria = (props) => {
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
-                                    <FormControl variant="outlined" className={classes.selects} >
+                                    <FormControl variant="outlined" className={styles.selects} >
                                         <InputLabel>Materia</InputLabel>
                                         <MuiSelect
                                             name="materia_id"

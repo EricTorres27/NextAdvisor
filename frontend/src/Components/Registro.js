@@ -25,9 +25,6 @@ const valoresInicialesRegistro = {
   asesor_calificacion: '',
   rol_id: ''
 }
-const styles = {
-  Paper: { height: 500, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
-}
 
 function Copyright() {
   return (

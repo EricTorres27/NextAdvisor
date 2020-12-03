@@ -175,7 +175,7 @@ const HistorialAsesoria = (props) => {
     if (role == "administrador" || role == "estudiante" ) {
         return (
             <div>
-                <Paper elevation={3} sclassName={styles.Paper}>
+                <Paper elevation={3} className={styles.Paper}>
                     <MaterialTable
                         title="Historial de asesorías registradas"
                         columns={columnas}

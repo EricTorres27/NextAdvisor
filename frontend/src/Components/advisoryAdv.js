@@ -170,7 +170,7 @@ const MisAsesorias = (props) => {
     if (role == "administrador" || role=="asesor") {
         return (
             <div>
-                <Paper elevation={3} sclassName={styles.Paper}>
+                <Paper elevation={3} className={styles.Paper}>
                     <Link to="/RegistrarAsesoria" style={{ textDecoration: 'none' }}>
                         <Box align="right" mb={2}>
 

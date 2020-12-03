@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Grid, Typography, Paper, Container, TextField, Button } from '@material-ui/core';
+import { Box, Grid, Typography, Paper, Container, TextField, Button,makeStyles } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
@@ -25,9 +25,45 @@ const initialValues = {
     rol_id: ''
 }
 
-const styles = {
-    Paper: { height: 500, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
-}
+const useStyles = makeStyles((theme)=> ( {
+    Paper: {
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '1.5rem',
+            height: 700,
+            padding: 5,
+            marginLeft: 10,
+            marginRight: 10,
+            overflowY: 'auto',
+            align:"center"
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.0rem',
+            height: 500,
+            padding: 20,
+            marginLeft: 100,
+            marginRight: 100,
+            overflowY: 'auto',
+        },
+        [theme.breakpoints.up('lg')]: {
+            height: 500,
+            padding: 20,
+            marginLeft: 100,
+            marginRight: 100,
+            overflowY: 'auto',
+        },
+    },
+    Title:{
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '0.5rem',
+        },
+        [theme.breakpoints.up('md')]: {
+            fontSize: '1.0rem',
+        },
+        [theme.breakpoints.up('lg')]: {
+            
+        },
+    }
+}));
 
 export const CrearUsuario = (props) => {
 
@@ -92,12 +128,12 @@ export const CrearUsuario = (props) => {
                     "cuenta_nombre": values.cuenta_nombre,
                     "cuenta_apellido_paterno": values.cuenta_apellido_paterno,
                     "cuenta_apellido_materno": values.cuenta_apellido_materno,
-                    "cuenta_genero":values.cuenta_genero,
+                    "cuenta_genero": values.cuenta_genero,
                     "estudiante_semestre": values.estudiante_semestre,
                     "estudiante_carrera": values.estudiante_carrera,
                     "estudiante_calificacion": 0,
                     "rol_id": values.rol_id
-                },{ headers: { "Authorization": "Bearer " + localStorage.token } }
+                }, { headers: { "Authorization": "Bearer " + localStorage.token } }
             )
             console.log(response.data);
             if (response.data.flag == 1) {
@@ -161,174 +197,175 @@ export const CrearUsuario = (props) => {
         })
     }
     const role = localStorage.getItem("rol");
+    const styles = useStyles();
     if (role == "administrador") {
-    return (
-        <div style={{ height: "650px" }}>
-            <Box color="primary.contrastText" mb={1}>
-                <Typography color="white" align="center" variant="h3">Crear nuevo usuario</Typography>
-            </Box>
-            <Paper elevation={3} style={styles.Paper}>
-                <Link to="/ConsultUser">
-                    <ArrowBackIcon button fontSize="large" />
-                </Link>
-                <Box mt={5} ml={5}>
-                    <Form onSubmit={handleSubmit}>
-                        <Box ml={3} mb={2}>
-                            <Typography variant="h5">Datos generales</Typography>
-                        </Box>
-                        <Grid container spacing={1}>
-                            <Grid item xs={12} sm={6}>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <Controls.Input
-                                        name="cuenta_nombre"
-                                        label="Nombre"
-                                        value={values.cuenta_nombre}
-                                        onChange={handleInputChange}
-                                        error={errors.cuenta_nombre}
-                                    />
-                                </Box>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <Controls.Input
-                                        name="cuenta_apellido_paterno"
-                                        label="Apellido paterno"
-                                        value={values.cuenta_apellido_paterno}
-                                        onChange={handleInputChange}
-                                        error={errors.cuenta_apellido_paterno}
-                                    />
-                                </Box>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <Controls.Input
-                                        name="cuenta_apellido_materno"
-                                        label="Apellido materno"
-                                        value={values.cuenta_apellido_materno}
-                                        onChange={handleInputChange}
-                                        error={errors.cuenta_apellido_materno}
-                                    />
-                                </Box>
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <Controls.Select
-                                        name="cuenta_genero"
-                                        label="Género"
-                                        value={values.cuenta_genero}
-                                        onChange={handleInputChange}
-                                        error={errors.cuenta_genero}
-                                    />
-                                </Box>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <Controls.Input
-                                        name="cuenta_telefono"
-                                        label="Telefono(10 digitos)"
-                                        value={values.cuenta_telefono}
-                                        onChange={handleInputChange}
-                                        error={errors.cuenta_telefono}
-                                        type="number"
-                                    />
-                                </Box>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <Controls.Input
-                                        name="cuenta_correo"
-                                        label="Correo electronico"
-                                        value={values.cuenta_correo}
-                                        onChange={handleInputChange}
-                                        error={errors.cuenta_correo}
-                                    />
-                                </Box>
-                            </Grid>
-                            <Grid item xs={12} sm={12}>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <Controls.Input
-                                        name="cuenta_nombre_usuario"
-                                        label="Nombre de usuario"
-                                        value={values.cuenta_nombre_usuario}
-                                        onChange={handleInputChange}
-                                        error={errors.cuenta_nombre_usuario}
-                                    />
-                                </Box>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <Controls.Input
-                                        name="password"
-                                        label="Contraseña"
-                                        value={values.password}
-                                        onChange={handleInputChange}
-                                        type={values.showPassword ? 'text' : 'password'}
-                                        error={errors.password}
-                                    />
-                                </Box>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <Controls.Input
-                                        name="passwordConfirmar"
-                                        label="Confrimar contraseña"
-                                        value={values.passwordConfirmar}
-                                        onChange={handleInputChange}
-                                        type={values.showPassword ? 'text' : 'password'}
-                                        error={errors.passwordConfirmar}
-                                    />
-                                </Box>
-
-                            </Grid>
-
-                        </Grid>
-                        <Box ml={3} mb={2}>
-                            <Typography variant="h5">Datos academicos</Typography>
-                        </Box>
-                        <Grid container spacing={1}>
-                            <Grid item xs={12} sm={6}>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <Controls.Input
-                                        name="estudiante_carrera"
-                                        label="Carrera"
-                                        value={values.estudiante_carrera}
-                                        onChange={handleInputChange}
-                                        error={errors.estudiante_carrera}
-                                    />
-                                </Box>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <Controls.Input
-                                        name="estudiante_semestre"
-                                        label="Semestre"
-                                        value={values.estudiante_semestre}
-                                        type="number"
-                                        pattern="[0-9]*"
-                                        onChange={handleInputChange}
-                                        error={errors.estudiante_semestre}
-                                    />
-                                </Box>
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <Controls.SelectRol
-                                    name="rol_id"
-                                    label="Rol"
-                                    value={values.rol_id}
-                                    onChange={handleInputChange}
-                                    error={errors.rol_id}
-                                />
-                            </Grid>
-                        </Grid>
-                        <Grid container spacing={1}>
-                            <Grid item xs={12} sm={12}>
-                                <Box ml={3} mt={1} align="right">
-                                    <Controls.ButtonSubmit
-                                        size="large"
-                                        text="Confirmar"
-                                        type="submit"
-                                    />
-                                    <Controls.ButtonSubmit
-                                        size="large"
-                                        text="Reiniciar"
-                                        color="default"
-                                        onClick={resetForm}
-                                    />
-                                </Box>
-                            </Grid>
-                        </Grid>
-                    </Form>
+        return (
+            <div style={{ height: "650px" }}>
+                <Box className={styles.Title} color="primary.contrastText" mb={1}>
+                    <Typography className={styles.Title} color="white" align="center" variant="h3">Crear nuevo usuario</Typography>
                 </Box>
-            </Paper>
-        </div>
-    )
-    }else{
+                <Paper elevation={3} className={styles.Paper}>
+                    <Link to="/ConsultUser">
+                        <ArrowBackIcon button fontSize="large" />
+                    </Link>
+                    <Box mt={5} ml={5}>
+                        <Form onSubmit={handleSubmit}>
+                            <Box ml={3} mb={2}>
+                                <Typography className={styles.Title} variant="h5">Datos generales</Typography>
+                            </Box>
+                            <Grid container spacing={1}>
+                                <Grid item xs={12} sm={6}>
+                                    <Box mb={2} mr={2} ml={2}>
+                                        <Controls.Input
+                                            name="cuenta_nombre"
+                                            label="Nombre"
+                                            value={values.cuenta_nombre}
+                                            onChange={handleInputChange}
+                                            error={errors.cuenta_nombre}
+                                        />
+                                    </Box>
+                                    <Box mb={2} mr={2} ml={2}>
+                                        <Controls.Input
+                                            name="cuenta_apellido_paterno"
+                                            label="Apellido paterno"
+                                            value={values.cuenta_apellido_paterno}
+                                            onChange={handleInputChange}
+                                            error={errors.cuenta_apellido_paterno}
+                                        />
+                                    </Box>
+                                    <Box mb={2} mr={2} ml={2}>
+                                        <Controls.Input
+                                            name="cuenta_apellido_materno"
+                                            label="Apellido materno"
+                                            value={values.cuenta_apellido_materno}
+                                            onChange={handleInputChange}
+                                            error={errors.cuenta_apellido_materno}
+                                        />
+                                    </Box>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <Box mb={2} mr={2} ml={2}>
+                                        <Controls.Select
+                                            name="cuenta_genero"
+                                            label="Género"
+                                            value={values.cuenta_genero}
+                                            onChange={handleInputChange}
+                                            error={errors.cuenta_genero}
+                                        />
+                                    </Box>
+                                    <Box mb={2} mr={2} ml={2}>
+                                        <Controls.Input
+                                            name="cuenta_telefono"
+                                            label="Telefono(10 digitos)"
+                                            value={values.cuenta_telefono}
+                                            onChange={handleInputChange}
+                                            error={errors.cuenta_telefono}
+                                            type="number"
+                                        />
+                                    </Box>
+                                    <Box mb={2} mr={2} ml={2}>
+                                        <Controls.Input
+                                            name="cuenta_correo"
+                                            label="Correo electronico"
+                                            value={values.cuenta_correo}
+                                            onChange={handleInputChange}
+                                            error={errors.cuenta_correo}
+                                        />
+                                    </Box>
+                                </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <Box mb={2} mr={2} ml={2}>
+                                        <Controls.Input
+                                            name="cuenta_nombre_usuario"
+                                            label="Nombre de usuario"
+                                            value={values.cuenta_nombre_usuario}
+                                            onChange={handleInputChange}
+                                            error={errors.cuenta_nombre_usuario}
+                                        />
+                                    </Box>
+                                    <Box mb={2} mr={2} ml={2}>
+                                        <Controls.Input
+                                            name="password"
+                                            label="Contraseña"
+                                            value={values.password}
+                                            onChange={handleInputChange}
+                                            type={values.showPassword ? 'text' : 'password'}
+                                            error={errors.password}
+                                        />
+                                    </Box>
+                                    <Box mb={2} mr={2} ml={2}>
+                                        <Controls.Input
+                                            name="passwordConfirmar"
+                                            label="Confrimar contraseña"
+                                            value={values.passwordConfirmar}
+                                            onChange={handleInputChange}
+                                            type={values.showPassword ? 'text' : 'password'}
+                                            error={errors.passwordConfirmar}
+                                        />
+                                    </Box>
+
+                                </Grid>
+
+                            </Grid>
+                            <Box ml={3} mb={2}>
+                                <Typography className={styles.Title} variant="h5">Datos academicos</Typography>
+                            </Box>
+                            <Grid container spacing={1}>
+                                <Grid item xs={12} sm={6}>
+                                    <Box mb={2} mr={2} ml={2}>
+                                        <Controls.Input
+                                            name="estudiante_carrera"
+                                            label="Carrera"
+                                            value={values.estudiante_carrera}
+                                            onChange={handleInputChange}
+                                            error={errors.estudiante_carrera}
+                                        />
+                                    </Box>
+                                    <Box mb={2} mr={2} ml={2}>
+                                        <Controls.Input
+                                            name="estudiante_semestre"
+                                            label="Semestre"
+                                            value={values.estudiante_semestre}
+                                            type="number"
+                                            pattern="[0-9]*"
+                                            onChange={handleInputChange}
+                                            error={errors.estudiante_semestre}
+                                        />
+                                    </Box>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <Controls.SelectRol
+                                        name="rol_id"
+                                        label="Rol"
+                                        value={values.rol_id}
+                                        onChange={handleInputChange}
+                                        error={errors.rol_id}
+                                    />
+                                </Grid>
+                            </Grid>
+                            <Grid container spacing={1}>
+                                <Grid item xs={12} sm={12}>
+                                    <Box ml={3} mt={1} align="right">
+                                        <Controls.ButtonSubmit
+                                            size="large"
+                                            text="Confirmar"
+                                            type="submit"
+                                        />
+                                        <Controls.ButtonSubmit
+                                            size="large"
+                                            text="Reiniciar"
+                                            color="default"
+                                            onClick={resetForm}
+                                        />
+                                    </Box>
+                                </Grid>
+                            </Grid>
+                        </Form>
+                    </Box>
+                </Paper>
+            </div>
+        )
+    } else {
         return <div>
             <Redirect to="/inicio" />
         </div>

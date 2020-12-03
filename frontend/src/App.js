@@ -23,8 +23,21 @@ const styles = makeStyles(theme => ({
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    padding: theme.spacing(3),
-    height: 1000,
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '0.5rem',
+      padding: theme.spacing(1),
+      height: 1550,
+    },
+    [theme.breakpoints.up('md')]: {
+
+      padding: theme.spacing(2),
+      height: 1200,
+    },
+    [theme.breakpoints.up('lg')]: {
+      padding: theme.spacing(3),
+      height: 1200,
+    },
+
   },
 }))
 
@@ -53,7 +66,7 @@ function App() {
                 onClose={openAction}
               />
             </Hidden>
-            <div className={classes.content}>
+            <div className={classes.content}  >
               <div className={classes.toolbar}></div>
               <Route exact path=""
                 render={() => {

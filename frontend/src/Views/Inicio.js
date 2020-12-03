@@ -1,6 +1,20 @@
-import { Box } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
 import React from 'react'
 import logo from '../img/main logo-dark.png';
+
+const styles = makeStyles((theme) => ( {
+    Paper: {
+        [theme.breakpoints.down('sm')]: {
+            height: 100,
+
+        },
+        [theme.breakpoints.up('md')]: {
+        },
+        [theme.breakpoints.up('lg')]: {
+            
+        },
+    }
+  }));
 
 export const Inicio = () => {
     return (
