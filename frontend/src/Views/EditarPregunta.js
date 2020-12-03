@@ -1,17 +1,17 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { Box, Grid, Typography, Paper, Container, TextField, Button } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { Link } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
 import swal from 'sweetalert';
 import API from '../apis/api';
+import { Link, Redirect } from 'react-router-dom';
 
 const initialValues = {
     administrador_id: '',
     pregunta_pregunta: '',
     pregunta_respuesta: '',
-    pregunta_id:'',
+    pregunta_id: '',
 
 }
 
@@ -23,7 +23,7 @@ const EditarPregunta = (props) => {
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
         if ('pregunta_pregunta' in fieldValues)
-            temp.pregunta_pregunta = fieldValues.pregunta_pregunta  ? "" : "Este campo es obligatorio."
+            temp.pregunta_pregunta = fieldValues.pregunta_pregunta ? "" : "Este campo es obligatorio."
         if ('pregunta_respuesta' in fieldValues)
             temp.pregunta_respuesta = fieldValues.pregunta_respuesta ? "" : "Este campo es obligatorio."
         setErrors({
@@ -32,19 +32,19 @@ const EditarPregunta = (props) => {
         if (fieldValues == values)
             return Object.values(temp).every(x => x == "")
     }
-    const validacionIgual = () =>{
-        let flag=0;
-        if(initialValues.pregunta_pregunta==values.pregunta_pregunta && initialValues.pregunta_respuesta==values.pregunta_respuesta){
-            flag=1;
+    const validacionIgual = () => {
+        let flag = 0;
+        if (initialValues.pregunta_pregunta == values.pregunta_pregunta && initialValues.pregunta_respuesta == values.pregunta_respuesta) {
+            flag = 1;
         }
         return flag;
     }
     const handleSubmitPregunta = e => {
         e.preventDefault()
-        if(validacionIgual()==0){
+        if (validacionIgual() == 0) {
             if (validate())
-            confirmacion();
-        }else{
+                confirmacion();
+        } else {
             swal({
                 title: "No se ha realizado ningún cambio.",
                 text: "Es necesario realizar al menos un cambio en la información.",
@@ -62,19 +62,19 @@ const EditarPregunta = (props) => {
     } = useForm(initialValues, true, validate);
 
     const peticionGet = async () => {
-        await API.get('pregunta/'+match.params.preguntaId)
+        await API.get('pregunta/' + match.params.preguntaId)
             .then(response => {
                 setValues(response.data);
-                initialValues.administrador_id=response.data.administrador_id;
-                initialValues.pregunta_pregunta=response.data.pregunta_pregunta;
-                initialValues.pregunta_respuesta=response.data.pregunta_respuesta;
-                initialValues.pregunta_id=response.data.pregunta_id;
+                initialValues.administrador_id = response.data.administrador_id;
+                initialValues.pregunta_pregunta = response.data.pregunta_pregunta;
+                initialValues.pregunta_respuesta = response.data.pregunta_respuesta;
+                initialValues.pregunta_id = response.data.pregunta_id;
             })
     }
 
     const peticionPut = async () => {
         try {
-            const response = await API.put('pregunta/'+values.pregunta_id,
+            const response = await API.put('pregunta/' + values.pregunta_id,
                 {
                     "pregunta_pregunta": values.pregunta_pregunta,
                     "pregunta_respuesta": values.pregunta_respuesta,
@@ -145,70 +145,77 @@ const EditarPregunta = (props) => {
         peticionGet();
     }, [])
 
-    return (
-        <div style={{ height: "650px" }}>
-            <Box color="primary.contrastText" mb={1}>
-                <Typography color="white" align="center" variant="h3">Editar pregunta</Typography>
-            </Box>
-            <Paper elevation={3} style={styles.Paper}>
-                <Link to="/PreguntasFrecuentes">
-                    <ArrowBackIcon button fontSize="large" />
-                </Link>
-                <Box mt={5} ml={5}>
-                    <Form onSubmit={handleSubmitPregunta}>
-                        <Grid container spacing={1}>
-                            <Grid item xs={12} sm={12}>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <Controls.Input
-                                        name="pregunta_pregunta"
-                                        label="Pregunta"
-                                        value={values.pregunta_pregunta}
-                                        onChange={handleInputChange}
-                                        error={errors.pregunta_pregunta}
-                                    />
-                                </Box>
-                            </Grid>
-                            <Grid item xs={12} sm={12}>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <Controls.Input
-                                        name="pregunta_respuesta"
-                                        label="Respuesta"
-                                        value={values.pregunta_respuesta}
-                                        onChange={handleInputChange}
-                                        error={errors.pregunta_respuesta}
-                                        multiline
-                                        inputProps={{
-                                            style: {
-                                                height: 100,
-                                                padding: '0 14px',
-                                            },
-                                        }}
-                                    />
-                                </Box>
-                            </Grid>
+    const role = localStorage.getItem("rol");
+    if (role == "administrador") {
+        return (
+            <div style={{ height: "650px" }}>
+                <Box color="primary.contrastText" mb={1}>
+                    <Typography color="white" align="center" variant="h3">Editar pregunta</Typography>
+                </Box>
+                <Paper elevation={3} style={styles.Paper}>
+                    <Link to="/PreguntasFrecuentes">
+                        <ArrowBackIcon button fontSize="large" />
+                    </Link>
+                    <Box mt={5} ml={5}>
+                        <Form onSubmit={handleSubmitPregunta}>
                             <Grid container spacing={1}>
                                 <Grid item xs={12} sm={12}>
-                                    <Box ml={3} mt={1} align="right">
-                                        <Controls.ButtonSubmit
-                                            size="large"
-                                            text="Confirmar"
-                                            type="submit"
-                                        />
-                                        <Controls.ButtonSubmit
-                                            size="large"
-                                            text="Reiniciar"
-                                            color="default"
-                                            onClick={resetForm}
+                                    <Box mb={2} mr={2} ml={2}>
+                                        <Controls.Input
+                                            name="pregunta_pregunta"
+                                            label="Pregunta"
+                                            value={values.pregunta_pregunta}
+                                            onChange={handleInputChange}
+                                            error={errors.pregunta_pregunta}
                                         />
                                     </Box>
                                 </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <Box mb={2} mr={2} ml={2}>
+                                        <Controls.Input
+                                            name="pregunta_respuesta"
+                                            label="Respuesta"
+                                            value={values.pregunta_respuesta}
+                                            onChange={handleInputChange}
+                                            error={errors.pregunta_respuesta}
+                                            multiline
+                                            inputProps={{
+                                                style: {
+                                                    height: 100,
+                                                    padding: '0 14px',
+                                                },
+                                            }}
+                                        />
+                                    </Box>
+                                </Grid>
+                                <Grid container spacing={1}>
+                                    <Grid item xs={12} sm={12}>
+                                        <Box ml={3} mt={1} align="right">
+                                            <Controls.ButtonSubmit
+                                                size="large"
+                                                text="Confirmar"
+                                                type="submit"
+                                            />
+                                            <Controls.ButtonSubmit
+                                                size="large"
+                                                text="Reiniciar"
+                                                color="default"
+                                                onClick={resetForm}
+                                            />
+                                        </Box>
+                                    </Grid>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </Form>
-                </Box>
-            </Paper>
+                        </Form>
+                    </Box>
+                </Paper>
+            </div>
+        )
+    } else {
+        return <div>
+            <Redirect to="/inicio" />
         </div>
-    )
+    }
 }
 
 export default EditarPregunta

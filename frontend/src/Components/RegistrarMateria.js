@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Grid, makeStyles,Typography, Paper, Button,Card, CardContent,CardMedia, Container, Box,TextField } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
 import swal from 'sweetalert';
-import { Redirect } from 'react-router-dom';
 import { FormControl, InputLabel, MenuItem, Select as MuiSelect } from '@material-ui/core';
 import jwt_decode from "jwt-decode";
 import API from '../apis/api';
@@ -145,7 +144,8 @@ export const RegistrarMateria = (props) => {
     }
 
 
-
+    const role = localStorage.getItem("rol");
+    if (role == "administrador" || role=="asesor") {
     return (
         <div style={{ height: "650px" }}>
             <Box color="primary.contrastText" mb={1}>
@@ -212,5 +212,10 @@ export const RegistrarMateria = (props) => {
             </Paper>
         </div>
     )
+    }else{
+        return <div>
+            <Redirect to="/inicio" />
+        </div>
+    }
 }
 export default RegistrarMateria

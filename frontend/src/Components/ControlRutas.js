@@ -11,7 +11,6 @@ import ConsultarUsuario from '../Views/ConsultarUsuario';
 import CrearUsuario  from '../Views/CrearUsuario';
 import  RegistrarMateria from './RegistrarMateria';
 import CrearAdministrador from '../Views/CrearAdministrador';
-import EstablecerTarifa from './EstablecerTarifa';
 import ConsultarPreguntas from '../Views/ConsultarPreguntas';
 import CrearPreguntasFrecuentes from '../Views/CrearPreguntasFrecuentes';
 import EditarUsuario from '../Views/EditarUsuario';
@@ -34,7 +33,6 @@ const Ruta ={
     CrearUsuario,
     RegistrarMateria,
     CrearAdministrador,
-    EstablecerTarifa,
     ConsultarPreguntas,
     CrearPreguntasFrecuentes,
     EditarUsuario,

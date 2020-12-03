@@ -11,6 +11,7 @@ import Rutas from './Components/ControlRutas';
 import DrawerBox from './Components/DrawerBox';
 
 let login = localStorage.getItem("isLoggedIn");
+let administrador = localStorage.getItem("administrador");
 const styles = makeStyles(theme => ({
   root: {
     display: 'flex'
@@ -62,8 +63,8 @@ function App() {
                 }} />
               <Route exact path="/inicio" component={Rutas.Inicio} />
               <Route exact path="/ConsultarUsuario" component={Rutas.ConsultarUsuario} />
-              <Route exact path="/EditarUsuario/:cuentaId" component={Rutas.EditarUsuario} />
               <Route exact path="/EditarPregunta/:preguntaId" component={Rutas.EditarPregunta} />
+              <Route exact path="/EditarUsuario/:cuentaId" component={Rutas.EditarUsuario} />
               <Route exact path="/HistorialAsesoria" component={Rutas.HistorialAsesoria} />
               <Route exact path="/CrearUsuario" component={Rutas.CrearUsuario} />
               <Route exact path="/CrearAdministrador" component={Rutas.CrearAdministrador} />
@@ -79,7 +80,6 @@ function App() {
               <Route exact path="/RegistrarAsesoria" component={Rutas.RegistrarAsesoria} />
               <Route exact path="/Materias" component={Rutas.subjects} />
               <Route exact path="/MisAsesorias" component={Rutas.advisoryAdv} />
-              <Route exact path="/EstablecerTarifa" component={Rutas.EstablecerTarifa} />
               <Route exact path="/asesores/:cuenta_id" component={Rutas.advisoryAdv} />
               <Route exact path="/Evaluaciones" component={Rutas.Evaluaciones} />
               <Route exact path="/AmbienteConstruido" component={Rutas.AmbienteConstruido} />
@@ -88,7 +88,6 @@ function App() {
               <Route exact path="/Negocios" component={Rutas.Negocios} />
               <Route exact path="/Salud" component={Rutas.Salud} />
               <Route exact path="/EstudiosCreativos" component={Rutas.EstudiosCreativos} />
-              <Route exact path="/HistorialAsesoria" component={Rutas.HistorialAsesoria} />
             </div>
           </div>
         </Router>

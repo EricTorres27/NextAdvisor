@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Grid, Typography, Paper, Container, TextField, Button } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
 import swal from 'sweetalert';
@@ -177,7 +177,8 @@ export const CrearAdministrador = (props) => {
             return false;
         }
     }
-
+    const role = localStorage.getItem("rol");
+    if (role == "administrador") {
     return (
         <div style={{ height: "650px" }}>
             <Box color="primary.contrastText" mb={1}>
@@ -322,6 +323,11 @@ export const CrearAdministrador = (props) => {
             </Paper>
         </div>
     )
+    }else{
+        return <div>
+            <Redirect to="/inicio" />
+        </div>
+    }
 }
 export default CrearAdministrador
 

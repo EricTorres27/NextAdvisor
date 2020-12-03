@@ -93,22 +93,20 @@ export default function SignIn() {
         .then(res => {
           switch (res.data['rol_id']) {
             case 1:
-              console.log("estudiante")
-              localStorage.setItem("rol", "estudiante")
+              localStorage.setItem("rol", "estudiante");
               break;
             case 2:
-              console.log("asesor")
               localStorage.setItem("rol", "asesor")
               break;
             case 3:
-              console.log("administrador")
-              localStorage.setItem("rol", "administrador")
+              localStorage.setItem("rol", "administrador");
+              localStorage.setItem("administrador", true);
               break;
           }
           localStorage.setItem("isLoggedIn", true);
           localStorage.setItem("nombreCuenta",res.data['cuenta_nombre_usuario'])
           localStorage.setItem("cuentaId", res.data['cuenta_id']);
-          window.location.href = "http://nextadvisor.com.mx";
+          window.location.href = "http://nextadvisor.com.mx/inicio";
         })
         .catch(err => {
           console.log(err);

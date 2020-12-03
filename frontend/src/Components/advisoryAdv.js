@@ -1,6 +1,6 @@
 
 import React, { forwardRef, useState, useEffect } from 'react';
-import { Box, Button, Divider, Grid, Typography, Paper, Container, Select, MenuItem, List , makeStyles} from '@material-ui/core';
+import { Box, Button, Divider, Grid, Typography, Paper, Container, Select, MenuItem, List, makeStyles } from '@material-ui/core';
 import MaterialTable from 'material-table'
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -17,7 +17,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import swal from 'sweetalert';
 import API from '../apis/api';
 
@@ -40,11 +40,11 @@ const MisAsesorias = (props) => {
         materia_nombre: "",
 
     })
-    const selecionarAsesoria=(oferta_asesoria,caso)=>{
+    const selecionarAsesoria = (oferta_asesoria, caso) => {
         setAsesoriaSeleccionada(oferta_asesoria);
-        (caso==="Eliminar")?confirmacionEliminar(oferta_asesoria)
-        :
-        props.history.push("/EditarAsesoria/"+oferta_asesoria.oferta_id);
+        (caso === "Eliminar") ? confirmacionEliminar(oferta_asesoria)
+            :
+            props.history.push("/EditarAsesoria/" + oferta_asesoria.oferta_id);
     }
 
     const columnas = [
@@ -90,10 +90,10 @@ const MisAsesorias = (props) => {
 
 
 
-    const cuentaId=localStorage.getItem("cuentaId");
+    const cuentaId = localStorage.getItem("cuentaId");
 
     const peticionGet = async () => {
-        await API.get('materias/conseguirEstudiante/'+cuentaId)
+        await API.get('materias/conseguirEstudiante/' + cuentaId)
             .then(response => {
                 setData(response.data);
             })
@@ -102,7 +102,7 @@ const MisAsesorias = (props) => {
     const peticionDelete = async (asesoriaId) => {
         try {
 
-            const response = await API.delete("asesoria/"+ asesoriaId)
+            const response = await API.delete("asesoria/" + asesoriaId)
             if (response.data.flag == 1) {
                 swal({
                     title: "La asesoría se ha eliminado con éxito.",
@@ -157,7 +157,7 @@ const MisAsesorias = (props) => {
 
     const confirmacionEliminar = (asesoriaSeleccionada) => {
         swal({
-            title: "¿Está seguro que desea eliminar la asesoria "+asesoriaSeleccionada.materia_nombre+" del sistema?",
+            title: "¿Está seguro que desea eliminar la asesoria " + asesoriaSeleccionada.materia_nombre + " del sistema?",
             text: "La información quedara guardada en la base de datos.",
             buttons: ["No", "Si"]
         }).then(respuesta => {
@@ -166,44 +166,51 @@ const MisAsesorias = (props) => {
             }
         })
     }
-    return (
-        <div>
-            <Paper elevation={3} sclassName={styles.Paper}>
-                <Link to="/RegistrarAsesoria" style={{ textDecoration: 'none' }}>
-                    <Box align="right" mb={2}>
+    const role = localStorage.getItem("rol");
+    if (role == "administrador" || role=="asesor") {
+        return (
+            <div>
+                <Paper elevation={3} sclassName={styles.Paper}>
+                    <Link to="/RegistrarAsesoria" style={{ textDecoration: 'none' }}>
+                        <Box align="right" mb={2}>
 
-                        <Button variant="contained" color="primary">Registrar asesoría</Button>
-                    </Box>
-                </Link>
-                <MaterialTable
-                    title="Asesorías"
-                    columns={columnas}
-                    data={data}
-                    icons={tableIcons}
-                    actions={[
-                        {
-                            icon: Edit,
-                            tooltip: 'Editar',
-                            onClick: (event, rowData)=>selecionarAsesoria(rowData,"Editar")
-                        },
-                        {
-                            icon: DeleteOutline,
-                            tooltip: 'Eliminar',
-                            onClick: (event, rowData)=>selecionarAsesoria(rowData,"Eliminar")
-                        },
-                    ]}
-                    options={{
-                        actionsColumnIndex: -1
-                    }}
-                    localization={{
-                        header: {
-                            actions: 'Acciones'
-                        }
-                    }}
-                />
-            </Paper>
+                            <Button variant="contained" color="primary">Registrar asesoría</Button>
+                        </Box>
+                    </Link>
+                    <MaterialTable
+                        title="Asesorías"
+                        columns={columnas}
+                        data={data}
+                        icons={tableIcons}
+                        actions={[
+                            {
+                                icon: Edit,
+                                tooltip: 'Editar',
+                                onClick: (event, rowData) => selecionarAsesoria(rowData, "Editar")
+                            },
+                            {
+                                icon: DeleteOutline,
+                                tooltip: 'Eliminar',
+                                onClick: (event, rowData) => selecionarAsesoria(rowData, "Eliminar")
+                            },
+                        ]}
+                        options={{
+                            actionsColumnIndex: -1
+                        }}
+                        localization={{
+                            header: {
+                                actions: 'Acciones'
+                            }
+                        }}
+                    />
+                </Paper>
+            </div>
+        )
+    } else {
+        return <div>
+            <Redirect to="/inicio" />
         </div>
-    )
+    }
 }
 
 export default MisAsesorias

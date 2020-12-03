@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Grid, Typography, Paper, Container, TextField, Button } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
 
 const styles = {
@@ -11,7 +11,8 @@ const styles = {
 const AmbienteConstruido = (props) => {
 
     const { match } = props;
-
+    const role = localStorage.getItem("rol");
+    if (role == "administrador" || role=="asesor") {
     return (
         <div style={{ height: "650px" }}>
             <Box color="primary.contrastText" mb={1}>
@@ -36,6 +37,11 @@ const AmbienteConstruido = (props) => {
             </Paper>
         </div>
     )
+    }else{
+        return <div>
+            <Redirect to="/inicio" />
+        </div>
+    }
 }
 
 export default AmbienteConstruido

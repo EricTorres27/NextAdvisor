@@ -16,7 +16,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import swal from 'sweetalert';
 import API from '../apis/api';
 
@@ -48,16 +48,16 @@ const ConsultarUsuario = (props) => {
         cuenta_apellido_materno: "",
         cuenta_apellido_paterno: "",
         cuenta_correo: "",
-        cuenta_id:"",
+        cuenta_id: "",
         cuenta_nombre: "",
         cuenta_nombre_usuario: "",
         rol_nombre: "",
     })
-    const selecionarUsuario=(cuenta,caso)=>{
+    const selecionarUsuario = (cuenta, caso) => {
         setUsuarioSeleccionado(cuenta);
-        (caso==="Eliminar")?confirmacionEliminar(cuenta)
-        :
-        props.history.push("/EditarUsuario/"+cuenta.cuenta_id);
+        (caso === "Eliminar") ? confirmacionEliminar(cuenta)
+            :
+            props.history.push("/EditarUsuario/" + cuenta.cuenta_id);
     }
     const abirCerrarModalCrear = () => {
         setModalCrearusuario(!modalCrearUsuario);
@@ -144,7 +144,7 @@ const ConsultarUsuario = (props) => {
     }
     const peticionDelete = async (cuentaId) => {
         try {
-            const response = await API.delete('cuenta/eliminarUsuario/'+cuentaId, { headers: { "Authorization": "Bearer " + localStorage.token } })
+            const response = await API.delete('cuenta/eliminarUsuario/' + cuentaId, { headers: { "Authorization": "Bearer " + localStorage.token } })
             if (response.data.flag == 1) {
                 swal({
                     title: "El usuario se ha eliminado con éxito",
@@ -191,7 +191,7 @@ const ConsultarUsuario = (props) => {
 
     const confirmacionEliminar = (cuentaSeleccionada) => {
         swal({
-            title: "¿Está seguro que desea eliminar al usuario "+cuentaSeleccionada.cuenta_nombre_usuario+" del sistema?",
+            title: "¿Está seguro que desea eliminar al usuario " + cuentaSeleccionada.cuenta_nombre_usuario + " del sistema?",
             text: "La información quedara guardada en la base de datos.",
             buttons: ["No", "Si"]
         }).then(respuesta => {
@@ -200,48 +200,54 @@ const ConsultarUsuario = (props) => {
             }
         })
     }
-
-    return (
-        <div>
-            <Paper elevation={3} className={styles.Paper}>
-                <Box align="right" mb={2}>
-                    <Button onClick={() => abirCerrarModalCrear()} variant="contained" color="primary">Crear usuario</Button>
-                </Box>
-                <MaterialTable
-                    title="Usuarios"
-                    columns={columnas}
-                    data={data}
-                    icons={tableIcons}
-                    actions={[
-                        {
-                            icon: Edit,
-                            tooltip: 'Editar',
-                            onClick: (event, rowData)=>selecionarUsuario(rowData,"Editar")
-                        },
-                        {
-                            icon: DeleteOutline,
-                            tooltip: 'Eliminar',
-                            onClick: (event, rowData)=>selecionarUsuario(rowData,"Eliminar")
-                        },
-                    ]}
-                    options={{
-                        actionsColumnIndex: -1
-                    }}
-                    localization={{
-                        header: {
-                            actions: 'Acciones'
-                        }
-                    }}
-                />
-            </Paper>
-            <Modal
-                open={modalCrearUsuario}
-                onClose={abirCerrarModalCrear}
-            >
-                {bodyCrear}
-            </Modal>
+    const role = localStorage.getItem("rol");
+    if (role == "administrador") {
+        return (
+            <div>
+                <Paper elevation={3} className={styles.Paper}>
+                    <Box align="right" mb={2}>
+                        <Button onClick={() => abirCerrarModalCrear()} variant="contained" color="primary">Crear usuario</Button>
+                    </Box>
+                    <MaterialTable
+                        title="Usuarios"
+                        columns={columnas}
+                        data={data}
+                        icons={tableIcons}
+                        actions={[
+                            {
+                                icon: Edit,
+                                tooltip: 'Editar',
+                                onClick: (event, rowData) => selecionarUsuario(rowData, "Editar")
+                            },
+                            {
+                                icon: DeleteOutline,
+                                tooltip: 'Eliminar',
+                                onClick: (event, rowData) => selecionarUsuario(rowData, "Eliminar")
+                            },
+                        ]}
+                        options={{
+                            actionsColumnIndex: -1
+                        }}
+                        localization={{
+                            header: {
+                                actions: 'Acciones'
+                            }
+                        }}
+                    />
+                </Paper>
+                <Modal
+                    open={modalCrearUsuario}
+                    onClose={abirCerrarModalCrear}
+                >
+                    {bodyCrear}
+                </Modal>
+            </div>
+        )
+    } else {
+        return <div>
+            <Redirect to="/inicio" />
         </div>
-    )
+    }
 }
 
 export default ConsultarUsuario

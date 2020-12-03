@@ -1,13 +1,13 @@
 import React from 'react';
 import { Box, Grid, Typography, Paper, Container, TextField, Button } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useForm, Form } from '../Components/useForm';
 import Controls from '../Components/controls/Controls';
 import swal from 'sweetalert';
 import API from '../apis/api';
 
-const cuentaId=localStorage.getItem("cuentaId");
+const cuentaId = localStorage.getItem("cuentaId");
 const initialValues = {
     administrador_id: cuentaId,
     pregunta_pregunta: '',
@@ -49,6 +49,9 @@ const CrearPreguntasFrecuentes = (props) => {
 
     const peticionPost = async () => {
         try {
+            console.log(values.pregunta_pregunta);
+            console.log(values.pregunta_respuesta);
+            console.log(cuentaId);
             const response = await API.post('pregunta',
                 {
                     "pregunta_pregunta": values.pregunta_pregunta,
@@ -116,71 +119,77 @@ const CrearPreguntasFrecuentes = (props) => {
             }
         })
     }
-
-    return (
-        <div style={{ height: "650px" }}>
-            <Box color="primary.contrastText" mb={1}>
-                <Typography color="white" align="center" variant="h3">Crear nuevo pregunta</Typography>
-            </Box>
-            <Paper elevation={3} style={styles.Paper}>
-                <Link to="/PreguntasFrecuentes">
-                    <ArrowBackIcon button fontSize="large" />
-                </Link>
-                <Box mt={5} ml={5}>
-                    <Form onSubmit={handleSubmitPregunta}>
-                        <Grid container spacing={1}>
-                            <Grid item xs={12} sm={12}>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <Controls.Input
-                                        name="pregunta_pregunta"
-                                        label="Pregunta"
-                                        value={values.pregunta_pregunta}
-                                        onChange={handleInputChange}
-                                        error={errors.pregunta_pregunta}
-                                    />
-                                </Box>
-                            </Grid>
-                            <Grid item xs={12} sm={12}>
-                                <Box mb={2} mr={2} ml={2}>
-                                    <Controls.Input
-                                        name="pregunta_respuesta"
-                                        label="Respuesta"
-                                        value={values.pregunta_respuesta}
-                                        onChange={handleInputChange}
-                                        error={errors.pregunta_respuesta}
-                                        multiline
-                                        inputProps={{
-                                            style: {
-                                                height: 100,
-                                                padding: '0 14px',
-                                            },
-                                        }}
-                                    />
-                                </Box>
-                            </Grid>
+    const role = localStorage.getItem("rol");
+    if (role == "administrador") {
+        return (
+            <div style={{ height: "650px" }}>
+                <Box color="primary.contrastText" mb={1}>
+                    <Typography color="white" align="center" variant="h3">Crear nueva pregunta</Typography>
+                </Box>
+                <Paper elevation={3} style={styles.Paper}>
+                    <Link to="/PreguntasFrecuentes">
+                        <ArrowBackIcon button fontSize="large" />
+                    </Link>
+                    <Box mt={5} ml={5}>
+                        <Form onSubmit={handleSubmitPregunta}>
                             <Grid container spacing={1}>
                                 <Grid item xs={12} sm={12}>
-                                    <Box ml={3} mt={1} align="right">
-                                        <Controls.ButtonSubmit
-                                            size="large"
-                                            text="Confirmar"
-                                            type="submit"
-                                        />
-                                        <Controls.ButtonSubmit
-                                            size="large"
-                                            text="Reiniciar"
-                                            color="default"
-                                            onClick={resetForm}
+                                    <Box mb={2} mr={2} ml={2}>
+                                        <Controls.Input
+                                            name="pregunta_pregunta"
+                                            label="Pregunta"
+                                            value={values.pregunta_pregunta}
+                                            onChange={handleInputChange}
+                                            error={errors.pregunta_pregunta}
                                         />
                                     </Box>
                                 </Grid>
+                                <Grid item xs={12} sm={12}>
+                                    <Box mb={2} mr={2} ml={2}>
+                                        <Controls.Input
+                                            name="pregunta_respuesta"
+                                            label="Respuesta"
+                                            value={values.pregunta_respuesta}
+                                            onChange={handleInputChange}
+                                            error={errors.pregunta_respuesta}
+                                            multiline
+                                            inputProps={{
+                                                style: {
+                                                    height: 100,
+                                                    padding: '0 14px',
+                                                },
+                                            }}
+                                        />
+                                    </Box>
+                                </Grid>
+                                <Grid container spacing={1}>
+                                    <Grid item xs={12} sm={12}>
+                                        <Box ml={3} mt={1} align="right">
+                                            <Controls.ButtonSubmit
+                                                size="large"
+                                                text="Confirmar"
+                                                type="submit"
+                                            />
+                                            <Controls.ButtonSubmit
+                                                size="large"
+                                                text="Reiniciar"
+                                                color="default"
+                                                onClick={resetForm}
+                                            />
+                                        </Box>
+                                    </Grid>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </Form>
-                </Box>
-            </Paper>
+                        </Form>
+                    </Box>
+                </Paper>
+            </div>
+        )
+    } else {
+        return <div>
+            <Redirect to="/inicio" />
         </div>
-    )
+    }
 }
 
 export default CrearPreguntasFrecuentes

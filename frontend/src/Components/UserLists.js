@@ -25,35 +25,34 @@ const role = localStorage.getItem("rol");
 // const role = "administrador";
 const UserLists = () => {
 
-    if (role=="estudiante") {
+    if (role == "estudiante") {
         return (
             <div>
-
                 <List component='nav'>
                     <Divider />
-                    <ListItem button>
-                        <ListItemIcon>
-                            <AccountCircleIcon color="primary" fontSize="large" />
-                        </ListItemIcon>
-                        <Link to="/ConsultarPerfil">
+                    <Link to="/ConsultarPerfil" style={{ textDecoration: 'none' }}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <AccountCircleIcon color="primary" fontSize="large" />
+                            </ListItemIcon>
                             <ListItemText primary='Mi perfil' />
-                        </Link>
-                    </ListItem>
+                        </ListItem>
+                    </Link>
                     <Divider />
-                    <ListItem button>
-                        <ListItemIcon>
-                            <EventIcon color="primary" fontSize="large" />
-                        </ListItemIcon>
-                        <Link to="/HistorialAsesoria">
+                    <Link to="/HistorialAsesoria" style={{ textDecoration: 'none' }}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <EventIcon color="primary" fontSize="large" />
+                            </ListItemIcon>
                             <ListItemText primary='Asesorías' />
-                        </Link>
-                    </ListItem>
+                        </ListItem>
+                    </Link>
                 </List>
             </div>
         )
     }
 
-    if (role=="administrador") {
+    if (role == "administrador") {
         return (
             <div>
 
@@ -117,46 +116,46 @@ const UserLists = () => {
         )
     }
 
-    if (role=="asesor") {
+    if (role == "asesor") {
         return (
             <div>
 
                 <List component='nav'>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <AccountCircleIcon color="primary" fontSize="large" />
-                        </ListItemIcon>
-                        <Link to="/ConsultarPerfil">
+                    <Link to="/ConsultarPerfil" style={{ textDecoration: 'none' }}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <AccountCircleIcon color="primary" fontSize="large" />
+                            </ListItemIcon>
                             <ListItemText primary='Mi perfil' />
-                        </Link>
-                    </ListItem>
+                        </ListItem>
+                    </Link>
                     <Divider />
-                    <ListItem button>
-                        <ListItemIcon>
-                            <AssignmentIcon color="primary" fontSize="large" />
-                        </ListItemIcon>
-                        <Link to="Materias">
+                    <Link to="Materias" style={{ textDecoration: 'none' }}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <AssignmentIcon color="primary" fontSize="large" />
+                            </ListItemIcon>
                             <ListItemText primary='Materias' />
-                        </Link>
-                    </ListItem>
+                        </ListItem>
+                    </Link>
                     <Divider />
-                    <ListItem button>
-                        <ListItemIcon>
-                            <EventIcon color="primary" fontSize="large" />
-                        </ListItemIcon>
-                        <Link to="MisAsesorias">
+                    <Link to="MisAsesorias" style={{ textDecoration: 'none' }}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <EventIcon color="primary" fontSize="large" />
+                            </ListItemIcon>
                             <ListItemText primary='Asesorías' />
-                        </Link>
-                    </ListItem>
+                        </ListItem>
+                    </Link>
                     <Divider />
-                    <ListItem button>
-                        <ListItemIcon>
-                            <GradeIcon color="primary" fontSize="large" />
-                        </ListItemIcon>
-                        <Link to="/Evaluaciones">
+                    <Link to="/Evaluaciones" style={{ textDecoration: 'none' }}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <GradeIcon color="primary" fontSize="large" />
+                            </ListItemIcon>
                             <ListItemText primary='Evaluaciones' />
-                        </Link>
-                    </ListItem>
+                        </ListItem>
+                    </Link>
                 </List>
             </div>
         )

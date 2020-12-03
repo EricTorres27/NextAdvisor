@@ -16,7 +16,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import swal from 'sweetalert';
 import API from '../apis/api';
 
@@ -37,11 +37,11 @@ const ConsultarPreguntas = (props) => {
         pregunta_id: "",
 
     })
-    const selecionarPregunta=(pregunta,caso)=>{
+    const selecionarPregunta = (pregunta, caso) => {
         setPreguntaSeleccionada(pregunta);
-        (caso==="Eliminar")?confirmacionEliminar(pregunta)
-        :
-        props.history.push("/EditarPregunta/"+pregunta.pregunta_id);
+        (caso === "Eliminar") ? confirmacionEliminar(pregunta)
+            :
+            props.history.push("/EditarPregunta/" + pregunta.pregunta_id);
     }
     const columnas = [
 
@@ -95,7 +95,7 @@ const ConsultarPreguntas = (props) => {
 
     const peticionDelete = async (preguntaId) => {
         try {
-            const response = await API.delete('pregunta/'+preguntaId,)
+            const response = await API.delete('pregunta/' + preguntaId,)
             if (response.data.flag == 1) {
                 swal({
                     title: "La pregunta se ha eliminado con éxito.",
@@ -161,45 +161,51 @@ const ConsultarPreguntas = (props) => {
         })
     }
 
+    const role = localStorage.getItem("rol");
+    if (role == "administrador") {
+        return (
+            <div>
+                <Paper elevation={3} className={styles.Paper}>
+                    <Box align="right" mb={2}>
+                        <Link to="/CrearPregunta">
+                            <Button variant="contained" color="primary">Crear pregunta</Button>
+                        </Link>
+                    </Box>
+                    <MaterialTable
+                        title="Preguntas"
+                        columns={columnas}
+                        data={data}
+                        icons={tableIcons}
+                        actions={[
+                            {
+                                icon: Edit,
+                                tooltip: 'Editar',
+                                onClick: (event, rowData) => selecionarPregunta(rowData, "Editar")
+                            },
+                            {
+                                icon: DeleteOutline,
+                                tooltip: 'Eliminar',
+                                onClick: (event, rowData) => selecionarPregunta(rowData, "Eliminar")
+                            },
+                        ]}
+                        options={{
+                            actionsColumnIndex: -1,
 
-    return (
-        <div>
-            <Paper elevation={3} className={styles.Paper}>
-                <Box align="right" mb={2}>
-                    <Link to="/CrearPregunta">
-                        <Button variant="contained" color="primary">Crear pregunta</Button>
-                    </Link>
-                </Box>
-                <MaterialTable
-                    title="Preguntas"
-                    columns={columnas}
-                    data={data}
-                    icons={tableIcons}
-                    actions={[
-                        {
-                            icon: Edit,
-                            tooltip: 'Editar',
-                            onClick: (event, rowData)=>selecionarPregunta(rowData,"Editar")
-                        },
-                        {
-                            icon: DeleteOutline,
-                            tooltip: 'Eliminar',
-                            onClick: (event, rowData)=>selecionarPregunta(rowData,"Eliminar")
-                        },
-                    ]}
-                    options={{
-                        actionsColumnIndex: -1,
-
-                    }}
-                    localization={{
-                        header: {
-                            actions: 'Acciones'
-                        }
-                    }}
-                />
-            </Paper>
+                        }}
+                        localization={{
+                            header: {
+                                actions: 'Acciones'
+                            }
+                        }}
+                    />
+                </Paper>
+            </div>
+        )
+    } else {
+        return <div>
+            <Redirect to="/inicio" />
         </div>
-    )
+    }
 }
 
 export default ConsultarPreguntas

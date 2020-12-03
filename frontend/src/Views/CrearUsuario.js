@@ -160,6 +160,8 @@ export const CrearUsuario = (props) => {
             }
         })
     }
+    const role = localStorage.getItem("rol");
+    if (role == "administrador") {
     return (
         <div style={{ height: "650px" }}>
             <Box color="primary.contrastText" mb={1}>
@@ -326,5 +328,10 @@ export const CrearUsuario = (props) => {
             </Paper>
         </div>
     )
+    }else{
+        return <div>
+            <Redirect to="/inicio" />
+        </div>
+    }
 }
 export default CrearUsuario

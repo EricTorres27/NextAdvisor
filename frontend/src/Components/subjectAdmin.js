@@ -1,5 +1,5 @@
 import React, { forwardRef, useState, useEffect } from 'react';
-import { Box, Button, Divider, Grid, Typography, Paper, Container, Select, MenuItem, List,makeStyles } from '@material-ui/core';
+import { Box, Button, Divider, Grid, Typography, Paper, Container, Select, MenuItem, List, makeStyles } from '@material-ui/core';
 import MaterialTable from 'material-table'
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -16,7 +16,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import swal from 'sweetalert';
 import API from '../apis/api';
 
@@ -38,11 +38,11 @@ const Materias = (props) => {
 
     })
 
-    const selecionarMateria=(materia,caso)=>{
+    const selecionarMateria = (materia, caso) => {
         setMateriaSeleccionada(materia);
-        (caso==="Eliminar")?confirmacionEliminar(materia)
-        :
-        props.history.push("/subjectAdmin/"+materia.materia_id);
+        (caso === "Eliminar") ? confirmacionEliminar(materia)
+            :
+            props.history.push("/EditarMateria/" + materia.materia_id);
 
     }
 
@@ -95,7 +95,7 @@ const Materias = (props) => {
     const peticionDelete = async (materiaId) => {
         try {
 
-            const response = await API.delete("materia/"+ materiaId)
+            const response = await API.delete("materia/" + materiaId)
             if (response.data.flag == 1) {
                 swal({
                     title: "La materia se ha eliminado con éxito",
@@ -150,7 +150,7 @@ const Materias = (props) => {
 
     const confirmacionEliminar = (materiaSeleccionada) => {
         swal({
-            title: "¿Está seguro que desea eliminar la materia "+materiaSeleccionada.materia_nombre+" del sistema?",
+            title: "¿Está seguro que desea eliminar la materia " + materiaSeleccionada.materia_nombre + " del sistema?",
             text: "La información quedara guardada en la base de datos.",
             buttons: ["No", "Si"]
         }).then(respuesta => {
@@ -159,44 +159,51 @@ const Materias = (props) => {
             }
         })
     }
-    return (
-        <div>
-            <Paper  elevation={3} className={styles.Paper}>
-                <Link to="/RegistrarMateria" style={{ textDecoration: 'none' }}>
-                    <Box align="right" mb={2}>
+    const role = localStorage.getItem("rol");
+    if (role == "administrador") {
+        return (
+            <div>
+                <Paper elevation={3} className={styles.Paper}>
+                    <Link to="/RegistrarMateria" style={{ textDecoration: 'none' }}>
+                        <Box align="right" mb={2}>
 
-                        <Button variant="contained" color="primary">Registrar materia</Button>
-                    </Box>
-                </Link>
-                <MaterialTable
-                    title="Materias"
-                    columns={columnas}
-                    data={data}
-                    icons={tableIcons}
-                    actions={[
-                        {
-                            icon: Edit,
-                            tooltip: 'Editar',
-                            onClick: (event, rowData)=>selecionarMateria(rowData,"Editar")
-                        },
-                        {
-                            icon: DeleteOutline,
-                            tooltip: 'Eliminar',
-                            onClick: (event, rowData)=>selecionarMateria(rowData,"Eliminar")
-                        },
-                    ]}
-                    options={{
-                        actionsColumnIndex: -1
-                    }}
-                    localization={{
-                        header: {
-                            actions: 'Acciones'
-                        }
-                    }}
-                />
-            </Paper>
+                            <Button variant="contained" color="primary">Registrar materia</Button>
+                        </Box>
+                    </Link>
+                    <MaterialTable
+                        title="Materias"
+                        columns={columnas}
+                        data={data}
+                        icons={tableIcons}
+                        actions={[
+                            {
+                                icon: Edit,
+                                tooltip: 'Editar',
+                                onClick: (event, rowData) => selecionarMateria(rowData, "Editar")
+                            },
+                            {
+                                icon: DeleteOutline,
+                                tooltip: 'Eliminar',
+                                onClick: (event, rowData) => selecionarMateria(rowData, "Eliminar")
+                            },
+                        ]}
+                        options={{
+                            actionsColumnIndex: -1
+                        }}
+                        localization={{
+                            header: {
+                                actions: 'Acciones'
+                            }
+                        }}
+                    />
+                </Paper>
+            </div>
+        )
+    } else {
+        return <div>
+            <Redirect to="/inicio" />
         </div>
-    )
+    }
 }
 
 export default Materias

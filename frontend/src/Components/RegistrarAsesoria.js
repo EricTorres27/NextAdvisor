@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Grid, Typography, Paper, Container,  Button,Card, CardContent, CardMedia, makeStyles, TextField} from '@material-ui/core';
+import { Box, Grid, Typography, Paper, Container, Button, Card, CardContent, CardMedia, makeStyles, TextField } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useForm, Form } from './useForm';
 import Controls from './controls/Controls';
 import swal from 'sweetalert';
 import { FormControl, InputLabel, MenuItem, Select as MuiSelect } from '@material-ui/core';
 import API from '../apis/api';
 
-const cuentaId=localStorage.getItem("cuentaId");
+const cuentaId = localStorage.getItem("cuentaId");
 
 const initialValues = {
-   oferta_fecha: '',
-   oferta_tarifa: '',
-   materia_id: '',
-   estudiante_id:cuentaId
+    oferta_fecha: '',
+    oferta_tarifa: '',
+    materia_id: '',
+    estudiante_id: cuentaId
 }
 
-const styles = makeStyles(theme =>({
+const styles = makeStyles(theme => ({
     Paper: { height: 500, padding: 20, marginLeft: 100, marginRight: 100, overflowY: 'auto' }
 }))
 
@@ -67,10 +67,10 @@ export const RegistrarAsesoria = (props) => {
             const response = await API.post('asesoria',
                 {
                     "oferta_fecha": values.oferta_fecha,
-                    "oferta_tarifa":values.oferta_tarifa,
-                    "materia_id":values.materia_id,
-                    "estudiante_id":cuentaId
-                },{ headers: { "Authorization": "Bearer " + localStorage.token } }
+                    "oferta_tarifa": values.oferta_tarifa,
+                    "materia_id": values.materia_id,
+                    "estudiante_id": cuentaId
+                }, { headers: { "Authorization": "Bearer " + localStorage.token } }
 
             )
             console.log(response.data)
@@ -127,7 +127,7 @@ export const RegistrarAsesoria = (props) => {
     }
 
     const peticionGetMateria = async () => {
-         API.get( 'materias/getMateria')
+        API.get('materias/getMateria')
             .then(response => {
                 setMateria(response.data);
             })
@@ -148,24 +148,26 @@ export const RegistrarAsesoria = (props) => {
             }
         })
     }
-    return (
-        <div style={{ height: "650px" }}>
-            <Box color="primary.contrastText" mb={1}>
-                <Typography color="white" align="center" variant="h3">Registrar asesoría</Typography>
-            </Box>
-            <Paper elevation={3} style={styles.Paper}>
-                <Link to="/RegistrarAsesoria">
-                    <ArrowBackIcon button fontSize="large" />
-                </Link>
-                <Box mt={5} ml={5}>
-                    <Form onSubmit={handleSubmit}>
-                        <Box ml={3} mb={2}>
-                            <Typography variant="h5">Registro</Typography>
-                        </Box>
+    const role = localStorage.getItem("rol");
+    if (role == "administrador" || role=="asesor") {
+        return (
+            <div style={{ height: "650px" }}>
+                <Box color="primary.contrastText" mb={1}>
+                    <Typography color="white" align="center" variant="h3">Registrar asesoría</Typography>
+                </Box>
+                <Paper elevation={3} style={styles.Paper}>
+                    <Link to="/RegistrarAsesoria">
+                        <ArrowBackIcon button fontSize="large" />
+                    </Link>
+                    <Box mt={5} ml={5}>
+                        <Form onSubmit={handleSubmit}>
+                            <Box ml={3} mb={2}>
+                                <Typography variant="h5">Registro</Typography>
+                            </Box>
 
 
-                        <Grid container spacing={1}>
-                            <Grid item xs={12} sm={6}>
+                            <Grid container spacing={1}>
+                                <Grid item xs={12} sm={6}>
 
                                     <Controls.Input
                                         name="oferta_fecha"
@@ -175,64 +177,69 @@ export const RegistrarAsesoria = (props) => {
                                         error={errors.oferta_fecha}
                                     />
 
+                                </Grid>
+
                             </Grid>
 
-                        </Grid>
-
-                        <Grid container spacing={1}>
-                            <Grid item xs={12} sm={6}>
-                                <Controls.SelecTarifa
-                                    name="oferta_tarifa"
-                                    label="Tarifa MXN"
-                                    value={values.oferta_tarifa}
-                                    onChange={handleInputChange}
-                                    error={errors.oferta_tarifa}
-                                />
-                            </Grid>
-
-                            <Grid item xs={12} sm={6}>
-                                <FormControl variant="outlined"  className={classes.selects} >
-                                    <InputLabel>Materia</InputLabel>
-                                    <MuiSelect
-                                    name="materia_id"
-                                    value={values.materia_id}
-                                    onChange={handleInputChange}
-                                    >
-                                        <MenuItem value=''>Elija una materia</MenuItem>
-                                        {materia.map((materia)=> (
-                                            <MenuItem key={materia.materia_id} value={materia.materia_id}>{materia.materia_nombre}</MenuItem>
-                                         ) )}
-
-
-                                    </MuiSelect>
-                                </FormControl>
-                            </Grid>
-
-
-                        </Grid>
-                        <Grid container spacing={1}>
-                            <Grid item xs={12} sm={12}>
-                                <Box ml={3} mt={1} align="right">
-                                    <Controls.ButtonSubmit
-                                        size="large"
-                                        text="Confirmar"
-                                        type="submit"
-
+                            <Grid container spacing={1}>
+                                <Grid item xs={12} sm={6}>
+                                    <Controls.SelecTarifa
+                                        name="oferta_tarifa"
+                                        label="Tarifa MXN"
+                                        value={values.oferta_tarifa}
+                                        onChange={handleInputChange}
+                                        error={errors.oferta_tarifa}
                                     />
-                                    <Controls.ButtonSubmit
-                                        size="large"
-                                        text="Reiniciar"
-                                        color="default"
-                                        onClick={resetForm}
-                                    />
-                                </Box>
+                                </Grid>
+
+                                <Grid item xs={12} sm={6}>
+                                    <FormControl variant="outlined" className={classes.selects} >
+                                        <InputLabel>Materia</InputLabel>
+                                        <MuiSelect
+                                            name="materia_id"
+                                            value={values.materia_id}
+                                            onChange={handleInputChange}
+                                        >
+                                            <MenuItem value=''>Elija una materia</MenuItem>
+                                            {materia.map((materia) => (
+                                                <MenuItem key={materia.materia_id} value={materia.materia_id}>{materia.materia_nombre}</MenuItem>
+                                            ))}
+
+
+                                        </MuiSelect>
+                                    </FormControl>
+                                </Grid>
+
+
                             </Grid>
-                        </Grid>
-                    </Form>
-                </Box>
-            </Paper>
+                            <Grid container spacing={1}>
+                                <Grid item xs={12} sm={12}>
+                                    <Box ml={3} mt={1} align="right">
+                                        <Controls.ButtonSubmit
+                                            size="large"
+                                            text="Confirmar"
+                                            type="submit"
+
+                                        />
+                                        <Controls.ButtonSubmit
+                                            size="large"
+                                            text="Reiniciar"
+                                            color="default"
+                                            onClick={resetForm}
+                                        />
+                                    </Box>
+                                </Grid>
+                            </Grid>
+                        </Form>
+                    </Box>
+                </Paper>
+            </div>
+        )
+    } else {
+        return <div>
+            <Redirect to="/inicio" />
         </div>
-    )
+    }
 }
 
 export default RegistrarAsesoria;
